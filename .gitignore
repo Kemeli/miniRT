@@ -1,0 +1,6 @@
+test.out
+a.out
+.vscode
+*.o
+*/**/.o
+miniRT
