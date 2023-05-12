@@ -8,7 +8,7 @@ OBJS := $(addprefix sources/, $(OBJS))
 
 all: $(NAME)
 
-$(NAME): $(OBJS) main.o
+$(NAME): $(OBJS) ./sources/main.o
 	$(CC) $(FLAGS) $(OBJS) -o $(NAME)
 
 %.o: %.c
