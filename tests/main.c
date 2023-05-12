@@ -1,5 +1,6 @@
 #include <minunit.h>
 #include <minirt.h>
+#include "tuples/tuple_test.c"
 
 int	main()
 {
