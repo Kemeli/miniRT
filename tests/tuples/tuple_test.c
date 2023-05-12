@@ -32,7 +32,7 @@ MU_TEST(test_point_create)
 {
 	t_tuple a = point(4.3, -4.2, 3.1);
 
-	mu_assert(a[3] == 0, "function point should create a point");
+	mu_assert(a[3] == 1, "function point should create a point");
 }
 
 MU_TEST_SUITE(test_tuple_identifier)
@@ -40,4 +40,5 @@ MU_TEST_SUITE(test_tuple_identifier)
 	MU_RUN_TEST(test_point_identifier);
 	MU_RUN_TEST(test_vector_identifier);
 	MU_RUN_TEST(test_vector_create);
+	MU_RUN_TEST(test_point_create);
 }
