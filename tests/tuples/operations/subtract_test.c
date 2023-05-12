@@ -37,8 +37,27 @@ MU_TEST(test_should_return_a_point_when_subtract_point_from_vector)
 	free(expected);
 }
 
+MU_TEST(test_should_return_a_vector_when_subtract_two_vectors)
+{
+	t_tuple	v1 = vector(3, 2, 1);
+	t_tuple	v2 = vector(5, 6, 7);
+	t_tuple	expected = vector(-2, -4, -6);
+	t_tuple	result = subtract(v1, v2);
+
+	mu_assert(
+		compare_tuples(result, expected), 
+		"subtraction of vector (3, 2, 1) and (5, 6, 7) should return the vector (-2, -4, -6)"
+	);
+
+	free(v1);
+	free(v2);
+	free(result);
+	free(expected);
+}
+
 MU_TEST_SUITE(test_tuples_subtract)
 {
 	MU_RUN_TEST(test_should_return_a_vector_when_subtract_two_points);
 	MU_RUN_TEST(test_should_return_a_point_when_subtract_point_from_vector);
+	MU_RUN_TEST(test_should_return_a_vector_when_subtract_two_vectors);
 }
