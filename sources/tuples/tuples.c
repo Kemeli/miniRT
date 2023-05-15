@@ -14,7 +14,7 @@ t_tuple	tuple(float x, float y, float z, float w)
 	return (tuple);
 }
 
-t_tuple vector(float x, float y, float z)
+t_tuple	vector(float x, float y, float z)
 {
 	t_tuple	vector;
 
@@ -22,7 +22,7 @@ t_tuple vector(float x, float y, float z)
 	return (vector);
 }
 
-t_tuple point(float x, float y, float z)
+t_tuple	point(float x, float y, float z)
 {
 	t_tuple	point;
 
