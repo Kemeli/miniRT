@@ -19,7 +19,29 @@ MU_TEST(test_negated_vector_should_be_equal_to_null_vector_minus_the_vector)
 	free(result);
 }
 
+MU_TEST(test_sum_with_negated_vector_should_be_equal_to_subract_these_vectors)
+{
+	int	i = 0;
+
+	t_tuple	v = vector(3.5, 10, 11);
+	t_tuple	w = vector(5, 1, 0);
+	t_tuple	minus_w = negative(w);
+	t_tuple	expected = subtract(v, w);
+
+	while (i < 3)
+	{
+		mu_assert_double_eq(expected[i], v[i] + minus_w[i]);
+		i++;
+	}
+	
+	free(v);
+	free(w);
+	free(minus_w);
+	free(expected);
+}
+
 MU_TEST_SUITE(test_negating_tuples)
 {
 	MU_RUN_TEST(test_negated_vector_should_be_equal_to_null_vector_minus_the_vector);
+	MU_RUN_TEST(test_sum_with_negated_vector_should_be_equal_to_subract_these_vectors);
 }
