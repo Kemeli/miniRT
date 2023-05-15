@@ -4,7 +4,8 @@ FLAGS=-Wall -Wextra -Werror
 INCLUDES=-I ./includes/
 LIBS=-lm
 
-OBJS := tuples/tuples.o tuples/operations/subtract.o
+OBJS := tuples/tuples.o tuples/operations/addition.o tuples/operations/subtract.o
+
 OBJS := $(addprefix sources/, $(OBJS))
 
 all: $(NAME)

@@ -10,5 +10,6 @@ t_tuple vector(float x, float y, float z);
 t_tuple point(float x, float y, float z);
 t_tuple	subtract(t_tuple a, t_tuple b);
 char	compare_tuples(t_tuple a, t_tuple b);
+t_tuple addition(t_tuple point, t_tuple vector);
 
 #endif
