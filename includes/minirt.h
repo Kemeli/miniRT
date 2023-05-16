@@ -9,6 +9,7 @@ t_tuple	tuple(float x, float y, float z, float w);
 t_tuple vector(float x, float y, float z);
 t_tuple point(float x, float y, float z);
 t_tuple	subtract(t_tuple a, t_tuple b);
+t_tuple	negative(t_tuple v);
 char	compare_tuples(t_tuple a, t_tuple b);
 t_tuple addition(t_tuple point, t_tuple vector);
 t_tuple	scalar_multiplication(t_tuple tuple_a, float times_to_multiply);
