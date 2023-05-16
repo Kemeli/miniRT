@@ -12,5 +12,6 @@ t_tuple	subtract(t_tuple a, t_tuple b);
 char	compare_tuples(t_tuple a, t_tuple b);
 t_tuple addition(t_tuple point, t_tuple vector);
 t_tuple	scalar_multiplication(t_tuple tuple_a, float times_to_multiply);
+t_tuple scalar_division(t_tuple tuple_a, float times_to_divide);
 
 #endif
