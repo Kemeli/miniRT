@@ -14,7 +14,22 @@ MU_TEST(test_multiplication)
 	);
 }
 
+MU_TEST(test_multiplication_by_decimal)
+{
+	float	times_to_multiply = 0.5;
+	t_tuple	tuple_a = tuple(1, -2, 3, -4);
+	t_tuple	expected = tuple(0.5, -1, 1.5, -2);
+	t_tuple	result = scalar_multiplication(tuple_a, times_to_multiply);
+
+	mu_assert(
+		compare_tuples(expected, result), 
+		"multiplication of tuple_a with 3.5 should be (0.5, -1, 1.5, -2)"
+	);
+}
+
 MU_TEST_SUITE(test_multiply_divide)
 {
 	MU_RUN_TEST(test_multiplication);
+	MU_RUN_TEST(test_multiplication_by_decimal);
 }
+
