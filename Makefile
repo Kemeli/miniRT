@@ -5,7 +5,7 @@ INCLUDES=-I ./includes/
 LIBS=-lm
 
 OBJS := tuples/tuples.o tuples/operations/subtract.o tuples/operations/negative.o tuples/operations/multiply_divide.o \
-        tuples/operations/addition.o
+        tuples/operations/addition.o tuples/operations/magnitude.o
 OBJS := $(addprefix sources/, $(OBJS))
 
 all: $(NAME)
@@ -14,10 +14,10 @@ $(NAME): $(OBJS) ./sources/main.o
 	$(CC) $(FLAGS) $(OBJS) -o $(NAME)
 
 %.o: %.c
-	$(CC) $(FLAGS) $(INCLUDES) $(LIBS) $< -c -o $@
+	$(CC) $(FLAGS) $(INCLUDES) $< $(LIBS) -c -o $@
 
 tests: $(OBJS)
-	@$(CC) $(INCLUDES) -I ./tests/ $(LIBS) $(OBJS) ./tests/main.c -o test.out
+	@$(CC) $(INCLUDES) -I ./tests/ $(OBJS) ./tests/main.c $(LIBS) -o test.out
 	@./test.out
 
 .PHONY: tests
