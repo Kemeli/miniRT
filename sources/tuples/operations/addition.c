@@ -2,7 +2,7 @@
 
 t_tuple	addition(t_tuple point, t_tuple vector)
 {
-    t_tuple	result;
+	t_tuple	result;
 	float	x;
 	float	y;
 	float	z;
