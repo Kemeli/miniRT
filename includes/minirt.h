@@ -15,5 +15,6 @@ t_tuple addition(t_tuple point, t_tuple vector);
 t_tuple	scalar_multiplication(t_tuple tuple_a, float times_to_multiply);
 t_tuple scalar_division(t_tuple tuple_a, float times_to_divide);
 float	magnitude(t_tuple v);
+t_tuple	normalize(t_tuple v);
 
 #endif
