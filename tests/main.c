@@ -6,6 +6,7 @@
 #include "tuples/operations/negative_test.c"
 #include "tuples/operations/multiply_divide_test.c"
 #include "tuples/operations/magnitude_test.c"
+#include "tuples/operations/normalization_test.c"
 
 int	main()
 {
@@ -15,6 +16,7 @@ int	main()
 	MU_RUN_SUITE(test_negating_tuples);
 	MU_RUN_SUITE(test_multiply_divide);
 	MU_RUN_SUITE(test_magnitude);
+	MU_RUN_SUITE(test_tuples_normalization);
 	MU_REPORT();
 	return MU_EXIT_CODE;
 }
