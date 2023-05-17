@@ -12,6 +12,9 @@ MU_TEST(test_multiplication)
 		compare_tuples(expected, result), 
 		"multiplication of tuple_a with 3.5 should be (3.5, -7, 10.5, -14)"
 	);
+	free(tuple_a);
+	free(expected);
+	free(result);
 }
 
 MU_TEST(test_multiplication_by_decimal)
@@ -25,6 +28,9 @@ MU_TEST(test_multiplication_by_decimal)
 		compare_tuples(expected, result), 
 		"multiplication of tuple_a with 0.5 should be (0.5, -1, 1.5, -2)"
 	);
+	free(tuple_a);
+	free(expected);
+	free(result);
 }
 
 MU_TEST(test_division)
@@ -38,6 +44,9 @@ MU_TEST(test_division)
 		compare_tuples(expected, result), 
 		"division of tuple_a with 2 should be (0.5, -1, 1.5, -2)"
 	);
+	free(tuple_a);
+	free(expected);
+	free(result);
 }
 
 MU_TEST_SUITE(test_multiply_divide)

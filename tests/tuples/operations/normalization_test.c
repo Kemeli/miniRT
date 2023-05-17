@@ -10,6 +10,9 @@ MU_TEST(test_vector_4_0_0_normalized_should_be_vector_1_0_0)
 	mu_assert(
 		compare_tuples(result, expected), "msg"
 	);
+	free(v);
+	free(expected);
+	free(result);
 }
 
 MU_TEST(test_vector_1_2_3_normalized_should_be_vector_026726_053452_080178)
@@ -21,6 +24,9 @@ MU_TEST(test_vector_1_2_3_normalized_should_be_vector_026726_053452_080178)
 	mu_assert(
 		compare_tuples(result, expected), "msg"
 	);
+	free(v);
+	free(expected);
+	free(result);
 }
 
 MU_TEST(test_magnitude_of_a_normalized_vector_should_be_1)
@@ -29,8 +35,9 @@ MU_TEST(test_magnitude_of_a_normalized_vector_should_be_1)
 	t_tuple	norm = normalize(v);
 	float	expected = 1;
 	float	result = magnitude(norm);
-
 	mu_assert_double_eq(result, expected);
+	free(v);
+	free(norm);
 }
 
 MU_TEST_SUITE(test_tuples_normalization)
