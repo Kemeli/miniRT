@@ -12,8 +12,11 @@ MU_TEST(check_sum_between_a_point_and_a_vector)
     vector_to_sum = vector(-2, 3, 1);
     expected = tuple (1, 1, 6, 1);
     result = addition(point_to_sum, vector_to_sum);
-
     mu_check(compare_tuples(result, expected));
+	free (point_to_sum);
+	free (vector_to_sum);
+	free (expected);
+	free (result);
 }
 
 MU_TEST(check_sum_between_a_point_and_a_point)
@@ -27,8 +30,11 @@ MU_TEST(check_sum_between_a_point_and_a_point)
     point2_to_sum = point(-2, 3, 1);
     expected = tuple (1, 1, 6, 2);
     result = addition(point1_to_sum, point2_to_sum);
-
     mu_check(compare_tuples(result, expected));
+	free (point1_to_sum);
+	free (point2_to_sum);
+	free (expected);
+	free (result);
 }
 
 MU_TEST(check_sum_between_a_vector_and_a_vector)
@@ -42,8 +48,11 @@ MU_TEST(check_sum_between_a_vector_and_a_vector)
     vector2_to_sum = vector(-1, 2, 3);
     expected = tuple (1, 0, 6, 0);
     result = addition(vector1_to_sum, vector2_to_sum);
-
     mu_check(compare_tuples(result, expected));
+	free (vector1_to_sum);
+	free (vector2_to_sum);
+	free (expected);
+	free (result);
 }
 
 MU_TEST_SUITE(check_sum)

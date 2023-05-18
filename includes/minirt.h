@@ -16,6 +16,7 @@ t_tuple	scalar_multiplication(t_tuple tuple_a, float times_to_multiply);
 t_tuple scalar_division(t_tuple tuple_a, float times_to_divide);
 float	magnitude(t_tuple v);
 t_tuple	normalize(t_tuple v);
+t_tuple	cross(t_tuple a, t_tuple b);
 float	dot(t_tuple v, t_tuple w);
 
 #endif
