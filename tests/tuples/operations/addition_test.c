@@ -55,9 +55,65 @@ MU_TEST(check_sum_between_a_vector_and_a_vector)
 	free (result);
 }
 
+MU_TEST(test_adding_colors)
+{
+    t_tuple c1 = color(0.9, 0.6, 0.75);
+    t_tuple c2 = color(0.7, 0.1, 0.25);
+    t_tuple expected = color(1.6, 0.7, 1.0);
+    t_tuple result = addition(c1, c2);
+
+    mu_assert(
+        compare_tuples(result, expected),
+        "(0.9, 0.6, 0.75) + (0.7, 0.1, 0.25) should be (1.6, 0.7, 1.0)"
+    );
+
+    free(c1);
+    free(c2);
+    free(expected);
+    free(result);
+}
+
+MU_TEST(test_subtracting_colors)
+{
+    t_tuple c1 = color(0.9, 0.6, 0.75);
+    t_tuple c2 = color(0.7, 0.1, 0.25);
+    t_tuple expected = color(0.2, 0.5, 0.5);
+    t_tuple result = subtract(c1, c2);
+
+    mu_assert(
+        compare_tuples(result, expected),
+        "(0.9, 0.6, 0.75) - (0.7, 0.1, 0.25) should be (0.2, 0.5, 0.5)"
+    );
+
+    free(c1);
+    free(c2);
+    free(expected);
+    free(result);
+}
+
+MU_TEST(test_multiplying_color_by_scalar)
+{
+    t_tuple c1 = color(0.2, 0.3, 0.4);
+    float   scalar = 2;
+    t_tuple expected = color(0.4, 0.6, 0.8);
+    t_tuple result = scalar_multiplication(c1, scalar);
+
+    mu_assert(
+        compare_tuples(result, expected),
+        "(0.2, 0.3, 0.4) * 2 should be (0.4, 0.6, 0.8)"
+    );
+
+    free(c1);
+    free(expected);
+    free(result);
+}
+
 MU_TEST_SUITE(check_sum)
 {
 	MU_RUN_TEST(check_sum_between_a_point_and_a_vector);
 	MU_RUN_TEST(check_sum_between_a_point_and_a_point);
 	MU_RUN_TEST(check_sum_between_a_vector_and_a_vector);
+    MU_RUN_TEST(test_adding_colors);
+    MU_RUN_TEST(test_subtracting_colors);
+    MU_RUN_TEST(test_multiplying_color_by_scalar);
 }
