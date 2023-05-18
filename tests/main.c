@@ -9,7 +9,7 @@
 #include "tuples/operations/normalization_test.c"
 #include "tuples/operations/cross_product_test.c"
 #include "tuples/operations/dot_product_test.c"
-#include "tuples/color_test.c"
+#include "tuples/colors/color_test.c"
 
 int	main()
 {
