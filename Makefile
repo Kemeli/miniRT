@@ -16,10 +16,10 @@ $(NAME): $(OBJS) ./sources/main.o
 	$(CC) $(FLAGS) $(OBJS) -o $(NAME)
 
 %.o: %.c
-	$(CC) $(FLAGS) $(INCLUDES) $< $(LIBS) -c -o $@
+	$(CC) $(FLAGS) -g3 $(INCLUDES) $< $(LIBS) -c -o $@
 
 tests: $(OBJS)
-	@$(CC) $(INCLUDES) -I ./tests/ $(OBJS) ./tests/main.c $(LIBS) -o test.out
-	@./test.out
+	@$(CC) $(INCLUDES) -I ./tests/ $(OBJS) ./tests/main.c $(LIBS) -g3 -o test.out
+	@valgrind -q --leak-check=full ./test.out
 
 .PHONY: tests
