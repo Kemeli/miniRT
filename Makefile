@@ -1,8 +1,8 @@
 NAME=miniRT
 CC=cc
 FLAGS=-Wall -Wextra -Werror
-INCLUDES=-I ./includes/
-LIBS=-lm
+INCLUDES=-I ./includes/ -I ./lib/minilibx/
+LIBS=-lm -lmlx_Linux -lXext -lX11 -lz
 
 OBJS := tuples/tuples.o tuples/operations/subtract.o tuples/operations/negative.o tuples/operations/multiply_divide.o \
     tuples/operations/addition.o tuples/operations/magnitude.o tuples/operations/normalization.o \
