@@ -4,6 +4,6 @@ t_tuple	color(float r, float g, float b)
 {
 	t_tuple	c;
 
-	c = tuple(r, g, b, -1);
+	c = tuple(r, g, b, 0);
 	return (c);
 }

@@ -6,7 +6,7 @@ LIBS=-lm
 
 OBJS := tuples/tuples.o tuples/operations/subtract.o tuples/operations/negative.o tuples/operations/multiply_divide.o \
     tuples/operations/addition.o tuples/operations/magnitude.o tuples/operations/normalization.o \
-		tuples/operations/dot.o tuples/operations/cross.o tuples/colors/color.o
+		tuples/operations/dot.o tuples/operations/cross.o tuples/colors/color.o tuples/colors/multiply_colors.o
 
 OBJS := $(addprefix sources/, $(OBJS))
 
