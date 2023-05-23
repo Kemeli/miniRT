@@ -19,5 +19,6 @@ t_tuple	normalize(t_tuple v);
 t_tuple	cross(t_tuple a, t_tuple b);
 float	dot(t_tuple v, t_tuple w);
 t_tuple	color(float r, float g, float b);
+t_tuple	multiply_colors(t_tuple c1, t_tuple c2);
 
 #endif
