@@ -9,6 +9,7 @@
 #include "tuples/operations/normalization_test.c"
 #include "tuples/operations/cross_product_test.c"
 #include "tuples/operations/dot_product_test.c"
+#include "matrix/matrix.c"
 #include "tuples/colors/color_test.c"
 
 int	main()
@@ -23,6 +24,7 @@ int	main()
 	MU_RUN_SUITE(test_cross_product);
 	MU_RUN_SUITE(test_dot_product);
 	MU_RUN_SUITE(test_color_creation);
+	MU_RUN_SUITE(test_creating_matrix);
 	MU_REPORT();
 	return MU_EXIT_CODE;
 }
