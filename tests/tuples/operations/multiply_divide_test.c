@@ -9,7 +9,7 @@ MU_TEST(test_multiplication)
 	t_tuple	result = scalar_multiplication(tuple_a, times_to_multiply);
 
 	mu_assert(
-		compare_tuples(expected, result), 
+		compare_tuples(expected, result),
 		"multiplication of tuple_a with 3.5 should be (3.5, -7, 10.5, -14)"
 	);
 	free(tuple_a);
@@ -25,7 +25,7 @@ MU_TEST(test_multiplication_by_decimal)
 	t_tuple	result = scalar_multiplication(tuple_a, times_to_multiply);
 
 	mu_assert(
-		compare_tuples(expected, result), 
+		compare_tuples(expected, result),
 		"multiplication of tuple_a with 0.5 should be (0.5, -1, 1.5, -2)"
 	);
 	free(tuple_a);
@@ -41,7 +41,7 @@ MU_TEST(test_division)
 	t_tuple	result = scalar_division(tuple_a, times_to_divide);
 
 	mu_assert(
-		compare_tuples(expected, result), 
+		compare_tuples(expected, result),
 		"division of tuple_a with 2 should be (0.5, -1, 1.5, -2)"
 	);
 	free(tuple_a);
@@ -49,10 +49,29 @@ MU_TEST(test_division)
 	free(result);
 }
 
+MU_TEST(test_multiplying_color_by_scalar)
+{
+    t_tuple c1 = color(0.2, 0.3, 0.4);
+    float   scalar = 2;
+    t_tuple expected = color(0.4, 0.6, 0.8);
+    t_tuple result = scalar_multiplication(c1, scalar);
+
+    mu_assert(
+        compare_tuples(result, expected),
+        "(0.2, 0.3, 0.4) * 2 should be (0.4, 0.6, 0.8)"
+    );
+
+    free(c1);
+    free(expected);
+    free(result);
+}
+
 MU_TEST_SUITE(test_multiply_divide)
 {
 	MU_RUN_TEST(test_multiplication);
 	MU_RUN_TEST(test_multiplication_by_decimal);
 	MU_RUN_TEST(test_division);
+    MU_RUN_TEST(test_multiplying_color_by_scalar);
+
 }
 

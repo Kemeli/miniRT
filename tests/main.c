@@ -10,6 +10,7 @@
 #include "tuples/operations/cross_product_test.c"
 #include "tuples/operations/dot_product_test.c"
 #include "tuples/colors/color_test.c"
+#include <mlx.h>
 
 int	main()
 {
