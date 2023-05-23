@@ -51,19 +51,19 @@ MU_TEST(test_division)
 
 MU_TEST(test_multiplying_color_by_scalar)
 {
-    t_tuple c1 = color(0.2, 0.3, 0.4);
-    float   scalar = 2;
-    t_tuple expected = color(0.4, 0.6, 0.8);
-    t_tuple result = scalar_multiplication(c1, scalar);
+	t_tuple c1 = color(0.2, 0.3, 0.4);
+	float   scalar = 2;
+	t_tuple expected = color(0.4, 0.6, 0.8);
+	t_tuple result = scalar_multiplication(c1, scalar);
 
-    mu_assert(
-        compare_tuples(result, expected),
-        "(0.2, 0.3, 0.4) * 2 should be (0.4, 0.6, 0.8)"
-    );
+	mu_assert(
+		compare_tuples(result, expected),
+		"(0.2, 0.3, 0.4) * 2 should be (0.4, 0.6, 0.8)"
+	);
 
-    free(c1);
-    free(expected);
-    free(result);
+	free(c1);
+	free(expected);
+	free(result);
 }
 
 MU_TEST_SUITE(test_multiply_divide)
@@ -71,7 +71,7 @@ MU_TEST_SUITE(test_multiply_divide)
 	MU_RUN_TEST(test_multiplication);
 	MU_RUN_TEST(test_multiplication_by_decimal);
 	MU_RUN_TEST(test_division);
-    MU_RUN_TEST(test_multiplying_color_by_scalar);
+	MU_RUN_TEST(test_multiplying_color_by_scalar);
 
 }
 
