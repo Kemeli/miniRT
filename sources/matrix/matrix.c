@@ -18,12 +18,12 @@ float	**matrix(unsigned int n)
 	return (m);
 }
 
-void	free_matrix(float **m, unsigned int n)
+void	free_matrix(float **m)
 {
 	unsigned int	i;
 
 	i = 0;
-	while (i < n)
+	while (m[i])
 	{
 		free(m[i]);
 		i++;

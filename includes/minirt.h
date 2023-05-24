@@ -22,6 +22,6 @@ t_tuple	color(float r, float g, float b);
 int		compare_matrices(float **matrix_A, float **matrix_B);
 t_tuple	multiply_colors(t_tuple c1, t_tuple c2);
 float	**matrix(unsigned int n);
-void	free_matrix(float **m, unsigned int n);
+void	free_matrix(float **m);
 
 #endif
