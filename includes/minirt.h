@@ -19,5 +19,7 @@ t_tuple	normalize(t_tuple v);
 t_tuple	cross(t_tuple a, t_tuple b);
 float	dot(t_tuple v, t_tuple w);
 t_tuple	color(float r, float g, float b);
+float	**matrix(unsigned int n);
+void	free_matrix(float **m, unsigned int n);
 
 #endif
