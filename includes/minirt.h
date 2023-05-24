@@ -21,6 +21,6 @@ float	dot(t_tuple v, t_tuple w);
 t_tuple	color(float r, float g, float b);
 t_tuple	multiply_colors(t_tuple c1, t_tuple c2);
 float	**matrix(unsigned int n);
-void	free_matrix(float **m, unsigned int n);
+void	free_matrix(float **m);
 
 #endif

@@ -18,7 +18,7 @@ MU_TEST(test_should_create_and_assign_right_values_to_a_2x2_matrix)
 	mu_assert_double_eq(expected[0][1], m[0][1]);
 	mu_assert_double_eq(expected[1][1], m[1][1]);
 
-	free_matrix(m, 2);
+	free_matrix(m);
 }
 
 MU_TEST(test_should_create_and_assign_right_values_to_a_3x3_matrix)
@@ -49,7 +49,7 @@ MU_TEST(test_should_create_and_assign_right_values_to_a_3x3_matrix)
 	mu_assert_double_eq(expected[2][1], m[2][1]);
 	mu_assert_double_eq(expected[2][2], m[2][2]);
 
-	free_matrix(m, 3);
+	free_matrix(m);
 }
 
 MU_TEST(test_should_create_and_assign_right_values_to_a_4x4_matrix)
@@ -88,7 +88,7 @@ MU_TEST(test_should_create_and_assign_right_values_to_a_4x4_matrix)
 	mu_assert_double_eq(expected[2][1], m[2][1]);
 	mu_assert_double_eq(expected[2][2], m[2][2]);
 
-	free_matrix(m, 4);
+	free_matrix(m);
 }
 
 MU_TEST(test_matrix_should_have_a_null_at_the_end)
@@ -98,7 +98,7 @@ MU_TEST(test_matrix_should_have_a_null_at_the_end)
 	
 	mu_check(m[size] == NULL);
 
-	free_matrix(m, size);
+	free_matrix(m);
 }
 
 MU_TEST_SUITE(test_creating_matrix)
