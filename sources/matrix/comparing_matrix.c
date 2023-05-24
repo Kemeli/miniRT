@@ -1,6 +1,6 @@
 #include <minirt.h>
 
-int	compare_matrices(float **matrix_A, floar **matrix_B)
+int	compare_matrices(float **matrix_A, float **matrix_B)
 {
 	int	i;
 	int	j;
@@ -14,5 +14,5 @@ int	compare_matrices(float **matrix_A, floar **matrix_B)
 		i++;
 		j++;
 	}
-	return (1)
+	return (1);
 }
