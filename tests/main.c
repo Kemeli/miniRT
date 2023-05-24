@@ -10,6 +10,7 @@
 #include "tuples/operations/cross_product_test.c"
 #include "tuples/operations/dot_product_test.c"
 #include "matrix/matrix.c"
+#include "matrix/comparing_matrix_test.c"
 #include "tuples/colors/color_test.c"
 
 int	main()
@@ -25,6 +26,7 @@ int	main()
 	MU_RUN_SUITE(test_dot_product);
 	MU_RUN_SUITE(test_color_creation);
 	MU_RUN_SUITE(test_creating_matrix);
+	MU_RUN_TEST(test_matrix_4x4_are_equal);
 	MU_REPORT();
 	return MU_EXIT_CODE;
 }

@@ -7,7 +7,7 @@ LIBS=-lm -lmlx_Linux -lXext -lX11 -lz
 OBJS := tuples/tuples.o tuples/operations/subtract.o tuples/operations/negative.o tuples/operations/multiply_divide.o \
 	    tuples/operations/addition.o tuples/operations/magnitude.o tuples/operations/normalization.o \
 		tuples/operations/dot.o tuples/operations/cross.o tuples/colors/color.o \
-		matrix/matrix.o
+		matrix/matrix.o matrix/comparing_matrix_test.c
 
 OBJS := $(addprefix sources/, $(OBJS))
 
