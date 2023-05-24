@@ -95,7 +95,7 @@ MU_TEST(test_matrix_should_have_a_null_at_the_end)
 {
 	int	size = 4;
 	float **m = matrix(size);
-	
+
 	mu_check(m[size] == NULL);
 
 	free_matrix(m);
