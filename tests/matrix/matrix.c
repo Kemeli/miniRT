@@ -91,9 +91,20 @@ MU_TEST(test_should_create_and_assign_right_values_to_a_4x4_matrix)
 	free_matrix(m, 4);
 }
 
+MU_TEST(test_matrix_should_have_a_null_at_the_end)
+{
+	int	size = 4;
+	float **m = matrix(size);
+	
+	mu_check(m[size] == NULL);
+
+	free_matrix(m, size);
+}
+
 MU_TEST_SUITE(test_creating_matrix)
 {
 	MU_RUN_TEST(test_should_create_and_assign_right_values_to_a_2x2_matrix);
 	MU_RUN_TEST(test_should_create_and_assign_right_values_to_a_3x3_matrix);
 	MU_RUN_TEST(test_should_create_and_assign_right_values_to_a_4x4_matrix);
+	MU_RUN_TEST(test_matrix_should_have_a_null_at_the_end);
 }

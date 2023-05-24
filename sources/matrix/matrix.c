@@ -8,12 +8,13 @@ float	**matrix(unsigned int n)
 	if (n == 0)
 		return (NULL);
 	i = 0;
-	m = malloc(sizeof(float **) * n);
+	m = malloc(sizeof(float **) * (n + 1));
 	while (i < n)
 	{
 		m[i] = malloc(sizeof(float *) * n);
 		i++;
 	}
+	m[i] = NULL;
 	return (m);
 }
 
