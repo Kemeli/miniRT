@@ -30,6 +30,7 @@ int	main()
 	MU_RUN_SUITE(test_cross_product);
 	MU_RUN_SUITE(test_color_mutltiplication);
 	MU_RUN_SUITE(test_creating_matrix);
+	MU_RUN_SUITE(test_comparing_matrices);
 	MU_REPORT();
 	return MU_EXIT_CODE;
 }
