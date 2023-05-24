@@ -5,6 +5,8 @@ float	**matrix(unsigned int n)
 	float			**m;
 	unsigned int	i;
 
+	if (n == 0)
+		return (NULL);
 	i = 0;
 	m = malloc(sizeof(float **) * n);
 	while (i < n)
