@@ -12,6 +12,7 @@ t_tuple	multiply_matrix_with_tuple(float **matrix_A, t_tuple tuple_A)
 	counter = 0;
 	while (row < 4)
 	{
+		product = 0;
 		counter = 0;
 		while(counter < 4)
 		{
