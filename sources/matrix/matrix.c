@@ -20,9 +20,9 @@ float	**matrix(unsigned int n)
 
 float	**identity_matrix(unsigned int n)
 {
-	float	**m;
-	int		i;
-	int		j;
+	float			**m;
+	unsigned int	i;
+	unsigned int	j;
 
 	m = matrix(n);
 	i = 0;
