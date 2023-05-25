@@ -1,6 +1,6 @@
 NAME=miniRT
 CC=cc
-FLAGS=
+FLAGS=-Wall -Werror -Wextra
 INCLUDES=-I ./includes/ -I ./lib/minilibx/
 LIBS= -L ./lib/minilibx -lm -lmlx_Linux -lXext -lX11 -lz
 
