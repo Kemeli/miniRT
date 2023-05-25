@@ -23,5 +23,8 @@ int		compare_matrices(float **matrix_A, float **matrix_B);
 t_tuple	multiply_colors(t_tuple c1, t_tuple c2);
 float	**matrix(unsigned int n);
 void	free_matrix(float **m);
+float	**multiply_matrix(float **matrix_A, float **matrix_B);
+t_tuple	multiply_matrix_with_tuple(float **matrix_A, t_tuple tuple_A);
+
 
 #endif
