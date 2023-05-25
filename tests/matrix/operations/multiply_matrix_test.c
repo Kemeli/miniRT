@@ -1,5 +1,6 @@
 #include <minunit.h>
 #include <minirt.h>
+#include <stdio.h>
 
 static float	**copy_matrix(float a[4][4])
 {
@@ -58,8 +59,10 @@ MU_TEST(test_multiply_matrix_with_a_tuple)
 		{0, 0, 0, 1}
 	};
 
-	for(int i = 0; i < 4; i++)
-		matrix_A[i] = matrix_values[i];
+	for(int i = 0; i < 4; i++){
+		for(int j = 0; j < 4; j++)
+			matrix_A[i][j] = matrix_values[i][j];
+	}
 
 	result = multiply_matrix_with_tuple(matrix_A, tuple_A);
 	mu_check(compare_tuples(result, expected));
