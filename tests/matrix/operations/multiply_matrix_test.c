@@ -44,7 +44,33 @@ MU_TEST(test_multiple_two_4x4_matrices)
 	free_matrix(result);
 }
 
+MU_TEST(test_multiply_matrix_with_a_tuple)
+{
+	t_tuple	result;
+	float	**matrix_A = matrix(4);
+	t_tuple	tuple_A = tuple(1, 2, 3, 1);
+	t_tuple	expected = tuple(18, 24, 33, 1);
+
+	float	matrix_values[4][4] = {
+		{1, 2, 3, 4},
+		{2, 4, 4, 2},
+		{8, 6, 4, 1},
+		{0, 0, 0, 1}
+	};
+
+	for(int i = 0; i < 4; i++)
+		matrix_A[i] = matrix_values[i];
+
+	result = multiply_matrix_with_tuple(matrix_A, tuple_A);
+	mu_check(compare_tuples(result, expected));
+	free_matrix(matrix_A);
+	free(tuple_A);
+	free(result);
+	free(expected);
+}
+
 MU_TEST_SUITE(test_multiply_matrix)
 {
 	MU_RUN_TEST(test_multiple_two_4x4_matrices);
+	MU_RUN_TEST(test_multiply_matrix_with_a_tuple);
 }
