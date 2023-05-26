@@ -14,6 +14,7 @@
 #include "tuples/colors/multiply_colors_test.c"
 #include "matrix/operations/comparing_matrix_test.c"
 #include "matrix/operations/multiply_matrix_test.c"
+#include "matrix/operations/transposing_matrix_test.c"
 
 int	main()
 {
@@ -33,6 +34,7 @@ int	main()
 	MU_RUN_SUITE(test_creating_matrix);
 	MU_RUN_SUITE(test_comparing_matrices);
 	MU_RUN_SUITE(test_multiply_matrix);
+	MU_RUN_SUITE(test_transposing_matrix);
 	MU_REPORT();
 	return MU_EXIT_CODE;
 }
