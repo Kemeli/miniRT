@@ -4,7 +4,7 @@
 MU_TEST(test_transposed_row_0930_should_become_col_0930)
 {
 	float	**matrix_A = matrix(4);
-	float	**result = matrix(4);
+	float	**result;
 	float	**expected = matrix(4);
 	float	values_matrix_A[4][4] = {
 		{0, 9, 3, 0},
@@ -35,7 +35,23 @@ MU_TEST(test_transposed_row_0930_should_become_col_0930)
 	free_matrix(expected);
 }
 
+MU_TEST(test_transpose_identity_matrix_should_return_itself)
+{
+	float	**identity = identity_matrix(4);
+	float	**result = transpose_matrix(identity);
+	float	**expected = identity;
+
+	mu_assert(
+		compare_matrices(result, expected),
+		"Transposing a identity matrix should return itself"
+	);
+
+	free_matrix(identity);
+	free_matrix(result);
+}
+
 MU_TEST_SUITE(test_transposing_matrix)
 {
 	MU_RUN_TEST(test_transposed_row_0930_should_become_col_0930);
+	MU_RUN_TEST(test_transpose_identity_matrix_should_return_itself);
 }

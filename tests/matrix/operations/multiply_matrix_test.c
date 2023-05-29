@@ -72,8 +72,48 @@ MU_TEST(test_multiply_matrix_with_a_tuple)
 	free(expected);
 }
 
+MU_TEST(test_multiplying_matrix_by_an_indentity_should_return_the_matrix_itself)
+{
+	float	m[4][4] = {
+		{0, 1, 2, 4},
+		{1, 2, 4, 8},
+		{2, 4, 8, 16},
+		{4, 8, 16, 32}
+	};
+	float	**original = copy_matrix(m);
+	float	**identity = identity_matrix(4);
+	float	**result = multiply_matrix(original, identity);
+
+	mu_assert(
+		compare_matrices(result, original),
+		"multiply a matrix by an indentity should return the matrix itself"
+	);
+
+	free_matrix(original);
+	free_matrix(identity);
+	free_matrix(result);
+}
+
+MU_TEST(test_multiplying_tuple_by_an_indentity_should_return_the_matrix_itself)
+{
+	t_tuple	a = tuple(1, 2, 3, 4);
+	float	**identity = identity_matrix(4);
+	t_tuple	result = multiply_matrix_with_tuple(identity, a);
+
+	mu_assert(
+		compare_tuples(a, result),
+		"multiply a tuple by an indentity should return the matrix itself"
+	);
+
+	free(a);
+	free(result);
+	free_matrix(identity);
+}
+
 MU_TEST_SUITE(test_multiply_matrix)
 {
 	MU_RUN_TEST(test_multiple_two_4x4_matrices);
 	MU_RUN_TEST(test_multiply_matrix_with_a_tuple);
+	MU_RUN_TEST(test_multiplying_matrix_by_an_indentity_should_return_the_matrix_itself);
+	MU_RUN_TEST(test_multiplying_tuple_by_an_indentity_should_return_the_matrix_itself);
 }
