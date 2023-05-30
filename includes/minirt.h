@@ -26,6 +26,9 @@ void	free_matrix(float **m);
 float	**multiply_matrix(float **matrix_A, float **matrix_B);
 t_tuple	multiply_matrix_with_tuple(float **matrix_A, t_tuple tuple_A);
 float	**transpose_matrix(float **matrix_A);
+float	determinant_2X2_matrix(float **matrix);
 float	**identity_matrix(unsigned int n);
+float	**submatrix(float **matrix, int row, int col);
+int		get_size(float **matrix);
 
 #endif
