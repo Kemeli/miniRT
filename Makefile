@@ -9,7 +9,8 @@ OBJS := tuples/tuples.o tuples/operations/subtract.o tuples/operations/negative.
 		tuples/operations/dot.o tuples/operations/cross.o tuples/colors/color.o tuples/colors/multiply_colors.o \
 		matrix/matrix.o matrix/operations/comparing_matrix.o matrix/operations/multiply_matrix.o \
 		matrix/operations/multiply_matrix_tuple.o matrix/operations/transposing_matrix.o matrix/inverting_matrices/determinants.o \
-		matrix/inverting_matrices/spotting_submatrices.o matrix/inverting_matrices/minor.o
+		matrix/inverting_matrices/spotting_submatrices.o matrix/inverting_matrices/minor.o \
+		matrix/inverting_matrices/cofactor.o
 
 OBJS := $(addprefix sources/, $(OBJS))
 
