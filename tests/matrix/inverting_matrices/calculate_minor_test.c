@@ -1,23 +1,15 @@
 #include <minunit.h>
 #include <minirt.h>
 
-static float	**copy_matrix(float a[4][4])
-{
-	float	**m = matrix(4);
-	for(int i = 0; i < 4; i++)
-		for (int j = 0; j < 4; j++)
-			m[i][j] = a[i][j];
-	return (m);
-}
-
 MU_TEST(test_should_calculate_minor_of_an_element_in_3x3_matrix)
 {
+	copy_size = 3;
 	float	x[3][3] = {
 		{3, 5, 0},
 		{2, -1, -7},
 		{6, -1, 5}
 	};
-	float	**A = copy_matrix_3x3(x);
+	float	**A = copy_matrix(x);
 	float	**B = submatrix(A, 1, 0);
 	float	expected = 25;
 	

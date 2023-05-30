@@ -388,4 +388,7 @@ static double mu_timer_cpu(void)
 }
 #endif
 
+extern int copy_size;
+float	**copy_matrix(float a[copy_size][copy_size]);
+
 #endif /* MINUNIT_MINUNIT_H */

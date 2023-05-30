@@ -2,15 +2,6 @@
 #include <minirt.h>
 #include <stdio.h>
 
-static float	**copy_matrix(float a[4][4])
-{
-	float	**m = matrix(4);
-	for(int i = 0; i < 4; i++)
-		for (int j = 0; j < 4; j++)
-			m[i][j] = a[i][j];
-	return (m);
-}
-
 MU_TEST(test_multiple_two_4x4_matrices)
 {
 	float x[4][4] = {
@@ -32,6 +23,7 @@ MU_TEST(test_multiple_two_4x4_matrices)
 		{16, 26, 46, 42}
 	};
 
+	copy_size = 4;
 	float	**a = copy_matrix(x);
 	float	**b = copy_matrix(y);
 	float	**expected = copy_matrix(z);

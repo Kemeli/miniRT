@@ -19,6 +19,17 @@
 #include "matrix/inverting_matrices/spotting_submatrices_test.c"
 #include "matrix/inverting_matrices/calculate_minor_test.c"
 
+int	copy_size;
+
+float	**copy_matrix(float a[copy_size][copy_size])
+{
+	float	**m = matrix(copy_size);
+	for(int i = 0; i < copy_size; i++)
+		for (int j = 0; j < copy_size; j++)
+			m[i][j] = a[i][j];
+	return (m);
+}
+
 int	main()
 {
 	MU_RUN_SUITE(test_tuple_identifier);
@@ -41,6 +52,7 @@ int	main()
 	MU_RUN_SUITE(test_matrix_determinant);
 	MU_RUN_SUITE(test_spotting_submatrices);
 	MU_RUN_SUITE(test_calculate_minor_test);
+	MU_RUN_SUITE(test_calculate_cofactor_test);
 	MU_REPORT();
 	return MU_EXIT_CODE;
 }
