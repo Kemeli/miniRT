@@ -30,5 +30,6 @@ float	determinant_2X2_matrix(float **matrix);
 float	**identity_matrix(unsigned int n);
 float	**submatrix(float **matrix, int row, int col);
 int		get_size(float **matrix);
+float	minor(float **matrix, int i, int j);
 
 #endif
