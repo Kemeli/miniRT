@@ -31,5 +31,6 @@ float	**identity_matrix(unsigned int n);
 float	**submatrix(float **matrix, int row, int col);
 int		get_size(float **matrix);
 float	minor(float **matrix, int i, int j);
+float	cofactor(float **matrix, int i, int j);
 
 #endif

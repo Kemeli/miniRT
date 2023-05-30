@@ -20,7 +20,7 @@ MU_TEST(test_should_calculate_minor_of_an_element_in_3x3_matrix)
 	free_matrix(B);
 }
 
-MU_TEST_SUITE(test_calculate_minor_test)
+MU_TEST_SUITE(test_calculate_minor)
 {
 	MU_RUN_TEST(test_should_calculate_minor_of_an_element_in_3x3_matrix);
 }
