@@ -6,7 +6,7 @@ float	minor(float **matrix, int i, int j)
 	float	result;
 
 	M = submatrix(matrix, i, j);
-	result = determinant_2X2_matrix(M);
+	result = determinant(M);
 	free_matrix(M);
 	return (result);
 }

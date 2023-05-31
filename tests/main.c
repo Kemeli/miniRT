@@ -54,6 +54,7 @@ int	main()
 	MU_RUN_SUITE(test_spotting_submatrices);
 	MU_RUN_SUITE(test_calculate_minor);
 	MU_RUN_SUITE(test_calculate_cofactor);
+
 	MU_REPORT();
 	return MU_EXIT_CODE;
 }
