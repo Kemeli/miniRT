@@ -32,14 +32,12 @@ t_tuple	point(float x, float y, float z)
 
 char	compare_tuples(t_tuple a, t_tuple b)
 {
-	float	epsilon;
 	int		i;
 
-	epsilon = 0.000001;
 	i = 0;
 	while (i < 4)
 	{
-		if (fabs(a[i] - b[i]) > epsilon)
+		if (!compare_floats(a[i], b[i]))
 			return (0);
 		i++;
 	}
