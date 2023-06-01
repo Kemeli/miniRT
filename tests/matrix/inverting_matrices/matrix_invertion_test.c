@@ -125,6 +125,39 @@ MU_TEST(test_if_inverse_function_returns_correct_matrices_2)
 	free_matrix(inverse_A);
 }
 
+MU_TEST(test_if_multiplying_by_inverse_gets_back_to_original_matrix)
+{
+	float	matrix_A_values[4][4] = {
+		{3, -9, 7, 3},
+		{3, -8, 2, -9},
+		{-4, 4, 4, 1},
+		{-6, 5, -1, 1}
+	};
+	float	matrix_B_values[4][4] = {
+		{8, 2, 2, 2},
+		{3, -1, 7, 0},
+		{7, 0, 5, 4},
+		{6, -2, 0, 5}
+	};
+	copy_size = 4;
+	float	**matrix_A = copy_matrix(matrix_A_values);
+	float	**matrix_B = copy_matrix(matrix_B_values);
+	float	**matrix_C = multiply_matrix(matrix_A, matrix_B);
+	float	**inverse_B = inverse(matrix_B);
+	float	**result = multiply_matrix(matrix_C, inverse_B);
+
+	mu_assert(
+		compare_matrices(result, matrix_A),
+		"Multiplying by inverse did not return the original A matrix"
+	);
+
+	free_matrix(matrix_A);
+	free_matrix(matrix_B);
+	free_matrix(inverse_B);
+	free_matrix(matrix_C);
+	free_matrix(result);
+}
+
 MU_TEST_SUITE(test_matrix_invertion)
 {
 	MU_RUN_TEST(test_if_a_matrix_is_invertible);
@@ -132,4 +165,5 @@ MU_TEST_SUITE(test_matrix_invertion)
 	MU_RUN_TEST(test_if_a_inverted_matrix_is_equal_to_a_received_matrix);
 	MU_RUN_TEST(test_if_inverse_function_returns_correct_matrices_1);
 	MU_RUN_TEST(test_if_inverse_function_returns_correct_matrices_2);
+	MU_RUN_TEST(test_if_multiplying_by_inverse_gets_back_to_original_matrix);
 }
