@@ -15,6 +15,7 @@ int	compare_matrices(float **matrix_A, float **matrix_B)
 	int	i;
 	int	j;
 	int	size;
+	float epsilon = 0.00001;
 
 	i = 0;
 	size = matrix_size(matrix_A);
@@ -23,7 +24,7 @@ int	compare_matrices(float **matrix_A, float **matrix_B)
 		j = 0;
 		while (j < size)
 		{
-			if (matrix_A[i][j] != matrix_B[i][j])
+			if (fabs(matrix_A[i][j] - matrix_B[i][j]) > epsilon)
 				return (0);
 			j++;
 		}
