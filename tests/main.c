@@ -17,6 +17,20 @@
 #include "matrix/operations/transposing_matrix_test.c"
 #include "matrix/inverting_matrices/determinants_test.c"
 #include "matrix/inverting_matrices/spotting_submatrices_test.c"
+#include "matrix/inverting_matrices/calculate_minor_test.c"
+#include "matrix/inverting_matrices/calculate_cofactor_test.c"
+#include "matrix/inverting_matrices/matrix_invertion_test.c"
+
+int	copy_size;
+
+float	**copy_matrix(float a[copy_size][copy_size])
+{
+	float	**m = matrix(copy_size);
+	for(int i = 0; i < copy_size; i++)
+		for (int j = 0; j < copy_size; j++)
+			m[i][j] = a[i][j];
+	return (m);
+}
 
 int	main()
 {
@@ -39,6 +53,9 @@ int	main()
 	MU_RUN_SUITE(test_transposing_matrix);
 	MU_RUN_SUITE(test_matrix_determinant);
 	MU_RUN_SUITE(test_spotting_submatrices);
+	MU_RUN_SUITE(test_calculate_minor);
+	MU_RUN_SUITE(test_calculate_cofactor);
+	MU_RUN_SUITE(test_matrix_invertion);
 	MU_REPORT();
 	return MU_EXIT_CODE;
 }
