@@ -20,6 +20,7 @@
 #include "matrix/inverting_matrices/calculate_minor_test.c"
 #include "matrix/inverting_matrices/calculate_cofactor_test.c"
 #include "matrix/inverting_matrices/matrix_invertion_test.c"
+#include "transformations/translation_test.c"
 
 int	copy_size;
 
@@ -56,6 +57,8 @@ int	main()
 	MU_RUN_SUITE(test_calculate_minor);
 	MU_RUN_SUITE(test_calculate_cofactor);
 	MU_RUN_SUITE(test_matrix_invertion);
+	MU_RUN_SUITE(test_translation_matrix);
+
 	MU_REPORT();
 	return MU_EXIT_CODE;
 }
