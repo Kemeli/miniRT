@@ -3,6 +3,10 @@
 # include <stdlib.h>
 # include <math.h>
 
+#ifndef M_PI
+#    define M_PI 3.14159265358979323846
+#endif
+
 typedef	float*	t_tuple;
 
 t_tuple	tuple(float x, float y, float z, float w);
@@ -37,5 +41,8 @@ float	**inverse(float **matrix);
 char	compare_floats(float n1, float n2);
 float	**translation(float x, float y, float z);
 float	**scaling(float x, float y, float z);
+float	**rotation_x(float radian);
+float	**rotation_y(float radian);
+float	**rotation_z(float radian);
 
 #endif
