@@ -20,4 +20,4 @@ float	**shearing(int axis, float value)
 	return (transform);
 }
 
-// verificar se essa matriz é válida
+// verificar se essa função é válida

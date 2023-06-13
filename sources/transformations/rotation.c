@@ -8,7 +8,7 @@ float	**rotation_x(float radian)
 	rotation_matrix[1][1] = cos(radian);
 	rotation_matrix[1][2] = -sin(radian);
 	rotation_matrix[2][1] = sin(radian);
-	rotation_matrix[2][2] = sin(radian);
+	rotation_matrix[2][2] = cos(radian);
 	return (rotation_matrix);
 }
 
