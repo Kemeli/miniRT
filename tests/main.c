@@ -23,6 +23,7 @@
 #include "transformations/translation_test.c"
 #include "transformations/scaling_test.c"
 #include "transformations/rotation_test.c"
+#include "transformations/shearing_test.c"
 
 int	copy_size;
 
@@ -62,7 +63,7 @@ int	main()
 	MU_RUN_SUITE(test_translation_matrix);
 	MU_RUN_SUITE(test_scaling_by_multiplication);
 	MU_RUN_SUITE(test_rotation);
-
+	MU_RUN_SUITE(shearing_test);
 
 	MU_REPORT();
 	return MU_EXIT_CODE;

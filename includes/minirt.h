@@ -44,5 +44,6 @@ float	**scaling(float x, float y, float z);
 float	**rotation_x(float radian);
 float	**rotation_y(float radian);
 float	**rotation_z(float radian);
+float	**shearing(int axis, float value);
 
 #endif
