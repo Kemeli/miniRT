@@ -32,7 +32,30 @@ MU_TEST(test_that_individual_transformations_are_applied_in_sequence)
 	free(p4_expected);
 }
 
+MU_TEST(test_that_chained_transformation_must_be_applied_in_reverse_order)
+{
+	t_tuple p = point(1, 0, 1);
+	float **a = rotation_x(M_PI / 2);
+	float **b = scaling(5, 5, 5);
+	float **c = translation(10, 5, 7);
+	float **t = multiply_matrix(c, b);
+	float **t2 = multiply_matrix(t, a);
+	t_tuple p2 = multiply_matrix_with_tuple(t2, p);
+	t_tuple p2_expected = point(15, 0, 7);
+	mu_check(compare_tuples(p2, p2_expected));
+
+	free_matrix(a);
+	free_matrix(b);
+	free_matrix(c);
+	free_matrix(t);
+	free_matrix(t2);
+	free(p);
+	free(p2);
+	free(p2_expected);
+}
+
 MU_TEST_SUITE(test_chaining_transformations)
 {
 	MU_RUN_TEST(test_that_individual_transformations_are_applied_in_sequence);
+	MU_RUN_TEST(test_that_chained_transformation_must_be_applied_in_reverse_order);
 }
