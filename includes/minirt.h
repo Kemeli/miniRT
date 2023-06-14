@@ -9,14 +9,21 @@
 
 typedef	float*	t_tuple;
 
+typedef struct s_ray
+{
+	t_tuple	origin;
+	t_tuple	direction;
+}	t_ray;
+
+
 t_tuple	tuple(float x, float y, float z, float w);
 t_tuple vector(float x, float y, float z);
 t_tuple point(float x, float y, float z);
 t_tuple	subtract(t_tuple a, t_tuple b);
 t_tuple	negative(t_tuple v);
 char	compare_tuples(t_tuple a, t_tuple b);
-t_tuple addition(t_tuple point, t_tuple vector);
-t_tuple	scalar_multiplication(t_tuple tuple_a, float times_to_multiply);
+t_tuple	tuple_addition(t_tuple point, t_tuple vector);
+t_tuple	multiply_tuple_by_scalar(t_tuple tuple_a, float times_to_multiply);
 t_tuple scalar_division(t_tuple tuple_a, float times_to_divide);
 float	magnitude(t_tuple v);
 t_tuple	normalize(t_tuple v);
@@ -45,5 +52,7 @@ float	**rotation_x(float radian);
 float	**rotation_y(float radian);
 float	**rotation_z(float radian);
 float	**shearing(int axis, float value);
+t_ray	create_ray(t_tuple origin, t_tuple direction);
+t_tuple	get_point_position(t_ray ray, float t);
 
 #endif

@@ -1,6 +1,6 @@
 #include <minirt.h>
 
-t_tuple	scalar_multiplication(t_tuple tuple_a, float times_to_multiply)
+t_tuple	multiply_tuple_by_scalar(t_tuple tuple_a, float times_to_multiply)
 {
 	t_tuple	result;
 	float	x;

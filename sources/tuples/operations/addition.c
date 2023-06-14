@@ -1,6 +1,6 @@
 #include <minirt.h>
 
-t_tuple	addition(t_tuple point, t_tuple vector)
+t_tuple	tuple_addition(t_tuple point, t_tuple vector)
 {
 	t_tuple	result;
 	float	x;
