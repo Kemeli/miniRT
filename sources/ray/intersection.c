@@ -12,7 +12,7 @@ t_intersect *handle_discriminant(
 
 	discriminant = pow(b, 2) - 4 * a * c;
 	if (discriminant < 0)
-		return (intersect);
+		return (intersect); //infinity?
 	if (discriminant == 0)
 	{
 		intersect->t1 = -b / (2.0 * a);
