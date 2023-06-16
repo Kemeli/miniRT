@@ -51,3 +51,16 @@ t_intersect	*intersection(t_sphere sphere, t_ray ray)
 	intersect = get_values(intersect, sphere, ray);
 	return (intersect);
 }
+
+//#############################################################################
+
+t_intersect	*create_intersection(float t, void *object)
+{
+	t_intersect	*intersect;
+
+	intersect = ft_calloc(1, sizeof(t_intersect));
+	intersect->t1 = t;
+	intersect->count = 1;
+	intersect->object = object;
+	return (intersect);
+}

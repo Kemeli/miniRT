@@ -26,7 +26,7 @@
 #include "transformations/shearing_test.c"
 #include "transformations/chaining_tranformation_test.c"
 #include "ray_tracer/ray_test.c"
-#include "ray_tracer/interception_test.c"
+#include "ray_tracer/intersection_test.c"
 
 int	copy_size;
 
@@ -37,6 +37,11 @@ float	**copy_matrix(float a[copy_size][copy_size])
 		for (int j = 0; j < copy_size; j++)
 			m[i][j] = a[i][j];
 	return (m);
+}
+
+int	compare_pointers(void *a, void *b)
+{
+	return (a == b);
 }
 
 int	main()

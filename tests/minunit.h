@@ -391,5 +391,6 @@ static double mu_timer_cpu(void)
 
 extern int copy_size;
 float	**copy_matrix(float a[copy_size][copy_size]);
+int		compare_pointers(void *a, void *b);
 
 #endif /* MINUNIT_MINUNIT_H */
