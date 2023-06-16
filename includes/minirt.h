@@ -24,10 +24,11 @@ typedef struct s_sphere
 
 typedef struct s_intersect
 {
-	float	t1;
-	float	t2;
-	int		count;
-	void	*object;
+	float		t;
+	float		t2;
+	int			count;
+	void		*object;
+	struct s_intersect	*next;
 }	t_intersect;
 
 t_tuple	tuple(float x, float y, float z, float w);
@@ -71,5 +72,7 @@ t_tuple	get_point_position(t_ray ray, float t);
 t_sphere	create_sphere(void);
 t_intersect	*intersection(t_sphere sphere, t_ray ray);
 t_intersect	*create_intersection(float t, void *object);
+void	free_list(t_intersect *list);
+t_intersect	*add_intersection_to_list(t_intersect *list, t_intersect *new);
 
 #endif

@@ -15,13 +15,13 @@ t_intersect *handle_discriminant(
 		return (intersect); //infinity?
 	if (discriminant == 0)
 	{
-		intersect->t1 = -b / (2.0 * a);
-		intersect->t2= intersect->t1;
+		intersect->t = -b / (2.0 * a);
+		intersect->t2= intersect->t;
 		intersect->count = 1;
 		return (intersect);
 	}
 	sqrtd = sqrt(discriminant);
-	intersect->t1 = (-b - sqrtd) / (2.0 * a);
+	intersect->t = (-b - sqrtd) / (2.0 * a);
 	intersect->t2= (-b + sqrtd) / (2.0 * a);
 	intersect->count = 2;
 	return (intersect);
@@ -59,8 +59,38 @@ t_intersect	*create_intersection(float t, void *object)
 	t_intersect	*intersect;
 
 	intersect = ft_calloc(1, sizeof(t_intersect));
-	intersect->t1 = t;
+	intersect->t = t;
 	intersect->count = 1;
 	intersect->object = object;
+	intersect->next = NULL;
 	return (intersect);
+}
+
+t_intersect	*add_intersection_to_list(t_intersect *list, t_intersect *new)
+{
+	t_intersect	*aux;
+
+	if (list == NULL)
+		return (new);
+	else
+	{
+		aux = list;
+		while (aux->next)
+			aux = aux->next;
+		aux->next = new;
+	}
+	return (list);
+}
+
+void	free_list(t_intersect *list)
+{
+	t_intersect	*aux;
+
+	aux = list;
+	while (list)
+	{
+		aux = list->next;
+		free(list);
+		list = aux;
+	}
 }
