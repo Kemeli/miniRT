@@ -26,6 +26,7 @@
 #include "transformations/shearing_test.c"
 #include "transformations/chaining_tranformation_test.c"
 #include "ray_tracer/ray_test.c"
+#include "ray_tracer/interception_test.c"
 
 int	copy_size;
 
@@ -68,6 +69,7 @@ int	main()
 	MU_RUN_SUITE(shearing_test);
 	MU_RUN_SUITE(test_chaining_transformations);
 	MU_RUN_SUITE(test_create_ray);
+	MU_RUN_SUITE(test_interception_of_rays_and_spheres);
 
 
 	MU_REPORT();

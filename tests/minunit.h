@@ -64,6 +64,7 @@
 
 #include <stdio.h>
 #include <math.h>
+#include <libft.h>
 
 /*  Maximum length of last message */
 #define MINUNIT_MESSAGE_LEN 1024
