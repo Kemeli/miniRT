@@ -2,6 +2,7 @@
 # define MINIRT_H
 # include <stdlib.h>
 # include <math.h>
+# include <libft.h>
 
 #ifndef M_PI
 #    define M_PI 3.14159265358979323846
@@ -15,16 +16,28 @@ typedef struct s_ray
 	t_tuple	direction;
 }	t_ray;
 
+typedef struct s_sphere
+{
+	t_tuple	center;
+	float	radius;
+}	t_sphere;
+
+typedef struct s_intersect
+{
+	float	t1;
+	float	t2;
+	int		count;
+}	t_intersect;
 
 t_tuple	tuple(float x, float y, float z, float w);
-t_tuple vector(float x, float y, float z);
-t_tuple point(float x, float y, float z);
+t_tuple	vector(float x, float y, float z);
+t_tuple	point(float x, float y, float z);
 t_tuple	subtract(t_tuple a, t_tuple b);
 t_tuple	negative(t_tuple v);
 char	compare_tuples(t_tuple a, t_tuple b);
 t_tuple	tuple_addition(t_tuple point, t_tuple vector);
 t_tuple	multiply_tuple_by_scalar(t_tuple tuple_a, float times_to_multiply);
-t_tuple scalar_division(t_tuple tuple_a, float times_to_divide);
+t_tuple	scalar_division(t_tuple tuple_a, float times_to_divide);
 float	magnitude(t_tuple v);
 t_tuple	normalize(t_tuple v);
 t_tuple	cross(t_tuple a, t_tuple b);
@@ -54,5 +67,7 @@ float	**rotation_z(float radian);
 float	**shearing(int axis, float value);
 t_ray	create_ray(t_tuple origin, t_tuple direction);
 t_tuple	get_point_position(t_ray ray, float t);
+t_sphere	create_sphere(void);
+t_intersect	*intersection(t_sphere sphere, t_ray ray);
 
 #endif
