@@ -1,27 +1,31 @@
 #include <minirt.h>
 
-t_intersect	*new_intersection(float t, void *object)
+t_node	*new_intersection(float t, void *object)
 {
-	t_intersect	*intersect;
+	t_node	*intersect;
 
-	intersect = ft_calloc(1, sizeof(t_intersect));
+	intersect = ft_calloc(1, sizeof(t_node));
 	intersect->t = t;
 	intersect->object = object;
-	intersect->next = NULL;
 	return (intersect);
 }
 
-t_intersect	*add_intersection_to_list(t_intersect *list, t_intersect *new)
+t_intersect	*add_intersection_to_list(t_intersect *list, t_node *new)
 {
-	t_intersect	*aux;
+	t_node	*aux;
 
 	if (list == NULL)
-		return (new);
+	{
+		list = ft_calloc(1, sizeof(t_intersect));
+		list->head = new;
+		return (list);
+	}
 	else
 	{
-		aux = list;
+		aux = list->head;
 		while (aux->next)
 			aux = aux->next;
+		new->next = NULL;
 		aux->next = new;
 	}
 	return (list);
@@ -29,13 +33,14 @@ t_intersect	*add_intersection_to_list(t_intersect *list, t_intersect *new)
 
 void	free_list(t_intersect *list)
 {
-	t_intersect	*aux;
+	t_node	*aux;
 
-	aux = list;
-	while (list)
+	aux = list->head;
+	while (list->head)
 	{
-		aux = list->next;
-		free(list);
-		list = aux;
+		aux = list->head->next;
+		free(list->head);
+		list->head = aux;
 	}
+	free(list);
 }

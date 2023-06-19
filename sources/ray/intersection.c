@@ -13,16 +13,6 @@ t_intersect *handle_discriminant(
 
 	intersect_list = NULL;
 	discriminant = pow(b, 2) - 4 * a * c;
-	// if (discriminant < 0)
-	// 	return (intersect); //infinity?
-	// if (discriminant == 0)
-	// {
-	// 	intersect->t = -b / (2.0 * a);
-	// 	intersect->t2= intersect->t;
-	// 	intersect->count = 1;
-	// 	return (intersect);
-	// }
-
 	sqrtd = sqrt(discriminant);
 	intersect_list = add_intersection_to_list(
 		intersect_list,
@@ -32,6 +22,10 @@ t_intersect *handle_discriminant(
 		intersect_list,
 		new_intersection((-b + sqrtd) / (2.0 * a), &sphere)
 	);
+	if (discriminant == 0)
+		intersect_list->count = 1;
+	else if (discriminant > 0)
+		intersect_list->count = 2;
 	return (intersect_list);
 }
 
