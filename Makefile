@@ -13,7 +13,7 @@ OBJS := tuples/tuples.o tuples/operations/subtract.o tuples/operations/negative.
 		matrix/inverting_matrices/spotting_submatrices.o matrix/inverting_matrices/minor.o \
 		matrix/inverting_matrices/cofactor.o matrix/inverting_matrices/inverse.o utils.o transformations/translation.o \
 		transformations/scaling.o transformations/rotation.o transformations/shearing.o ray/ray.o ray/intersection.o \
-		ray/sphere.o
+		ray/sphere.o ray/list_intersect.o
 
 OBJS := $(addprefix sources/, $(OBJS))
 
