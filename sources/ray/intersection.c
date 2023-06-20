@@ -29,7 +29,7 @@ t_intersect *handle_discriminant(
 	return (intersect_list);
 }
 
-t_intersect	*intersect_sphere(t_sphere *sphere, t_ray ray)
+t_intersect	*intersect_sphere(t_sphere *sphere, t_ray *ray)
 {
 	float		a;
 	float		b;
@@ -38,9 +38,9 @@ t_intersect	*intersect_sphere(t_sphere *sphere, t_ray ray)
 	t_intersect	*intersect;
 
 	intersect = NULL;
-	origin_to_center = subtract(ray.origin, sphere->center);
-	a = dot(ray.direction, ray.direction);
-	b = 2 * dot(ray.direction, origin_to_center);
+	origin_to_center = subtract(ray->origin, sphere->center);
+	a = dot(ray->direction, ray->direction);
+	b = 2 * dot(ray->direction, origin_to_center);
 	c = dot(origin_to_center, origin_to_center) - pow(sphere->radius, 2);
 	intersect = handle_discriminant(a, b, c, sphere);
 	free(origin_to_center);

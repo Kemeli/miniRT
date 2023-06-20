@@ -20,3 +20,5 @@ t_node	*hit(t_intersect *xs)
 	}
 	return (hit);
 }
+
+//create sort list of intersections

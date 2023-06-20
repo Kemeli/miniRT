@@ -28,6 +28,7 @@
 #include "ray_tracer/ray_test.c"
 #include "ray_tracer/intersection_test.c"
 #include "ray_tracer/hit_test.c"
+#include "ray_tracer/transform_ray_test.c"
 
 int	copy_size;
 
@@ -77,6 +78,7 @@ int	main()
 	MU_RUN_SUITE(test_create_ray);
 	MU_RUN_SUITE(test_interception_of_rays_and_spheres);
 	MU_RUN_SUITE(test_hit_intersection);
+	MU_RUN_SUITE(test_transform_ray);
 
 	MU_REPORT();
 	return MU_EXIT_CODE;

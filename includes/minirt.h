@@ -76,13 +76,14 @@ float	**rotation_x(float radian);
 float	**rotation_y(float radian);
 float	**rotation_z(float radian);
 float	**shearing(int axis, float value);
-t_ray	create_ray(t_tuple origin, t_tuple direction);
-t_tuple	get_point_position(t_ray ray, float t);
+t_ray	*create_ray(t_tuple origin, t_tuple direction);
+t_tuple	get_point_position(t_ray *ray, float t);
 t_sphere	*create_sphere(void);
-t_intersect	*intersect_sphere(t_sphere *sphere, t_ray ray);
+t_intersect	*intersect_sphere(t_sphere *sphere, t_ray *ray);
 t_node	*new_intersection(float t, void *object);
 void	free_list(t_intersect *list);
 t_intersect	*add_intersection_to_list(t_intersect *list, t_node *new);
 t_node	*hit(t_intersect *xs);
+t_ray	*transform_ray(t_ray *ray, float **matrix);
 
 #endif

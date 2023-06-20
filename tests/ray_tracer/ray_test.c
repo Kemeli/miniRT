@@ -5,20 +5,20 @@ MU_TEST(test_creating_and_quering_a_ray)
 {
 	t_tuple origin = point(1, 2, 3);
 	t_tuple direction = vector(4, 5, 6);
-	t_ray r = create_ray(origin, direction);
-	mu_check(compare_tuples(r.origin, origin));
-	mu_check(compare_tuples(r.direction, direction));
+	t_ray *r = create_ray(origin, direction);
+	mu_check(compare_tuples(r->origin, origin));
+	mu_check(compare_tuples(r->direction, direction));
 
 	free(origin);
 	free(direction);
-
+	free(r);
 }
 
 MU_TEST(test_computing_a_point_from_a_distance)
 {
 	t_tuple p = point(2, 3, 4);
 	t_tuple v = vector(1, 0, 0);
-	t_ray r = create_ray(p, v);
+	t_ray *r = create_ray(p, v);
 	t_tuple result1 = get_point_position(r, 0);
 	t_tuple expected1 = point(2, 3, 4);
 	t_tuple result2 = get_point_position(r, 1);
@@ -43,6 +43,7 @@ MU_TEST(test_computing_a_point_from_a_distance)
 	free(expected4);
 	free(p);
 	free(v);
+	free(r);
 }
 
 MU_TEST_SUITE(test_create_ray)
