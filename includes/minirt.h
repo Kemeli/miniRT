@@ -83,5 +83,6 @@ t_intersect	*intersect_sphere(t_sphere *sphere, t_ray ray);
 t_node	*new_intersection(float t, void *object);
 void	free_list(t_intersect *list);
 t_intersect	*add_intersection_to_list(t_intersect *list, t_node *new);
+t_node	*hit(t_intersect *xs);
 
 #endif

@@ -7,6 +7,7 @@ t_node	*new_intersection(float t, void *object)
 	intersect = ft_calloc(1, sizeof(t_node));
 	intersect->t = t;
 	intersect->object = object;
+	intersect->next = NULL;
 	return (intersect);
 }
 
@@ -35,7 +36,6 @@ void	free_list(t_intersect *list)
 {
 	t_node	*aux;
 
-	aux = list->head;
 	while (list->head)
 	{
 		aux = list->head->next;
