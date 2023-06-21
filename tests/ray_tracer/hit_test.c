@@ -13,6 +13,7 @@ MU_TEST(test_hit_intersection_sphere_all_positive_t)
 	t_node *i = hit(xs);
 	mu_assert(i->t == 1, "hit->t != 1");
 
+	free_matrix(s->transform);
 	free(s->center);
 	free(s);
 	free_list(xs);
@@ -31,6 +32,7 @@ MU_TEST(test_hit_intersection_sphere_has_negative_t)
 	t_node *i = hit(xs);
 	mu_assert(i->t == 1, "hit->t != 1");
 
+	free_matrix(s->transform);
 	free(s->center);
 	free(s);
 	free_list(xs);
@@ -48,6 +50,7 @@ MU_TEST(test_hit_intersection_sphere_all_negative_t)
 	t_node *i = hit(xs);
 	mu_assert(i == NULL, "hit != NULL");
 
+	free_matrix(s->transform);
 	free(s->center);
 	free(s);
 	free_list(xs);
@@ -69,6 +72,7 @@ MU_TEST(test_hit_intersection_is_always_lowest_nonnegative_t)
 	t_node *i = hit(xs);
 	mu_assert(i->t == 2, "hit->t != 2");
 
+	free_matrix(s->transform);
 	free(s->center);
 	free(s);
 	free_list(xs);

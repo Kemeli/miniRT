@@ -14,6 +14,7 @@ MU_TEST(test_that_a_ray_intercepts_a_sphere_at_two_points)
 	mu_assert_double_eq(6.0, xs->head->next->t);
 	mu_assert_int_eq(2, xs->count);
 
+	free_matrix(s->transform);
 	free_list (xs);
 	free (r->direction);
 	free (r->origin);
@@ -31,6 +32,7 @@ MU_TEST(test_that_a_ray_intercepts_a_sphere_at_a_tangent)
 	mu_assert_double_eq(5.0, xs->head->next->t);
 	mu_assert_int_eq(1, xs->count);
 
+	free_matrix(s->transform);
 	free_list (xs);
 	free (r->direction);
 	free (r->origin);
@@ -48,6 +50,7 @@ MU_TEST(test_that_a_ray_misses_a_sphere)
 	mu_assert_double_eq(0, xs->head->next->t);
 	mu_assert_int_eq(0, xs->count);
 
+	free_matrix(s->transform);
 	free_list (xs);
 	free (r->direction);
 	free (r->origin);
@@ -65,6 +68,7 @@ MU_TEST(test_that_a_ray_originates_inside_a_sphere)
 	mu_assert_double_eq(1.0, xs->head->next->t);
 	mu_assert_int_eq(2, xs->count);
 
+	free_matrix(s->transform);
 	free_list (xs);
 	free (r->direction);
 	free (r->origin);
@@ -82,6 +86,7 @@ MU_TEST(test_that_a_sphere_is_behind_a_ray)
 	mu_assert_double_eq(-4.0, xs->head->next->t);
 	mu_assert_int_eq(2, xs->count);
 
+	free_matrix(s->transform);
 	free_list(xs);
 	free (r->direction);
 	free (r->origin);
@@ -101,6 +106,7 @@ MU_TEST(test_that_an_intersection_encapsulates_t_and_object)
 	mu_assert_double_eq(3.5, i->t);
 	mu_check(compare_pointers(&s, i->object));
 
+	free_matrix(s->transform);
 	free (i);
 	free (s->center);
 	free(s);
@@ -128,6 +134,7 @@ MU_TEST(test_that_a_collection_of_intersections_is_created)
 	}
 	mu_assert_int_eq(2, count);
 
+	free_matrix(s->transform);
 	free(s->center);
 	free_list(xs);
 	free(s);
@@ -152,6 +159,7 @@ MU_TEST(test_that_intersect_sets_the_object_on_the_intersection)
 	mu_assert_double_eq(6.0, xs->head->next->t);
 	mu_assert_int_eq(2, xs->count);
 
+	free_matrix(s->transform);
 	free (r->direction);
 	free (r->origin);
 	free (s->center);

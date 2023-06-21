@@ -22,6 +22,7 @@ typedef struct s_sphere
 {
 	t_tuple	center;
 	float	radius;
+	float	**transform;
 }	t_sphere;
 
 typedef struct s_node
