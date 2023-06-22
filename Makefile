@@ -33,4 +33,12 @@ tests: $(OBJS) $(LIBFT)
 	@$(CC) $(INCLUDES) -I ./tests/ $(OBJS) ./tests/main.c $(LIBS) $(LIBFT) -g3 -o test.out
 	@valgrind -q --leak-check=full ./test.out
 
+clean:
+	rm -rf $(OBJS)
+
+fclean: clean
+	rm -rf $(NAME)
+
+re: fclean all
+
 .PHONY: tests
