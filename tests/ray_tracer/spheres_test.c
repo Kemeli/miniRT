@@ -60,9 +60,38 @@ MU_TEST(test_intersecting_a_scaled_sphere_with_a_ray)
 	free_matrix(scale);
 }
 
+MU_TEST(test_intersecting_a_translated_sphere_with_a_ray)
+{
+	t_sphere	*s;
+	t_ray		*r;
+	t_tuple		p;
+	t_tuple		v;
+	float		**t;
+	t_intersect	*xs;
+
+	s = create_sphere();
+	t = translation(5, 0, 0);
+	p = point(0, 0, -5);
+	v = vector(0, 0, 1);
+	r = create_ray(p, v);
+	set_transform(&s, t);
+	xs = intersect_sphere(s, r);
+	mu_check(compare_matrices(s->transform, t));
+
+	free_matrix(t);
+	free_matrix(s->transform);
+	free(s->center);
+	free_list(xs);
+	free(s);
+	free(r);
+	free(p);
+	free(v);
+}
+
 MU_TEST_SUITE(test_spheres_transformation)
 {
 	MU_RUN_TEST(test_sphere_default_transformation);
 	MU_RUN_TEST(test_changing_a_spheres_transformation);
 	MU_RUN_TEST(test_intersecting_a_scaled_sphere_with_a_ray);
+	MU_RUN_TEST(test_intersecting_a_translated_sphere_with_a_ray);
 }

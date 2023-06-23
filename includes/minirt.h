@@ -3,6 +3,8 @@
 # include <stdlib.h>
 # include <math.h>
 # include <libft.h>
+# include "mlx.h"
+# include "mlx_int.h"
 
 #ifndef M_PI
 #    define M_PI 3.14159265358979323846
