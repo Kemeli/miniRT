@@ -93,6 +93,7 @@ int render_rect(t_image *img, t_rect rect)
 	double	y;
 	double	angle;
 	double	raio;
+	double	all;
 	int		i;
 	t_tuple	center;
 	t_tuple	vecto;
@@ -103,14 +104,19 @@ int render_rect(t_image *img, t_rect rect)
 	raio = 50.0f;
 	vecto = vector(1, 0, 0);
 	i = 0;
-	while (i < 100)
+	while (i < 500)
 	{
-		angle = 2.0f * M_PI * i / 100.0f;
+		all = 1.0f;
+		angle = 2.0f * M_PI * i / 500.0f;
 		rot = rotation_y(angle);
 		v2 = multiply_matrix_with_tuple(rot, vecto);
-		x = raio * v2[0];
-		y = raio * v2[2];
-		img_pix_put(img, center[0] + x, center[2] + y, rect.color);
+		while(all < raio)
+		{
+			x = all * v2[0];
+			y = all * v2[2];
+			img_pix_put(img, center[0] + x, center[2] + y, rect.color);
+			all += 1;
+		}
 		printf("x=%f, y=%f\n", x, y);
 		i++;
 		free_matrix(rot);
