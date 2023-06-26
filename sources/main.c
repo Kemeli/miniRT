@@ -16,10 +16,15 @@ typedef struct s_data
 	t_image img;
 } t_data;
 
-void write_pixel(t_data *data, int x, int y, int color)
+void write_pixel(t_data *data, int x, int y, t_tuple color)
 {
-	char *pixel = data->img.addr + (y * data->img.line_len + x * (data->img.bpp / 8));
-	*(unsigned int *)pixel = color;
+	int pixel_offset = (y * data->img.line_len) + (x * (data->img.bpp / 8));
+
+	data->img.addr[pixel_offset + 0] = color[2] * 255;
+	data->img.addr[pixel_offset + 1] = color[1] * 255;
+	data->img.addr[pixel_offset + 2] = color[0] * 255;
+	data->img.addr[pixel_offset + 3] = 0;
+
 }
 
 int render(t_data *data)
@@ -32,7 +37,7 @@ int render(t_data *data)
 	t_tuple ray_origin = point(0, 0, -5);
 	t_sphere *shape;
 
-	int color = 0xFF0000; // Red
+	t_tuple red = color(1, 0, 0);
 
 	shape = create_sphere();
 	for (int y = 0; y < canvas_pixels; y++)
@@ -48,12 +53,13 @@ int render(t_data *data)
 			t_intersect *xs = intersect_sphere(shape, r);
 
 			if (hit(xs))
-				write_pixel(data, x, y, color);
+				write_pixel(data, x, y, red);
 		}
 	}
 
 	if (data->win_ptr != NULL)
-		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, 0, 0);
+		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
+			data->img.mlx_img, 0, 0);
 	return (0);
 }
 
@@ -74,7 +80,12 @@ int main(void)
 	data.mlx_ptr = mlx_init();
 	data.win_ptr = mlx_new_window(data.mlx_ptr, 100, 100, "print sphere");
 	data.img.mlx_img = mlx_new_image(data.mlx_ptr, 100, 100);
-	data.img.addr = mlx_get_data_addr(data.img.mlx_img, &data.img.bpp, &data.img.line_len, &data.img.endian);
+	data.img.addr = mlx_get_data_addr(
+		data.img.mlx_img,
+		&data.img.bpp,
+		&data.img.line_len,
+		&data.img.endian
+	);
 
 	mlx_loop_hook(data.mlx_ptr, &render, &data);
 	mlx_hook(data.win_ptr, KeyPress, KeyPressMask, &handle_keypress, &data);
