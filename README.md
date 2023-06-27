@@ -15,3 +15,7 @@ Para compilar o miniRT precisamos incluir o arquivo `main.o` na variável **OBJS
 ```
 make re
 ```
+
+## Obs
+
+1. Alteramos o `epsilon` na função `compare_floats` para comparar 5 casas decimais! (antes comparava 6)

@@ -86,5 +86,6 @@ t_intersect	*add_intersection_to_list(t_intersect *list, t_node *new);
 t_node	*hit(t_intersect *xs);
 t_ray	*transform_ray(t_ray *ray, float **matrix);
 void	set_transform(t_sphere **sphere, float **translation);
+t_tuple	normal_at(t_sphere *sphere, t_tuple point);
 
 #endif
