@@ -108,6 +108,29 @@ MU_TEST(test_computing_the_normal_on_a_translated_sphere)
 	free(n);
 }
 
+MU_TEST(test_computing_the_normal_on_a_transformed_sphere)
+{
+	t_sphere *s = create_sphere();
+	float **scaled = scaling(1, 0.5, 1);
+	float **rotated = rotation_z(M_PI / 5);
+	float **result = multiply_matrix(scaled, rotated);
+	set_transform(&s, result);
+	t_tuple p = point(0, sqrt(2)/2, -sqrt(2)/2);
+	t_tuple n = normal_at(s, p);
+	t_tuple expected = vector(0, 0.97014f, -0.24254f);
+	mu_check(compare_tuples(expected, n));
+
+	free(p);
+	free(s->center);
+	free_matrix(s->transform);
+	free(s);
+	free_matrix(scaled);
+	free_matrix(rotated);
+	free_matrix(result);
+	free(expected);
+	free(n);
+}
+
 MU_TEST_SUITE(test_normal_at)
 {
 	MU_RUN_TEST(test_the_normal_on_a_sphere_at_a_point_on_the_x_axis);
@@ -116,4 +139,5 @@ MU_TEST_SUITE(test_normal_at)
 	MU_RUN_TEST(test_the_normal_on_a_sphere_at_a_nonaxial_point);
 	MU_RUN_TEST(test_the_normal_is_a_normalized_vector);
 	MU_RUN_TEST(test_computing_the_normal_on_a_translated_sphere);
+	MU_RUN_TEST(test_computing_the_normal_on_a_transformed_sphere);
 }
