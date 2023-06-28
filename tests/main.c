@@ -32,6 +32,7 @@
 #include "ray_tracer/spheres_test.c"
 #include "ray_tracer/normal_at_test.c"
 #include "ray_tracer/reflect_vector_test.c"
+#include "ray_tracer/lighting_test.c"
 
 int	copy_size;
 
@@ -85,6 +86,7 @@ int	main()
 	MU_RUN_SUITE(test_spheres_transformation);
 	MU_RUN_SUITE(test_normal_at);
 	MU_RUN_SUITE(test_reflecting_vector);
+	MU_RUN_SUITE(test_the_phone_reflection_mode);
 
 	MU_REPORT();
 	return MU_EXIT_CODE;
