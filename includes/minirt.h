@@ -40,6 +40,21 @@ typedef struct s_intersect
 	int		count;
 }	t_intersect;
 
+typedef struct s_material
+{
+	t_tuple	color;
+	float	ambient;
+	float	diffuse;
+	float	specular;
+	float	shininess;
+}	t_material;
+
+typedef struct s_light
+{
+	t_tuple	position;
+	t_tuple	intensity;
+}	t_light;
+
 t_tuple	tuple(float x, float y, float z, float w);
 t_tuple	vector(float x, float y, float z);
 t_tuple	point(float x, float y, float z);
@@ -88,5 +103,6 @@ t_ray	*transform_ray(t_ray *ray, float **matrix);
 void	set_transform(t_sphere **sphere, float **translation);
 t_tuple	normal_at(t_sphere *sphere, t_tuple point);
 t_tuple	reflect(t_tuple in, t_tuple normal);
+t_light	*point_light(t_tuple position, t_tuple intensity);
 
 #endif
