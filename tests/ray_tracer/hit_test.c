@@ -15,6 +15,8 @@ MU_TEST(test_hit_intersection_sphere_all_positive_t)
 
 	free_matrix(s->transform);
 	free(s->center);
+	free(s->material->color);
+	free(s->material);
 	free(s);
 	free_list(xs);
 }
@@ -34,6 +36,8 @@ MU_TEST(test_hit_intersection_sphere_has_negative_t)
 
 	free_matrix(s->transform);
 	free(s->center);
+	free(s->material->color);
+	free(s->material);
 	free(s);
 	free_list(xs);
 }
@@ -52,6 +56,8 @@ MU_TEST(test_hit_intersection_sphere_all_negative_t)
 
 	free_matrix(s->transform);
 	free(s->center);
+	free(s->material->color);
+	free(s->material);
 	free(s);
 	free_list(xs);
 }
@@ -74,6 +80,8 @@ MU_TEST(test_hit_intersection_is_always_lowest_nonnegative_t)
 
 	free_matrix(s->transform);
 	free(s->center);
+	free(s->material->color);
+	free(s->material);
 	free(s);
 	free_list(xs);
 }

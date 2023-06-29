@@ -13,6 +13,8 @@ MU_TEST(test_the_normal_on_a_sphere_at_a_point_on_the_x_axis)
 	free(p);
 	free(s->center);
 	free_matrix(s->transform);
+	free(s->material->color);
+	free(s->material);
 	free(s);
 	free(esperado);
 	free(n);
@@ -30,6 +32,8 @@ MU_TEST(test_the_normal_on_a_sphere_at_a_point_on_the_y_axis)
 	free(p);
 	free(s->center);
 	free_matrix(s->transform);
+	free(s->material->color);
+	free(s->material);
 	free(s);
 	free(esperado);
 	free(n);
@@ -47,6 +51,8 @@ MU_TEST(test_the_normal_on_a_sphere_at_a_point_on_the_z_axis)
 	free(p);
 	free(s->center);
 	free_matrix(s->transform);
+	free(s->material->color);
+	free(s->material);
 	free(s);
 	free(esperado);
 	free(n);
@@ -64,6 +70,8 @@ MU_TEST(test_the_normal_on_a_sphere_at_a_nonaxial_point)
 	free(p);
 	free(s->center);
 	free_matrix(s->transform);
+	free(s->material->color);
+	free(s->material);
 	free(s);
 	free(esperado);
 	free(n);
@@ -82,6 +90,8 @@ MU_TEST(test_the_normal_is_a_normalized_vector)
 	free(p);
 	free(s->center);
 	free_matrix(s->transform);
+	free(s->material->color);
+	free(s->material);
 	free(s);
 	free(esperado);
 	free(n);
@@ -102,6 +112,8 @@ MU_TEST(test_computing_the_normal_on_a_translated_sphere)
 	free(p);
 	free(s->center);
 	free_matrix(s->transform);
+	free(s->material->color);
+	free(s->material);
 	free(s);
 	free_matrix(t);
 	free(esperado);
@@ -123,6 +135,8 @@ MU_TEST(test_computing_the_normal_on_a_transformed_sphere)
 	free(p);
 	free(s->center);
 	free_matrix(s->transform);
+	free(s->material->color);
+	free(s->material);
 	free(s);
 	free_matrix(scaled);
 	free_matrix(rotated);

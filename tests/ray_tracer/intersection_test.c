@@ -19,6 +19,8 @@ MU_TEST(test_that_a_ray_intercepts_a_sphere_at_two_points)
 	free (r->direction);
 	free (r->origin);
 	free (s->center);
+	free(s->material->color);
+	free(s->material);
 	free (s);
 	free (r);
 }
@@ -37,6 +39,8 @@ MU_TEST(test_that_a_ray_intercepts_a_sphere_at_a_tangent)
 	free (r->direction);
 	free (r->origin);
 	free (s->center);
+	free(s->material->color);
+	free(s->material);
 	free (s);
 	free (r);
 }
@@ -55,6 +59,8 @@ MU_TEST(test_that_a_ray_misses_a_sphere)
 	free (r->direction);
 	free (r->origin);
 	free (s->center);
+	free(s->material->color);
+	free(s->material);
 	free (s);
 	free (r);
 }
@@ -73,6 +79,8 @@ MU_TEST(test_that_a_ray_originates_inside_a_sphere)
 	free (r->direction);
 	free (r->origin);
 	free (s->center);
+	free(s->material->color);
+	free(s->material);
 	free (s);
 	free (r);
 }
@@ -91,6 +99,8 @@ MU_TEST(test_that_a_sphere_is_behind_a_ray)
 	free (r->direction);
 	free (r->origin);
 	free (s->center);
+	free(s->material->color);
+	free(s->material);
 	free (s);
 	free (r);
 }
@@ -109,6 +119,8 @@ MU_TEST(test_that_an_intersection_encapsulates_t_and_object)
 	free_matrix(s->transform);
 	free (i);
 	free (s->center);
+	free(s->material->color);
+	free(s->material);
 	free(s);
 }
 
@@ -137,6 +149,8 @@ MU_TEST(test_that_a_collection_of_intersections_is_created)
 	free_matrix(s->transform);
 	free(s->center);
 	free_list(xs);
+	free(s->material->color);
+	free(s->material);
 	free(s);
 }
 
@@ -164,6 +178,8 @@ MU_TEST(test_that_intersect_sets_the_object_on_the_intersection)
 	free (r->origin);
 	free (s->center);
 	free_list(xs);
+	free(s->material->color);
+	free(s->material);
 	free(s);
 	free(r);
 }

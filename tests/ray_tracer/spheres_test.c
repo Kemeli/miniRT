@@ -10,6 +10,8 @@ MU_TEST(test_sphere_default_transformation)
 	free_matrix(expected);
 	free_matrix(s->transform);
 	free(s->center);
+	free(s->material->color);
+	free(s->material);
 	free(s);
 }
 
@@ -26,6 +28,8 @@ MU_TEST(test_changing_a_spheres_transformation)
 	free_matrix(t);
 	free_matrix(s->transform);
 	free(s->center);
+	free(s->material->color);
+	free(s->material);
 	free(s);
 }
 
@@ -52,6 +56,8 @@ MU_TEST(test_intersecting_a_scaled_sphere_with_a_ray)
 
 	free_matrix(s->transform);
 	free(s->center);
+	free(s->material->color);
+	free(s->material);
 	free(s);
 	free(r);
 	free(v);
@@ -81,6 +87,8 @@ MU_TEST(test_intersecting_a_translated_sphere_with_a_ray)
 	free_matrix(t);
 	free_matrix(s->transform);
 	free(s->center);
+	free(s->material->color);
+	free(s->material);
 	free_list(xs);
 	free(s);
 	free(r);
