@@ -2,7 +2,7 @@
 
 typedef struct s_aux
 {
-	t_tuple	eff_color;
+	t_tuple	effective_c;
 	t_tuple	light_v;
 	t_tuple	ambient;
 	t_tuple	diffuse;
@@ -57,7 +57,7 @@ static t_tuple	calculate_specular(t_lighting *l, float ref_dot_eye)
 
 static void	free_aux(t_aux *aux)
 {
-	free(aux->eff_color);
+	free(aux->effective_c);
 	free(aux->light_v);
 	free(aux->ambient);
 	free(aux->diffuse);
@@ -72,9 +72,9 @@ t_tuple	lighting(t_lighting *l)
 	t_aux	*aux;
 
 	aux = ft_calloc(1, sizeof(t_aux));
-	aux->eff_color = multiply_colors(l->material->color, l->light->intensity);
+	aux->effective_c = multiply_colors(l->material->color, l->light->intensity);
 	aux->ambient = multiply_tuple_by_scalar(
-			aux->eff_color, l->material->ambient);
+			aux->effective_c, l->material->ambient);
 	aux->light_v = ligth_vector(l);
 	aux->light_dot_normal = dot(aux->light_v, l->normal);
 	if (aux->light_dot_normal < 0)
@@ -84,7 +84,7 @@ t_tuple	lighting(t_lighting *l)
 	}
 	else
 	{
-		aux->diffuse = multiply_tuple_by_scalar(aux->eff_color,
+		aux->diffuse = multiply_tuple_by_scalar(aux->effective_c,
 				l->material->diffuse * aux->light_dot_normal);
 		aux->f_reflect_dot_eye = reflect_dot_eye(l, aux->light_v);
 		aux->specular = calculate_specular(l, aux->f_reflect_dot_eye);
