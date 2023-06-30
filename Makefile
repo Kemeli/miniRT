@@ -15,7 +15,8 @@ OBJS := tuples/tuples.o tuples/operations/subtract.o tuples/operations/negative.
 		transformations/scaling.o transformations/rotation.o transformations/shearing.o ray_tracer/ray.o ray_tracer/sphere_intersection.o \
 		objects/sphere.o ray_tracer/list_intersect.o ray_tracer/hit.o \
 		ray_tracer/transform_ray.o ray_tracer/set_transform.o \
-		ray_tracer/normal_at.o ray_tracer/reflect_vector.o ray_tracer/lighting.o
+		ray_tracer/normal_at.o ray_tracer/reflect_vector.o ray_tracer/lighting.o \
+		ray_tracer/lighting_utils.o
 
 OBJS := $(addprefix sources/, $(OBJS))
 

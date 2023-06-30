@@ -115,7 +115,8 @@ t_ray		*transform_ray(t_ray *ray, float **matrix);
 void		set_transform(t_sphere **sphere, float **translation);
 t_tuple		normal_at(t_sphere *sphere, t_tuple point);
 t_tuple		reflect(t_tuple in, t_tuple normal);
-t_light		*point_light(t_tuple position, t_tuple intensity);
+t_point_light	*point_light(t_tuple position, t_tuple intensity);
 t_material	*material(void);
+t_tuple		lighting(t_lighting *l);
 
 #endif

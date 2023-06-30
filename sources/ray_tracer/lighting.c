@@ -1,31 +1,96 @@
 #include <minirt.h>
 
-t_point_light	*point_light(t_tuple position, t_tuple intensity)
+typedef struct s_aux
 {
-	t_point_light	*point_light;
+	t_tuple	eff_color;
+	t_tuple	light_v;
+	t_tuple	ambient;
+	t_tuple	diffuse;
+	t_tuple	specular;
+	t_tuple	sum;
+	float	light_dot_normal;
+	float	f_reflect_dot_eye;
+}	t_aux;
 
-	point_light = ft_calloc(1, sizeof(t_point_light));
-	point_light->position = position;
-	point_light->intensity = intensity;
-	return (point_light);
+static t_tuple	ligth_vector(t_lighting *l)
+{
+	t_tuple	sub;
+	t_tuple	light_v;
+
+	sub = subtract(l->light->position, l->position);
+	light_v = normalize(sub);
+	free(sub);
+	return (light_v);
 }
 
-t_material	*material(void)
+static float	reflect_dot_eye(t_lighting *l, t_tuple light_v)
 {
-	t_material	*material;
+	t_tuple	neg;
+	t_tuple	reflect_v;
+	float	reflect_dot_eye;
 
-	material = ft_calloc(1, sizeof(t_material));
-	material->color = color(1, 1, 1);
-	material->ambient = 0.1f;
-	material->diffuse = 0.9f;
-	material->specular = 0.9f;
-	material->shininess = 200.0f;
-	return (material);
+	neg = negative(light_v);
+	reflect_v = reflect(neg, l->normal);
+	reflect_dot_eye = dot(reflect_v, l->eye);
+	free(reflect_v);
+	free(neg);
+	return (reflect_dot_eye);
 }
 
-t_tuple	lighting(t_lighting *)
+static t_tuple	calculate_specular(t_lighting *l, float ref_dot_eye)
+{
+	t_tuple	specular;
+	float	factor;
+
+	if (ref_dot_eye <= 0)
+		specular = color(0, 0, 0);
+	else
+	{
+		factor = pow(ref_dot_eye, l->material->shininess);
+		specular = multiply_tuple_by_scalar(
+				l->light->intensity,
+				l->material->specular * factor
+				);
+	}
+	return (specular);
+}
+
+static void	free_aux(t_aux *aux)
+{
+	free(aux->eff_color);
+	free(aux->light_v);
+	free(aux->ambient);
+	free(aux->diffuse);
+	free(aux->specular);
+	free(aux->sum);
+	free(aux);
+}
+
+t_tuple	lighting(t_lighting *l)
 {
 	t_tuple	response;
+	t_aux	*aux;
 
+	aux = ft_calloc(1, sizeof(t_aux));
+	aux->eff_color = multiply_colors(l->material->color, l->light->intensity);
+	aux->ambient = multiply_tuple_by_scalar(
+			aux->eff_color, l->material->ambient);
+	aux->light_v = ligth_vector(l);
+	aux->light_dot_normal = dot(aux->light_v, l->normal);
+	if (aux->light_dot_normal < 0)
+	{
+		aux->diffuse = color(0, 0, 0);
+		aux->specular = color(0, 0, 0);
+	}
+	else
+	{
+		aux->diffuse = multiply_tuple_by_scalar(aux->eff_color,
+				l->material->diffuse * aux->light_dot_normal);
+		aux->f_reflect_dot_eye = reflect_dot_eye(l, aux->light_v);
+		aux->specular = calculate_specular(l, aux->f_reflect_dot_eye);
+	}
+	aux->sum = tuple_addition(aux->ambient, aux->diffuse);
+	response = tuple_addition(aux->sum, aux->specular);
+	free_aux(aux);
 	return (response);
 }
