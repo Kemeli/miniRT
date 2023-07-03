@@ -105,6 +105,7 @@ float		**shearing(int axis, float value);
 t_ray		*create_ray(t_tuple origin, t_tuple direction);
 t_tuple		get_point_position(t_ray *ray, float t);
 t_sphere	*create_sphere(void);
+void		free_sphere(t_sphere *s);
 void		change_material(t_sphere *s, t_material *m);
 t_intersect	*intersect_sphere(t_sphere *sphere, t_ray *ray);
 t_node		*new_intersection(float t, void *object);
@@ -117,6 +118,8 @@ t_tuple		normal_at(t_sphere *sphere, t_tuple point);
 t_tuple		reflect(t_tuple in, t_tuple normal);
 t_point_light	*point_light(t_tuple position, t_tuple intensity);
 t_material	*material(void);
+void		free_material(t_material *m);
 t_tuple		lighting(t_lighting *l);
+void		free_lighting(t_lighting *l);
 
 #endif

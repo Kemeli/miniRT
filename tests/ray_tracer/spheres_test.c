@@ -54,11 +54,7 @@ MU_TEST(test_intersecting_a_scaled_sphere_with_a_ray)
 	mu_assert_double_eq(3, xs->head->t);
 	mu_assert_double_eq(7, xs->head->next->t);
 
-	free_matrix(s->transform);
-	free(s->center);
-	free(s->material->color);
-	free(s->material);
-	free(s);
+	free_sphere(s);
 	free(r);
 	free(v);
 	free(p);
@@ -85,12 +81,8 @@ MU_TEST(test_intersecting_a_translated_sphere_with_a_ray)
 	mu_check(compare_matrices(s->transform, t));
 
 	free_matrix(t);
-	free_matrix(s->transform);
-	free(s->center);
-	free(s->material->color);
-	free(s->material);
+	free_sphere(s);
 	free_list(xs);
-	free(s);
 	free(r);
 	free(p);
 	free(v);

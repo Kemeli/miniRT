@@ -64,11 +64,7 @@ MU_TEST(test_that_a_sphere_may_be_assigned_a_material)
 	mu_assert_double_eq(m->specular, s->material->specular);
 	mu_assert_double_eq(m->shininess, s->material->shininess);
 
-	free_matrix(s->transform);
-	free(s->center);
-	free(s->material->color);
-	free(s->material);
-	free(s);
+	free_sphere(s);
 }
 
 MU_TEST(test_lighting_with_the_eye_between_the_light_and_the_surface)
@@ -89,13 +85,7 @@ MU_TEST(test_lighting_with_the_eye_between_the_light_and_the_surface)
 
 	free(result);
 	free(expected);
-	free(lighting_s->eye);
-	free(lighting_s->light);
-	free(lighting_s->normal);
-	free(lighting_s->position);
-	free(lighting_s->material->color);
-	free(lighting_s->material);
-	free(lighting_s);
+	free_lighting(lighting_s);
 	free(p);
 	free(c);
 }
@@ -116,13 +106,7 @@ MU_TEST(test_lighting_with_the_eye_between_light_and_surface_eye_offset_45_degre
 
 	free(result);
 	free(expected);
-	free(lighting_s->eye);
-	free(lighting_s->light);
-	free(lighting_s->normal);
-	free(lighting_s->position);
-	free(lighting_s->material->color);
-	free(lighting_s->material);
-	free(lighting_s);
+	free_lighting(lighting_s);
 	free(p);
 	free(c);
 }
@@ -143,13 +127,7 @@ MU_TEST(test_lighting_with_the_eye_opposite_surface_light_offset_45_degrees)
 
 	free(result);
 	free(expected);
-	free(lighting_s->eye);
-	free(lighting_s->light);
-	free(lighting_s->normal);
-	free(lighting_s->position);
-	free(lighting_s->material->color);
-	free(lighting_s->material);
-	free(lighting_s);
+	free_lighting(lighting_s);
 	free(p);
 	free(c);
 }
@@ -172,13 +150,7 @@ MU_TEST(test_lighting_with_the_eye_in_the_path_of_the_reflection_vector)
 
 	free(result);
 	free(expected);
-	free(lighting_s->eye);
-	free(lighting_s->light);
-	free(lighting_s->normal);
-	free(lighting_s->position);
-	free(lighting_s->material->color);
-	free(lighting_s->material);
-	free(lighting_s);
+	free_lighting(lighting_s);
 	free(p);
 	free(c);
 }
@@ -200,13 +172,7 @@ MU_TEST(test_lighting_with_the_light_behind_the_surface)
 
 	free(result);
 	free(expected);
-	free(lighting_s->eye);
-	free(lighting_s->light);
-	free(lighting_s->normal);
-	free(lighting_s->position);
-	free(lighting_s->material->color);
-	free(lighting_s->material);
-	free(lighting_s);
+	free_lighting(lighting_s);
 	free(p);
 	free(c);
 }

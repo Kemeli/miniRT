@@ -19,3 +19,11 @@ void	change_material(t_sphere *s, t_material *m)
 	free(s->material);
 	s->material = m;
 }
+
+void	free_sphere(t_sphere *s)
+{
+	free_matrix(s->transform);
+	free(s->center);
+	free_material(s->material);
+	free(s);
+}

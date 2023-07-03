@@ -22,3 +22,19 @@ t_material	*material(void)
 	material->shininess = 200.0f;
 	return (material);
 }
+
+void	free_material(t_material *m)
+{
+	free(m->color);
+	free(m);
+}
+
+void	free_lighting(t_lighting *l)
+{
+	free(l->eye);
+	free(l->light);
+	free(l->normal);
+	free(l->position);
+	free_material(l->material);
+	free(l);
+}
