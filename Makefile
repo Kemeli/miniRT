@@ -1,5 +1,5 @@
 NAME			= miniRT
-CC				= cc
+CC				= clang
 FLAGS			= -Wall -Werror -Wextra
 INCLUDES		= -I ./includes/ -I ./lib/minilibx/ -I ./lib/libft/includes
 LIBS			= -L ./lib/minilibx/ -lmlx -lm -lXext -lX11 -lz \
@@ -61,7 +61,7 @@ VPATH			+= ./lib/libft
 .DEFAULT_GOAL	= all
 
 $(OBJ_DIR)/%.o: %.c
-			$(CC) $(FLAGS) -g3 $(INCLUDES) $< $(LIBS) -c -o $@
+			$(CC) $(FLAGS) -g3 $(INCLUDES) $< -c -o $@
 
 obj_dir:
 		@mkdir -p $(OBJ_DIR)
