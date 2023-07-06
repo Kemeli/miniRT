@@ -1,5 +1,18 @@
 #include <minirt.h>
 
+void	free_sphere_intersection(
+	t_tuple origin_to_center,
+	t_ray *transformed_ray,
+	float **inv,
+	t_tuple abc
+)
+{
+	free_ray(transformed_ray);
+	free_matrix(inv);
+	free(origin_to_center);
+	free(abc);
+}
+
 t_intersect *handle_discriminant(
 	float a,
 	float b,
@@ -31,26 +44,21 @@ t_intersect *handle_discriminant(
 
 t_intersect	*intersect_sphere(t_sphere *sphere, t_ray *ray)
 {
-	float		a;
-	float		b;
-	float		c;
-	t_ray		*transformed_ray;
+	t_tuple		abc;
 	t_tuple		origin_to_center;
+	t_ray		*transformed_ray;
 	t_intersect	*intersect;
 	float		**inv;
 
+	abc = point(0, 0, 0);
 	inv = inverse(sphere->transform);
 	intersect = NULL;
 	transformed_ray = transform_ray(ray, inv);
 	origin_to_center = subtract(transformed_ray->origin, sphere->center);
-	a = dot(transformed_ray->direction, transformed_ray->direction);
-	b = 2 * dot(transformed_ray->direction, origin_to_center);
-	c = dot(origin_to_center, origin_to_center) - pow(sphere->radius, 2);
-	intersect = handle_discriminant(a, b, c, sphere);
-	free(origin_to_center);
-	free(transformed_ray->origin);
-	free(transformed_ray->direction);
-	free(transformed_ray);
-	free_matrix(inv);
+	abc[0] = dot(transformed_ray->direction, transformed_ray->direction);
+	abc[1] = 2 * dot(transformed_ray->direction, origin_to_center);
+	abc[2] = dot(origin_to_center, origin_to_center) - pow(sphere->radius, 2);
+	intersect = handle_discriminant(abc[0], abc[1], abc[2], sphere);
+	free_sphere_intersection(origin_to_center, transformed_ray, inv, abc);
 	return (intersect);
 }
