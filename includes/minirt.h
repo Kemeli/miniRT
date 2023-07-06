@@ -121,5 +121,7 @@ t_material	*material(void);
 void		free_material(t_material *m);
 t_tuple		lighting(t_lighting *l);
 void		free_lighting(t_lighting *l);
+void		free_ray(t_ray *ray);
+
 
 #endif
