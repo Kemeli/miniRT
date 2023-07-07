@@ -1,6 +1,6 @@
 #include <minirt.h>
 
-t_node	*new_intersection(float t, void *object)
+t_node	*new_intersection(float t, t_object *object)
 {
 	t_node	*intersect;
 

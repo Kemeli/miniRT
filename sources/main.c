@@ -34,13 +34,15 @@ int render(t_data *data)
 	double pixel_size = wall_size / canvas_pixels;
 	double half = wall_size / 2.0;
 	t_tuple ray_origin = point(0, 0, -5);
-	t_sphere *shape;
+	t_object *object;
+
+	object = ft_calloc(1, sizeof(t_object));
 
 	t_tuple light_position = point(-10, 10, -10); //posição que a luz bate na esfera
 	t_tuple light_intensity = color(1, 1, 1); //como a intensidade de uma lâmpada
 
-	shape = create_sphere();
-	shape->material->color = color(1, 0.2, 1); //lilás
+	object->sphere = create_sphere();
+	object->sphere->material->color = color(1, 0.2, 1); //lilás
 
 	for (int y = 0; y < canvas_pixels; y++)
 	{
@@ -53,18 +55,15 @@ int render(t_data *data)
 			t_tuple dir_position = point(world_x, world_y, wall_z); //posição do raio na esfera
 			t_tuple direction = normalize(subtract(dir_position, ray_origin)); //direção do raio
 			t_ray *r = create_ray(ray_origin, direction);
-			t_intersect *xs = intersect_sphere(shape, r);
-
+			t_intersect *xs = intersect_sphere(object, r);
 			t_node *try_hit = hit(xs);
 			if (try_hit)
 			{
-				try_hit->object = shape; //colocar isso na funçao hit ...?
 				t_lighting *lighting_s = ft_calloc(1, sizeof(t_lighting));
-				t_sphere *object = (t_sphere *)try_hit->object;
-				lighting_s->material = object->material;
+				lighting_s->material = try_hit->object->sphere->material;
 				lighting_s->light = point_light(light_position, light_intensity);
 				lighting_s->position = get_point_position(r, try_hit->t);
-				lighting_s->normal = normal_at(try_hit->object, lighting_s->position);
+				lighting_s->normal = normal_at(try_hit->object->sphere, lighting_s->position);
 				lighting_s->eye = negative(r->direction); //sem negativo não aparece o ponto de luz
 				t_tuple to_color = lighting(lighting_s); //cor final do pixel
 				write_pixel(data, x, y, to_color);
