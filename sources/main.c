@@ -66,6 +66,12 @@ int render(t_data *data)
 				lighting_s->normal = normal_at(try_hit->object->sphere, lighting_s->position);
 				lighting_s->eye = negative(r->direction); //sem negativo não aparece o ponto de luz
 				t_tuple to_color = lighting(lighting_s); //cor final do pixel
+					if (to_color[0] > 1)
+						to_color[0] = 1;
+					if (to_color[1] > 1)
+						to_color[1] = 1;
+					if (to_color[2] > 1)
+						to_color[2] = 1;
 				write_pixel(data, x, y, to_color);
 			}
 		}
