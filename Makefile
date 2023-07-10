@@ -1,43 +1,93 @@
-NAME=miniRT
-CC=cc
-FLAGS=-Wall -Werror -Wextra
-INCLUDES=-I ./includes/ -I ./lib/minilibx/ -I ./lib/libft/includes
-LIBS= -L ./lib/minilibx/ -lmlx -lm -lXext -lX11 -lz
-LIBFT = lib/libft/libft.a
+NAME			= miniRT
+CC				= clang
+FLAGS			= -Wall -Werror -Wextra
+INCLUDES		= -I ./includes/ -I ./lib/minilibx/ -I ./lib/libft/includes
+LIBS			= -L ./lib/minilibx/ -lmlx -lm -lXext -lX11 -lz \
+					-L ./lib/libft -lft
 
-OBJS := tuples/tuples.o tuples/operations/subtract.o tuples/operations/negative.o tuples/operations/multiply_divide.o \
-		tuples/operations/addition.o tuples/operations/magnitude.o tuples/operations/normalization.o \
-		tuples/operations/dot.o tuples/operations/cross.o tuples/colors/color.o tuples/colors/multiply_colors.o \
-		matrix/matrix.o matrix/operations/comparing_matrix.o matrix/operations/multiply_matrix.o \
-		matrix/operations/multiply_matrix_tuple.o matrix/operations/transposing_matrix.o matrix/inverting_matrices/determinants.o \
-		matrix/inverting_matrices/spotting_submatrices.o matrix/inverting_matrices/minor.o \
-		matrix/inverting_matrices/cofactor.o matrix/inverting_matrices/inverse.o utils.o transformations/translation.o \
-		transformations/scaling.o transformations/rotation.o transformations/shearing.o ray_tracer/ray.o ray_tracer/sphere_intersection.o \
-		objects/sphere.o ray_tracer/list_intersect.o ray_tracer/hit.o \
-		ray_tracer/transform_ray.o ray_tracer/set_transform.o \
+SRC				= tuples.c
+SRC				+= subtract.c
+SRC				+= negative.c
+SRC				+= multiply_divide.c
+SRC				+= addition.c
+SRC				+= magnitude.c
+SRC				+= normalization.c
+SRC				+= dot.c
+SRC				+= cross.c
+SRC				+= color.c
+SRC				+= multiply_colors.c
+SRC				+= matrix.c
+SRC				+= comparing_matrix.c
+SRC				+= multiply_matrix.c
+SRC				+= multiply_matrix_tuple.c
+SRC				+= transposing_matrix.c
+SRC				+= determinants.c
+SRC				+= spotting_submatrices.c
+SRC				+= minor.c
+SRC				+= cofactor.c
+SRC				+= inverse.c
+SRC				+= utils.c
+SRC				+= translation.c
+SRC				+= scaling.c
+SRC				+= rotation.c
+SRC				+= shearing.c
+SRC				+= ray.c
+SRC				+= sphere_intersection.c
+SRC				+= sphere.c
+SRC				+= list_intersect.c
+SRC				+= hit.c
+SRC				+= transform_ray.c
+SRC				+= set_transform.c
+SRC				+= normal_at.c
+SRC				+= reflect_vector.c
+SRC				+= lighting.c
+SRC				+= lighting_utils.c
 
-OBJS := $(addprefix sources/, $(OBJS))
+OBJ_DIR			= ./obj
+OBJ				= $(SRC:.c=.o)
+OBJS			= $(addprefix $(OBJ_DIR)/, $(OBJ))
 
-APP := $(OBJS) ./sources/main.o
+APP := $(OBJS) $(OBJ_DIR)/main.o
 
-all: $(NAME)
+VPATH			= ./sources ./sources/tuples ./sources/tuples/operations
+VPATH			+= ./sources/tuples/colors
+VPATH			+= ./sources/matrix ./sources/matrix/operations
+VPATH			+= ./sources/matrix/inverting_matrices
+VPATH			+= ./sources/transformations
+VPATH			+= ./sources/ray_tracer
+VPATH			+= ./sources/objects
+VPATH			+= ./lib/libft
 
-$(NAME): $(APP)
-	$(CC) $(FLAGS) $(APP) $(LIBS) $(LIBFT) -o $(NAME)
+.DEFAULT_GOAL	= all
 
-%.o: %.c
-	$(CC) $(FLAGS) -g3 $(INCLUDES) $< $(LIBS) -c -o $@
+$(OBJ_DIR)/%.o: %.c
+			$(CC) $(FLAGS) -g3 $(INCLUDES) $< -c -o $@
 
-$(LIBFT):
-	make -sC ./lib/libft/
+obj_dir:
+		@mkdir -p $(OBJ_DIR)
 
-tests: $(OBJS) $(LIBFT)
-	@$(CC) $(INCLUDES) -I ./tests/ $(OBJS) ./tests/main.c $(LIBS) $(LIBFT) -g3 -o test.out
-	@valgrind -q --leak-check=full ./test.out
+all: obj_dir $(NAME)
 
-clean:
+$(NAME): libs $(OBJS) $(APP)
+	$(CC) $(APP) $(FLAGS) $(LIBS) -o $(NAME)
+
+libs:
+	make all -sC ./lib/libft/
+	make all -sC ./lib/minilibx/
+
+clean_libs:
+	make fclean -sC ./lib/libft/
+	make clean -sC ./lib/minilibx/
+
+clean: clean_libs
 	rm -rf $(APP)
+	rm -rf $(OBJS)
+	rm -rf $(OBJ_DIR)
 	rm -rf test.out
+
+tests: libs obj_dir $(OBJS)
+	@$(CC) $(INCLUDES) -I ./tests/ $(OBJS) ./tests/main.c $(LIBS) -g3 -o test.out
+	@valgrind -q --leak-check=full ./test.out
 
 test: clean tests
 
@@ -46,4 +96,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: tests
+.PHONY: all clean fclean re obj_dir $(NAME) libs clean_libs test tests

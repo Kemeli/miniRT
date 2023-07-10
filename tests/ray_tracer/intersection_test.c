@@ -8,91 +8,117 @@
 MU_TEST(test_that_a_ray_intercepts_a_sphere_at_two_points)
 {
 	t_ray *r = create_ray(point(0, 0, -5), vector(0, 0, 1));
-	t_sphere *s = create_sphere();
-	t_intersect *xs = intersect_sphere(s, r);
+	t_object *object = ft_calloc(1, sizeof(t_object));
+	object->sphere = create_sphere();
+	t_intersect *xs = intersect_sphere(object, r);
 	mu_assert_double_eq(4.0, xs->head->t);
 	mu_assert_double_eq(6.0, xs->head->next->t);
 	mu_assert_int_eq(2, xs->count);
 
-	free_matrix(s->transform);
+
 	free_list (xs);
 	free (r->direction);
 	free (r->origin);
-	free (s->center);
-	free (s);
 	free (r);
+
+	free_matrix(object->sphere->transform);
+	free(object->sphere->material->color);
+	free (object->sphere->material);
+	free(object->sphere->center);
+	free(object->sphere);
+	free(object);
 }
 
 MU_TEST(test_that_a_ray_intercepts_a_sphere_at_a_tangent)
 {
 	t_ray *r = create_ray(point(0, 1, -5), vector(0, 0, 1));
-	t_sphere *s = create_sphere();
-	t_intersect *xs = intersect_sphere(s, r);
+	t_object *object = ft_calloc(1, sizeof(t_object));
+	object->sphere = create_sphere();
+	t_intersect *xs = intersect_sphere(object, r);
 	mu_assert_double_eq(5.0, xs->head->t);
 	mu_assert_double_eq(5.0, xs->head->next->t);
 	mu_assert_int_eq(1, xs->count);
 
-	free_matrix(s->transform);
 	free_list (xs);
 	free (r->direction);
 	free (r->origin);
-	free (s->center);
-	free (s);
 	free (r);
+
+	free_matrix(object->sphere->transform);
+	free(object->sphere->material->color);
+	free (object->sphere->material);
+	free(object->sphere->center);
+	free(object->sphere);
+	free(object);
 }
 
 MU_TEST(test_that_a_ray_misses_a_sphere)
 {
 	t_ray *r = create_ray(point(0, 2, -5), vector(0, 0, 1));
-	t_sphere *s = create_sphere();
-	t_intersect *xs = intersect_sphere(s, r);
+	t_object *object = ft_calloc(1, sizeof(t_object));
+	object->sphere = create_sphere();
+	t_intersect *xs = intersect_sphere(object, r);
 	mu_assert_double_eq(0, xs->head->t);
 	mu_assert_double_eq(0, xs->head->next->t);
 	mu_assert_int_eq(0, xs->count);
 
-	free_matrix(s->transform);
 	free_list (xs);
 	free (r->direction);
 	free (r->origin);
-	free (s->center);
-	free (s);
 	free (r);
+
+	free_matrix(object->sphere->transform);
+	free(object->sphere->material->color);
+	free (object->sphere->material);
+	free(object->sphere->center);
+	free(object->sphere);
+	free(object);
 }
 
 MU_TEST(test_that_a_ray_originates_inside_a_sphere)
 {
 	t_ray *r = create_ray(point(0, 0, 0), vector(0, 0, 1));
-	t_sphere *s = create_sphere();
-	t_intersect *xs =intersect_sphere(s, r);
+	t_object *object = ft_calloc(1, sizeof(t_object));
+	object->sphere = create_sphere();
+	t_intersect *xs = intersect_sphere(object, r);
 	mu_assert_double_eq(-1.0, xs->head->t);
 	mu_assert_double_eq(1.0, xs->head->next->t);
 	mu_assert_int_eq(2, xs->count);
 
-	free_matrix(s->transform);
 	free_list (xs);
 	free (r->direction);
 	free (r->origin);
-	free (s->center);
-	free (s);
 	free (r);
+
+	free_matrix(object->sphere->transform);
+	free(object->sphere->material->color);
+	free (object->sphere->material);
+	free(object->sphere->center);
+	free(object->sphere);
+	free(object);
 }
 
 MU_TEST(test_that_a_sphere_is_behind_a_ray)
 {
 	t_ray *r = create_ray(point(0, 0, 5), vector(0, 0, 1));
-	t_sphere *s = create_sphere();
-	t_intersect *xs = intersect_sphere(s, r);
+	t_object *object = ft_calloc(1, sizeof(t_object));
+	object->sphere = create_sphere();
+	t_intersect *xs = intersect_sphere(object, r);
 	mu_assert_double_eq(-6.0, xs->head->t);
 	mu_assert_double_eq(-4.0, xs->head->next->t);
 	mu_assert_int_eq(2, xs->count);
 
-	free_matrix(s->transform);
 	free_list(xs);
 	free (r->direction);
 	free (r->origin);
-	free (s->center);
-	free (s);
 	free (r);
+
+	free_matrix(object->sphere->transform);
+	free(object->sphere->material->color);
+	free (object->sphere->material);
+	free(object->sphere->center);
+	free(object->sphere);
+	free(object);
 }
 
 // //###########################################################################
@@ -109,6 +135,8 @@ MU_TEST(test_that_an_intersection_encapsulates_t_and_object)
 	free_matrix(s->transform);
 	free (i);
 	free (s->center);
+	free(s->material->color);
+	free(s->material);
 	free(s);
 }
 
@@ -137,6 +165,8 @@ MU_TEST(test_that_a_collection_of_intersections_is_created)
 	free_matrix(s->transform);
 	free(s->center);
 	free_list(xs);
+	free(s->material->color);
+	free(s->material);
 	free(s);
 }
 
@@ -147,8 +177,9 @@ queria fazer como ponteiro mas ainda n funcionou
 MU_TEST(test_that_intersect_sets_the_object_on_the_intersection)
 {
 	t_ray *r = create_ray(point(0, 0, -5), vector(0, 0, 1));
-	t_sphere *s = create_sphere();
-	t_intersect *xs = intersect_sphere(s, r);
+	t_object *object = ft_calloc(1, sizeof(t_object));
+	object->sphere = create_sphere();
+	t_intersect *xs = intersect_sphere(object, r);
 	/*
 	printf("xs->object: %p\n", xs->object);
 	printf("s: %p\n", s);
@@ -159,13 +190,17 @@ MU_TEST(test_that_intersect_sets_the_object_on_the_intersection)
 	mu_assert_double_eq(6.0, xs->head->next->t);
 	mu_assert_int_eq(2, xs->count);
 
-	free_matrix(s->transform);
 	free (r->direction);
 	free (r->origin);
-	free (s->center);
 	free_list(xs);
-	free(s);
 	free(r);
+
+	free_matrix(object->sphere->transform);
+	free(object->sphere->material->color);
+	free (object->sphere->material);
+	free(object->sphere->center);
+	free(object->sphere);
+	free(object);
 }
 
 //##############################################################################
