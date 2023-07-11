@@ -49,8 +49,8 @@ MU_TEST(test_intersecting_a_scaled_sphere_with_a_ray)
 	set_transform(&object->sphere, scale);
 	t_intersect *xs = intersect_sphere(object, r);
 	mu_assert_int_eq(2, xs->count);
-	mu_assert_double_eq(3, xs->head->t);
-	mu_assert_double_eq(7, xs->head->next->t);
+	mu_assert_double_eq(3, ((t_node*)xs->head->content)->t);
+	mu_assert_double_eq(7, ((t_node*)xs->head->next->content)->t);
 
 	free(r);
 	free(v);
