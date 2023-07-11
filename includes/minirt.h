@@ -47,12 +47,11 @@ typedef struct s_node
 {
 	float			t;
 	t_object		*object;
-	struct s_node	*next;
 }	t_node;
 
 typedef struct s_intersect
 {
-	t_node	*head;
+	t_list	*head;
 	int		count;
 }	t_intersect;
 
@@ -70,6 +69,12 @@ typedef struct s_lighting
 	t_tuple			eye;
 	t_tuple			normal;
 }	t_lighting;
+
+typedef struct s_world
+{
+	t_node			*head;
+	t_point_light	*light;
+}	t_world;
 
 t_tuple		tuple(float x, float y, float z, float w);
 t_tuple		vector(float x, float y, float z);
@@ -113,7 +118,7 @@ t_sphere	*create_sphere(void);
 void		free_sphere(t_sphere *s);
 void		change_material(t_sphere *s, t_material *m);
 t_intersect	*intersect_sphere(t_object *object, t_ray *ray);
-t_node  *new_intersection(float t, t_object *object);
+t_list		*new_intersection(float t, t_object *object);
 void		free_list(t_intersect *list);
 t_intersect	*add_intersection_to_list(t_intersect *list, t_node *new);
 t_node		*hit(t_intersect *xs);
@@ -127,6 +132,7 @@ void		free_material(t_material *m);
 t_tuple		lighting(t_lighting *l);
 void		free_lighting(t_lighting *l);
 void		free_ray(t_ray *ray);
-
+t_world		*create_world(void);
+t_world		*default_world(void);
 
 #endif

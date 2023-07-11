@@ -3,20 +3,20 @@
 t_node	*hit(t_intersect *xs)
 {
 	t_node	*hit;
+	t_list	*aux;
 
 	hit = NULL;
-	while (xs->head)
+	aux = xs->head;
+	while (aux)
 	{
-		if (xs->head->t > 0)
+		if (((t_node*)aux->content)->t > 0)
 		{
 			if (hit == NULL)
-				hit = xs->head;
-			else if (xs->head->t < hit->t)
-				hit = xs->head;
+				hit = (t_node*)aux->content;
+			else if (((t_node*)aux->content)->t < hit->t)
+				hit = (t_node*)aux->content;
 		}
-		// if (xs->head->object)
-		// 	hit->object = xs->head->object;
-		xs->head = xs->head->next;
+		aux = aux->next;
 	}
 	return (hit);
 }
