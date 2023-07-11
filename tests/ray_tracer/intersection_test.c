@@ -180,22 +180,15 @@ MU_TEST(test_that_a_collection_of_intersections_is_created)
 	free(object);
 }
 
-/*
-aqui faltou checar se o xs tem a esfera como objeto
-queria fazer como ponteiro mas ainda n funcionou
-*/
 MU_TEST(test_that_intersect_sets_the_object_on_the_intersection)
 {
 	t_ray *r = create_ray(point(0, 0, -5), vector(0, 0, 1));
 	t_object *object = ft_calloc(1, sizeof(t_object));
 	object->sphere = create_sphere();
 	t_intersect *xs = intersect_sphere(object, r);
-	/*
-	printf("xs->object: %p\n", xs->object);
-	printf("s: %p\n", s);
-	mu_check(compare_pointers(&s, xs->object));
-	mu_check(compare_pointers(&s, xs->head->next->object));
-	*/
+
+	mu_check(compare_pointers(&object->sphere, ((t_node*)xs->head->content)->object));
+	mu_check(compare_pointers(&object->sphere, ((t_node*)xs->head->next->content)->object));
 	mu_assert_double_eq(4.0, ((t_node*)xs->head->content)->t);
 	mu_assert_double_eq(6.0, ((t_node*)xs->head->next->content)->t);
 	mu_assert_int_eq(2, xs->count);
