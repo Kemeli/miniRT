@@ -21,6 +21,7 @@ MU_TEST(test_create_world)
 	mu_check(world->head->object == NULL);
 	mu_check(world->light == NULL);
 
+	free(world->head);
 	free(world);
 }
 

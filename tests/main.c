@@ -82,9 +82,9 @@ int	main()
 	MU_RUN_SUITE(test_chaining_transformations);
 	MU_RUN_SUITE(test_create_ray);
 	MU_RUN_SUITE(test_interception_of_rays_and_spheres);
-	// MU_RUN_SUITE(test_hit_intersection);
+	MU_RUN_SUITE(test_hit_intersection);
 	MU_RUN_SUITE(test_transform_ray);
-	// MU_RUN_SUITE(test_spheres_transformation);
+	MU_RUN_SUITE(test_spheres_transformation);
 	MU_RUN_SUITE(test_normal_at);
 	MU_RUN_SUITE(test_reflecting_vector);
 	MU_RUN_SUITE(test_the_phone_reflection_mode);
