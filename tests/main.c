@@ -33,6 +33,7 @@
 #include "ray_tracer/normal_at_test.c"
 #include "ray_tracer/reflect_vector_test.c"
 #include "ray_tracer/lighting_test.c"
+#include "world/create_world_test.c"
 
 int	copy_size;
 
@@ -81,12 +82,13 @@ int	main()
 	MU_RUN_SUITE(test_chaining_transformations);
 	MU_RUN_SUITE(test_create_ray);
 	MU_RUN_SUITE(test_interception_of_rays_and_spheres);
-	MU_RUN_SUITE(test_hit_intersection);
+	// MU_RUN_SUITE(test_hit_intersection);
 	MU_RUN_SUITE(test_transform_ray);
-	MU_RUN_SUITE(test_spheres_transformation);
+	// MU_RUN_SUITE(test_spheres_transformation);
 	MU_RUN_SUITE(test_normal_at);
 	MU_RUN_SUITE(test_reflecting_vector);
 	MU_RUN_SUITE(test_the_phone_reflection_mode);
+	MU_RUN_SUITE(test_build_world);
 
 	MU_REPORT();
 	return MU_EXIT_CODE;

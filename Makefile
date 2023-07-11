@@ -42,6 +42,7 @@ SRC				+= normal_at.c
 SRC				+= reflect_vector.c
 SRC				+= lighting.c
 SRC				+= lighting_utils.c
+SRC				+= create_world.c
 
 OBJ_DIR			= ./obj
 OBJ				= $(SRC:.c=.o)
@@ -55,6 +56,7 @@ VPATH			+= ./sources/matrix ./sources/matrix/operations
 VPATH			+= ./sources/matrix/inverting_matrices
 VPATH			+= ./sources/transformations
 VPATH			+= ./sources/ray_tracer
+VPATH			+= ./sources/world
 VPATH			+= ./sources/objects
 VPATH			+= ./lib/libft
 

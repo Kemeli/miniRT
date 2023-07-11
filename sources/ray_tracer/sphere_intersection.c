@@ -20,25 +20,18 @@ t_intersect	*handle_discriminant(
 	t_object *object
 )
 {
-	float	sqrtd;
-	float	discriminant;
+	float		sqrtd;
+	float		discriminant;
 	t_intersect	*intersect_list;
-	t_node	*first_inters;
-	t_node	*second_inters;
+	t_list		*list_i;
 
-	intersect_list = NULL;
+	intersect_list = ft_calloc(1, sizeof(t_intersect));
 	discriminant = pow(b, 2) - 4 * a * c;
 	sqrtd = sqrt(discriminant);
-	first_inters = new_intersection((-b - sqrtd) / (2.0 * a), object);
-	second_inters = new_intersection((-b + sqrtd) / (2.0 * a), object);
-	intersect_list = add_intersection_to_list(
-		intersect_list,
-		first_inters
-	);
-	intersect_list = add_intersection_to_list(
-		intersect_list,
-		second_inters
-	);
+	list_i = ft_lstnew((void*)new_intersection((-b - sqrtd) / (2.0 * a), object));
+	ft_lstadd_back(&list_i, (void*)new_intersection((-b + sqrtd) / (2.0 * a), object));
+
+	intersect_list->head = list_i;
 	if (discriminant == 0)
 		intersect_list->count = 1;
 	else if (discriminant > 0)
