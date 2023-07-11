@@ -3,22 +3,22 @@
 t_node	*hit(t_intersect *xs)
 {
 	t_node	*hit;
-	t_node	*curr;
+	t_list	*aux;
 
 	hit = NULL;
-	curr = xs->head;
-	while (curr)
+	aux = xs->head;
+	while (aux)
 	{
-		if (curr->t > 0)
+		if (((t_node*)aux->content)->t > 0)
 		{
 			if (hit == NULL)
-				hit = curr;
-			else if (curr->t < hit->t)
-				hit = curr;
+				hit = (t_node*)aux->content;
+			else if (((t_node*)aux->content)->t < hit->t)
+				hit = (t_node*)aux->content;
 		}
-		curr = curr->next;
+		aux = aux->next;
 	}
 	return (hit);
 }
 
-//create sort list of intersections
+//create sort list of intersections..?
