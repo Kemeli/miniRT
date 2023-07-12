@@ -43,6 +43,7 @@ SRC				+= reflect_vector.c
 SRC				+= lighting.c
 SRC				+= lighting_utils.c
 SRC				+= create_world.c
+SRC				+= world_utils.c
 
 OBJ_DIR			= ./obj
 OBJ				= $(SRC:.c=.o)
