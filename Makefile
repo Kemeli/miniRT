@@ -32,7 +32,7 @@ SRC				+= scaling.c
 SRC				+= rotation.c
 SRC				+= shearing.c
 SRC				+= ray.c
-SRC				+= sphere_intersection.c
+SRC				+= intersect_sphere.c
 SRC				+= sphere.c
 SRC				+= list_intersect.c
 SRC				+= hit.c
@@ -42,6 +42,8 @@ SRC				+= normal_at.c
 SRC				+= reflect_vector.c
 SRC				+= lighting.c
 SRC				+= lighting_utils.c
+SRC				+= create_world.c
+SRC				+= world_utils.c
 
 OBJ_DIR			= ./obj
 OBJ				= $(SRC:.c=.o)
@@ -55,6 +57,7 @@ VPATH			+= ./sources/matrix ./sources/matrix/operations
 VPATH			+= ./sources/matrix/inverting_matrices
 VPATH			+= ./sources/transformations
 VPATH			+= ./sources/ray_tracer
+VPATH			+= ./sources/world
 VPATH			+= ./sources/objects
 VPATH			+= ./lib/libft
 

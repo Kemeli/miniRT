@@ -11,8 +11,6 @@ MU_TEST(test_that_a_point_light_has_a_position_and_intensity)
 
 	free(light->position);
 	free(light->intensity);
-	// free(intensity);
-	// free(position);
 	free(light);
 }
 
