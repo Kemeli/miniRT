@@ -26,8 +26,7 @@ t_comps	*prepare_computations(t_list *intersect, t_ray *ray)
 
 void	free_comps(t_comps *comps)
 {
-	free_sphere(comps->object->sphere);
-	free(comps->object);
+	free_object(comps->object);
 	free(comps->point);
 	free(comps->eye);
 	free(comps->normal);

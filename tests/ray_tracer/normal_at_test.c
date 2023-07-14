@@ -12,11 +12,10 @@ MU_TEST(test_the_normal_on_a_sphere_at_a_point_on_the_x_axis)
 	n = normal_at(object, p);
 	mu_check(compare_tuples(esperado, n));
 
-	free_sphere(object->sphere);
+	free_object(object);
 	free(p);
 	free(esperado);
 	free(n);
-	free(object);
 }
 
 MU_TEST(test_the_normal_on_a_sphere_at_a_point_on_the_y_axis)
@@ -30,10 +29,9 @@ MU_TEST(test_the_normal_on_a_sphere_at_a_point_on_the_y_axis)
 	n = normal_at(object, p);
 	mu_check(compare_tuples(esperado, n));
 	free(p);
-	free_sphere(object->sphere);
+	free_object(object);
 	free(esperado);
 	free(n);
-	free(object);
 }
 
 MU_TEST(test_the_normal_on_a_sphere_at_a_point_on_the_z_axis)
@@ -48,10 +46,9 @@ MU_TEST(test_the_normal_on_a_sphere_at_a_point_on_the_z_axis)
 	mu_check(compare_tuples(esperado, n));
 
 	free(p);
-	free_sphere(object->sphere);
+	free_object(object);
 	free(esperado);
 	free(n);
-	free(object);
 }
 
 MU_TEST(test_the_normal_on_a_sphere_at_a_nonaxial_point)
@@ -66,10 +63,9 @@ MU_TEST(test_the_normal_on_a_sphere_at_a_nonaxial_point)
 	mu_check(compare_tuples(esperado, n));
 
 	free(p);
-	free_sphere(object->sphere);
+	free_object(object);
 	free(esperado);
 	free(n);
-	free(object);
 }
 
 MU_TEST(test_the_normal_is_a_normalized_vector)
@@ -85,10 +81,9 @@ MU_TEST(test_the_normal_is_a_normalized_vector)
 	mu_check(compare_tuples(esperado, n));
 
 	free(p);
-	free_sphere(object->sphere);
+	free_object(object);
 	free(esperado);
 	free(n);
-	free(object);
 }
 
 MU_TEST(test_computing_the_normal_on_a_translated_sphere)
@@ -106,11 +101,10 @@ MU_TEST(test_computing_the_normal_on_a_translated_sphere)
 	mu_check(compare_tuples(esperado, n));
 
 	free(p);
-	free_sphere(object->sphere);
+	free_object(object);
 	free_matrix(t);
 	free(esperado);
 	free(n);
-	free(object);
 }
 
 MU_TEST(test_computing_the_normal_on_a_transformed_sphere)
@@ -127,13 +121,12 @@ MU_TEST(test_computing_the_normal_on_a_transformed_sphere)
 	mu_check(compare_tuples(expected, n));
 
 	free(p);
-	free_sphere(object->sphere);
+	free_object(object);
 	free_matrix(scaled);
 	free_matrix(rotated);
 	free_matrix(result);
 	free(expected);
 	free(n);
-	free(object);
 }
 
 MU_TEST_SUITE(test_normal_at)
