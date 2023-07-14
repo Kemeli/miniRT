@@ -34,6 +34,7 @@
 #include "ray_tracer/reflect_vector_test.c"
 #include "ray_tracer/lighting_test.c"
 #include "world/create_world_test.c"
+#include "world/prepare_computations_test.c"
 
 int	copy_size;
 
@@ -89,6 +90,7 @@ int	main()
 	MU_RUN_SUITE(test_reflecting_vector);
 	MU_RUN_SUITE(test_the_phone_reflection_mode);
 	MU_RUN_SUITE(test_build_world);
+	MU_RUN_SUITE(test_prepare_computations);
 
 	MU_REPORT();
 	return MU_EXIT_CODE;

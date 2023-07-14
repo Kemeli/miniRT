@@ -45,6 +45,7 @@ SRC				+= lighting_utils.c
 SRC				+= create_world.c
 SRC				+= world_utils.c
 SRC				+= intersect_world.c
+SRC				+= prepare_computations.c
 
 
 OBJ_DIR			= ./obj

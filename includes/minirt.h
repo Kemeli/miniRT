@@ -6,11 +6,14 @@
 # include "mlx.h"
 # include "mlx_int.h"
 
-#ifndef M_PI
-#    define M_PI 3.14159265358979323846
-#endif
+# ifndef M_PI
+#  define M_PI 3.14159265358979323846
+# endif
 
-#define SPHERE 1
+# define SPHERE 1
+
+# define TRUE 1
+# define FALSE 0
 
 typedef	float*	t_tuple;
 
@@ -76,6 +79,16 @@ typedef struct s_world
 	t_point_light	*light;
 }	t_world;
 
+typedef struct s_comps
+{
+	float		t;
+	t_object	*object;
+	t_tuple		point;
+	t_tuple		eye;
+	t_tuple		normal;
+	int			inside;
+}	t_comps;
+
 t_tuple			tuple(float x, float y, float z, float w);
 t_tuple			vector(float x, float y, float z);
 t_tuple			point(float x, float y, float z);
@@ -137,5 +150,7 @@ t_world			*create_world(void);
 t_world			*default_world(void);
 void			free_world(t_world *world);
 t_intersect		*intersect_world(t_world *world, t_ray *ray);
+t_comps			*prepare_computations(t_list *intersect, t_ray *ray);
+void			free_comps(t_comps *comps);
 
 #endif
