@@ -63,7 +63,7 @@ int render(t_data *data)
 				lighting_s->material = try_hit->object->sphere->material;
 				lighting_s->light = point_light(light_position, light_intensity);
 				lighting_s->position = get_point_position(r, try_hit->t);
-				lighting_s->normal = normal_at(try_hit->object->sphere, lighting_s->position);
+				lighting_s->normal = normal_at(try_hit->object, lighting_s->position);
 				lighting_s->eye = negative(r->direction); //sem negativo não aparece o ponto de luz
 				t_tuple to_color = lighting(lighting_s); //cor final do pixel
 					if (to_color[0] > 1)

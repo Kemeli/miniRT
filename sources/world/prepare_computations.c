@@ -11,7 +11,7 @@ t_comps	*prepare_computations(t_list *intersect, t_ray *ray)
 	comps->object = ((t_node *)intersect->content)->object;
 	comps->point = get_point_position(ray, comps->t);
 	comps->eye = negative(ray->direction);
-	comps->normal = normal_at(comps->object->sphere, comps->point);
+	comps->normal = normal_at(comps->object, comps->point);
 	comps->inside = FALSE;
 	dot_p = dot(comps->normal, comps->eye);
 	if (dot_p < 0)
