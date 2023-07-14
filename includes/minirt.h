@@ -136,5 +136,6 @@ void			free_ray(t_ray *ray);
 t_world			*create_world(void);
 t_world			*default_world(void);
 void			free_world(t_world *world);
+t_intersect		*intersect_world(t_world *world, t_ray *ray);
 
 #endif
