@@ -64,7 +64,7 @@ MU_TEST(test_Intersect_a_world_with_a_ray)
 	mu_check(6 == ((t_node *)xs->head->next->next->next->content)->t);
 
 	free_world(world);
-	free_list(xs);
+	free_intersections(xs);
 	free_ray(r);
 }
 

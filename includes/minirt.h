@@ -133,7 +133,7 @@ void			free_sphere(t_sphere *s);
 void			change_material(t_sphere *s, t_material *m);
 t_intersect		*intersect_sphere(t_object *object, t_ray *ray);
 t_list			*new_intersection(float t, t_object *object);
-void			free_list(t_intersect *list);
+void			free_intersections(t_intersect *list);
 t_intersect		*add_intersection_to_list(t_intersect *list, t_node *new);
 t_node			*hit(t_intersect *xs);
 t_ray			*transform_ray(t_ray *ray, float **matrix);

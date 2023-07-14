@@ -12,7 +12,7 @@ t_list	*new_intersection(float t, t_object *object)
 	return (list);
 }
 
-void	free_list(t_intersect *list)
+void	free_intersections(t_intersect *list)
 {
 	ft_lstclear(&list->head, free);
 	free(list);

@@ -55,7 +55,7 @@ MU_TEST(test_intersecting_a_scaled_sphere_with_a_ray)
 	free(r);
 	free(v);
 	free(p);
-	free_list(xs);
+	free_intersections(xs);
 	free_matrix(scale);
 
 	free_matrix(object->sphere->transform);
@@ -84,7 +84,7 @@ MU_TEST(test_intersecting_a_translated_sphere_with_a_ray)
 	mu_check(compare_matrices(object->sphere->transform, t));
 
 	free_matrix(t);
-	free_list(xs);
+	free_intersections(xs);
 	free(r);
 	free(p);
 	free(v);
