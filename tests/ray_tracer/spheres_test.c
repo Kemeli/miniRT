@@ -47,7 +47,7 @@ MU_TEST(test_intersecting_a_scaled_sphere_with_a_ray)
 	t_object *object = ft_calloc(1, sizeof(t_object));
 	object->sphere = create_sphere();
 	set_transform(&object->sphere, scale);
-	t_intersect *xs = intersect_sphere(object, r);
+	t_intersect *xs = intersect(object, r);
 	mu_assert_int_eq(2, xs->count);
 	mu_assert_double_eq(3, ((t_node*)xs->head->content)->t);
 	mu_assert_double_eq(7, ((t_node*)xs->head->next->content)->t);
@@ -80,7 +80,7 @@ MU_TEST(test_intersecting_a_translated_sphere_with_a_ray)
 	t_object *object = ft_calloc(1, sizeof(t_object));
 	object->sphere = create_sphere();
 	set_transform(&object->sphere, t);
-	t_intersect *xs = intersect_sphere(object, r);
+	t_intersect *xs = intersect(object, r);
 	mu_check(compare_matrices(object->sphere->transform, t));
 
 	free_matrix(t);

@@ -44,6 +44,7 @@ typedef struct s_sphere
 typedef struct s_object
 {
 	t_sphere	*sphere;
+	int			type;
 }	t_object;
 
 typedef struct s_node
@@ -152,5 +153,7 @@ void			free_world(t_world *world);
 t_intersect		*intersect_world(t_world *world, t_ray *ray);
 t_comps			*prepare_computations(t_list *intersect, t_ray *ray);
 void			free_comps(t_comps *comps);
+t_intersect		*intersect(t_object *object, t_ray *ray);
+
 
 #endif

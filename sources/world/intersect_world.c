@@ -9,11 +9,11 @@ t_intersect	*intersect_world(t_world *world, t_ray *ray)
 	t_list		*obj;
 
 	obj = world->head;
-	xs = intersect_sphere(((t_node *)obj->content)->object, ray);
+	xs = intersect(((t_node *)obj->content)->object, ray);
 	obj = obj->next;
 	while (obj)
 	{
-		temp = intersect_sphere(((t_node *)obj->content)->object, ray);
+		temp = intersect(((t_node *)obj->content)->object, ray);
 		xs->count += temp->count;
 		ft_lstadd_back(&(xs->head), temp->head);
 		free(temp);

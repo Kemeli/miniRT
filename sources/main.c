@@ -55,7 +55,7 @@ int render(t_data *data)
 			t_tuple dir_position = point(world_x, world_y, wall_z); //posição do raio na esfera
 			t_tuple direction = normalize(subtract(dir_position, ray_origin)); //direção do raio
 			t_ray *r = create_ray(ray_origin, direction);
-			t_intersect *xs = intersect_sphere(object, r);
+			t_intersect *xs = intersect(object, r);
 			t_node *try_hit = hit(xs);
 			if (try_hit)
 			{
