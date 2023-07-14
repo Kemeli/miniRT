@@ -10,8 +10,6 @@
 #  define M_PI 3.14159265358979323846
 # endif
 
-# define SPHERE 1
-
 # define TRUE 1
 # define FALSE 0
 
@@ -44,7 +42,6 @@ typedef struct s_sphere
 typedef struct s_object
 {
 	t_sphere	*sphere;
-	int			type;
 }	t_object;
 
 typedef struct s_node
