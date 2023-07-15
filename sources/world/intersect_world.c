@@ -6,18 +6,18 @@ t_intersect	*intersect_world(t_world *world, t_ray *ray)
 {
 	t_intersect	*xs;
 	t_intersect	*temp;
-	t_list		*obj;
+	t_list		*head;
 
-	obj = world->head;
-	xs = intersect(((t_node *)obj->content)->object, ray);
-	obj = obj->next;
-	while (obj)
+	head = world->head;
+	xs = intersect(((t_node *)head->content)->object, ray);
+	head = head->next;
+	while (head)
 	{
-		temp = intersect(((t_node *)obj->content)->object, ray);
+		temp = intersect(((t_node *)head->content)->object, ray);
 		xs->count += temp->count;
 		ft_lstadd_back(&(xs->head), temp->head);
 		free(temp);
-		obj = obj->next;
+		head = head->next;
 	}
 	bubble_sort(&(xs->head));
 	return (xs);

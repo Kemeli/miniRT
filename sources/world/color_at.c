@@ -11,6 +11,7 @@ t_tuple	color_at(t_world *w, t_ray *r)
 	{
 		comps = prepare_computations(xs->head, r);
 		c = shade_hit(w, comps);
+		free_comps(comps);
 	}
 	else
 		c = color(0, 0, 0);
