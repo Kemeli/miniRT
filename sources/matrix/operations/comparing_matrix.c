@@ -1,6 +1,6 @@
 #include <minirt.h>
 
-static int	matrix_size(float **matrix)
+static int	matrix_size(t_matrix matrix)
 {
 	int	i;
 
@@ -10,14 +10,15 @@ static int	matrix_size(float **matrix)
 	return (i);
 }
 
-int	compare_matrices(float **matrix_A, float **matrix_B)
+int	compare_matrices(t_matrix matrix_A, t_matrix matrix_B)
 {
-	int	i;
-	int	j;
-	int	size;
-	float epsilon = 0.00001;
+	int		i;
+	int		j;
+	int		size;
+	float	epsilon;
 
 	i = 0;
+	epsilon = 0.00001;
 	size = matrix_size(matrix_A);
 	while (matrix_A[i])
 	{

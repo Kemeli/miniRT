@@ -1,6 +1,6 @@
 #include <minirt.h>
 
-float	cofactor(float **matrix, int i, int j)
+float	cofactor(t_matrix matrix, int i, int j)
 {
 	float	minor_result;
 

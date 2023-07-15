@@ -8,7 +8,7 @@ float	**matrix(unsigned int n)
 	if (n == 0)
 		return (NULL);
 	i = 0;
-	m = malloc(sizeof(float **) * (n + 1));
+	m = malloc(sizeof(t_matrix) * (n + 1));
 	while (i < n)
 	{
 		m[i] = malloc(sizeof(float *) * n);
@@ -20,7 +20,7 @@ float	**matrix(unsigned int n)
 
 float	**identity_matrix(unsigned int n)
 {
-	float			**m;
+	t_matrix		m;
 	unsigned int	i;
 	unsigned int	j;
 
@@ -41,7 +41,7 @@ float	**identity_matrix(unsigned int n)
 	return (m);
 }
 
-void	free_matrix(float **m)
+void	free_matrix(t_matrix m)
 {
 	unsigned int	i;
 

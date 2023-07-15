@@ -13,7 +13,8 @@
 # define TRUE 1
 # define FALSE 0
 
-typedef	float*	t_tuple;
+typedef float*	t_tuple;
+typedef float**	t_matrix;
 
 typedef struct s_ray
 {
@@ -46,8 +47,8 @@ typedef struct s_object
 
 typedef struct s_node
 {
-	float			t;
-	t_object		*object;
+	float		t;
+	t_object	*object;
 }	t_node;
 
 typedef struct s_intersect
@@ -102,28 +103,28 @@ t_tuple			normalize(t_tuple v);
 t_tuple			cross(t_tuple a, t_tuple b);
 float			dot(t_tuple v, t_tuple w);
 t_tuple			color(float r, float g, float b);
-int				compare_matrices(float **matrix_A, float **matrix_B);
+int				compare_matrices(t_matrix matrix_A, t_matrix matrix_B);
 t_tuple			multiply_colors(t_tuple c1, t_tuple c2);
-float			**matrix(unsigned int n);
-void			free_matrix(float **m);
-float			**multiply_matrix(float **matrix_A, float **matrix_B);
-t_tuple			multiply_matrix_with_tuple(float **matrix_A, t_tuple tuple_A);
-float			**transpose_matrix(float **matrix_A);
-float			determinant_2X2_matrix(float **matrix);
-float			**identity_matrix(unsigned int n);
-float			**submatrix(float **matrix, int row, int col);
-int				get_size(float **matrix);
-float			minor(float **matrix, int i, int j);
-float			cofactor(float **matrix, int i, int j);
-float			determinant(float **matrix);
-float			**inverse(float **matrix);
+t_matrix		matrix(unsigned int n);
+void			free_matrix(t_matrix m);
+t_matrix		multiply_matrix(t_matrix matrix_A, t_matrix matrix_B);
+t_tuple			multiply_matrix_with_tuple(t_matrix matrix_A, t_tuple tuple_A);
+t_matrix		transpose_matrix(t_matrix matrix_A);
+float			determinant_2X2_matrix(t_matrix matrix);
+t_matrix		identity_matrix(unsigned int n);
+t_matrix		submatrix(t_matrix matrix, int row, int col);
+int				get_size(t_matrix matrix);
+float			minor(t_matrix matrix, int i, int j);
+float			cofactor(t_matrix matrix, int i, int j);
+float			determinant(t_matrix matrix);
+t_matrix		inverse(t_matrix matrix);
 char			compare_floats(float n1, float n2);
-float			**translation(float x, float y, float z);
-float			**scaling(float x, float y, float z);
-float			**rotation_x(float radian);
-float			**rotation_y(float radian);
-float			**rotation_z(float radian);
-float			**shearing(int axis, float value);
+t_matrix		translation(float x, float y, float z);
+t_matrix		scaling(float x, float y, float z);
+t_matrix		rotation_x(float radian);
+t_matrix		rotation_y(float radian);
+t_matrix		rotation_z(float radian);
+t_matrix		shearing(int axis, float value);
 t_ray			*create_ray(t_tuple origin, t_tuple direction);
 t_tuple			get_point_position(t_ray *ray, float t);
 t_sphere		*create_sphere(void);
@@ -134,8 +135,8 @@ t_list			*new_intersection(float t, t_object *object);
 void			free_intersections(t_intersect *list);
 t_intersect		*add_intersection_to_list(t_intersect *list, t_node *new);
 t_node			*hit(t_intersect *xs);
-t_ray			*transform_ray(t_ray *ray, float **matrix);
-void			set_transform(t_sphere **sphere, float **translation);
+t_ray			*transform_ray(t_ray *ray, t_matrix matrix);
+void			set_transform(t_sphere **sphere, t_matrix translation);
 t_tuple			normal_at(t_object *object, t_tuple point);
 t_tuple			reflect(t_tuple in, t_tuple normal);
 t_point_light	*point_light(t_tuple position, t_tuple intensity);

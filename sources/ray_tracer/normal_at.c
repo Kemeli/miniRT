@@ -1,14 +1,14 @@
 #include <minirt.h>
 
-static void	update_temp(float ***t);
+static void	update_temp(t_matrix *t);
 
 t_tuple	normal_at(t_object *object, t_tuple world_point)
 {
-	t_tuple	normal;
-	t_tuple	obj_point;
-	t_tuple	obj_normal;
-	t_tuple	world_normal;
-	float	**temp;
+	t_tuple		normal;
+	t_tuple		obj_point;
+	t_tuple		obj_normal;
+	t_tuple		world_normal;
+	t_matrix	temp;
 
 	temp = inverse(object->sphere->transform);
 	obj_point = multiply_matrix_with_tuple(temp, world_point);
@@ -24,9 +24,9 @@ t_tuple	normal_at(t_object *object, t_tuple world_point)
 	return (normal);
 }
 
-static void	update_temp(float ***t)
+static void	update_temp(t_matrix *t)
 {
-	float	**temp;
+	t_matrix	temp;
 
 	temp = transpose_matrix(*t);
 	free_matrix(*t);

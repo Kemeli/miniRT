@@ -1,12 +1,12 @@
 #include <minirt.h>
 
-float	minor(float **matrix, int i, int j)
+float	minor(t_matrix matrix, int i, int j)
 {
-	float	**M;
-	float	result;
+	t_matrix	m;
+	float		result;
 
-	M = submatrix(matrix, i, j);
-	result = determinant(M);
-	free_matrix(M);
+	m = submatrix(matrix, i, j);
+	result = determinant(m);
+	free_matrix(m);
 	return (result);
 }
