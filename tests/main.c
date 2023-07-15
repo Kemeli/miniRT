@@ -35,6 +35,7 @@
 #include "ray_tracer/lighting_test.c"
 #include "world/create_world_test.c"
 #include "world/prepare_computations_test.c"
+#include "world/color_at_test.c"
 
 int	copy_size;
 
@@ -91,6 +92,7 @@ int	main()
 	MU_RUN_SUITE(test_the_phone_reflection_mode);
 	MU_RUN_SUITE(test_build_world);
 	MU_RUN_SUITE(test_prepare_computations);
+	MU_RUN_SUITE(test_color_at);
 
 	MU_REPORT();
 	return MU_EXIT_CODE;

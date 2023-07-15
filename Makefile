@@ -47,7 +47,8 @@ SRC				+= world_utils.c
 SRC				+= intersect_world.c
 SRC				+= prepare_computations.c
 SRC				+= free_object.c
-
+SRC				+= shade_hit.c
+SRC				+= color_at.c
 
 OBJ_DIR			= ./obj
 OBJ				= $(SRC:.c=.o)
