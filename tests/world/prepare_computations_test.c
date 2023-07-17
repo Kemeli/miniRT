@@ -14,7 +14,7 @@ MU_TEST(test_precomputing_the_state_of_an_intersection)
 	obj = ft_calloc(1, sizeof(t_object));
 	obj->sphere = s;
 	t_list	*i = new_intersection(4, obj);
-	t_comps	*comps = prepare_computations(i, r);
+	t_comps	*comps = prepare_computations(((t_node *)i->content), r);
 
 	mu_check(((t_node *)i->content)->t == comps->t);
 	mu_check(compare_pointers(((t_node *)i->content)->object, comps->object));
@@ -43,7 +43,7 @@ MU_TEST(test_the_hit_when_an_intersection_occurs_on_the_outside)
 	obj = ft_calloc(1, sizeof(t_object));
 	obj->sphere = s;
 	t_list	*i = new_intersection(4, obj);
-	t_comps	*comps = prepare_computations(i, r);
+	t_comps	*comps = prepare_computations(((t_node *)i->content), r);
 
 	mu_check(comps->inside == FALSE);
 
@@ -64,7 +64,7 @@ MU_TEST(test_the_hit_when_an_intersection_occurs_on_the_inside)
 	t_object	*obj = ft_calloc(1, sizeof(t_object));
 	obj->sphere = create_sphere();
 	t_list		*i = new_intersection(1, obj);
-	t_comps		*comps = prepare_computations(i, r);
+	t_comps		*comps = prepare_computations(((t_node *)i->content), r);
 
 	t_tuple		p_expected = point(0, 0, 1);
 	t_tuple		v_expected = vector(0, 0, -1);
@@ -92,7 +92,7 @@ MU_TEST(test_shading_an_intersection)
 
 	t_list		*i = new_intersection(4, ((t_node *)w->head->content)->object);
 
-	t_comps		*comps = prepare_computations(i, r);
+	t_comps		*comps = prepare_computations(((t_node *)i->content), r);
 	t_tuple		c = shade_hit(w, comps);
 	t_tuple		expected = color(0.38066, 0.47583, 0.2855);
 
@@ -120,7 +120,7 @@ MU_TEST_SUITE(test_shading_an_intersection_from_the_inside)
 	t_tuple		r_direction = vector(0, 0, 1);
 	t_ray		*r = create_ray(r_origin, r_direction);
 	t_list		*i = new_intersection(0.5, ((t_node *)w->head->next->content)->object);
-	t_comps		*comps = prepare_computations(i, r);
+	t_comps		*comps = prepare_computations(((t_node *)i->content), r);
 
 	t_tuple		c_shade_hit = shade_hit(w, comps);
 	t_tuple		expected = color(0.90498, 0.90498, 0.90498);

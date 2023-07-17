@@ -38,28 +38,23 @@ MU_TEST(test_the_color_when_a_ray_hits)
 
 MU_TEST(test_the_color_with_an_intersection_behind_the_ray)
 {
-	t_world		*w = default_world();
+	t_world	*w = default_world();
+	t_node	*outer = (t_node *)w->head->content;
+	outer->object->sphere->material->ambient = 1;
+	t_node	*inner = (t_node *)w->head->next->content;
+	inner->object->sphere->material->ambient = 1;
+	t_tuple	ray_origin = point(0, 0, 0.75);
+	t_tuple	ray_direction = vector(0, 0, -1);
+	t_ray	*r = create_ray(ray_origin, ray_direction);
 
-	((t_node *)w->head->content)->object->sphere->material->ambient = 1;
-	((t_node *)w->head->next->content)->object->sphere->material->ambient = 1;
+	t_tuple c = color_at(w, r);
+	t_tuple expected = inner->object->sphere->material->color;
 
-	t_tuple		ray_origin = point(0, 0, 0.75);
-	t_tuple		ray_direction = vector(0, 0, -1);
-	t_ray		*r = create_ray(ray_origin, ray_direction);
+	mu_check(compare_tuples(expected, c));
 
-	t_tuple		c = color_at(w, r);
-
-	// printf("\n\n c = %f %f %f\n\n", c[0], c[1], c[2]);
-	// printf("\n\n material = %f %f %f\n\n",
-	// 	((t_node *)w->head->next->content)->object->sphere->material->color[0],
-	// 	((t_node *)w->head->next->content)->object->sphere->material->color[1],
-	// 	((t_node *)w->head->next->content)->object->sphere->material->color[2]);
-
-	mu_check(compare_tuples(((t_node *)w->head->next->content)->object->sphere->material->color, c));
-
-	free(c);
-	free_ray(r);
 	free_world(w);
+	free_ray(r);
+	free(c);
 }
 
 MU_TEST_SUITE(test_color_at)

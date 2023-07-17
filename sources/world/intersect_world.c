@@ -6,20 +6,20 @@ t_intersect	*intersect_world(t_world *world, t_ray *ray)
 {
 	t_intersect	*xs;
 	t_intersect	*temp;
-	t_list		*head;
+	t_list		*aux;
 
-	head = world->head;
-	xs = intersect(((t_node *)head->content)->object, ray);
-	head = head->next;
-	while (head)
+	aux = world->head;
+	xs = intersect(((t_node *)aux->content)->object, ray);
+	aux = aux->next;
+	while (aux)
 	{
-		temp = intersect(((t_node *)head->content)->object, ray);
-		xs->count += temp->count;
-		ft_lstadd_back(&(xs->head), temp->head);
+		temp = intersect(((t_node *)aux->content)->object, ray);
+		ft_lstadd_back(&xs->head, temp->head);
 		free(temp);
-		head = head->next;
+		aux = aux->next;
 	}
 	bubble_sort(&(xs->head));
+	xs->count = ft_lstsize(xs->head);
 	return (xs);
 }
 
@@ -41,28 +41,62 @@ static int	ft_is_sorted(t_list **list)
 	return (flag);
 }
 
+// static void	bubble_sort(t_list **head)
+// {
+// 	t_list	*slow;
+// 	t_list	*fast;
+// 	float	temp;
+
+// 	slow = *head;
+// 	fast = (*head)->next;
+// 	while (ft_is_sorted(head))
+// 	{
+// 		if (((t_node *)slow->content)->t > ((t_node *)fast->content)->t)
+// 		{
+// 			temp = ((t_node *)slow->content)->t;
+// 			((t_node *)slow->content)->t = ((t_node *)fast->content)->t;
+// 			((t_node *)fast->content)->t = temp;
+// 		}
+// 		slow = slow->next;
+// 		fast = fast->next;
+// 		if (!fast)
+// 		{
+// 			slow = *head;
+// 			fast = (*head)->next;
+// 		}
+// 	}
+// }
+
 static void	bubble_sort(t_list **head)
 {
-	t_list	*slow;
-	t_list	*fast;
-	float	temp;
+	t_list	*temp;
+	t_list	*aux;
+	t_list	*prev;
 
-	slow = *head;
-	fast = (*head)->next;
+	if (!head || !*head)
+		return ;
 	while (ft_is_sorted(head))
 	{
-		if (((t_node *)slow->content)->t > ((t_node *)fast->content)->t)
+		temp = *head;
+		prev = NULL;
+		while (temp->next)
 		{
-			temp = ((t_node *)slow->content)->t;
-			((t_node *)slow->content)->t = ((t_node *)fast->content)->t;
-			((t_node *)fast->content)->t = temp;
-		}
-		slow = slow->next;
-		fast = fast->next;
-		if (!fast)
-		{
-			slow = *head;
-			fast = (*head)->next;
+			if (((t_node *)temp->content)->t > ((t_node *)temp->next->content)->t)
+			{
+				aux = temp->next;
+				temp->next = aux->next;
+				aux->next = temp;
+				if (prev)
+					prev->next = aux;
+				else
+					*head = aux;
+				prev = aux;
+			}
+			else
+			{
+				prev = temp;
+				temp = temp->next;
+			}
 		}
 	}
 }

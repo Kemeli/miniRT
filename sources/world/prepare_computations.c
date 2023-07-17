@@ -1,14 +1,14 @@
 #include <minirt.h>
 
-t_comps	*prepare_computations(t_list *intersect, t_ray *ray)
+t_comps	*prepare_computations(t_node *hit, t_ray *ray)
 {
 	t_comps	*comps;
 	float	dot_p;
 	t_tuple	temp;
 
 	comps = ft_calloc(1, sizeof(t_comps));
-	comps->t = ((t_node *)intersect->content)->t;
-	comps->object = ((t_node *)intersect->content)->object;
+	comps->t = hit->t;
+	comps->object = hit->object;
 	comps->point = get_point_position(ray, comps->t);
 	comps->eye = negative(ray->direction);
 	comps->normal = normal_at(comps->object, comps->point);
@@ -26,7 +26,6 @@ t_comps	*prepare_computations(t_list *intersect, t_ray *ray)
 
 void	free_comps(t_comps *comps)
 {
-	// free_object(comps->object);
 	free(comps->point);
 	free(comps->eye);
 	free(comps->normal);
