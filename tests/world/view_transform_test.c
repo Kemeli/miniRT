@@ -11,10 +11,10 @@ MU_TEST(test_the_transformation_matrix_for_the_default_orientation)
 
 	t = view_transform(from, to, up);
 
-	//printf("\nt: %f\n", t[0][0]);
 	mu_check(compare_matrices(expected, t));
 
 	free_matrix(expected);
+	free_matrix(t);
 	free(from);
 	free(to);
 	free(up);

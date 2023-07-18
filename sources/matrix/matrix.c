@@ -1,17 +1,17 @@
 #include <minirt.h>
 
-float	**matrix(unsigned int n)
+t_matrix	matrix(unsigned int n)
 {
-	float			**m;
+	t_matrix		m;
 	unsigned int	i;
 
 	if (n == 0)
 		return (NULL);
 	i = 0;
-	m = malloc(sizeof(t_matrix) * (n + 1));
+	m = ft_calloc(n + 1, sizeof(float *));
 	while (i < n)
 	{
-		m[i] = malloc(sizeof(float *) * n);
+		m[i] = ft_calloc(n + 1, sizeof(float));
 		i++;
 	}
 	m[i] = NULL;

@@ -1,23 +1,32 @@
 #include <minirt.h>
 
-t_matrix	view_transform(t_tuple from, t_tuple to, t_tuple up)
-{
+typedef	struct s_aux{
 	t_tuple		sub;
 	t_tuple		forward;
 	t_tuple		normal_up;
 	t_tuple		left;
 	t_tuple		true_up;
 	t_tuple		neg;
+}				t_aux;
+
+static void	free_view_transform(t_aux *aux, t_matrix orient, t_matrix transl)
+{
+	free(aux->sub);
+	free(aux->forward);
+	free(aux->normal_up);
+	free(aux->left);
+	free(aux->true_up);
+	free(aux->neg);
+	free(aux);
+	free_matrix(orient);
+	free_matrix(transl);
+}
+
+static t_matrix	get_orientation(t_tuple left, t_tuple true_up, t_tuple forward)
+{
 	t_matrix	orientation;
-	t_matrix	transl;
-	t_matrix	mult;
 
 	orientation = matrix(4);
-	sub = subtract(from, to);
-	forward = normalize(sub);
-	normal_up = normalize(up);
-	left = cross(forward, normal_up);
-	true_up = cross(left, forward);
 	orientation[0][0] = left[0];
 	orientation[0][1] = left[1];
 	orientation[0][2] = left[2];
@@ -28,9 +37,26 @@ t_matrix	view_transform(t_tuple from, t_tuple to, t_tuple up)
 	orientation[2][1] = -forward[1];
 	orientation[2][2] = -forward[2];
 	orientation[3][3] = 1;
-	neg = negative(from);
-	transl = translation(neg[0], neg[1], neg[2]);
-	mult = multiply_matrix(orientation, transl);
-	return (mult);
+	return (orientation);
+}
 
+t_matrix	view_transform(t_tuple from, t_tuple to, t_tuple up)
+{
+	t_matrix	orientation;
+	t_matrix	transl;
+	t_matrix	mult;
+	t_aux		*aux;
+
+	aux = ft_calloc(1, sizeof(t_aux));
+	aux->sub = subtract(to, from);
+	aux->forward = normalize(aux->sub);
+	aux->normal_up = normalize(up);
+	aux->left = cross(aux->forward, aux->normal_up);
+	aux->true_up = cross(aux->left, aux->forward);
+	orientation = get_orientation(aux->left, aux->true_up, aux->forward);
+	aux->neg = negative(from);
+	transl = translation(aux->neg[0], aux->neg[1], aux->neg[2]);
+	mult = multiply_matrix(orientation, transl);
+	free_view_transform(aux, orientation, transl);
+	return (mult);
 }
