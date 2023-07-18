@@ -155,6 +155,7 @@ t_intersect		*intersect(t_object *object, t_ray *ray);
 void			free_object(t_object *object);
 t_tuple			shade_hit(t_world *world, t_comps *comps);
 t_tuple			color_at(t_world *w, t_ray *r);
+t_matrix		view_transform(t_tuple from, t_tuple to, t_tuple direction);
 
 
 #endif

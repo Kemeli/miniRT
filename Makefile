@@ -49,6 +49,7 @@ SRC				+= prepare_computations.c
 SRC				+= free_object.c
 SRC				+= shade_hit.c
 SRC				+= color_at.c
+SRC				+= view_transform.c
 
 OBJ_DIR			= ./obj
 OBJ				= $(SRC:.c=.o)
