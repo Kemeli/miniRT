@@ -50,6 +50,8 @@ SRC				+= free_object.c
 SRC				+= shade_hit.c
 SRC				+= color_at.c
 SRC				+= view_transform.c
+SRC				+= camera.c
+SRC				+= ray_for_pixel.c
 
 OBJ_DIR			= ./obj
 OBJ				= $(SRC:.c=.o)

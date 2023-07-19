@@ -88,6 +88,17 @@ typedef struct s_comps
 	int			inside;
 }	t_comps;
 
+typedef struct s_camera
+{
+	float		hsize;
+	float		vsize;
+	float		field_of_view;
+	float		pixel_size;
+	float		half_width;
+	float		half_height;
+	t_matrix	transform;
+}	t_camera;
+
 t_tuple			tuple(float x, float y, float z, float w);
 t_tuple			vector(float x, float y, float z);
 t_tuple			point(float x, float y, float z);
@@ -156,6 +167,9 @@ void			free_object(t_object *object);
 t_tuple			shade_hit(t_world *world, t_comps *comps);
 t_tuple			color_at(t_world *w, t_ray *r);
 t_matrix		view_transform(t_tuple from, t_tuple to, t_tuple direction);
+t_camera		*camera(float hsize, float vsize, float field_of_view);
+void			free_camera(t_camera *c);
+t_ray			*ray_for_pixel(t_camera *c, float px, float py);
 
 
 #endif
