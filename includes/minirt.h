@@ -170,6 +170,7 @@ t_matrix		view_transform(t_tuple from, t_tuple to, t_tuple direction);
 t_camera		*camera(float hsize, float vsize, float field_of_view);
 void			free_camera(t_camera *c);
 t_ray			*ray_for_pixel(t_camera *c, float px, float py);
+void			render(t_camera *camera, t_world *world);
 
 
 #endif
