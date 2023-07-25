@@ -99,6 +99,24 @@ typedef struct s_camera
 	t_matrix	transform;
 }	t_camera;
 
+typedef struct s_image
+{
+	void	*mlx_img;
+	char	*addr;
+	int		bpp;
+	int		line_len;
+	int		endian;
+}t_image;
+
+typedef struct s_data
+{
+	void		*mlx_ptr;
+	void		*win_ptr;
+	t_camera	*c;
+	t_world		*w;
+	t_image		*img;
+}t_data;
+
 t_tuple			tuple(float x, float y, float z, float w);
 t_tuple			vector(float x, float y, float z);
 t_tuple			point(float x, float y, float z);
@@ -170,7 +188,6 @@ t_matrix		view_transform(t_tuple from, t_tuple to, t_tuple direction);
 t_camera		*camera(float hsize, float vsize, float field_of_view);
 void			free_camera(t_camera *c);
 t_ray			*ray_for_pixel(t_camera *c, float px, float py);
+// t_image 		*render(t_data *data);
 void			render(t_camera *camera, t_world *world);
-
-
 #endif
