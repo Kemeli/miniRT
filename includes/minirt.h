@@ -189,5 +189,5 @@ t_camera		*camera(float hsize, float vsize, float field_of_view);
 void			free_camera(t_camera *c);
 t_ray			*ray_for_pixel(t_camera *c, float px, float py);
 // t_image 		*render(t_data *data);
-void			render(t_camera *camera, t_world *world);
+// void			render(t_camera *camera, t_world *world);
 #endif

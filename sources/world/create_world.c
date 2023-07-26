@@ -17,8 +17,8 @@ static t_list	*objects_list(t_list *head)
 	t_node		*next_node;
 	t_material	*mat;
 
-	((t_node*)head->content)->object = ft_calloc(1, sizeof(t_object));
-	((t_node*)head->content)->object->sphere = create_sphere();
+	((t_node *)head->content)->object = ft_calloc(1, sizeof(t_object));
+	((t_node *)head->content)->object->sphere = create_sphere();
 	next_node = ft_calloc(1, sizeof(t_node));
 	next_node->object = ft_calloc(1, sizeof(t_object));
 	next_node->object->sphere = create_sphere();
@@ -30,7 +30,7 @@ static t_list	*objects_list(t_list *head)
 	mat->color = color(0.8, 1.0, 0.6);
 	mat->diffuse = 0.7;
 	mat->specular = 0.2;
-	((t_node*)head->content)->object->sphere->change_my_material(
+	((t_node *)head->content)->object->sphere->change_my_material(
 		((t_node*)head->content)->object->sphere, mat);
 	return (head);
 }
