@@ -41,32 +41,6 @@ static int	ft_is_sorted(t_list **list)
 	return (flag);
 }
 
-// static void	bubble_sort(t_list **head)
-// {
-// 	t_list	*slow;
-// 	t_list	*fast;
-// 	float	temp;
-
-// 	slow = *head;
-// 	fast = (*head)->next;
-// 	while (ft_is_sorted(head))
-// 	{
-// 		if (((t_node *)slow->content)->t > ((t_node *)fast->content)->t)
-// 		{
-// 			temp = ((t_node *)slow->content)->t;
-// 			((t_node *)slow->content)->t = ((t_node *)fast->content)->t;
-// 			((t_node *)fast->content)->t = temp;
-// 		}
-// 		slow = slow->next;
-// 		fast = fast->next;
-// 		if (!fast)
-// 		{
-// 			slow = *head;
-// 			fast = (*head)->next;
-// 		}
-// 	}
-// }
-
 static void	bubble_sort(t_list **head)
 {
 	t_list	*temp;
