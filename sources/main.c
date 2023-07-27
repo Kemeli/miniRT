@@ -126,7 +126,6 @@ int render(t_data *data)
 
 	t_sphere *left_wall = create_sphere();
 	left_wall->transform = multiply_matrix(
-		multiply_matrix(
 			multiply_matrix(
 				multiply_matrix(
 					translation(0, 0, 5),
@@ -135,14 +134,11 @@ int render(t_data *data)
 				rotation_x(M_PI / 2)
 			),
 			scaling(10, 0.01, 10)
-		),
-		translation(0, 0, 5)
 	);
 	left_wall->material = floor->material;
 
 	t_sphere *right_wall = create_sphere();
 	right_wall->transform = multiply_matrix(
-		multiply_matrix(
 			multiply_matrix(
 				multiply_matrix(
 					translation(0, 0, 5),
@@ -151,8 +147,6 @@ int render(t_data *data)
 				rotation_x(M_PI / 2)
 			),
 			scaling(10, 0.01, 10)
-		),
-		translation(0, 0, 5)
 	);
 	right_wall->material = floor->material;
 
@@ -250,8 +244,8 @@ int main(void)
 	t_camera	*c;
 
 	data.mlx_ptr = mlx_init();
-	data.win_ptr = mlx_new_window(data.mlx_ptr, 100, 100, "print sphere");
-	data.img->mlx_img = mlx_new_image(data.mlx_ptr, 100, 100);
+	data.win_ptr = mlx_new_window(data.mlx_ptr, 200, 100, "print sphere");
+	data.img->mlx_img = mlx_new_image(data.mlx_ptr, 200, 100);
 	data.img->addr = mlx_get_data_addr(
 		data.img->mlx_img,
 		&data.img->bpp,
@@ -260,7 +254,7 @@ int main(void)
 	);
 
 	w = default_world();
-	c = camera(100, 50, M_PI / 3);
+	c = camera(200, 100, M_PI / 3);
 	free_matrix(c->transform);
 	c->transform = view_transform(point(0, 1.5, -5), point(0, 1, 0), vector(0, 1, 0));
 	free(w->light);
