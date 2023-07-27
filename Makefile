@@ -52,7 +52,7 @@ SRC				+= color_at.c
 SRC				+= view_transform.c
 SRC				+= camera.c
 SRC				+= ray_for_pixel.c
-#SRC				+= render.c
+SRC				+= render.c
 
 OBJ_DIR			= ./obj
 OBJ				= $(SRC:.c=.o)
