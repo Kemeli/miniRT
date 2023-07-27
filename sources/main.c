@@ -118,20 +118,20 @@ void write_pixel(t_data *data, int x, int y, t_tuple color)
 
 int render(t_data *data)
 {
-	int canvas_pixels = 100;
+	// int canvas_pixels = 100;
 	double wall_z = 10;
-	double wall_size = 7.0;
-	double pixel_size = wall_size / canvas_pixels;
-	double half = wall_size / 2.0;
+	// double wall_size = 7.0;
+	// double pixel_size = wall_size / canvas_pixels;
+	// double half = wall_size / 2.0;
 	t_tuple ray_origin = point(0, 0, -5);
 
-	for (int y = 0; y < canvas_pixels; y++)
+	for (int y = 0; y < data->c->vsize; y++)
 	{
-		double world_y = half - pixel_size * y; //posição do pixel no eixo y
+		double world_y = data->c->half_height - data->c->pixel_size * y; //posição do pixel no eixo y
 
-		for (int x = 0; x < canvas_pixels; x++)
+		for (int x = 0; x < data->c->hsize; x++)
 		{
-			double world_x = -half + pixel_size * x;  //posição do pixel no eixo x
+			double world_x = -data->c->half_width + data->c->pixel_size * x;  //posição do pixel no eixo x
 
 			t_tuple dir_position = point(world_x, world_y, wall_z); //posição do raio na esfera
 			t_tuple direction = normalize(subtract(dir_position, ray_origin)); //direção do raio
@@ -164,8 +164,9 @@ int	handle_keypress(int keysym, t_data *data)
 
 int main(void)
 {
-	t_data	data;
-	t_world	*w;
+	t_data		data;
+	t_world		*w;
+	t_camera	*c;
 
 	data.mlx_ptr = mlx_init();
 	data.win_ptr = mlx_new_window(data.mlx_ptr, 100, 100, "print sphere");
@@ -178,7 +179,9 @@ int main(void)
 	);
 
 	w = default_world();
+	c = camera(100, 100, M_PI / 1.2);
 	data.w = w;
+	data.c = c;
 	mlx_loop_hook(data.mlx_ptr, &render, &data);
 	mlx_hook(data.win_ptr, KeyPress, KeyPressMask, &handle_keypress, &data);
 	mlx_loop(data.mlx_ptr);
