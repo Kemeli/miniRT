@@ -119,23 +119,23 @@ void write_pixel(t_data *data, int x, int y, t_tuple color)
 int render(t_data *data)
 {
 	// int canvas_pixels = 100;
-	double wall_z = 10;
+	// double wall_z = 10;
 	// double wall_size = 7.0;
 	// double pixel_size = wall_size / canvas_pixels;
 	// double half = wall_size / 2.0;
-	t_tuple ray_origin = point(0, 0, -5);
+	// t_tuple ray_origin = point(0, 0, -5);
 
 	for (int y = 0; y < data->c->vsize; y++)
 	{
-		double world_y = data->c->half_height - data->c->pixel_size * y; //posição do pixel no eixo y
+		// double world_y = data->c->half_height - data->c->pixel_size * y; //posição do pixel no eixo y
 
 		for (int x = 0; x < data->c->hsize; x++)
 		{
-			double world_x = -data->c->half_width + data->c->pixel_size * x;  //posição do pixel no eixo x
+			// double world_x = -data->c->half_width + data->c->pixel_size * x;  //posição do pixel no eixo x
 
-			t_tuple dir_position = point(world_x, world_y, wall_z); //posição do raio na esfera
-			t_tuple direction = normalize(subtract(dir_position, ray_origin)); //direção do raio
-			t_ray *r = create_ray(ray_origin, direction);
+			// t_tuple dir_position = point(world_x, world_y, wall_z); //posição do raio na esfera
+			// t_tuple direction = normalize(subtract(dir_position, ray_origin)); //direção do raio
+			t_ray *r = ray_for_pixel(data->c, x, y);
 				t_tuple to_color = color_at(data->w, r);
 					if (to_color[0] > 1)
 						to_color[0] = 1;
@@ -179,7 +179,11 @@ int main(void)
 	);
 
 	w = default_world();
-	c = camera(100, 100, M_PI / 1.2);
+	c = camera(100, 50, M_PI / 3);
+	free_matrix(c->transform);
+	c->transform = view_transform(point(0, 1.5, -5), point(0, 1, 0), vector(0, 1, 0));
+	free(w->light);
+	w->light = point_light(point(-10, 10, -10), color(1, 1, 1));
 	data.w = w;
 	data.c = c;
 	mlx_loop_hook(data.mlx_ptr, &render, &data);
@@ -190,5 +194,5 @@ int main(void)
 	mlx_destroy_display(data.mlx_ptr);
 	free(data.mlx_ptr);
 
-	return 0;
+	return (0);
 }
