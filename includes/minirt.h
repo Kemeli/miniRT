@@ -190,4 +190,5 @@ t_camera		*camera(float hsize, float vsize, float field_of_view);
 void			free_camera(t_camera *c);
 t_ray			*ray_for_pixel(t_camera *c, float px, float py);
 void			render(t_data *data);
+char			is_shadowed(t_world *world, t_tuple point);
 #endif
