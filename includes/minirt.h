@@ -70,6 +70,7 @@ typedef struct s_lighting
 	t_tuple			position;
 	t_tuple			eye;
 	t_tuple			normal;
+	int				in_shadow;
 }	t_lighting;
 
 typedef struct s_world
