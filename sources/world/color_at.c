@@ -9,7 +9,7 @@ t_tuple	color_at(t_world *w, t_ray *r)
 
 	xs = intersect_world(w, r);
 	the_hit = hit(xs);
-	if(the_hit)
+	if (the_hit)
 	{
 		comps = prepare_computations(the_hit, r);
 		c = shade_hit(w, comps);

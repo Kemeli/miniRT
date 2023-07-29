@@ -3,7 +3,7 @@
 int render_first_scene(t_data *data)
 {
 	t_sphere *floor = create_sphere();
-	floor->transform = scaling(10, 0.01, 10);
+	floor->transform = scaling(10, 0.1, 10);
 	floor->material->color = color(1, 0.9, 0.9);
 	floor->material->specular = 0;
 
@@ -16,7 +16,7 @@ int render_first_scene(t_data *data)
 				),
 				rotation_x(M_PI / 2)
 			),
-			scaling(10, 0.01, 10)
+			scaling(10, 0.1, 10)
 	);
 	left_wall->material = floor->material;
 
@@ -29,7 +29,7 @@ int render_first_scene(t_data *data)
 				),
 				rotation_x(M_PI / 2)
 			),
-			scaling(10, 0.01, 10)
+			scaling(10, 0.1, 10)
 	);
 	right_wall->material = floor->material;
 

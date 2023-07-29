@@ -2,7 +2,8 @@
 
 void	free_shadow(t_ray *r, t_intersect *intersect, t_tuple v)
 {
-	free_ray(r);
+	free(r->direction);
+	free(r);
 	free_intersections(intersect);
 	free(v);
 }

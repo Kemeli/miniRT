@@ -9,6 +9,7 @@
 # ifndef M_PI
 #  define M_PI 3.14159265358979323846
 # endif
+# define EPSILON 0.00001
 
 # define TRUE 1
 # define FALSE 0
@@ -87,6 +88,7 @@ typedef struct s_comps
 	t_tuple		eye;
 	t_tuple		normal;
 	int			inside;
+	t_tuple		over_point;
 }	t_comps;
 
 typedef struct s_camera

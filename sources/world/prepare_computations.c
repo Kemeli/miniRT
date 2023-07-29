@@ -5,6 +5,7 @@ t_comps	*prepare_computations(t_node *hit, t_ray *ray)
 	t_comps	*comps;
 	float	dot_p;
 	t_tuple	temp;
+	t_tuple	mult;
 
 	comps = ft_calloc(1, sizeof(t_comps));
 	comps->t = hit->t;
@@ -21,6 +22,9 @@ t_comps	*prepare_computations(t_node *hit, t_ray *ray)
 		comps->normal = negative(temp);
 		free(temp);
 	}
+	mult = multiply_tuple_by_scalar(comps->normal, EPSILON);
+	comps->over_point = tuple_addition(comps->point, mult);
+	free(mult);
 	return (comps);
 }
 
@@ -29,5 +33,6 @@ void	free_comps(t_comps *comps)
 	free(comps->point);
 	free(comps->eye);
 	free(comps->normal);
+	free(comps->over_point);
 	free(comps);
 }
