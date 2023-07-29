@@ -1,8 +1,8 @@
 #include <minirt.h>
 #include <stdio.h>
 
-static float	multiply_elements(float **matrix_A,
-	float **matrix_B, int i, int j)
+static float	multiply_elements(t_matrix matrix_A,
+	t_matrix matrix_B, int i, int j)
 {
 	float	first;
 	float	second;
@@ -16,11 +16,11 @@ static float	multiply_elements(float **matrix_A,
 	return (first + second + third + fourth);
 }
 
-float	**multiply_matrix(float **matrix_A, float **matrix_B)
+t_matrix	multiply_matrix(t_matrix matrix_A, t_matrix matrix_B)
 {
-	int		i;
-	int		j;
-	float	**result_matrix;
+	int			i;
+	int			j;
+	t_matrix	result_matrix;
 
 	result_matrix = matrix(4);
 	i = 0;

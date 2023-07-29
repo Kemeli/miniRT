@@ -1,8 +1,8 @@
 #include <minirt.h>
 
-void	set_transform(t_sphere **sphere, float **translation)
+void	set_transform(t_sphere **sphere, t_matrix translation)
 {
-	float	**transform;
+	t_matrix	transform;
 
 	transform = (*sphere)->transform;
 	(*sphere)->transform = multiply_matrix(transform, translation);

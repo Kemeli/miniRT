@@ -3,7 +3,7 @@
 void	free_sphere_intersection(
 	t_tuple origin_to_center,
 	t_ray *transformed_ray,
-	float **inv,
+	t_matrix inv,
 	t_tuple abc
 )
 {
@@ -46,7 +46,7 @@ t_intersect	*intersect_sphere(t_object *object, t_ray *ray)
 	t_tuple		orig_center;
 	t_ray		*transformed_ray;
 	t_intersect	*intersect;
-	float		**inv;
+	t_matrix	inv;
 
 	abc = point(0, 0, 0);
 	inv = inverse(object->sphere->transform);

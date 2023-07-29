@@ -4,3 +4,4 @@ a.out
 *.o
 */**/.o
 miniRT
+lib/libft/libft.a

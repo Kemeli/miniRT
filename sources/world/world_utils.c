@@ -2,8 +2,7 @@
 
 static void	free_content(void *node)
 {
-	free_sphere(((t_node *)node)->object->sphere);
-	free(((t_node *)node)->object);
+	free_object(((t_node *)node)->object);
 	free((t_node *)node);
 }
 

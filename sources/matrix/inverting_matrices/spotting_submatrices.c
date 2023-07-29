@@ -1,6 +1,6 @@
 #include "minirt.h"
 
-int	get_size(float **matrix)
+int	get_size(t_matrix matrix)
 {
 	int	i;
 
@@ -10,12 +10,12 @@ int	get_size(float **matrix)
 	return (i);
 }
 
-float	**submatrix(float **original_matrix, int row, int col)
+t_matrix	submatrix(t_matrix original_matrix, int row, int col)
 {
-	int		i;
-	int		j;
-	int		size;
-	float	**submatrix;
+	int			i;
+	int			j;
+	int			size;
+	t_matrix	submatrix;
 
 	size = get_size(original_matrix);
 	submatrix = matrix(size - 1);

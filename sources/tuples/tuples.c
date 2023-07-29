@@ -4,7 +4,7 @@ t_tuple	tuple(float x, float y, float z, float w)
 {
 	t_tuple	tuple;
 
-	tuple = malloc(sizeof(float) * 4);
+	tuple = ft_calloc(4, sizeof(float *));
 	if (!tuple)
 		return (NULL);
 	tuple[0] = x;

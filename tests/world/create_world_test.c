@@ -48,8 +48,29 @@ MU_TEST(test_default_world)
 	free_world(world);
 }
 
+MU_TEST(test_Intersect_a_world_with_a_ray)
+{
+	t_world	*world = default_world();
+	t_tuple	p = point(0, 0, -5);
+	t_tuple	v = vector(0, 0, 1);
+	t_ray	*r = create_ray(p, v);
+	t_intersect	*xs;
+
+	xs = intersect_world(world, r);
+	mu_check(4 == xs->count);
+	mu_check(4 == ((t_node *)xs->head->content)->t);
+	mu_check(4.5 == ((t_node *)xs->head->next->content)->t);
+	mu_check(5.5 == ((t_node *)xs->head->next->next->content)->t);
+	mu_check(6 == ((t_node *)xs->head->next->next->next->content)->t);
+
+	free_world(world);
+	free_intersections(xs);
+	free_ray(r);
+}
+
 MU_TEST_SUITE(test_build_world)
 {
 	MU_RUN_TEST(test_create_world);
 	MU_RUN_TEST(test_default_world);
+	MU_RUN_TEST(test_Intersect_a_world_with_a_ray);
 }
