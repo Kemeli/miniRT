@@ -34,6 +34,12 @@
 #include "ray_tracer/reflect_vector_test.c"
 #include "ray_tracer/lighting_test.c"
 #include "world/create_world_test.c"
+#include "world/prepare_computations_test.c"
+#include "world/color_at_test.c"
+#include "world/view_transform_test.c"
+#include "world/camera_test.c"
+#include "world/ray_for_pixel_test.c"
+#include "shadows/shadows_test.c"
 
 int	copy_size;
 
@@ -89,6 +95,12 @@ int	main()
 	MU_RUN_SUITE(test_reflecting_vector);
 	MU_RUN_SUITE(test_the_phone_reflection_mode);
 	MU_RUN_SUITE(test_build_world);
+	MU_RUN_SUITE(test_prepare_computations);
+	MU_RUN_SUITE(test_color_at);
+	MU_RUN_SUITE(test_view_transform);
+	MU_RUN_SUITE(test_implementing_a_camera);
+	MU_RUN_SUITE(test_ray_for_pixel);
+	MU_RUN_SUITE(test_shadows);
 
 	MU_REPORT();
 	return MU_EXIT_CODE;

@@ -1,6 +1,6 @@
 #include <minirt.h>
 
-t_tuple	multiply_matrix_with_tuple(float **matrix_A, t_tuple tuple_A)
+t_tuple	multiply_matrix_with_tuple(t_matrix matrix_A, t_tuple tuple_A)
 {
 	t_tuple	result;
 	float	sum[4];
@@ -14,7 +14,7 @@ t_tuple	multiply_matrix_with_tuple(float **matrix_A, t_tuple tuple_A)
 	{
 		product = 0;
 		counter = 0;
-		while(counter < 4)
+		while (counter < 4)
 		{
 			product += matrix_A[row][counter] * tuple_A[counter];
 			counter++;

@@ -68,13 +68,18 @@ static void	free_aux(t_aux *aux)
 
 t_tuple	lighting(t_lighting *l)
 {
-	t_tuple	response;
 	t_aux	*aux;
+	t_tuple	response;
+	t_tuple	ambient;
 
 	aux = ft_calloc(1, sizeof(t_aux));
 	aux->effective_c = multiply_colors(l->material->color, l->light->intensity);
-	aux->ambient = multiply_tuple_by_scalar(
-			aux->effective_c, l->material->ambient);
+	ambient = multiply_tuple_by_scalar(aux->effective_c, l->material->ambient);
+	if (l->in_shadow)
+	{
+		free_aux(aux);
+		return(ambient);
+	}
 	aux->light_v = ligth_vector(l);
 	aux->light_dot_normal = dot(aux->light_v, l->normal);
 	if (aux->light_dot_normal < 0)
@@ -89,8 +94,9 @@ t_tuple	lighting(t_lighting *l)
 		aux->f_reflect_dot_eye = reflect_dot_eye(l, aux->light_v);
 		aux->specular = calculate_specular(l, aux->f_reflect_dot_eye);
 	}
-	aux->sum = tuple_addition(aux->ambient, aux->diffuse);
+	aux->sum = tuple_addition(ambient, aux->diffuse);
 	response = tuple_addition(aux->sum, aux->specular);
 	free_aux(aux);
+	free(ambient);
 	return (response);
 }

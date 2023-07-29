@@ -1,6 +1,6 @@
 #include "minirt.h"
 
-float	determinant_2X2_matrix(float **matrix)
+float	determinant_2X2_matrix(t_matrix matrix)
 {
 	float	result;
 	float	first_diagonal;
@@ -12,7 +12,7 @@ float	determinant_2X2_matrix(float **matrix)
 	return (result);
 }
 
-float	determinant(float **matrix)
+float	determinant(t_matrix matrix)
 {
 	float	size;
 	float	determ;
@@ -26,7 +26,7 @@ float	determinant(float **matrix)
 	}
 	j = 0;
 	determ = 0;
-	while(j < size)
+	while (j < size)
 	{
 		determ += matrix[0][j] * cofactor(matrix, 0, j);
 		j++;

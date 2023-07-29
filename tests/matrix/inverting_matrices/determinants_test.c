@@ -3,7 +3,7 @@
 
 MU_TEST(test_determinant_of_matrix_2x2_values_1_5_minus_3_2_is_17)
 {
-	float	**matrix_A = matrix(2);
+	t_matrix	matrix_A = matrix(2);
 	float	matrix_values[2][2] = {
 		{1, 5},
 		{-3, 2}
@@ -26,7 +26,7 @@ MU_TEST(test_determinant_of_3x3_matrix)
 		{2, 6, 4}
 	};
 	copy_size = 3;
-	float **matrix_A = copy_matrix(matrix_A_values);
+	t_matrix matrix_A = copy_matrix(matrix_A_values);
 	mu_assert_double_eq(cofactor(matrix_A, 0, 0), 56);
 	mu_assert_double_eq(cofactor(matrix_A, 0, 1), 12);
 	mu_assert_double_eq(cofactor(matrix_A, 0, 2), -46);
@@ -43,7 +43,7 @@ MU_TEST(test_determinant_of_4x4_matrix)
 		{-6, 7, 7, -9}
 	};
 	copy_size = 4;
-	float **matrix_A = copy_matrix(matrix_A_values);
+	t_matrix matrix_A = copy_matrix(matrix_A_values);
 	mu_assert_double_eq(cofactor(matrix_A, 0, 0), 690);
 	mu_assert_double_eq(cofactor(matrix_A, 0, 1), 447);
 	mu_assert_double_eq(cofactor(matrix_A, 0, 2), 210);

@@ -19,3 +19,4 @@ make re
 ## Obs
 
 1. Alteramos o `epsilon` na função `compare_floats` para comparar 5 casas decimais! (antes comparava 6)
+2. arquivo `render.c` está comentado no `makefile`

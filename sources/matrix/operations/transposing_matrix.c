@@ -1,11 +1,11 @@
 #include <minirt.h>
 
-float	**transpose_matrix(float **matrix_A)
+float	**transpose_matrix(t_matrix matrix_A)
 {
-	float	**result;
-	int		i;
-	int		j;
-	int		size;
+	t_matrix	result;
+	int			i;
+	int			j;
+	int			size;
 
 	size = get_size(matrix_A);
 	result = matrix(size);
@@ -13,7 +13,7 @@ float	**transpose_matrix(float **matrix_A)
 	while (j < size)
 	{
 		i = 0;
-		while(i < size)
+		while (i < size)
 		{
 			result[i][j] = matrix_A[j][i];
 			i++;

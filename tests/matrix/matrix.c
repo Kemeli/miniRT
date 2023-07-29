@@ -94,7 +94,7 @@ MU_TEST(test_should_create_and_assign_right_values_to_a_4x4_matrix)
 MU_TEST(test_matrix_should_have_a_null_at_the_end)
 {
 	int	size = 4;
-	float **m = matrix(size);
+	t_matrix m = matrix(size);
 
 	mu_check(m[size] == NULL);
 

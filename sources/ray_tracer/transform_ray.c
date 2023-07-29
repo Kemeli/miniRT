@@ -1,6 +1,6 @@
 #include <minirt.h>
 
-t_ray *transform_ray(t_ray *ray, float **matrix)
+t_ray *transform_ray(t_ray *ray, t_matrix matrix)
 {
 	t_ray	*ray_transformed;
 	t_tuple	origin_transformed;

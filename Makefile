@@ -34,7 +34,7 @@ SRC				+= shearing.c
 SRC				+= ray.c
 SRC				+= intersect_sphere.c
 SRC				+= sphere.c
-SRC				+= list_intersect.c
+SRC				+= intersection.c
 SRC				+= hit.c
 SRC				+= transform_ray.c
 SRC				+= set_transform.c
@@ -43,6 +43,17 @@ SRC				+= reflect_vector.c
 SRC				+= lighting.c
 SRC				+= lighting_utils.c
 SRC				+= create_world.c
+SRC				+= world_utils.c
+SRC				+= intersect_world.c
+SRC				+= prepare_computations.c
+SRC				+= free_object.c
+SRC				+= shade_hit.c
+SRC				+= color_at.c
+SRC				+= view_transform.c
+SRC				+= camera.c
+SRC				+= ray_for_pixel.c
+SRC				+= render.c
+SRC				+= shadow.c
 
 OBJ_DIR			= ./obj
 OBJ				= $(SRC:.c=.o)
@@ -58,6 +69,7 @@ VPATH			+= ./sources/transformations
 VPATH			+= ./sources/ray_tracer
 VPATH			+= ./sources/world
 VPATH			+= ./sources/objects
+VPATH			+= ./sources/shadow
 VPATH			+= ./lib/libft
 
 .DEFAULT_GOAL	= all

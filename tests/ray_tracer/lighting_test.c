@@ -175,6 +175,33 @@ MU_TEST(test_lighting_with_the_light_behind_the_surface)
 	free(c);
 }
 
+MU_TEST(test_lighting_with_the_surface_in_shadow)
+{
+	t_lighting	*lighting_s;
+
+	lighting_s = ft_calloc(1, sizeof(t_lighting));
+	lighting_s->material = material();
+	lighting_s->position =  point(0, 0, 0);
+
+	t_tuple p = point(0, 0, -10);
+	t_tuple c = color(1, 1, 1);
+	lighting_s->light = point_light(p, c);
+
+	lighting_s->eye =  vector(0, 0, -1);
+	lighting_s->normal =  vector(0, 0, -1);
+	lighting_s->in_shadow = TRUE;
+	t_tuple result = lighting(lighting_s);
+	t_tuple expected = color(0.1, 0.1, 0.1);
+	mu_check(compare_tuples(result, expected));
+
+	free(result);
+	free(expected);
+	free_lighting(lighting_s);
+	free(p);
+	free(c);
+}
+
+
 MU_TEST_SUITE(test_the_phone_reflection_mode)
 {
 	MU_RUN_TEST(test_that_a_point_light_has_a_position_and_intensity);
@@ -186,4 +213,5 @@ MU_TEST_SUITE(test_the_phone_reflection_mode)
 	MU_RUN_TEST(test_lighting_with_the_eye_opposite_surface_light_offset_45_degrees);
 	MU_RUN_TEST(test_lighting_with_the_eye_in_the_path_of_the_reflection_vector);
 	MU_RUN_TEST(test_lighting_with_the_light_behind_the_surface);
+	MU_RUN_TEST(test_lighting_with_the_surface_in_shadow);
 }
