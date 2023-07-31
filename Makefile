@@ -54,6 +54,7 @@ SRC				+= camera.c
 SRC				+= ray_for_pixel.c
 SRC				+= render.c
 SRC				+= shadow.c
+SRC				+= object.c
 
 OBJ_DIR			= ./obj
 OBJ				= $(SRC:.c=.o)

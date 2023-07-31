@@ -36,14 +36,20 @@ typedef struct s_sphere
 {
 	t_tuple		center;
 	float		radius;
-	float		**transform;
-	t_material	*material;
 	void		(*change_my_material)(struct s_sphere *s, t_material *m);
 }	t_sphere;
 
 typedef struct s_object
 {
-	t_sphere	*sphere;
+	char		shape; // s = sphere, p = plane e c = cylinder
+	union
+	{
+		t_sphere		*sphere;
+		// t_palne		*plane;
+		// t_cylinder	*cylinder;
+	};
+	float		**transform;
+	t_material	*material;
 }	t_object;
 
 typedef struct s_node
@@ -179,6 +185,7 @@ void			free_lighting(t_lighting *l);
 void			free_ray(t_ray *ray);
 t_world			*create_world(void);
 t_world			*default_world(void);
+t_object		*create_object(char shape);
 void			free_world(t_world *world);
 t_intersect		*intersect_world(t_world *world, t_ray *ray);
 t_comps			*prepare_computations(t_node *hit, t_ray *ray);

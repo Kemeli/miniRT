@@ -17,8 +17,7 @@ static t_list	*objects_list(t_list *head)
 	t_node		*next_node;
 	t_material	*mat;
 
-	((t_node *)head->content)->object = ft_calloc(1, sizeof(t_object));
-	((t_node *)head->content)->object->sphere = create_sphere();
+	((t_node *)head->content)->object = create_object('s');
 	next_node = ft_calloc(1, sizeof(t_node));
 	next_node->object = ft_calloc(1, sizeof(t_object));
 	next_node->object->sphere = create_sphere();

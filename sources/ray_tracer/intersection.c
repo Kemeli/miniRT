@@ -23,7 +23,7 @@ t_intersect	*intersect(t_object *object, t_ray *ray)
 	t_intersect	*intersect;
 
 	intersect = NULL;
-	if (object->sphere)
+	if (object->shape == 's')
 		intersect = intersect_sphere(object, ray);
 
 	/*com calloc os que n receberem memoria vão estar apontando para NULL*/
