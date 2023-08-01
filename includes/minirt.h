@@ -36,7 +36,6 @@ typedef struct s_sphere
 {
 	t_tuple		center;
 	float		radius;
-	void		(*change_my_material)(struct s_sphere *s, t_material *m);
 }	t_sphere;
 
 typedef struct s_object
@@ -50,6 +49,7 @@ typedef struct s_object
 	};
 	float		**transform;
 	t_material	*material;
+	void		(*change_my_material)(struct s_object *obj, t_material *m);
 }	t_object;
 
 typedef struct s_node
@@ -167,14 +167,14 @@ t_ray			*create_ray(t_tuple origin, t_tuple direction);
 t_tuple			get_point_position(t_ray *ray, float t);
 t_sphere		*create_sphere(void);
 void			free_sphere(t_sphere *s);
-void			change_material(t_sphere *s, t_material *m);
+void			change_material(t_object *obj, t_material *m);
 t_intersect		*intersect_sphere(t_object *object, t_ray *ray);
 t_list			*new_intersection(float t, t_object *object);
 void			free_intersections(t_intersect *list);
 t_intersect		*add_intersection_to_list(t_intersect *list, t_node *new);
 t_node			*hit(t_intersect *xs);
 t_ray			*transform_ray(t_ray *ray, t_matrix matrix);
-void			set_transform(t_sphere **sphere, t_matrix translation);
+void			set_transform(t_object **obj, t_matrix translation);
 t_tuple			normal_at(t_object *object, t_tuple point);
 t_tuple			reflect(t_tuple in, t_tuple normal);
 t_point_light	*point_light(t_tuple position, t_tuple intensity);

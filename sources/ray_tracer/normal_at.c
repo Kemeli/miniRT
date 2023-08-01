@@ -10,7 +10,7 @@ t_tuple	normal_at(t_object *object, t_tuple world_point)
 	t_tuple		world_normal;
 	t_matrix	temp;
 
-	temp = inverse(object->sphere->transform);
+	temp = inverse(object->transform);
 	obj_point = multiply_matrix_with_tuple(temp, world_point);
 	obj_normal = subtract(obj_point, object->sphere->center);
 	update_temp(&temp);

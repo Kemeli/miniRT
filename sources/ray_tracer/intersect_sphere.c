@@ -49,7 +49,7 @@ t_intersect	*intersect_sphere(t_object *object, t_ray *ray)
 	t_matrix	inv;
 
 	abc = point(0, 0, 0);
-	inv = inverse(object->sphere->transform);
+	inv = inverse(object->transform);
 	intersect = NULL;
 	transformed_ray = transform_ray(ray, inv);
 	orig_center = subtract(transformed_ray->origin, object->sphere->center);

@@ -1,8 +1,8 @@
 #include <minirt.h>
 
-void write_pixel(t_image *img, int x, int y, t_tuple color)
+void	write_pixel(t_image *img, int x, int y, t_tuple color)
 {
-	int pixel_offset = (y * img->line_len) + (x * (img->bpp / 8));
+	int	pixel_offset = (y * img->line_len) + (x * (img->bpp / 8));
 
 	img->addr[pixel_offset + 0] = color[2] * 255;
 	img->addr[pixel_offset + 1] = color[1] * 255;

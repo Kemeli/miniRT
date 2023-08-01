@@ -2,6 +2,9 @@
 
 void	free_object(t_object *object)
 {
+	free(object->material->color);
+	free(object->material);
+	free_matrix(object->transform);
 	if (object->shape == 's')
 		free_sphere(object->sphere);
 // 	else if(object->plane)

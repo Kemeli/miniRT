@@ -19,18 +19,17 @@ static t_list	*objects_list(t_list *head)
 
 	((t_node *)head->content)->object = create_object('s');
 	next_node = ft_calloc(1, sizeof(t_node));
-	next_node->object = ft_calloc(1, sizeof(t_object));
-	next_node->object->sphere = create_sphere();
-	free_matrix(next_node->object->sphere->transform);
-	next_node->object->sphere->transform = scaling(0.5, 0.5, 0.5);
+	next_node->object = create_object('s');
+	free_matrix(next_node->object->transform);
+	next_node->object->transform = scaling(0.5, 0.5, 0.5);
 	ft_lstadd_back(&head, ft_lstnew(next_node));
 	mat = material();
 	free(mat->color);
 	mat->color = color(0.8, 1.0, 0.6);
 	mat->diffuse = 0.7;
 	mat->specular = 0.2;
-	((t_node *)head->content)->object->sphere->change_my_material(
-		((t_node*)head->content)->object->sphere, mat);
+	((t_node *)head->content)->object->change_my_material(
+		((t_node*)head->content)->object, mat);
 	return (head);
 }
 

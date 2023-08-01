@@ -2,12 +2,12 @@
 
 int render_first_scene(t_data *data)
 {
-	t_sphere *floor = create_sphere();
+	t_object	*floor = create_object('s');
 	floor->transform = scaling(10, 0.1, 10);
 	floor->material->color = color(1, 0.9, 0.9);
 	floor->material->specular = 0;
 
-	t_sphere *left_wall = create_sphere();
+	t_object *left_wall = create_object('s');
 	left_wall->transform = multiply_matrix(
 			multiply_matrix(
 				multiply_matrix(
@@ -20,7 +20,7 @@ int render_first_scene(t_data *data)
 	);
 	left_wall->material = floor->material;
 
-	t_sphere *right_wall = create_sphere();
+	t_object *right_wall = create_object('s');
 	right_wall->transform = multiply_matrix(
 			multiply_matrix(
 				multiply_matrix(
@@ -33,13 +33,13 @@ int render_first_scene(t_data *data)
 	);
 	right_wall->material = floor->material;
 
-	t_sphere *middle = create_sphere();
+	t_object *middle = create_object('s');
 	middle->transform = translation(-0.5, 1, 0.5);
 	middle->material->color = color(0.1, 1, 0.5);
 	middle->material->diffuse = 0.7;
 	middle->material->specular = 0.3;
 
-	t_sphere *right = create_sphere();
+	t_object *right = create_object('s');
 	right->transform = multiply_matrix(
 		translation(1.5, 0.5, -0.5),
 		scaling(0.5, 0.5, 0.5)
@@ -48,7 +48,7 @@ int render_first_scene(t_data *data)
 	right->material->diffuse = 0.7;
 	right->material->specular = 0.3;
 
-	t_sphere *left = create_sphere();
+	t_object *left = create_object('s');
 	left->transform = multiply_matrix(
 		translation(-1.5, 0.33, -0.75),
 		scaling(0.33, 0.33, 0.33)
@@ -60,28 +60,22 @@ int render_first_scene(t_data *data)
 	data->w->head = ft_calloc(1, sizeof(t_list));
 	data->w->head->content = (void *)ft_calloc(1, sizeof(t_node));
 
-	((t_node *)data->w->head->content)->object = ft_calloc(1, sizeof(t_object));
-	((t_node *)data->w->head->content)->object->sphere = floor;
+	((t_node *)data->w->head->content)->object = floor;
 
 	t_node *node2 = ft_calloc(1, sizeof(t_node));
-	node2->object = ft_calloc(1, sizeof(t_object));
-	node2->object->sphere = left_wall;
+	node2->object = left_wall;
 
 	t_node *node3 = ft_calloc(1, sizeof(t_node));
-	node3->object = ft_calloc(1, sizeof(t_object));
-	node3->object->sphere = right_wall;
+	node3->object = right_wall;
 
 	t_node *node4 = ft_calloc(1, sizeof(t_node));
-	node4->object = ft_calloc(1, sizeof(t_object));
-	node4->object->sphere = middle;
+	node4->object = middle;
 
 	t_node *node5 = ft_calloc(1, sizeof(t_node));
-	node5->object = ft_calloc(1, sizeof(t_object));
-	node5->object->sphere = right;
+	node5->object = right;
 
 	t_node *node6 = ft_calloc(1, sizeof(t_node));
-	node6->object = ft_calloc(1, sizeof(t_object));
-	node6->object->sphere = left;
+	node6->object = left;
 
 	ft_lstadd_back(&data->w->head, ft_lstnew(node2));
 	ft_lstadd_back(&data->w->head, ft_lstnew(node3));
@@ -113,6 +107,7 @@ int main(void)
 	t_world		*w;
 	t_camera	*c;
 
+	data.img = ft_calloc(1, sizeof(t_image));
 	data.mlx_ptr = mlx_init();
 	data.win_ptr = mlx_new_window(data.mlx_ptr, 200, 100, "print sphere");
 	data.img->mlx_img = mlx_new_image(data.mlx_ptr, 200, 100);
