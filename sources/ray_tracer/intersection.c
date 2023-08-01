@@ -21,10 +21,14 @@ void	free_intersections(t_intersect *list)
 t_intersect	*intersect(t_object *object, t_ray *ray)
 {
 	t_intersect	*intersect;
+	t_matrix	inv;
+
+	inv = inverse(object->transform);
+	object->saved_ray = transform_ray(ray, inv);
 
 	intersect = NULL;
 	if (object->shape == 's')
-		intersect = intersect_sphere(object, ray);
+		intersect = intersect_sphere(object);
 
 	/*com calloc os que n receberem memoria vão estar apontando para NULL*/
 	// else if (object->plane)

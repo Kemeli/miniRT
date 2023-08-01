@@ -47,6 +47,7 @@ typedef struct s_object
 		// t_palne		*plane;
 		// t_cylinder	*cylinder;
 	};
+	t_ray		*saved_ray;
 	float		**transform;
 	t_material	*material;
 	void		(*change_my_material)(struct s_object *obj, t_material *m);
@@ -168,7 +169,7 @@ t_tuple			get_point_position(t_ray *ray, float t);
 t_sphere		*create_sphere(void);
 void			free_sphere(t_sphere *s);
 void			change_material(t_object *obj, t_material *m);
-t_intersect		*intersect_sphere(t_object *object, t_ray *ray);
+t_intersect		*intersect_sphere(t_object *object);
 t_list			*new_intersection(float t, t_object *object);
 void			free_intersections(t_intersect *list);
 t_intersect		*add_intersection_to_list(t_intersect *list, t_node *new);

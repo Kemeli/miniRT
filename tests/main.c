@@ -40,6 +40,7 @@
 #include "world/camera_test.c"
 #include "world/ray_for_pixel_test.c"
 #include "shadows/shadows_test.c"
+#include "object/shape_test.c"
 
 int	copy_size;
 
@@ -101,6 +102,7 @@ int	main()
 	MU_RUN_SUITE(test_implementing_a_camera);
 	MU_RUN_SUITE(test_ray_for_pixel);
 	MU_RUN_SUITE(test_shadows);
+	MU_RUN_SUITE(test_shapes);
 
 	MU_REPORT();
 	return MU_EXIT_CODE;

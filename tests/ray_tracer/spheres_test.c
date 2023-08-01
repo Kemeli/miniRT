@@ -1,7 +1,7 @@
 #include <minirt.h>
 #include <minunit.h>
 
-MU_TEST(test_sphere_default_transformation)
+MU_TEST(test_object_default_transformation)
 {
 	t_object *o = create_object('s');
 	float **expected = identity_matrix(4);
@@ -11,7 +11,7 @@ MU_TEST(test_sphere_default_transformation)
 	free_object(o);
 }
 
-MU_TEST(test_changing_a_spheres_transformation)
+MU_TEST(test_changing_an_object_transformation)
 {
 	float **t;
 	t_object *o = create_object('s');
@@ -75,8 +75,8 @@ MU_TEST(test_intersecting_a_translated_sphere_with_a_ray)
 
 MU_TEST_SUITE(test_spheres_transformation)
 {
-	MU_RUN_TEST(test_sphere_default_transformation);
-	MU_RUN_TEST(test_changing_a_spheres_transformation);
+	MU_RUN_TEST(test_object_default_transformation);
+	MU_RUN_TEST(test_changing_an_object_transformation);
 	MU_RUN_TEST(test_intersecting_a_scaled_sphere_with_a_ray);
 	MU_RUN_TEST(test_intersecting_a_translated_sphere_with_a_ray);
 }
