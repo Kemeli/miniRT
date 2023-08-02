@@ -10,7 +10,7 @@ MU_TEST(test_that_a_ray_intercepts_a_sphere_at_two_points)
 {
 	t_ray *r = create_ray(point(0, 0, -5), vector(0, 0, 1));
 	t_object *object = create_object('s');
-	t_intersect *xs = intersect(object, r);
+	t_intersect *xs = intersect(&object, r);
 	mu_assert_double_eq(4.0, ((t_node*)xs->head->content)->t);
 	mu_assert_double_eq(6.0, ((t_node*)xs->head->next->content)->t);
 	mu_assert_int_eq(2, xs->count);
@@ -24,7 +24,7 @@ MU_TEST(test_that_a_ray_intercepts_a_sphere_at_a_tangent)
 {
 	t_ray *r = create_ray(point(0, 1, -5), vector(0, 0, 1));
 	t_object *object = create_object('s');
-	t_intersect *xs = intersect(object, r);
+	t_intersect *xs = intersect(&object, r);
 	mu_assert_double_eq(5.0, ((t_node*)xs->head->content)->t);
 	mu_assert_double_eq(5.0, ((t_node*)xs->head->next->content)->t);
 	mu_assert_int_eq(1, xs->count);
@@ -38,7 +38,7 @@ MU_TEST(test_that_a_ray_misses_a_sphere)
 {
 	t_ray *r = create_ray(point(0, 2, -5), vector(0, 0, 1));
 	t_object *object = create_object('s');
-	t_intersect *xs = intersect(object, r);
+	t_intersect *xs = intersect(&object, r);
 	mu_assert_double_eq(0, ((t_node*)xs->head->content)->t);
 	mu_assert_double_eq(0, ((t_node*)xs->head->next->content)->t);
 	mu_assert_int_eq(0, xs->count);
@@ -52,7 +52,7 @@ MU_TEST(test_that_a_ray_originates_inside_a_sphere)
 {
 	t_ray *r = create_ray(point(0, 0, 0), vector(0, 0, 1));
 	t_object *object = create_object('s');
-	t_intersect *xs = intersect(object, r);
+	t_intersect *xs = intersect(&object, r);
 	mu_assert_double_eq(-1.0, ((t_node*)xs->head->content)->t);
 	mu_assert_double_eq(1.0, ((t_node*)xs->head->next->content)->t);
 	mu_assert_int_eq(2, xs->count);
@@ -66,7 +66,7 @@ MU_TEST(test_that_a_sphere_is_behind_a_ray)
 {
 	t_ray *r = create_ray(point(0, 0, 5), vector(0, 0, 1));
 	t_object *object = create_object('s');
-	t_intersect *xs = intersect(object, r);
+	t_intersect *xs = intersect(&object, r);
 	mu_assert_double_eq(-6.0, ((t_node*)xs->head->content)->t);
 	mu_assert_double_eq(-4.0, ((t_node*)xs->head->next->content)->t);
 	mu_assert_int_eq(2, xs->count);
@@ -125,7 +125,7 @@ MU_TEST(test_that_intersect_sets_the_object_on_the_intersection)
 {
 	t_ray *r = create_ray(point(0, 0, -5), vector(0, 0, 1));
 	t_object *object = create_object('s');
-	t_intersect *xs = intersect(object, r);
+	t_intersect *xs = intersect(&object, r);
 
 	mu_check(compare_pointers(object, ((t_node*)xs->head->content)->object));
 	mu_check(compare_pointers(object, ((t_node*)xs->head->next->content)->object));

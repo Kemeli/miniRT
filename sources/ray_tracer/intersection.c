@@ -14,21 +14,22 @@ t_list	*new_intersection(float t, t_object *object)
 
 void	free_intersections(t_intersect *list)
 {
+	//free_ray(((t_node *)list->head->content)->object->saved_ray);
 	ft_lstclear(&list->head, free);
 	free(list);
 }
 
-t_intersect	*intersect(t_object *object, t_ray *ray)
+t_intersect	*intersect(t_object **object, t_ray *ray)
 {
 	t_intersect	*intersect;
 	t_matrix	inv;
 
-	inv = inverse(object->transform);
-	object->saved_ray = transform_ray(ray, inv);
-
+	inv = inverse((*object)->transform);
+	(*object)->saved_ray = transform_ray(ray, inv);
+	free_matrix(inv);
 	intersect = NULL;
-	if (object->shape == 's')
-		intersect = intersect_sphere(object);
+	if ((*object)->shape == 's')
+		intersect = intersect_sphere((*object));
 
 	/*com calloc os que n receberem memoria vão estar apontando para NULL*/
 	// else if (object->plane)

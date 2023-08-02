@@ -15,7 +15,7 @@ MU_TEST(test_intersecting_a_scaled_shape_with_a_ray)
 	scale = scaling(2, 2, 2);
 	t_object *o = create_object('s');
 	set_transform(&o, scale);
-	t_intersect *xs = intersect(o, r);
+	t_intersect *xs = intersect(&o, r);
 
 	t_tuple expected_origin = point(0, 0, -2.5);
 	t_tuple expected_direction = vector(0, 0, 0.5);
@@ -46,7 +46,7 @@ MU_TEST(test_intersecting_a_translated_shape_with_a_ray)
 	t_matrix translate = translation(5, 0, 0);
 	t_object *o = create_object('s');
 	set_transform(&o, translate);
-	t_intersect *xs = intersect(o, r);
+	t_intersect *xs = intersect(&o, r);
 
 	t_tuple expected_origin = point(-5, 0, -5);
 	t_tuple expected_direction = vector(0, 0, 1);
