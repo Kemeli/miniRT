@@ -22,6 +22,8 @@ t_intersect	*handle_discriminant(
 	t_list		*first_inter;
 	t_list		*second_inter;
 
+	first_inter = NULL;
+	second_inter = NULL;
 	intersect_list = ft_calloc(1, sizeof(t_intersect));
 	discriminant = pow(b, 2) - 4 * a * c;
 	sqrtd = sqrt(discriminant);

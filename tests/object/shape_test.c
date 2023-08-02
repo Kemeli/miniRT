@@ -23,6 +23,7 @@ MU_TEST(test_intersecting_a_scaled_shape_with_a_ray)
 	mu_check(compare_tuples(o->saved_ray->origin, expected_origin));
 	mu_check(compare_tuples(o->saved_ray->direction, expected_direction));
 
+
 	free_matrix(scale);
 	free_ray(r);
 	free_object(o);

@@ -133,6 +133,7 @@ MU_TEST(test_that_intersect_sets_the_object_on_the_intersection)
 	mu_assert_double_eq(6.0, ((t_node*)xs->head->next->content)->t);
 	mu_assert_int_eq(2, xs->count);
 
+
 	free_intersections(xs);
 	free_ray(r);
 	free_object(object);
