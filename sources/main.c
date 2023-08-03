@@ -2,36 +2,10 @@
 
 int render_first_scene(t_data *data)
 {
-	t_object	*floor = create_object('s');
+	t_object	*floor = create_object('p');
 	floor->transform = scaling(10, 0.1, 10);
 	floor->material->color = color(1, 0.9, 0.9);
 	floor->material->specular = 0;
-
-	t_object *left_wall = create_object('s');
-	left_wall->transform = multiply_matrix(
-			multiply_matrix(
-				multiply_matrix(
-					translation(0, 0, 5),
-					rotation_y(-M_PI / 4)
-				),
-				rotation_x(M_PI / 2)
-			),
-			scaling(10, 0.1, 10)
-	);
-	left_wall->material = floor->material;
-
-	t_object *right_wall = create_object('s');
-	right_wall->transform = multiply_matrix(
-			multiply_matrix(
-				multiply_matrix(
-					translation(0, 0, 5),
-					rotation_y(M_PI / 4)
-				),
-				rotation_x(M_PI / 2)
-			),
-			scaling(10, 0.1, 10)
-	);
-	right_wall->material = floor->material;
 
 	t_object *middle = create_object('s');
 	middle->transform = translation(-0.5, 1, 0.5);
@@ -62,12 +36,6 @@ int render_first_scene(t_data *data)
 
 	((t_node *)data->w->head->content)->object = floor;
 
-	t_node *node2 = ft_calloc(1, sizeof(t_node));
-	node2->object = left_wall;
-
-	t_node *node3 = ft_calloc(1, sizeof(t_node));
-	node3->object = right_wall;
-
 	t_node *node4 = ft_calloc(1, sizeof(t_node));
 	node4->object = middle;
 
@@ -77,8 +45,6 @@ int render_first_scene(t_data *data)
 	t_node *node6 = ft_calloc(1, sizeof(t_node));
 	node6->object = left;
 
-	ft_lstadd_back(&data->w->head, ft_lstnew(node2));
-	ft_lstadd_back(&data->w->head, ft_lstnew(node3));
 	ft_lstadd_back(&data->w->head, ft_lstnew(node4));
 	ft_lstadd_back(&data->w->head, ft_lstnew(node5));
 	ft_lstadd_back(&data->w->head, ft_lstnew(node6));
