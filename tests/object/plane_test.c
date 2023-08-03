@@ -1,7 +1,7 @@
 #include <minirt.h>
 #include <minunit.h>
 
-MU_TEST(test_plane_normal_at)
+MU_TEST(test_the_normal_of_a_plane_is_constant_everywhere)
 {
 	t_object *o = create_object('p');
 
@@ -30,7 +30,83 @@ MU_TEST(test_plane_normal_at)
 	free(expected);
 }
 
+MU_TEST(test_intersect_with_a_ray_parallel_to_the_plane)
+{
+	t_object *o = create_object('p');
+
+	t_tuple origin = point(0, 10, 0);
+	t_tuple direction = vector(0, 0, 1);
+	t_ray *r = create_ray(origin, direction);
+
+	t_intersect *xs = intersect(&o, r);
+
+	mu_check(xs->count == 0);
+
+	free_object(o);
+	free_ray(r);
+	free_intersections(xs);
+}
+
+MU_TEST(test_intersect_with_a_coplanar_ray)
+{
+	t_object *o = create_object('p');
+
+	t_tuple origin = point(0, 0, 0);
+	t_tuple direction = vector(0, 0, 1);
+	t_ray *r = create_ray(origin, direction);
+
+	t_intersect *xs = intersect(&o, r);
+
+	mu_check(xs->count == 0);
+
+	free_object(o);
+	free_ray(r);
+	free_intersections(xs);
+}
+
+MU_TEST(test_a_ray_intersecting_a_plane_from_above)
+{
+	t_object *o = create_object('p');
+
+	t_tuple origin = point(0, 1, 0);
+	t_tuple direction = vector(0, -1, 0);
+	t_ray *r = create_ray(origin, direction);
+
+	t_intersect *xs = intersect(&o, r);
+
+	mu_check(xs->count == 1);
+	mu_check(compare_floats(((t_node *)xs->head->content)->t, 1));
+	mu_check(compare_pointers(((t_node *)xs->head->content)->object, o));
+
+	free_object(o);
+	free_ray(r);
+	free_intersections(xs);
+}
+
+MU_TEST(test_a_ray_intersecting_a_plane_from_below)
+{
+	t_object *o = create_object('p');
+
+	t_tuple origin = point(0, -1, 0);
+	t_tuple direction = vector(0, 1, 0);
+	t_ray *r = create_ray(origin, direction);
+
+	t_intersect *xs = intersect(&o, r);
+
+	mu_check(xs->count == 1);
+	mu_check(compare_floats(((t_node *)xs->head->content)->t, 1));
+	mu_check(compare_pointers(((t_node *)xs->head->content)->object, o));
+
+	free_object(o);
+	free_ray(r);
+	free_intersections(xs);
+}
+
 MU_TEST_SUITE(test_plane)
 {
-	MU_RUN_TEST(test_plane_normal_at);
+	MU_RUN_TEST(test_the_normal_of_a_plane_is_constant_everywhere);
+	MU_RUN_TEST(test_intersect_with_a_ray_parallel_to_the_plane);
+	MU_RUN_TEST(test_intersect_with_a_coplanar_ray);
+	MU_RUN_TEST(test_a_ray_intersecting_a_plane_from_above);
+	MU_RUN_TEST(test_a_ray_intersecting_a_plane_from_below);
 }

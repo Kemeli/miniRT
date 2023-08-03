@@ -12,6 +12,20 @@ t_list	*new_intersection(float t, t_object *object)
 	return (list);
 }
 
+t_intersect	*intersect_plane(t_object *object, t_ray *ray)
+{
+	t_intersect	*intersect;
+	float		t;
+
+	intersect = ft_calloc(1, sizeof(t_intersect));
+	if (fabs(ray->direction[1]) < EPSILON)
+		return (intersect);
+	t = -ray->origin[1] / ray->direction[1];
+	intersect->head = new_intersection(t, object);
+	intersect->count = 1;
+	return (intersect);
+}
+
 void	free_intersections(t_intersect *list)
 {
 	//free_ray(((t_node *)list->head->content)->object->saved_ray);
@@ -32,6 +46,8 @@ t_intersect	*intersect(t_object **object, t_ray *ray)
 	intersect = NULL;
 	if ((*object)->shape == 's')
 		intersect = intersect_sphere((*object));
+	if ((*object)->shape == 'p')
+		intersect = intersect_plane((*object), ray);
 
 	/*com calloc os que n receberem memoria vão estar apontando para NULL*/
 	// else if (object->plane)
