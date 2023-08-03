@@ -32,6 +32,12 @@ typedef struct s_material
 	float	shininess;
 }	t_material;
 
+typedef struct s_cylinder
+{
+	float	radius;
+	float	height;
+}	t_cylinder;
+
 typedef struct s_plane
 {
 	char	pass;
@@ -50,7 +56,7 @@ typedef struct s_object
 	{
 		t_sphere	*sphere;
 		t_plane		*plane;
-		// t_cylinder	*cylinder;
+		t_cylinder	*cylinder;
 	};
 	t_ray		*saved_ray;
 	float		**transform;
@@ -208,6 +214,6 @@ void			render(t_data *data);
 char			is_shadowed(t_world *world, t_tuple point);
 t_plane			*create_plane(void);
 t_tuple			local_normal_at(t_object *object, t_tuple local_point);
-
+t_cylinder		*create_cylinder(void);
 
 #endif

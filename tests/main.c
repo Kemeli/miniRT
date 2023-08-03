@@ -29,7 +29,6 @@
 #include "ray_tracer/intersection_test.c"
 #include "ray_tracer/hit_test.c"
 #include "ray_tracer/transform_ray_test.c"
-#include "ray_tracer/spheres_test.c"
 #include "ray_tracer/normal_at_test.c"
 #include "ray_tracer/reflect_vector_test.c"
 #include "ray_tracer/lighting_test.c"
@@ -40,8 +39,10 @@
 #include "world/camera_test.c"
 #include "world/ray_for_pixel_test.c"
 #include "shadows/shadows_test.c"
+#include "object/spheres_test.c"
 #include "object/shape_test.c"
 #include "object/plane_test.c"
+#include "object/cylinder_test.c"
 
 int	copy_size;
 
@@ -105,6 +106,7 @@ int	main()
 	MU_RUN_SUITE(test_shadows);
 	MU_RUN_SUITE(test_shapes);
 	MU_RUN_SUITE(test_plane);
+	MU_RUN_SUITE(test_cylinder);
 
 
 	MU_REPORT();

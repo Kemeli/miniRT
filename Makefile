@@ -56,6 +56,7 @@ SRC				+= render.c
 SRC				+= shadow.c
 SRC				+= object.c
 SRC				+= plane.c
+SRC				+= cylinder.c
 
 OBJ_DIR			= ./obj
 OBJ				= $(SRC:.c=.o)
