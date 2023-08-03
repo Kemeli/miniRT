@@ -2,13 +2,15 @@
 
 static void	update_temp(t_matrix *t);
 
-static t_tuple local_normal_at(t_object *object, t_tuple local_point)
+t_tuple local_normal_at(t_object *object, t_tuple local_point)
 {
 	t_tuple	obj_normal;
 
 	obj_normal = NULL;
 	if(object->shape == 's')
 		obj_normal = subtract(local_point, object->sphere->center);
+	if(object->shape == 'p')
+		obj_normal = vector(0, 1, 0);
 	return (obj_normal);
 } //aqui faltou transformar o obj_normal em vector, os tests passaam sem isso
 

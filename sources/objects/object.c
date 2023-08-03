@@ -13,8 +13,8 @@ t_object	*create_object(char shape)
 	// object->saved_ray = NULL;
 	if (shape == 's')
 		object->sphere = create_sphere();
-	// if (shape == 'p')
-	// 	object->sphere = create_sphere();
+	if (shape == 'p')
+		object->plane = create_plane();
 	// if (shape == 'c')
 	// 	object->sphere = create_sphere();
 	return (object);

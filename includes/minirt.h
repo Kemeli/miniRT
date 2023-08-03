@@ -32,6 +32,11 @@ typedef struct s_material
 	float	shininess;
 }	t_material;
 
+typedef struct s_plane
+{
+	char	pass;
+}	t_plane;
+
 typedef struct s_sphere
 {
 	t_tuple		center;
@@ -43,8 +48,8 @@ typedef struct s_object
 	char		shape; // s = sphere, p = plane e c = cylinder
 	union
 	{
-		t_sphere		*sphere;
-		// t_palne		*plane;
+		t_sphere	*sphere;
+		t_plane		*plane;
 		// t_cylinder	*cylinder;
 	};
 	t_ray		*saved_ray;
@@ -201,4 +206,8 @@ void			free_camera(t_camera *c);
 t_ray			*ray_for_pixel(t_camera *c, float px, float py);
 void			render(t_data *data);
 char			is_shadowed(t_world *world, t_tuple point);
+t_plane			*create_plane(void);
+t_tuple			local_normal_at(t_object *object, t_tuple local_point);
+
+
 #endif

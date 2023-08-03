@@ -9,6 +9,8 @@ void	free_object(t_object *object)
 		free_ray(object->saved_ray);
 	if (object->shape == 's')
 		free_sphere(object->sphere);
+	if (object->shape == 'p')
+		free(object->plane);
 // 	else if(object->plane)
 // 		free_plane(object->plane);
 // 	else if(object->cylinder)

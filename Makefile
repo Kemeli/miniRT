@@ -55,6 +55,7 @@ SRC				+= ray_for_pixel.c
 SRC				+= render.c
 SRC				+= shadow.c
 SRC				+= object.c
+SRC				+= plane.c
 
 OBJ_DIR			= ./obj
 OBJ				= $(SRC:.c=.o)
