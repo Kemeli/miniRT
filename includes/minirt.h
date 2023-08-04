@@ -34,8 +34,8 @@ typedef struct s_material
 
 typedef struct s_cylinder
 {
-	float	radius;
-	float	height;
+	float	minimum;
+	float	maximum;
 }	t_cylinder;
 
 typedef struct s_plane
