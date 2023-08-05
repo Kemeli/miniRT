@@ -36,6 +36,7 @@ typedef struct s_cylinder
 {
 	float	minimum;
 	float	maximum;
+	char	closed;
 }	t_cylinder;
 
 typedef struct s_plane
@@ -213,7 +214,9 @@ t_ray			*ray_for_pixel(t_camera *c, float px, float py);
 void			render(t_data *data);
 char			is_shadowed(t_world *world, t_tuple point);
 t_plane			*create_plane(void);
+t_intersect		*intersect_plane(t_object *object, t_ray *ray);
 t_tuple			local_normal_at(t_object *object, t_tuple local_point);
 t_cylinder		*create_cylinder(void);
+t_intersect		*intersect_cylinder(t_object *object, t_ray *ray);
 
 #endif

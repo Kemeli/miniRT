@@ -7,5 +7,6 @@ t_cylinder	*create_cylinder(void)
 	cylinder = ft_calloc(1, sizeof(t_cylinder));
 	cylinder->minimum = -INFINITY;
 	cylinder->maximum = INFINITY;
+	cylinder->closed = FALSE;
 	return (cylinder);
 }
