@@ -1,6 +1,6 @@
 #include <minirt.h>
 
-typedef	struct s_aux{
+typedef struct s_aux{
 	t_tuple		sub;
 	t_tuple		forward;
 	t_tuple		normal_up;

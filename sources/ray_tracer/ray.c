@@ -4,7 +4,8 @@ void	free_ray(t_ray *ray)
 {
 	free(ray->origin);
 	free(ray->direction);
-	free(ray);
+	if(ray)
+		free(ray);
 }
 
 t_ray	*create_ray(t_tuple origin, t_tuple direction)

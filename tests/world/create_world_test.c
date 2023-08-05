@@ -20,28 +20,28 @@ MU_TEST(test_default_world)
 	t_tuple c = color(1, 1, 1);
 	t_point_light *light = point_light(p, c);
 
-	t_sphere *s1 = create_sphere();
-	free(s1->material->color);
-	s1->material->color = color(0.8, 1.0, 0.6);
-	s1->material->diffuse = 0.7;
-	s1->material->specular = 0.2;
+	t_object *o1 = create_object('s');
+	free(o1->material->color);
+	o1->material->color = color(0.8, 1.0, 0.6);
+	o1->material->diffuse = 0.7;
+	o1->material->specular = 0.2;
 
-	t_sphere *s2 = create_sphere();
-	free_matrix(s2->transform);
-	s2->transform = scaling(0.5, 0.5, 0.5);
+	t_object *o2 = create_object('s');
+	free_matrix(o2->transform);
+	o2->transform = scaling(0.5, 0.5, 0.5);
 
 	t_world *world = default_world();
 	mu_check(compare_tuples(world->light->position, light->position));
 	mu_check(compare_tuples(world->light->intensity, light->intensity));
 
-	mu_check(compare_tuples(((t_node*)world->head->content)->object->sphere->material->color, s1->material->color));
-	mu_check(compare_floats(((t_node*)world->head->content)->object->sphere->material->diffuse, s1->material->diffuse));
-	mu_check(compare_floats(((t_node*)world->head->content)->object->sphere->material->specular, s1->material->specular));
+	mu_check(compare_tuples(((t_node*)world->head->content)->object->material->color, o1->material->color));
+	mu_check(compare_floats(((t_node*)world->head->content)->object->material->diffuse, o1->material->diffuse));
+	mu_check(compare_floats(((t_node*)world->head->content)->object->material->specular, o1->material->specular));
 
-	mu_check(compare_matrices(((t_node*)world->head->next->content)->object->sphere->transform, s2->transform));
+	mu_check(compare_matrices(((t_node*)world->head->next->content)->object->transform, o2->transform));
 
-	free_sphere(s1);
-	free_sphere(s2);
+	free_object(o1);
+	free_object(o2);
 	free(light->intensity);
 	free(light->position);
 	free(light);

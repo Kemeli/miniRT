@@ -18,23 +18,22 @@ void	free_intersections(t_intersect *list)
 	free(list);
 }
 
-t_intersect	*intersect(t_object *object, t_ray *ray)
+t_intersect	*intersect(t_object **object, t_ray *ray)
 {
 	t_intersect	*intersect;
+	t_matrix	inv;
 
+	if((*object)->saved_ray)
+		free_ray((*object)->saved_ray);
+	inv = inverse((*object)->transform);
+	(*object)->saved_ray = transform_ray(ray, inv);
+	free_matrix(inv);
 	intersect = NULL;
-	if (object->sphere)
-		intersect = intersect_sphere(object, ray);
-
-	/*com calloc os que n receberem memoria vão estar apontando para NULL*/
-	// else if (object->plane)
-	// 	intersect = *intersect_plane(object, ray);
-	// else if (object->cylinder)
-	// 	intersect = *intersect_cylinder(object, ray);
-	// else
-	// {
-	// 	intersect.count = 0;
-	// 	intersect.head = NULL;
-	// }
+	if ((*object)->shape == 's')
+		intersect = intersect_sphere((*object));
+	else if ((*object)->shape == 'p')
+		intersect = intersect_plane((*object), ray);
+	else if ((*object)->shape == 'c')
+		intersect = intersect_cylinder((*object), ray);
 	return (intersect);
 }
