@@ -32,18 +32,37 @@ typedef struct s_material
 	float	shininess;
 }	t_material;
 
+typedef struct s_cylinder
+{
+	float	minimum;
+	float	maximum;
+	char	closed;
+}	t_cylinder;
+
+typedef struct s_plane
+{
+	char	pass;
+}	t_plane;
+
 typedef struct s_sphere
 {
 	t_tuple		center;
 	float		radius;
-	float		**transform;
-	t_material	*material;
-	void		(*change_my_material)(struct s_sphere *s, t_material *m);
 }	t_sphere;
 
 typedef struct s_object
 {
-	t_sphere	*sphere;
+	char		shape; // s = sphere, p = plane e c = cylinder
+	union
+	{
+		t_sphere	*sphere;
+		t_plane		*plane;
+		t_cylinder	*cylinder;
+	};
+	t_ray		*saved_ray;
+	float		**transform;
+	t_material	*material;
+	void		(*change_my_material)(struct s_object *obj, t_material *m);
 }	t_object;
 
 typedef struct s_node
@@ -161,14 +180,14 @@ t_ray			*create_ray(t_tuple origin, t_tuple direction);
 t_tuple			get_point_position(t_ray *ray, float t);
 t_sphere		*create_sphere(void);
 void			free_sphere(t_sphere *s);
-void			change_material(t_sphere *s, t_material *m);
-t_intersect		*intersect_sphere(t_object *object, t_ray *ray);
+void			change_material(t_object *obj, t_material *m);
+t_intersect		*intersect_sphere(t_object *object);
 t_list			*new_intersection(float t, t_object *object);
 void			free_intersections(t_intersect *list);
 t_intersect		*add_intersection_to_list(t_intersect *list, t_node *new);
 t_node			*hit(t_intersect *xs);
 t_ray			*transform_ray(t_ray *ray, t_matrix matrix);
-void			set_transform(t_sphere **sphere, t_matrix translation);
+void			set_transform(t_object **obj, t_matrix translation);
 t_tuple			normal_at(t_object *object, t_tuple point);
 t_tuple			reflect(t_tuple in, t_tuple normal);
 t_point_light	*point_light(t_tuple position, t_tuple intensity);
@@ -179,11 +198,12 @@ void			free_lighting(t_lighting *l);
 void			free_ray(t_ray *ray);
 t_world			*create_world(void);
 t_world			*default_world(void);
+t_object		*create_object(char shape);
 void			free_world(t_world *world);
 t_intersect		*intersect_world(t_world *world, t_ray *ray);
 t_comps			*prepare_computations(t_node *hit, t_ray *ray);
 void			free_comps(t_comps *comps);
-t_intersect		*intersect(t_object *object, t_ray *ray);
+t_intersect		*intersect(t_object **object, t_ray *ray);
 void			free_object(t_object *object);
 t_tuple			shade_hit(t_world *world, t_comps *comps);
 t_tuple			color_at(t_world *w, t_ray *r);
@@ -193,4 +213,10 @@ void			free_camera(t_camera *c);
 t_ray			*ray_for_pixel(t_camera *c, float px, float py);
 void			render(t_data *data);
 char			is_shadowed(t_world *world, t_tuple point);
+t_plane			*create_plane(void);
+t_intersect		*intersect_plane(t_object *object, t_ray *ray);
+t_tuple			local_normal_at(t_object *object, t_tuple local_point);
+t_cylinder		*create_cylinder(void);
+t_intersect		*intersect_cylinder(t_object *object, t_ray *ray);
+
 #endif

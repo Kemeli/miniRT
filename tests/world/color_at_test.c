@@ -40,15 +40,15 @@ MU_TEST(test_the_color_with_an_intersection_behind_the_ray)
 {
 	t_world	*w = default_world();
 	t_node	*outer = (t_node *)w->head->content;
-	outer->object->sphere->material->ambient = 1;
+	outer->object->material->ambient = 1;
 	t_node	*inner = (t_node *)w->head->next->content;
-	inner->object->sphere->material->ambient = 1;
+	inner->object->material->ambient = 1;
 	t_tuple	ray_origin = point(0, 0, 0.75);
 	t_tuple	ray_direction = vector(0, 0, -1);
 	t_ray	*r = create_ray(ray_origin, ray_direction);
 
 	t_tuple c = color_at(w, r);
-	t_tuple expected = inner->object->sphere->material->color;
+	t_tuple expected = inner->object->material->color;
 
 	mu_check(compare_tuples(expected, c));
 

@@ -4,8 +4,7 @@
 MU_TEST(test_hit_intersection_sphere_all_positive_t)
 {
 	t_object *object;
-	object = ft_calloc(1, sizeof(t_object));
-	object->sphere = create_sphere();
+	object = create_object('s');
 
 	t_list *i1 = new_intersection(1, object);
 	t_list *i2 = new_intersection(2, object);
@@ -17,20 +16,13 @@ MU_TEST(test_hit_intersection_sphere_all_positive_t)
 	mu_assert(i->t == 1, "hit->t != 1");
 
 	free_intersections(xs);
-
-	free_matrix(object->sphere->transform);
-	free(object->sphere->material->color);
-	free (object->sphere->material);
-	free(object->sphere->center);
-	free(object->sphere);
-	free(object);
+	free_object(object);
 }
 
 MU_TEST(test_hit_intersection_sphere_has_negative_t)
 {
 	t_object *object;
-	object = ft_calloc(1, sizeof(t_object));
-	object->sphere = create_sphere();
+	object = create_object('s');
 	t_list *i1 = new_intersection(-1, object);
 	t_list *i2 = new_intersection(1, object);
 	t_intersect *xs = ft_calloc(1, sizeof(t_intersect));
@@ -40,21 +32,14 @@ MU_TEST(test_hit_intersection_sphere_has_negative_t)
 	t_node *i = hit(xs);
 	mu_assert(i->t == 1, "hit->t != -1");
 
-	free_matrix(object->sphere->transform);
-	free(object->sphere->material->color);
-	free (object->sphere->material);
-	free(object->sphere->center);
-	free(object->sphere);
-	free(object);
-
+	free_object(object);
 	free_intersections(xs);
 }
 
 MU_TEST(test_hit_intersection_sphere_all_negative_t)
 {
 	t_object *object;
-	object = ft_calloc(1, sizeof(t_object));
-	object->sphere = create_sphere();
+	object = create_object('s');
 	t_list *i1 = new_intersection(-2, object);
 	t_list *i2 = new_intersection(-1, object);
 	t_intersect *xs = ft_calloc(1, sizeof(t_intersect));
@@ -64,21 +49,14 @@ MU_TEST(test_hit_intersection_sphere_all_negative_t)
 	t_node *i = hit(xs);
 	mu_assert(i == NULL, "hit != NULL");
 
-	free_matrix(object->sphere->transform);
-	free(object->sphere->material->color);
-	free (object->sphere->material);
-	free(object->sphere->center);
-	free(object->sphere);
-	free(object);
-
+	free_object(object);
 	free_intersections(xs);
 }
 
 MU_TEST(test_hit_intersection_is_always_lowest_nonnegative_t)
 {
 	t_object *object;
-	object = ft_calloc(1, sizeof(t_object));
-	object->sphere = create_sphere();
+	object = create_object('s');
 	t_list *i1 = new_intersection(5,object);
 	t_list *i2 = new_intersection(7,object);
 	t_list *i3 = new_intersection(-3,object);
@@ -92,13 +70,7 @@ MU_TEST(test_hit_intersection_is_always_lowest_nonnegative_t)
 	t_node *i = hit(xs);
 	mu_assert(i->t == 2, "hit->t != 2");
 
-	free_matrix(object->sphere->transform);
-	free(object->sphere->material->color);
-	free (object->sphere->material);
-	free(object->sphere->center);
-	free(object->sphere);
-	free(object);
-
+	free_object(object);
 	free_intersections(xs);
 }
 

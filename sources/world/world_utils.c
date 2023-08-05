@@ -14,4 +14,5 @@ void	free_world(t_world *world)
 	free(world->light);
 	free(world->head);
 	free(world);
+	world = NULL;
 }

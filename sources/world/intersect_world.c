@@ -9,11 +9,11 @@ t_intersect	*intersect_world(t_world *world, t_ray *ray)
 	t_list		*aux;
 
 	aux = world->head;
-	xs = intersect(((t_node *)aux->content)->object, ray);
+	xs = intersect(&((t_node *)aux->content)->object, ray);
 	aux = aux->next;
 	while (aux)
 	{
-		temp = intersect(((t_node *)aux->content)->object, ray);
+		temp = intersect(&((t_node *)aux->content)->object, ray);
 		ft_lstadd_back(&xs->head, temp->head);
 		free(temp);
 		aux = aux->next;

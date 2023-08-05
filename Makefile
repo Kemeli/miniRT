@@ -54,6 +54,11 @@ SRC				+= camera.c
 SRC				+= ray_for_pixel.c
 SRC				+= render.c
 SRC				+= shadow.c
+SRC				+= object.c
+SRC				+= plane.c
+SRC				+= cylinder.c
+SRC				+= intersect_plane.c
+SRC				+= intersect_cylinder.c
 
 OBJ_DIR			= ./obj
 OBJ				= $(SRC:.c=.o)

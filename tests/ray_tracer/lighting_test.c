@@ -28,10 +28,10 @@ MU_TEST(test_the_default_material)
 	free(m);
 }
 
-MU_TEST(test_a_sphere_has_a_default_material)
+MU_TEST(test_an_object_has_a_default_material)
 {
-	t_sphere *s = create_sphere();
-	t_material *m = s->material;
+	t_object *o = create_object('s');
+	t_material *m = o->material;
 	t_material *expected = material();
 
 	mu_check(compare_tuples(expected->color, m->color));
@@ -40,29 +40,25 @@ MU_TEST(test_a_sphere_has_a_default_material)
 	mu_assert_double_eq(expected->specular, m->specular);
 	mu_assert_double_eq(expected->shininess, m->shininess);
 
-	free_matrix(s->transform);
-	free(s->center);
-	free(s->material->color);
-	free(s->material);
-	free(s);
+	free_object(o);
 	free(expected->color);
 	free(expected);
 }
 
-MU_TEST(test_that_a_sphere_may_be_assigned_a_material)
+MU_TEST(test_that_an_object_may_be_assigned_a_material)
 {
-	t_sphere *s = create_sphere();
+	t_object *o = create_object('s');
 	t_material *m = material();
 
 	m->ambient = 1;
-	s->change_my_material(s, m);
-	mu_check(compare_tuples(m->color, s->material->color));
-	mu_assert_double_eq(m->ambient, s->material->ambient);
-	mu_assert_double_eq(m->diffuse, s->material->diffuse);
-	mu_assert_double_eq(m->specular, s->material->specular);
-	mu_assert_double_eq(m->shininess, s->material->shininess);
+	o->change_my_material(o, m);
+	mu_check(compare_tuples(m->color, o->material->color));
+	mu_assert_double_eq(m->ambient, o->material->ambient);
+	mu_assert_double_eq(m->diffuse, o->material->diffuse);
+	mu_assert_double_eq(m->specular, o->material->specular);
+	mu_assert_double_eq(m->shininess, o->material->shininess);
 
-	free_sphere(s);
+	free_object(o);
 }
 
 MU_TEST(test_lighting_with_the_eye_between_the_light_and_the_surface)
@@ -206,8 +202,8 @@ MU_TEST_SUITE(test_the_phone_reflection_mode)
 {
 	MU_RUN_TEST(test_that_a_point_light_has_a_position_and_intensity);
 	MU_RUN_TEST(test_the_default_material);
-	MU_RUN_TEST(test_a_sphere_has_a_default_material);
-	MU_RUN_TEST(test_that_a_sphere_may_be_assigned_a_material);
+	MU_RUN_TEST(test_an_object_has_a_default_material);
+	MU_RUN_TEST(test_that_an_object_may_be_assigned_a_material);
 	MU_RUN_TEST(test_lighting_with_the_eye_between_the_light_and_the_surface);
 	MU_RUN_TEST(test_lighting_with_the_eye_between_light_and_surface_eye_offset_45_degrees);
 	MU_RUN_TEST(test_lighting_with_the_eye_opposite_surface_light_offset_45_degrees);

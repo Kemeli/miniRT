@@ -16,7 +16,6 @@ t_ray	*ray_for_pixel(t_camera *c, float px, float py)
 	origin = get_origin(inv);
 	sub = subtract(pixel, origin);
 	direction = normalize(sub);
-
 	free_matrix(inv);
 	free(pixel);
 	free(sub);
@@ -45,7 +44,6 @@ t_tuple static	get_pixel(t_camera *c, float px, float py, t_matrix inv)
 	offset_xy[1] = (py + 0.5) * c->pixel_size;
 	world_xy[0] = c->half_width - offset_xy[0];
 	world_xy[1] = c->half_height - offset_xy[1];
-
 	p = point(world_xy[0], world_xy[1], -1);
 	pixel = multiply_matrix_with_tuple(inv, p);
 	free(p);
