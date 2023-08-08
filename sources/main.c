@@ -170,17 +170,45 @@ void	get_scene(t_rt *rt)
 	return ;
 }
 
-// void	validate_A(char *A_line)
-// {
-// 	while (A_line[i] == ' ')
-// 		i++;
-// 	if (ft_isdigit(A_line[i]))
-// 		i++;
-// 	if (A_line[i] != '.')
-// 		i++;
-// 	if (ft_isdigit(A_line[i]))
-// 		i++;
-// }
+char	is_btwen_zero_and_one(char *ratio)
+{
+	if (ft_isdigit(ratio[0]) && ratio[1] == '.' && ft_isdigit(ratio[2]))
+		return (1);
+	return (0);
+}
+
+char	valid_color(char *color)
+{
+	int	i;
+
+	i = 0;
+	while (color[i])
+	{
+		while(ft_isdigit(color[i]) && i < 3)
+			i++;
+		if (color[i] == ',')
+			i++;
+	}
+}
+
+void	validate_A(char *A_line)
+{
+	char	*ratio;
+	int		i;
+	int		j;
+
+	while (A_line[i] && A_line[i] == ' ')
+		i++;
+	j = i + 2;
+	ratio = ft_substr(A_line, i, j);
+	if (!is_btwen_zero_and_one(ratio))
+		error_and_exit("invalid A line");
+	while (A_line[j] && A_line[j] == ' ')
+		j++;
+	if(!valid_color(A_line + j))
+		error_and_exit("invalid A line");
+
+}
 
 int	validate_identifier(char *line)
 {
