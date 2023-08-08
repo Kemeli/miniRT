@@ -23,6 +23,17 @@ t_material	*material(void)
 	return (material);
 }
 
+t_tuple	ligth_vector(t_lighting *l)
+{
+	t_tuple	sub;
+	t_tuple	light_v;
+
+	sub = subtract(l->light->position, l->position);
+	light_v = normalize(sub);
+	free(sub);
+	return (light_v);
+}
+
 void	free_material(t_material *m)
 {
 	free(m->color);

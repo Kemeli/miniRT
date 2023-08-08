@@ -194,6 +194,7 @@ t_point_light	*point_light(t_tuple position, t_tuple intensity);
 t_material		*material(void);
 void			free_material(t_material *m);
 t_tuple			lighting(t_lighting *l);
+t_tuple			ligth_vector(t_lighting *l);
 void			free_lighting(t_lighting *l);
 void			free_ray(t_ray *ray);
 t_world			*create_world(void);

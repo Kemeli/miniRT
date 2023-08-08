@@ -1,5 +1,5 @@
 #include <minirt.h>
-
+/*
 int render_first_scene(t_data *data)
 {
 	t_object	*floor = create_object('p');
@@ -101,4 +101,73 @@ int main(void)
 	free(data.mlx_ptr);
 
 	return (0);
+}
+*/
+
+#include<stdio.h>
+
+typedef struct s_rt
+{
+	char *scene;
+	char cpy_scene[100];
+}	t_rt;
+
+static void	error_and_exit(char *error_message)
+{
+	printf ("ERROR\n");
+	printf ("%s\n", error_message);
+	exit (0);
+}
+
+void	input_validation(int argc)
+{
+	if (argc != 2)
+		error_and_exit("invalid number of arguments");
+}
+
+void	extension_validation(char *scene)
+{
+	char	*extension;
+	extension = ft_strrchr(scene, '.');
+	printf("\n%s\n", extension);
+	if (ft_memcmp(extension, ".rt", 3))
+		error_and_exit("invalid scene extension");
+}
+
+void	get_scene(t_rt *rt)
+{
+	int		fd;
+	int		read_count;
+	char	*buffer;
+
+	fd = open(rt->scene, O_RDONLY);
+	printf("\n%d\n", fd);
+	printf("\n%s\n", rt->scene);
+	if (fd < 0)
+		error_and_exit("couldn't open fd");
+	buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+	read_count = read(fd, buffer, BUFFER_SIZE);
+	while (read_count > 0)
+	{
+		buffer[read_count] = '\0';
+		ft_strlcat(rt->cpy_scene, buffer, 100);
+		read_count = read(fd, buffer, BUFFER_SIZE);
+	}
+	if(rt->cpy_scene[0] == '\0')
+		error_and_exit("scene is empty");
+	if (close(fd) == -1)
+		error_and_exit("couldn't close fd");
+	free(buffer);
+	return ;
+}
+
+int	main(int argc, char **argv)
+{
+	t_rt	rt;
+
+	input_validation(argc);
+	rt.scene = ft_strdup(argv[1]);
+	extension_validation(rt.scene);
+	get_scene(&rt);
+	printf("\n%s\n", rt.cpy_scene);
 }
