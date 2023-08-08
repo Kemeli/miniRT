@@ -145,6 +145,7 @@ t_tuple			point(float x, float y, float z);
 t_tuple			subtract(t_tuple a, t_tuple b);
 t_tuple			negative(t_tuple v);
 char			compare_tuples(t_tuple a, t_tuple b);
+void			ft_swap(void *a, void *b);
 t_tuple			tuple_addition(t_tuple point, t_tuple vector);
 t_tuple			multiply_tuple_by_scalar(
 					t_tuple tuple_a, float times_to_multiply);
