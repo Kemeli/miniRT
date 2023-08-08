@@ -112,6 +112,17 @@ typedef struct s_rt
 	char cpy_scene[100];
 }	t_rt;
 
+enum	e_scene
+{
+	error,
+	A,
+	C,
+	L,
+	sp,
+	pl,
+	cy
+};
+
 static void	error_and_exit(char *error_message)
 {
 	printf ("ERROR\n");
@@ -141,8 +152,6 @@ void	get_scene(t_rt *rt)
 	char	*buffer;
 
 	fd = open(rt->scene, O_RDONLY);
-	printf("\n%d\n", fd);
-	printf("\n%s\n", rt->scene);
 	if (fd < 0)
 		error_and_exit("couldn't open fd");
 	buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
@@ -161,6 +170,54 @@ void	get_scene(t_rt *rt)
 	return ;
 }
 
+// void	validate_A(char *A_line)
+// {
+// 	while (A_line[i] == ' ')
+// 		i++;
+// 	if (ft_isdigit(A_line[i]))
+// 		i++;
+// 	if (A_line[i] != '.')
+// 		i++;
+// 	if (ft_isdigit(A_line[i]))
+// 		i++;
+// }
+
+int	validate_identifier(char *line)
+{
+	if (line && line[0] && line[1] && line[2])
+	{
+		if (line[0] == 'A' && line[1] == ' ')
+			validate_A(line);
+		else if (line[i] == 'C' && line[1] == ' ')
+			return (C);
+		else if (line[i] == 'L' && line[1] == ' ')
+			return (L);
+		else if (line[i] == 's' && line[1] == 'p' && line[2] == ' ')
+			return (sp);
+		else if (line[i] == 'pl' && line[1] == 'l' && line[2] == ' ')
+			return (pl);
+		else if (line[i] == 'cy' && line[1] == 'y' && line[2] == ' ')
+			return (cy);
+	}
+	return (error);
+}
+
+void	validate_scene(t_rt *rt)
+{
+	char		*trimmed;
+	char		**matrix;
+
+	trimmed = ft_strtrim(rt->cpy_scene, " \t\n\v\f\r");
+	matrix = ft_split(rt->cpy_scene, '\n');
+
+	while(matrix[i])
+	{
+		if (!check_identifier(matrix[i]))
+			error_and_exit("invalid identifier");
+		i++;
+	}
+}
+
 int	main(int argc, char **argv)
 {
 	t_rt	rt;
@@ -169,5 +226,6 @@ int	main(int argc, char **argv)
 	rt.scene = ft_strdup(argv[1]);
 	extension_validation(rt.scene);
 	get_scene(&rt);
+	validate_identifier(&rt);
 	printf("\n%s\n", rt.cpy_scene);
 }
