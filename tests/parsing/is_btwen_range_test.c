@@ -56,6 +56,16 @@ MU_TEST(test_validate_1_7_btwen_1_0_and_1_5)
 	mu_check(is_btwen_range("1.7", "1.0", "1.5") == 0);
 }
 
+MU_TEST(test_validate_1_e)
+{
+	mu_check(is_btwen_range("1.e", "1.0", "1.5") == 0);
+}
+
+MU_TEST(test_validate_10)
+{
+	mu_check(is_btwen_range("10", "1.0", "1.5") == 0);
+}
+
 // fazer testes com letras e sem ponto
 
 MU_TEST_SUITE(test_is_btwen_range)
@@ -69,4 +79,6 @@ MU_TEST_SUITE(test_is_btwen_range)
 	MU_RUN_TEST(test_validate__0_9_);
 	MU_RUN_TEST(test_validate_1_3_btwen_1_0_and_1_5);
 	MU_RUN_TEST(test_validate_1_7_btwen_1_0_and_1_5);
+	MU_RUN_TEST(test_validate_1_e);
+	MU_RUN_TEST(test_validate_10);
 }
