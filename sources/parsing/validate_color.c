@@ -23,7 +23,7 @@ char	validate_color(char *color)
 			comma++;
 			i++;
 		}
-		if (comma > 2 || n < 0 || n > 255)
+		if ((comma != 2 && !ft_isdigit(color[i])) || n < 0 || n > 255)
 			return (0);
 		j = i;
 	}
