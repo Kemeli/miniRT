@@ -108,7 +108,7 @@ int main(void)
 
 typedef struct s_rt
 {
-	char *scene;
+	char *scene_name;
 	char cpy_scene[100];
 }	t_rt;
 
@@ -140,7 +140,6 @@ void	extension_validation(char *scene)
 {
 	char	*extension;
 	extension = ft_strrchr(scene, '.');
-	printf("\n%s\n", extension);
 	if (ft_memcmp(extension, ".rt", 3))
 		error_and_exit("invalid scene extension");
 }
@@ -151,7 +150,7 @@ void	get_scene(t_rt *rt)
 	int		read_count;
 	char	*buffer;
 
-	fd = open(rt->scene, O_RDONLY);
+	fd = open(rt->scene_name, O_RDONLY);
 	if (fd < 0)
 		error_and_exit("couldn't open fd");
 	buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
@@ -177,64 +176,66 @@ void	validate_A(char *A_line)
 	int		j;
 	char	*trimmed;
 
-	i = 0;
 	trimmed = ft_strtrim(A_line, " \t\n\v\f\r");
-	j = i + 2;
+	i = 1; //começa no 1 espaço
+	while(trimmed[i] && trimmed[i] == ' ')
+		i++; //percorre outros espaços
+	j = 3;
 	if (trimmed[i] && trimmed[i] == '-')
 		j++;
 	ratio = ft_substr(trimmed, i, j);
-	if (!is_btwen_range(ratio))
-		error_and_exit("invalid A line");
-	while (trimmed[j] && trimmed[j] == ' ')
+	if (!is_btwen_range(ratio, "0", "1"))
+		error_and_exit("invalid A ratio");
+	while (trimmed[i + j] && trimmed[i + j] == ' ')
 		j++;
-	if(!validate_color(trimmed + j))
-		error_and_exit("invalid A line");
+	char val = validate_color(trimmed + (i + j));
+	if(!val)
+		error_and_exit("invalid A color");
 }
 
-int	validate_identifier(char *line)
+void	validate_identifier(char *line)
 {
 	if (line && line[0] && line[1] && line[2])
 	{
 		if (line[0] == 'A' && line[1] == ' ')
 			validate_A(line);
-		else if (line[i] == 'C' && line[1] == ' ')
-			return (C);
-		else if (line[i] == 'L' && line[1] == ' ')
-			return (L);
-		else if (line[i] == 's' && line[1] == 'p' && line[2] == ' ')
-			return (sp);
-		else if (line[i] == 'pl' && line[1] == 'l' && line[2] == ' ')
-			return (pl);
-		else if (line[i] == 'cy' && line[1] == 'y' && line[2] == ' ')
-			return (cy);
+		// else if (line[i] == 'C' && line[1] == ' ')
+		// 	return (C);
+		// else if (line[i] == 'L' && line[1] == ' ')
+		// 	return (L);
+		// else if (line[i] == 's' && line[1] == 'p' && line[2] == ' ')
+		// 	return (sp);
+		// else if (line[i] == 'pl' && line[1] == 'l' && line[2] == ' ')
+		// 	return (pl);
+		// else if (line[i] == 'cy' && line[1] == 'y' && line[2] == ' ')
+		// 	return (cy);
 	}
-	return (error);
 }
 
 void	validate_scene(t_rt *rt)
 {
 	char		*trimmed;
 	char		**matrix;
+	// int			i;
 
+	// i = 0;
 	trimmed = ft_strtrim(rt->cpy_scene, " \t\n\v\f\r");
-	matrix = ft_split(rt->cpy_scene, '\n');
+	matrix = ft_split(trimmed, '\n');
 
-	while(matrix[i])
-	{
-		if (!check_identifier(matrix[i]))
-			error_and_exit("invalid identifier");
-		i++;
-	}
-}
+	// while(matrix[i])
+	// {
+		validate_identifier(matrix[0]);
+	// 	i++;
+	// }
+} //validar mais de uma quebra de linha
 
 int	main(int argc, char **argv)
 {
 	t_rt	rt;
 
 	input_validation(argc);
-	rt.scene = ft_strdup(argv[1]);
-	extension_validation(rt.scene);
+	rt.scene_name = ft_strdup(argv[1]);
+	extension_validation(rt.scene_name);
 	get_scene(&rt);
-	validate_identifier(&rt);
-	printf("\n%s\n", rt.cpy_scene);
+	validate_scene(&rt);
 }
