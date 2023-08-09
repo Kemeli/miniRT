@@ -4,24 +4,26 @@ char	validate_color(char *color)
 {
 	int		i;
 	int		comma;
-	int		num;
+	int		n;
 	char	*str;
 	int		j;
 
 	i = 0;
 	comma = 0;
+	j = 0;
 	while (color && color[i])
 	{
 		while (color && color[i] && ft_isdigit(color[i]) && color[i] != ',')
 			i++;
 		str = ft_substr(color, j, i);
-		num = ft_atoi(str);
+		n = ft_atoi(str);
+		free(str);
 		if (color[i] == ',')
 		{
 			comma++;
 			i++;
 		}
-		if (comma > 2 || num < 0 || num > 255)
+		if (comma > 2 || n < 0 || n > 255)
 			return (0);
 		j = i;
 	}

@@ -170,39 +170,25 @@ void	get_scene(t_rt *rt)
 	return ;
 }
 
-char	valid_color(char *color)
-{
-	int	i;
-
-	i = 0;
-	while (color[i])
-	{
-		while(ft_isdigit(color[i]) && i < 3)
-			i++;
-		if (color[i] == ',')
-			i++;
-	}
-}
-
 void	validate_A(char *A_line)
 {
 	char	*ratio;
 	int		i;
 	int		j;
+	char	*trimmed;
 
-	while (A_line[i] && A_line[i] == ' ')
-		i++;
+	i = 0;
+	trimmed = ft_strtrim(A_line, " \t\n\v\f\r");
 	j = i + 2;
-	if (A_line[i] && A_line[i] == '-')
+	if (trimmed[i] && trimmed[i] == '-')
 		j++;
-	ratio = ft_substr(A_line, i, j);
+	ratio = ft_substr(trimmed, i, j);
 	if (!is_btwen_range(ratio))
 		error_and_exit("invalid A line");
-	while (A_line[j] && A_line[j] == ' ')
+	while (trimmed[j] && trimmed[j] == ' ')
 		j++;
-	if(!valid_color(A_line + j))
+	if(!validate_color(trimmed + j))
 		error_and_exit("invalid A line");
-
 }
 
 int	validate_identifier(char *line)
