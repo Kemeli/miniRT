@@ -106,12 +106,6 @@ int main(void)
 
 #include<stdio.h>
 
-typedef struct s_rt
-{
-	char *scene_name;
-	char cpy_scene[100];
-}	t_rt;
-
 enum	e_scene
 {
 	error,
@@ -169,13 +163,15 @@ void	get_scene(t_rt *rt)
 	return ;
 }
 
-void	validate_A(char *A_line)
+void	validate_A(char *A_line, t_rt *rt)
 {
 	char	*ratio;
 	int		i;
 	int		j;
 	char	*trimmed;
+	char	*color;
 
+	(void)rt;
 	trimmed = ft_strtrim(A_line, " \t\n\v\f\r");
 	i = 1; //começa no 1 espaço
 	while(trimmed[i] && trimmed[i] == ' ')
@@ -188,17 +184,19 @@ void	validate_A(char *A_line)
 		error_and_exit("invalid A ratio");
 	while (trimmed[i + j] && trimmed[i + j] == ' ')
 		j++;
-	char val = validate_color(trimmed + (i + j));
-	if(!val)
+	color = validate_color(trimmed + (i + j));
+	if(!color)
 		error_and_exit("invalid A color");
+	// else
+	// 	rt->lighting->material->color = tranform_tuple(color); //???? teria q transformar em tuple antes
 }
 
-void	validate_identifier(char *line)
+void	validate_identifier(char *line, t_rt *rt)
 {
 	if (line && line[0] && line[1] && line[2])
 	{
 		if (line[0] == 'A' && line[1] == ' ')
-			validate_A(line);
+			validate_A(line, rt);
 		// else if (line[i] == 'C' && line[1] == ' ')
 		// 	return (C);
 		// else if (line[i] == 'L' && line[1] == ' ')
@@ -224,7 +222,7 @@ void	validate_scene(t_rt *rt)
 
 	// while(matrix[i])
 	// {
-		validate_identifier(matrix[0]);
+		validate_identifier(matrix[0], rt);
 	// 	i++;
 	// }
 } //validar mais de uma quebra de linha

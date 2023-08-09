@@ -139,6 +139,12 @@ typedef struct s_data
 	t_image		*img;
 }t_data;
 
+typedef struct s_rt
+{
+	char	*scene_name;
+	char	cpy_scene[100];
+}	t_rt;
+
 t_tuple			tuple(float x, float y, float z, float w);
 t_tuple			vector(float x, float y, float z);
 t_tuple			point(float x, float y, float z);
@@ -221,6 +227,6 @@ t_tuple			local_normal_at(t_object *object, t_tuple local_point);
 t_cylinder		*create_cylinder(void);
 t_intersect		*intersect_cylinder(t_object *object, t_ray *ray);
 char			is_btwen_range(char *ratio, char *r0, char *r1);
-char			validate_color(char *color);
+char			*validate_color(char *color);
 
 #endif
