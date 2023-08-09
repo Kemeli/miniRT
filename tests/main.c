@@ -43,6 +43,8 @@
 #include "object/shape_test.c"
 #include "object/plane_test.c"
 #include "object/cylinder_test.c"
+#include "parsing/is_btwen_range_test.c"
+#include "parsing/validate_color_test.c"
 
 int	copy_size;
 
@@ -107,6 +109,8 @@ int	main()
 	MU_RUN_SUITE(test_shapes);
 	MU_RUN_SUITE(test_plane);
 	MU_RUN_SUITE(test_cylinder);
+	MU_RUN_SUITE(test_is_btwen_range);
+	MU_RUN_SUITE(test_validate_color);
 
 
 	MU_REPORT();

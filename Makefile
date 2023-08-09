@@ -59,6 +59,8 @@ SRC				+= plane.c
 SRC				+= cylinder.c
 SRC				+= intersect_plane.c
 SRC				+= intersect_cylinder.c
+SRC				+= is_btwen_range.c
+SRC				+= validate_color.c
 
 OBJ_DIR			= ./obj
 OBJ				= $(SRC:.c=.o)
@@ -75,6 +77,7 @@ VPATH			+= ./sources/ray_tracer
 VPATH			+= ./sources/world
 VPATH			+= ./sources/objects
 VPATH			+= ./sources/shadow
+VPATH			+= ./sources/parsing
 VPATH			+= ./lib/libft
 
 .DEFAULT_GOAL	= all

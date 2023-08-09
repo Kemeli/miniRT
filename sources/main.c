@@ -170,13 +170,6 @@ void	get_scene(t_rt *rt)
 	return ;
 }
 
-char	is_btwen_zero_and_one(char *ratio)
-{
-	if (ft_isdigit(ratio[0]) && ratio[1] == '.' && ft_isdigit(ratio[2]))
-		return (1);
-	return (0);
-}
-
 char	valid_color(char *color)
 {
 	int	i;
@@ -200,8 +193,10 @@ void	validate_A(char *A_line)
 	while (A_line[i] && A_line[i] == ' ')
 		i++;
 	j = i + 2;
+	if (A_line[i] && A_line[i] == '-')
+		j++;
 	ratio = ft_substr(A_line, i, j);
-	if (!is_btwen_zero_and_one(ratio))
+	if (!is_btwen_range(ratio))
 		error_and_exit("invalid A line");
 	while (A_line[j] && A_line[j] == ' ')
 		j++;
