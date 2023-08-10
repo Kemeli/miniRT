@@ -143,6 +143,7 @@ typedef struct s_rt
 {
 	char	*scene_name;
 	char	cpy_scene[100];
+	t_tuple	A_color;
 }	t_rt;
 
 t_tuple			tuple(float x, float y, float z, float w);

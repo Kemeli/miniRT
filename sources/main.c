@@ -162,6 +162,34 @@ void	get_scene(t_rt *rt)
 	free(buffer);
 	return ;
 }
+//lembrar que as funções estão lidaando com numeros de  a 1
+int	get_num_len(char *str, int i)
+{
+	while(str[i] != ',')
+		i++;
+	return (i);
+}
+
+t_tuple	char_to_color(char *str)
+{
+	char	*r;
+	char	*g;
+	char	*b;
+	int		first_len;
+	int		sec_len;
+	t_tuple	rgb;
+
+	first_len = get_num_len(str, 0);
+	r = ft_substr(str, 0, first_len);
+	sec_len = get_num_len(str, first_len + 1);
+	g = ft_substr(str, first_len + 1, sec_len);
+	b = ft_substr(str, sec_len + 1, ft_strlen(str));
+	rgb = color(ft_atof(r) / 255, ft_atof(g) / 255, ft_atof(b) / 255);
+	free(r);
+	free(g);
+	free(b);
+	return (rgb);
+}
 
 void	validate_A(char *A_line, t_rt *rt)
 {
@@ -171,23 +199,36 @@ void	validate_A(char *A_line, t_rt *rt)
 	char	*trimmed;
 	char	*color;
 
-	(void)rt;
 	trimmed = ft_strtrim(A_line, " \t\n\v\f\r");
-	i = 1; //começa no 1 espaço
+	i = 1; //começa no 1 espaço depois do A
 	while(trimmed[i] && trimmed[i] == ' ')
 		i++; //percorre outros espaços
 	j = 3;
 	ratio = ft_substr(trimmed, i, j);
-	if (!is_btwen_range(ratio + j, "0", "1"))
+	if (!is_btwen_range(ratio, "0", "1"))
 		error_and_exit("invalid A ratio");
+	printf("\nA_ratio: %s\n", ratio);
 	while (trimmed[i + j] && trimmed[i + j] == ' ')
 		j++;
 	color = validate_color(trimmed + (i + j));
 	if(!color)
 		error_and_exit("invalid A color");
-	// else
-	// 	rt->lighting->material->color = tranform_tuple(color); //???? teria q transformar em tuple antes
+	rt->A_color = char_to_color(color);
+	printf("\nA_color: %f, %f, %f\n", rt->A_color[0], rt->A_color[1], rt->A_color[2]);
+	free(trimmed);
 }
+
+// void	validate_C(char *C_line, t_rt *rt)
+// {
+// 	char	*trimmed;
+// 	int		i;
+
+// 	trimmed = ft_strtrim(C_line, " \t\n\v\f\r");
+// 	i = 1;
+// 	while(trimmed[i] && trimmed[i] == ' ')
+// 		i++;
+
+// }
 
 void	validate_identifier(char *line, t_rt *rt)
 {
@@ -196,7 +237,7 @@ void	validate_identifier(char *line, t_rt *rt)
 		if (line[0] == 'A' && line[1] == ' ')
 			validate_A(line, rt);
 		// else if (line[i] == 'C' && line[1] == ' ')
-		// 	return (C);
+		// 	validate_C(line, rt);
 		// else if (line[i] == 'L' && line[1] == ' ')
 		// 	return (L);
 		// else if (line[i] == 's' && line[1] == 'p' && line[2] == ' ')
@@ -235,3 +276,5 @@ int	main(int argc, char **argv)
 	get_scene(&rt);
 	validate_scene(&rt);
 }
+
+//lighting é inicializado com os valores passados por parametro
