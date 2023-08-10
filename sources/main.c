@@ -162,34 +162,6 @@ void	get_scene(t_rt *rt)
 	free(buffer);
 	return ;
 }
-//lembrar que as funções estão lidaando com numeros de  a 1
-int	get_num_len(char *str, int i)
-{
-	while(str[i] != ',')
-		i++;
-	return (i);
-}
-
-t_tuple	char_to_color(char *str)
-{
-	char	*r;
-	char	*g;
-	char	*b;
-	int		first_len;
-	int		sec_len;
-	t_tuple	rgb;
-
-	first_len = get_num_len(str, 0);
-	r = ft_substr(str, 0, first_len);
-	sec_len = get_num_len(str, first_len + 1);
-	g = ft_substr(str, first_len + 1, sec_len);
-	b = ft_substr(str, sec_len + 1, ft_strlen(str));
-	rgb = color(ft_atof(r) / 255, ft_atof(g) / 255, ft_atof(b) / 255);
-	free(r);
-	free(g);
-	free(b);
-	return (rgb);
-}
 
 void	validate_A(char *A_line, t_rt *rt)
 {

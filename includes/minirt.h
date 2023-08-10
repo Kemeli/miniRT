@@ -230,5 +230,6 @@ t_intersect		*intersect_cylinder(t_object *object, t_ray *ray);
 float			is_btwen_range(char *ratio, char *r0, char *r1);
 char			*validate_color(char *color);
 float			ft_atof(const char *str);
+t_tuple			char_to_color(char *str);
 
 #endif

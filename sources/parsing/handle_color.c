@@ -1,5 +1,32 @@
 #include <minirt.h>
 
+int	get_num_len(char *str, int i)
+{
+	while(str[i] != ',')
+		i++;
+	return (i);
+}
+
+t_tuple	char_to_color(char *str)
+{
+	char	*r;
+	char	*g;
+	char	*b;
+	t_tuple	rgb;
+	int		i;
+
+	i = get_num_len(str, 0);
+	r = ft_substr(str, 0, i);
+	g = ft_substr(str, i + 1, get_num_len(str, i + 1));
+	i = get_num_len(str, i + 1);
+	b = ft_substr(str, i + 1, ft_strlen(str));
+	rgb = color(ft_atof(r) / 255, ft_atof(g) / 255, ft_atof(b) / 255);
+	free(r);
+	free(g);
+	free(b);
+	return (rgb);
+}
+
 static int	get_number(char *color, int i, int j)
 {
 	char	*str;

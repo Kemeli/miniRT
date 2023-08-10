@@ -62,6 +62,8 @@ SRC				+= intersect_cylinder.c
 SRC				+= is_btwen_range.c
 SRC				+= validate_color.c
 SRC				+= ft_atof.c
+SRC				+= handle_color.c
+
 
 OBJ_DIR			= ./obj
 OBJ				= $(SRC:.c=.o)
