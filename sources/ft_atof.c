@@ -53,3 +53,4 @@ float	ft_atof(const char *str)
 	result = aux.sign * result / aux.frac_pow;
 	return (result);
 }
+
