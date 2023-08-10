@@ -61,6 +61,7 @@ SRC				+= intersect_plane.c
 SRC				+= intersect_cylinder.c
 SRC				+= is_btwen_range.c
 SRC				+= validate_color.c
+SRC				+= ft_atof.c
 
 OBJ_DIR			= ./obj
 OBJ				= $(SRC:.c=.o)

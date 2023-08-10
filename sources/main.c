@@ -177,10 +177,8 @@ void	validate_A(char *A_line, t_rt *rt)
 	while(trimmed[i] && trimmed[i] == ' ')
 		i++; //percorre outros espaços
 	j = 3;
-	if (trimmed[i] && trimmed[i] == '-')
-		j++;
 	ratio = ft_substr(trimmed, i, j);
-	if (!is_btwen_range(ratio, "0", "1"))
+	if (!is_btwen_range(ratio + j, "0", "1"))
 		error_and_exit("invalid A ratio");
 	while (trimmed[i + j] && trimmed[i + j] == ' ')
 		j++;

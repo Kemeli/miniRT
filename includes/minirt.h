@@ -226,7 +226,8 @@ t_intersect		*intersect_plane(t_object *object, t_ray *ray);
 t_tuple			local_normal_at(t_object *object, t_tuple local_point);
 t_cylinder		*create_cylinder(void);
 t_intersect		*intersect_cylinder(t_object *object, t_ray *ray);
-char			is_btwen_range(char *ratio, char *r0, char *r1);
+float			is_btwen_range(char *ratio, char *r0, char *r1);
 char			*validate_color(char *color);
+float			ft_atof(const char *str);
 
 #endif
