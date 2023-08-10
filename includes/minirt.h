@@ -233,5 +233,6 @@ char			*validate_color(char *color);
 float			ft_atof(const char *str);
 t_tuple			char_to_color(char *str);
 t_tuple			validate_coordinates(char *str);
+t_tuple			validate_normal(char *str);
 
 #endif

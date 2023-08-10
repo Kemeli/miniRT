@@ -46,6 +46,7 @@
 #include "parsing/is_btwen_range_test.c"
 #include "parsing/validate_color_test.c"
 #include "parsing/coordinates_test.c"
+#include "parsing/validate_normal_test.c"
 
 int	copy_size;
 
@@ -113,6 +114,7 @@ int	main()
 	MU_RUN_SUITE(test_is_btwen_range);
 	MU_RUN_SUITE(test_validate_color);
 	MU_RUN_SUITE(test_coordinates);
+	MU_RUN_SUITE(test_validate_normal_parsing);
 
 
 	MU_REPORT();

@@ -63,6 +63,7 @@ SRC				+= is_btwen_range.c
 SRC				+= ft_atof.c
 SRC				+= color_handler.c
 SRC				+= coordinates_handler.c
+SRC				+= validate_normal.c
 
 
 OBJ_DIR			= ./obj
