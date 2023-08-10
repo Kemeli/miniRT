@@ -177,30 +177,38 @@ void	validate_A(char *A_line, t_rt *rt)
 		i++; //percorre outros espaços
 	j = 3;
 	ratio = ft_substr(trimmed, i, j);
-	if (!is_btwen_range(ratio, "0", "1"))
+	if (!is_btwen_range(ratio, "0", "1"))// falta pegar o valor do float q é retornado aqui
 		error_and_exit("invalid A ratio");
-	printf("\nA_ratio: %s\n", ratio);
 	while (trimmed[i + j] && trimmed[i + j] == ' ')
 		j++;
 	color = validate_color(trimmed + (i + j));
 	if(!color)
 		error_and_exit("invalid A color");
 	rt->A_color = char_to_color(color);
-	printf("\nA_color: %f, %f, %f\n", rt->A_color[0], rt->A_color[1], rt->A_color[2]);
 	free(trimmed);
 }
 
-// void	validate_C(char *C_line, t_rt *rt)
-// {
-// 	char	*trimmed;
-// 	int		i;
+void	validate_C(char *C_line, t_rt *rt)
+{
+	char	*trimmed;
+	int		i;
+	int		j;
+	char	*sub;
+	t_tuple	coordinates;
 
-// 	trimmed = ft_strtrim(C_line, " \t\n\v\f\r");
-// 	i = 1;
-// 	while(trimmed[i] && trimmed[i] == ' ')
-// 		i++;
-
-// }
+	trimmed = ft_strtrim(C_line, " \t\n\v\f\r");
+	i = 1;
+	while(trimmed[i] && trimmed[i] == ' ')
+		i++;
+	j = i;
+	while(trimmed[j] && trimmed[j] != ' ')
+		j++;
+	sub = ft_substr(trimmed, i, j - i);
+	coordinates = validate_coordinates(sub);
+	if (!coordinates)
+		error_and_exit("invalid C coordinates");
+	rt->C_coordinates = coordinates;
+}
 
 void	validate_identifier(char *line, t_rt *rt)
 {
@@ -208,8 +216,8 @@ void	validate_identifier(char *line, t_rt *rt)
 	{
 		if (line[0] == 'A' && line[1] == ' ')
 			validate_A(line, rt);
-		// else if (line[i] == 'C' && line[1] == ' ')
-		// 	validate_C(line, rt);
+		else if (line[0] == 'C' && line[1] == ' ') //dar trim em todos os line antes dessa verificação
+			validate_C(line, rt);
 		// else if (line[i] == 'L' && line[1] == ' ')
 		// 	return (L);
 		// else if (line[i] == 's' && line[1] == 'p' && line[2] == ' ')
@@ -234,6 +242,7 @@ void	validate_scene(t_rt *rt)
 	// while(matrix[i])
 	// {
 		validate_identifier(matrix[0], rt);
+		validate_identifier(matrix[1], rt);
 	// 	i++;
 	// }
 } //validar mais de uma quebra de linha

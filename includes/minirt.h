@@ -144,6 +144,7 @@ typedef struct s_rt
 	char	*scene_name;
 	char	cpy_scene[100];
 	t_tuple	A_color;
+	t_tuple	C_coordinates;
 }	t_rt;
 
 t_tuple			tuple(float x, float y, float z, float w);
@@ -231,5 +232,6 @@ float			is_btwen_range(char *ratio, char *r0, char *r1);
 char			*validate_color(char *color);
 float			ft_atof(const char *str);
 t_tuple			char_to_color(char *str);
+t_tuple			validate_coordinates(char *str);
 
 #endif
