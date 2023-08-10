@@ -64,6 +64,7 @@ SRC				+= ft_atof.c
 SRC				+= color_handler.c
 SRC				+= coordinates_handler.c
 SRC				+= validate_normal.c
+SRC				+= validate_angle.c
 
 
 OBJ_DIR			= ./obj
