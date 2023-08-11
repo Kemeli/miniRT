@@ -134,7 +134,7 @@ void	extension_validation(char *scene)
 {
 	char	*extension;
 	extension = ft_strrchr(scene, '.');
-	if (ft_memcmp(extension, ".rt", 3))
+	if (!extension || ft_memcmp(extension, ".rt", 3))
 		error_and_exit("invalid scene extension");
 }
 
@@ -188,26 +188,50 @@ void	validate_A(char *A_line, t_rt *rt)
 	free(trimmed);
 }
 
+int	go_through_space(int index, char *str)
+{
+	while(str[index] && str[index] == ' ')
+		index++;
+	return (index);
+}
+
+int	go_through_char(int index, char *str)
+{
+	while(str[index] && str[index] != ' ')
+		index++;
+	return (index);
+}
+
 void	validate_C(char *C_line, t_rt *rt)
 {
 	char	*trimmed;
 	int		i;
 	int		j;
 	char	*sub;
-	t_tuple	coordinates;
 
 	trimmed = ft_strtrim(C_line, " \t\n\v\f\r");
 	i = 1;
-	while(trimmed[i] && trimmed[i] == ' ')
-		i++;
-	j = i;
-	while(trimmed[j] && trimmed[j] != ' ')
-		j++;
+	i = go_through_space(i, trimmed);
+	j = go_through_char(i, trimmed);
 	sub = ft_substr(trimmed, i, j - i);
-	coordinates = validate_coordinates(sub);
-	if (!coordinates)
+	rt->C_coordinates = validate_coordinates(sub);
+	free(sub);
+	if(!rt->C_coordinates)
 		error_and_exit("invalid C coordinates");
-	rt->C_coordinates = coordinates;
+	i = go_through_space(j, trimmed);
+	j = go_through_char(i, trimmed);
+	sub = ft_substr(trimmed, i, j - i);
+	rt->C_normal = validate_normal(sub);
+	free(sub);
+	if(!rt->C_normal)
+		error_and_exit("invalid C normal");
+	i = go_through_space(j, trimmed);
+	j = go_through_char(i, trimmed);
+	sub = ft_substr(trimmed, i, j - i);
+	rt->C_fov = validate_angle(sub);
+	free(sub);
+	if(!rt->C_fov)
+		error_and_exit("invalid C fov");
 }
 
 void	validate_identifier(char *line, t_rt *rt)

@@ -145,6 +145,8 @@ typedef struct s_rt
 	char	cpy_scene[100];
 	t_tuple	A_color;
 	t_tuple	C_coordinates;
+	t_tuple	C_normal;
+	float	C_fov;
 }	t_rt;
 
 t_tuple			tuple(float x, float y, float z, float w);
