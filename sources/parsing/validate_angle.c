@@ -7,6 +7,8 @@ float	validate_angle(char *angle)
 	float	f_angle;
 
 	i = 0;
+	if (angle[0] == '-' || ft_strchr(angle, ','))
+		return (-1);
 	while (ft_isdigit(angle[i]))
 		i++;
 	if (angle[i] == '.')
@@ -17,6 +19,6 @@ float	validate_angle(char *angle)
 	f_angle = ft_atof(s_angle);
 	free(s_angle);
 	if (f_angle < 0 || f_angle > 180)
-		return (0);
+		return (-1);
 	return (f_angle);
 }
