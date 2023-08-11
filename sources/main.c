@@ -117,13 +117,6 @@ enum	e_scene
 	cy
 };
 
-static void	error_and_exit(char *error_message)
-{
-	printf ("ERROR\n");
-	printf ("%s\n", error_message);
-	exit (0);
-}
-
 void	input_validation(int argc)
 {
 	if (argc != 2)
@@ -138,165 +131,25 @@ void	extension_validation(char *scene)
 		error_and_exit("invalid scene extension");
 }
 
-void	get_scene(t_rt *rt)
+void	free_rt(t_rt *rt)
 {
-	int		fd;
-	int		read_count;
-	char	*buffer;
-
-	fd = open(rt->scene_name, O_RDONLY);
-	if (fd < 0)
-		error_and_exit("couldn't open fd");
-	buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
-	read_count = read(fd, buffer, BUFFER_SIZE);
-	while (read_count > 0)
-	{
-		buffer[read_count] = '\0';
-		ft_strlcat(rt->cpy_scene, buffer, 100);
-		read_count = read(fd, buffer, BUFFER_SIZE);
-	}
-	if(rt->cpy_scene[0] == '\0')
-		error_and_exit("scene is empty");
-	if (close(fd) == -1)
-		error_and_exit("couldn't close fd");
-	free(buffer);
-	return ;
+	free(rt->scene_name);
+	free(rt->A_color);
+	free(rt->C_coordinates);
+	free(rt->C_normal);
+	free(rt);
 }
-
-void	validate_A(char *A_line, t_rt *rt)
-{
-	char	*ratio;
-	int		i;
-	int		j;
-	char	*trimmed;
-	char	*color;
-
-	trimmed = ft_strtrim(A_line, " \t\n\v\f\r");
-	i = 1; //começa no 1 espaço depois do A
-	while(trimmed[i] && trimmed[i] == ' ')
-		i++; //percorre outros espaços
-	j = 3;
-	ratio = ft_substr(trimmed, i, j);
-	if (!is_btwen_range(ratio, "0", "1"))// falta pegar o valor do float q é retornado aqui
-		error_and_exit("invalid A ratio");
-	while (trimmed[i + j] && trimmed[i + j] == ' ')
-		j++;
-	color = validate_color(trimmed + (i + j));
-	if(!color)
-		error_and_exit("invalid A color");
-	rt->A_color = char_to_color(color);
-	free(trimmed);
-}
-
-int	go_through_space(int index, char *str)
-{
-	while(str[index] && str[index] == ' ')
-		index++;
-	return (index);
-}
-
-int	go_through_char(int index, char *str)
-{
-	while(str[index] && str[index] != ' ')
-		index++;
-	return (index);
-}
-
-void	validate_C_element(char *str, char type, t_rt *rt)
-{
-	if (type == 'c')
-	{
-		rt->C_coordinates =  validate_coordinates(str);
-		if (!rt->C_coordinates)
-			error_and_exit("invalid C coordinates");
-	}
-	else if (type == 'n')
-	{
-		rt->C_normal = validate_normal(str);
-		if (!rt->C_normal)
-			error_and_exit("invalid C normal");
-	}
-	else if (type == 'a')
-	{
-		rt->C_fov = validate_angle(str);
-		if (!rt->C_fov)
-			error_and_exit("invalid C fov");
-	}
-	free(str);
-}
-
-void	validate_C(char *C_line, t_rt *rt)
-{
-	char	*str;
-	int		i;
-	int		j;
-	char	*sub;
-
-	str = ft_strtrim(C_line, " \t\n\v\f\r");
-	i = 1;
-	i = go_through_space(i, str);
-	j = go_through_char(i, str);
-	sub = ft_substr(str, i, j - i);
-	validate_C_element(sub, 'c', rt);
-	i = go_through_space(j, str);
-	j = go_through_char(i, str);
-	sub = ft_substr(str, i, j - i);
-	validate_C_element(sub, 'n', rt);
-	i = go_through_space(j, str);
-	j = go_through_char(i, str);
-	sub = ft_substr(str, i, j - i);
-	validate_C_element(sub, 'a', rt);
-	// printf("C_coordinates: %f %f %f\n", rt->C_coordinates[0], rt->C_coordinates[1], rt->C_coordinates[2]);
-	// printf("C_normal: %f %f %f\n", rt->C_normal[0], rt->C_normal[1], rt->C_normal[2]);
-	// printf("C_fov: %f\n", rt->C_fov);
-}
-
-void	validate_identifier(char *line, t_rt *rt)
-{
-	if (line && line[0] && line[1] && line[2])
-	{
-		if (line[0] == 'A' && line[1] == ' ')
-			validate_A(line, rt);
-		else if (line[0] == 'C' && line[1] == ' ') //dar trim em todos os line antes dessa verificação
-			validate_C(line, rt);
-		// else if (line[i] == 'L' && line[1] == ' ')
-		// 	return (L);
-		// else if (line[i] == 's' && line[1] == 'p' && line[2] == ' ')
-		// 	return (sp);
-		// else if (line[i] == 'pl' && line[1] == 'l' && line[2] == ' ')
-		// 	return (pl);
-		// else if (line[i] == 'cy' && line[1] == 'y' && line[2] == ' ')
-		// 	return (cy);
-	}
-}
-
-void	validate_scene(t_rt *rt)
-{
-	char		*trimmed;
-	char		**matrix;
-	// int			i;
-
-	// i = 0;
-	trimmed = ft_strtrim(rt->cpy_scene, " \t\n\v\f\r");
-	matrix = ft_split(trimmed, '\n');
-
-	// while(matrix[i])
-	// {
-		validate_identifier(matrix[0], rt);
-		validate_identifier(matrix[1], rt);
-	// 	i++;
-	// }
-} //validar mais de uma quebra de linha
 
 int	main(int argc, char **argv)
 {
-	t_rt	rt;
+	t_rt	*rt;
 
+	rt = ft_calloc(1, sizeof(t_rt));
 	input_validation(argc);
-	rt.scene_name = ft_strdup(argv[1]);
-	extension_validation(rt.scene_name);
-	get_scene(&rt);
-	validate_scene(&rt);
+	rt->scene_name = ft_strdup(argv[1]);
+	extension_validation(rt->scene_name);
+	validate_scene(rt);
+	free_rt(rt);
 }
 
 //lighting é inicializado com os valores passados por parametro

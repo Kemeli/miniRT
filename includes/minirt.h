@@ -143,7 +143,10 @@ typedef struct s_rt
 {
 	char	*scene_name;
 	char	cpy_scene[100];
+
 	t_tuple	A_color;
+	float	A_ratio;
+
 	t_tuple	C_coordinates;
 	t_tuple	C_normal;
 	float	C_fov;
@@ -237,5 +240,13 @@ t_tuple			char_to_color(char *str);
 t_tuple			validate_coordinates(char *str);
 t_tuple			validate_normal(char *str);
 float			validate_angle(char *angle);
+void			validate_C(char *C_line, t_rt *rt);
+int				skip_spaces(int index, char *str);
+int				go_through_char(int index, char *str);
+void			error_and_exit(char *error_message);
+void			validate_A(char *A_line, t_rt *rt);
+void			validate_scene(t_rt *rt);
+void			free_split(char **split);
+
 
 #endif

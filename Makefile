@@ -65,7 +65,10 @@ SRC				+= color_handler.c
 SRC				+= coordinates_handler.c
 SRC				+= validate_normal.c
 SRC				+= validate_angle.c
-
+SRC				+= validate_C.c
+SRC				+= validate_A.c
+SRC				+= validation_utils.c
+SRC				+= scene_validation.c
 
 OBJ_DIR			= ./obj
 OBJ				= $(SRC:.c=.o)
@@ -83,6 +86,7 @@ VPATH			+= ./sources/world
 VPATH			+= ./sources/objects
 VPATH			+= ./sources/shadow
 VPATH			+= ./sources/parsing
+VPATH			+= ./sources/parsing/elements
 VPATH			+= ./lib/libft
 
 .DEFAULT_GOAL	= all
