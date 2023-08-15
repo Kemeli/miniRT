@@ -71,6 +71,7 @@ SRC				+= validate_L.c
 SRC				+= utils_validations.c
 SRC				+= scene_validation.c
 SRC				+= utils_parsing.c
+SRC				+= is_float.c
 
 OBJ_DIR			= ./obj
 OBJ				= $(SRC:.c=.o)
