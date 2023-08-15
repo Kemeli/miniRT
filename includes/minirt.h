@@ -150,7 +150,12 @@ typedef struct s_rt
 	t_tuple	C_coordinates;
 	t_tuple	C_normal;
 	float	C_fov;
+
+	t_tuple	L_coordinates;
+	t_tuple	L_color;
+	float	L_brightness;
 }	t_rt;
+//tuples são float e as cores são int, pode dar erro
 
 t_tuple			tuple(float x, float y, float z, float w);
 t_tuple			vector(float x, float y, float z);
@@ -234,7 +239,7 @@ t_tuple			local_normal_at(t_object *object, t_tuple local_point);
 t_cylinder		*create_cylinder(void);
 t_intersect		*intersect_cylinder(t_object *object, t_ray *ray);
 float			is_btwen_range(char *ratio, char *r0, char *r1);
-char			*validate_color(char *color);
+t_tuple			validate_color(char *str);
 float			ft_atof(const char *str);
 t_tuple			char_to_color(char *str);
 t_tuple			validate_coordinates(char *str);
@@ -247,6 +252,9 @@ void			error_and_exit(char *error_message);
 void			validate_A(char *A_line, t_rt *rt);
 void			validate_scene(t_rt *rt);
 void			free_split(char **split);
-
+void			validate_L(char *line, t_rt *rt);
+int				count_comma(char *str, int *i, int comma);
+float			get_float(char *str, int i, int j);
+int				go_through_num(char *str, int i);
 
 #endif

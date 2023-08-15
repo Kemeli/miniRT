@@ -6,7 +6,6 @@ void	validate_A(char *A_line, t_rt *rt)
 	int		j;
 	char	*sub;
 	char	*str;
-	char	*color;
 
 	str = ft_strtrim(A_line, " \t\n\v\f\r");
 	i = 1;
@@ -19,10 +18,9 @@ void	validate_A(char *A_line, t_rt *rt)
 	free(sub);
 	while (str[i + j] && str[i + j] == ' ')
 		j++;
-	color = validate_color(str + (i + j));
-	if(!color)
+	rt->A_color = validate_color(str + (i + j));
+	if(!rt->A_color)
 		error_and_exit("invalid A color");
-	rt->A_color = char_to_color(color);
 	// printf("A_color: %f %f %f\n", rt->A_color[0], rt->A_color[1], rt->A_color[2]);
 	// printf("A_ratio: %f\n", rt->A_ratio);
 	free(str);

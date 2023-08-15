@@ -137,6 +137,8 @@ void	free_rt(t_rt *rt)
 	free(rt->A_color);
 	free(rt->C_coordinates);
 	free(rt->C_normal);
+	free(rt->L_coordinates);
+	free(rt->L_color);
 	free(rt);
 }
 

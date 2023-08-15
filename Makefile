@@ -67,8 +67,10 @@ SRC				+= validate_normal.c
 SRC				+= validate_angle.c
 SRC				+= validate_C.c
 SRC				+= validate_A.c
+SRC				+= validate_L.c
 SRC				+= validation_utils.c
 SRC				+= scene_validation.c
+SRC				+= utils_parsing.c
 
 OBJ_DIR			= ./obj
 OBJ				= $(SRC:.c=.o)
