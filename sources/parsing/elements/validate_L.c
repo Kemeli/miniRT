@@ -2,12 +2,12 @@
 
 static void	validate_L_element(char *str, char type, t_rt *rt)
 {
-	if (type == 'c')
-	{
-		rt->L_color = validate_color(str);
-		if (!rt->L_color)
-			error_and_exit("invalid A color");
-	}
+	// if (type == 'c')
+	// {
+	// 	rt->L_color = validate_color(str);
+	// 	if (!rt->L_color)
+	// 		error_and_exit("invalid A color");
+	// }
 	else if (type == 'l')
 	{
 		rt->L_coordinates = validate_coordinates(str);
@@ -40,10 +40,10 @@ void	validate_L(char *line, t_rt *rt)
 	j = go_through_char(i, str);
 	sub = ft_substr(str, i, j - i);
 	validate_L_element(sub, 'b', rt);
-	i = skip_spaces(j, str);
-	j = go_through_char(i, str);
-	sub = ft_substr(str, i, j - i);
-	validate_L_element(sub, 'c', rt);
+	// i = skip_spaces(j, str);
+	// j = go_through_char(i, str);
+	// sub = ft_substr(str, i, j - i);
+	// validate_L_element(sub, 'c', rt);
 	// printf("\nL_coordinates: %f %f %f\n", rt->L_coordinates[0], rt->L_coordinates[1], rt->L_coordinates[2]);
 	// printf("L_brightness: %f\n", rt->L_brightness);
 	// printf("L_color: %f %f %f\n", rt->L_color[0], rt->L_color[1], rt->L_color[2]);
