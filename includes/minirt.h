@@ -256,5 +256,6 @@ void			validate_L(char *line, t_rt *rt);
 int				count_comma(char *str, int *i, int comma);
 float			get_float(char *str, int i, int j);
 int				go_through_num(char *str, int i);
+t_tuple			validate_tuple(char *str, float *n);
 
 #endif

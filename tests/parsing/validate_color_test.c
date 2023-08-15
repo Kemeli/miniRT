@@ -11,7 +11,6 @@ MU_TEST(test_validate_color_cases)
 	t_tuple	c6 = color(0.054902, 0, 0.431373);
 
 	t_tuple result1 = validate_color("255,150,212");
-	printf("result1: %f %f %f\n", result1[0], result1[1], result1[2]);
 	t_tuple result2 = validate_color("0,0,0");
 	t_tuple result3 = validate_color("0,1,2");
 	t_tuple result4 = validate_color("0,150,98");

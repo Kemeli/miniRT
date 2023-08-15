@@ -31,3 +31,17 @@ float	get_float(char *str, int i, int j)
 	free(ptr);
 	return (num);
 }
+
+int	go_through_char(int index, char *str)
+{
+	while(str[index] && str[index] != ' ')
+		index++;
+	return (index);
+}
+
+int	skip_spaces(int index, char *str)
+{
+	while(str[index] && str[index] == ' ')
+		index++;
+	return (index);
+}

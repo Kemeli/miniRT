@@ -23,6 +23,7 @@ MU_TEST(test_validate_normal_cases)
 	t_tuple p6 = validate_normal("0,0,1");
 	t_tuple p7 = validate_normal("-33,0.02");
 	t_tuple p8 = validate_normal("-33,0.2,1.0");
+	t_tuple p9 = validate_normal("-33,0.2,1.0,0.0");
 
 	mu_check(compare_tuples(expected1, p1));
 	mu_check(compare_tuples(expected2, p2));
@@ -32,6 +33,7 @@ MU_TEST(test_validate_normal_cases)
 	mu_check(compare_tuples(expected6, p6));
 	mu_check(p7 == NULL);
 	mu_check(p8 == NULL);
+	mu_check(p9 == NULL);
 
 	free(p1);
 	free(p2);
