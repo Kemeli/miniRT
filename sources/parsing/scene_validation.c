@@ -1,28 +1,41 @@
 #include <minirt.h>
 
+static char	*get_line(char *buffer, int fd)
+{
+	char	*temp;
+	char	*line;
+
+	line = "";
+	while (line)
+	{
+		line = get_next_line(fd);
+		if (line)
+		{
+			temp = ft_strjoin(buffer, line);
+			free(buffer);
+			buffer = ft_strjoin(temp, "\n");
+			free(temp);
+			free(line);
+		}
+	}
+	return (buffer);
+}
+
 static void	get_scene(t_rt *rt)
 {
 	int		fd;
-	char	*line;
-	char	*temp;
+	char	*buffer;
 
-	fd = open(rt->scene, O_RDONLY);
+	fd = open(rt->scene_name, O_RDONLY);
 	if (fd < 0)
-		error_and_exit("invalid scene file");
-	while (get_next_line(fd, &line) > 0)
-	{
-		temp = ft_strjoin(rt->cpy_scene, line);
-		free(rt->cpy_scene);
-		rt->cpy_scene = ft_strjoin(temp, "\n");
-		free(temp);
-		free(line);
-	}
-	temp = ft_strjoin(rt->cpy_scene, line);
-	free(rt->cpy_scene);
-	rt->cpy_scene = ft_strjoin(temp, "\n");
-	free(temp);
-	free(line);
-	close(fd);
+		error_and_exit("couldn't open fd");
+	buffer = ft_calloc(1, sizeof(char));
+	buffer = get_line(buffer, fd);
+	rt->cpy_scene = ft_strdup(buffer);
+	if(rt->cpy_scene[0] == '\0')
+		error_and_exit("scene is empty");
+	if (close(fd) == -1)
+		error_and_exit("couldn't close fd");
 }
 
 static void	validate_identifier(char *line, t_rt *rt)

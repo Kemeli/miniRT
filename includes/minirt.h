@@ -142,7 +142,7 @@ typedef struct s_data
 typedef struct s_rt
 {
 	char	*scene_name;
-	char	cpy_scene[100];
+	char	*cpy_scene;
 
 	t_tuple	A_color;
 	float	A_ratio;
