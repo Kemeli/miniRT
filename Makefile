@@ -65,14 +65,15 @@ SRC				+= color_handler.c
 SRC				+= coordinates_handler.c
 SRC				+= validate_normal.c
 SRC				+= validate_angle.c
-SRC				+= validate_C.c
-SRC				+= validate_A.c
-SRC				+= validate_L.c
+SRC				+= validate_c.c
+SRC				+= validate_a.c
+SRC				+= validate_l.c
 SRC				+= utils_validations.c
 SRC				+= scene_validation.c
 SRC				+= utils_parsing.c
 SRC				+= is_float.c
 SRC				+= validate_sp.c
+SRC				+= validate_pl.c
 
 OBJ_DIR			= ./obj
 OBJ				= $(SRC:.c=.o)

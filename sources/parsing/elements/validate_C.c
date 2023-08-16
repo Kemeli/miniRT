@@ -4,20 +4,20 @@ static void	validate_c_element(char *str, char type, t_rt *rt)
 {
 	if (type == 'c')
 	{
-		rt->C_coordinates =  validate_coordinates(str);
-		if (!rt->C_coordinates)
+		rt->c_coordinates =  validate_coordinates(str);
+		if (!rt->c_coordinates)
 			error_and_exit("invalid C coordinates");
 	}
 	else if (type == 'n')
 	{
-		rt->C_normal = validate_normal(str);
-		if (!rt->C_normal)
+		rt->c_normal = validate_normal(str);
+		if (!rt->c_normal)
 			error_and_exit("invalid C normal");
 	}
 	else if (type == 'a')
 	{
-		rt->C_fov = validate_angle(str);
-		if (!rt->C_fov)
+		rt->c_fov = validate_angle(str);
+		if (!rt->c_fov)
 			error_and_exit("invalid C fov");
 	}
 	free(str);
@@ -42,7 +42,7 @@ void	validate_c(char *element, t_rt *rt)
 	j = go_through_char(i, element);
 	sub = ft_substr(element, i, j - i);
 	validate_c_element(sub, 'a', rt);
-	// printf("C_coordinates: %f %f %f\n", rt->C_coordinates[0], rt->C_coordinates[1], rt->C_coordinates[2]);
-	// printf("C_normal: %f %f %f\n", rt->C_normal[0], rt->C_normal[1], rt->C_normal[2]);
-	// printf("C_fov: %f\n", rt->C_fov);
+	// printf("c_coordinates: %f %f %f\n", rt->c_coordinates[0], rt->c_coordinates[1], rt->c_coordinates[2]);
+	// printf("c_normal: %f %f %f\n", rt->c_normal[0], rt->c_normal[1], rt->c_normal[2]);
+	// printf("c_fov: %f\n", rt->c_fov);
 }

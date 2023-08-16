@@ -144,20 +144,24 @@ typedef struct s_rt
 	char	*scene_name;
 	char	*cpy_scene;
 
-	t_tuple	A_color;
-	float	A_ratio;
+	t_tuple	a_color;
+	float	a_ratio;
 
-	t_tuple	C_coordinates;
-	t_tuple	C_normal;
-	float	C_fov;
+	t_tuple	c_coordinates;
+	t_tuple	c_normal;
+	float	c_fov;
 
-	t_tuple	L_coordinates;
-	t_tuple	L_color;
-	float	L_brightness;
+	t_tuple	l_coordinates;
+	t_tuple	l_color;
+	float	l_brightness;
 
 	t_tuple	sp_coordinates;
 	t_tuple	sp_color;
 	float	sp_diameter;
+
+	t_tuple	pl_coordinates;
+	t_tuple	pl_normal;
+	t_tuple	pl_color;
 }	t_rt;
 //tuples são float e as cores são int, pode dar erro
 
@@ -263,5 +267,6 @@ int				go_through_num(char *str, int i);
 float			*validate_tuple(char *str, float *n);
 char			is_float(char *str);
 void			validate_sp(char *line, t_rt *rt);
+void			validate_pl(char *element, t_rt *rt);
 
 #endif

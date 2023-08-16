@@ -134,11 +134,11 @@ void	extension_validation(char *scene)
 void	free_rt(t_rt *rt)
 {
 	free(rt->scene_name);
-	free(rt->A_color);
-	free(rt->C_coordinates);
-	free(rt->C_normal);
-	free(rt->L_coordinates);
-	free(rt->L_color);
+	free(rt->a_color);
+	free(rt->c_coordinates);
+	free(rt->c_normal);
+	free(rt->l_coordinates);
+	free(rt->l_color);
 	free(rt);
 }
 

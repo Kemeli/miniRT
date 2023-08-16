@@ -53,8 +53,8 @@ static void	validate_identifier(char *line, t_rt *rt)
 			validate_l(element, rt);
 		else if (element[0] == 's' && element[1] == 'p' && element[2] == ' ')
 			validate_sp(element, rt);
-		// else if (element[i] == 'pl' && element[1] == 'l' && element[2] == ' ')
-		// 	return (pl);
+		else if (element[0] == 'p' && element[1] == 'l' && element[2] == ' ')
+			validate_pl(element, rt);
 		// else if (element[i] == 'cy' && element[1] == 'y' && element[2] == ' ')
 		// 	return (cy);
 	}
@@ -78,6 +78,7 @@ void	validate_scene(t_rt *rt)
 		validate_identifier(matrix[1], rt);
 		validate_identifier(matrix[2], rt);
 		validate_identifier(matrix[3], rt);
+		validate_identifier(matrix[4], rt);
 	// 	i++;
 	// }
 	free_split(matrix);
