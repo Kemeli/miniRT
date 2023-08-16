@@ -22,6 +22,8 @@ MU_TEST(test_validate_coordinates)
 	t_tuple p5 = validate_coordinates("-33.17,0.0,32.83");
 	t_tuple p6 = validate_coordinates("-33,0.0,32");
 	t_tuple p7 = validate_coordinates("-33,0.02");
+	t_tuple p8 = validate_coordinates("-33,0..0,32");
+	t_tuple p9 = validate_coordinates("-3a,0.0,32");
 
 	mu_check(compare_tuples(expected1, p1));
 	mu_check(compare_tuples(expected2, p2));
@@ -30,6 +32,8 @@ MU_TEST(test_validate_coordinates)
 	mu_check(compare_tuples(expected5, p5));
 	mu_check(compare_tuples(expected6, p6));
 	mu_check(p7 == NULL);
+	mu_check(p8 == NULL);
+	mu_check(p9 == NULL);
 
 	free(p1);
 	free(p2);

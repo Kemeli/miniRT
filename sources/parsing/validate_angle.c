@@ -7,20 +7,10 @@ float	validate_angle(char *angle)
 	float	f_angle;
 
 	i = 0;
-	if (angle[0] == '-' || ft_strchr(angle, ','))
+	if (!is_float(angle))
 		return (-1);
-	while (ft_isdigit(angle[i]))
+	while (angle[i])
 		i++;
-	if (!ft_isdigit(angle[i]) && !ft_strrchr(".\0", angle[i]))
-		return (-1);
-	if (angle[i] == '.')
-		i++;
-	if (!ft_isdigit(angle[i]) && !ft_strrchr(".\0", angle[i]))
-		return (-1);
-	while (ft_isdigit(angle[i]))
-		i++;
-	if (!ft_isdigit(angle[i]) && !ft_strrchr(".\0", angle[i]))
-		return (-1);
 	s_angle = ft_substr(angle, 0, i);
 	f_angle = ft_atof(s_angle);
 	free(s_angle);
