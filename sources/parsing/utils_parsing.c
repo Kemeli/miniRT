@@ -30,7 +30,7 @@ float	get_float(char *str, int i, int j)
 
 int	go_through_char(int index, char *str)
 {
-	while(str[index] && str[index] != ' ')
+	while(str[index] != '\0' && str[index] != ' ')
 		index++;
 	return (index);
 }

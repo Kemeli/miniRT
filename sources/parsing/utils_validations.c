@@ -7,7 +7,7 @@ void	error_and_exit(char *error_message)
 	exit (0);
 }
 
-t_tuple	validate_tuple(char *str, float *n)
+float *validate_tuple(char *str, float *n)
 {
 	int		i;
 	int		j;

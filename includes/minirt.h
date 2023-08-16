@@ -154,6 +154,10 @@ typedef struct s_rt
 	t_tuple	L_coordinates;
 	t_tuple	L_color;
 	float	L_brightness;
+
+	t_tuple	sp_coordinates;
+	t_tuple	sp_color;
+	float	sp_diameter;
 }	t_rt;
 //tuples são float e as cores são int, pode dar erro
 
@@ -256,7 +260,8 @@ void			validate_L(char *line, t_rt *rt);
 void			count_comma(int *index, int *comma);
 float			get_float(char *str, int i, int j);
 int				go_through_num(char *str, int i);
-t_tuple			validate_tuple(char *str, float *n);
+float			*validate_tuple(char *str, float *n);
 char			is_float(char *str);
+void			validate_sp(char *line, t_rt *rt);
 
 #endif
