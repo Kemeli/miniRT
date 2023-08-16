@@ -32,3 +32,10 @@ float *validate_tuple(char *str, float *n)
 	}
 	return (n);
 }
+
+float	 verify_and_get_float(char *str) //refatorar
+{
+	if(str && is_float(str))
+		return(ft_atof(str));
+	return (0);
+}

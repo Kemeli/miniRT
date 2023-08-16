@@ -162,6 +162,13 @@ typedef struct s_rt
 	t_tuple	pl_coordinates;
 	t_tuple	pl_normal;
 	t_tuple	pl_color;
+
+	t_tuple	cy_coordinates;
+	t_tuple	cy_normal;
+	float	cy_diameter;
+	float	cy_height;
+	t_tuple	cy_color;
+
 }	t_rt;
 //tuples são float e as cores são int, pode dar erro
 
@@ -268,5 +275,7 @@ float			*validate_tuple(char *str, float *n);
 char			is_float(char *str);
 void			validate_sp(char *line, t_rt *rt);
 void			validate_pl(char *element, t_rt *rt);
+void			validate_cy(char *element, t_rt *rt);
+float			verify_and_get_float(char *str);
 
 #endif

@@ -1,12 +1,5 @@
 #include <minirt.h>
 
-float	 verify_and_get_float(char *str) //refatorar
-{
-	if(str && is_float(str))
-		return(ft_atof(str));
-	return (0);
-}
-
 static void	get_sp_values(char *sub, t_rt *rt, char type)
 {
 	if (type == 'm')
