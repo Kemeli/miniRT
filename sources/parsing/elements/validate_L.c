@@ -1,6 +1,6 @@
 #include <minirt.h>
 
-static void	validate_L_element(char *str, char type, t_rt *rt)
+static void	validate_l_element(char *str, char type, t_rt *rt)
 {
 	// if (type == 'c')
 	// {
@@ -23,29 +23,26 @@ static void	validate_L_element(char *str, char type, t_rt *rt)
 	free(str);
 }
 
-void	validate_L(char *line, t_rt *rt)
+void	validate_l(char *element, t_rt *rt)
 {
-	char	*str;
 	int		i;
 	int		j;
 	char	*sub;
 
-	str = ft_strtrim(line, " \t\n\v\f\r");
 	i = 1;
-	i = skip_spaces(i, str);
-	j = go_through_char(i, str);
-	sub = ft_substr(str, i, j - i);
-	validate_L_element(sub, 'l', rt);
-	i = skip_spaces(j, str);
-	j = go_through_char(i, str);
-	sub = ft_substr(str, i, j - i);
-	validate_L_element(sub, 'b', rt);
-	// i = skip_spaces(j, str);
-	// j = go_through_char(i, str);
-	// sub = ft_substr(str, i, j - i);
-	// validate_L_element(sub, 'c', rt);
+	i = skip_spaces(i, element);
+	j = go_through_char(i, element);
+	sub = ft_substr(element, i, j - i);
+	validate_l_element(sub, 'l', rt);
+	i = skip_spaces(j, element);
+	j = go_through_char(i, element);
+	sub = ft_substr(element, i, j - i);
+	validate_l_element(sub, 'b', rt);
+	// i = skip_spaces(j, element);
+	// j = go_through_char(i, element);
+	// sub = ft_substr(element, i, j - i);
+	// validate_l_element(sub, 'c', rt);
 	// printf("\nL_coordinates: %f %f %f\n", rt->L_coordinates[0], rt->L_coordinates[1], rt->L_coordinates[2]);
 	// printf("L_brightness: %f\n", rt->L_brightness);
 	// printf("L_color: %f %f %f\n", rt->L_color[0], rt->L_color[1], rt->L_color[2]);
-	free(str);
 }

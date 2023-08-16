@@ -40,21 +40,25 @@ static void	get_scene(t_rt *rt)
 
 static void	validate_identifier(char *line, t_rt *rt)
 {
-	if (line && line[0] && line[1] && line[2])
+	char	*element;
+
+	element = ft_strtrim(line, " \t\n\v\f\r");
+	if (element && element[0] && element[1] && element[2])
 	{
-		if (line[0] == 'A' && line[1] == ' ')
-			validate_A(line, rt);
-		else if (line[0] == 'C' && line[1] == ' ') //dar trim em todos os line antes dessa verificação
-			validate_C(line, rt);
-		else if (line[0] == 'L' && line[1] == ' ')
-			validate_L(line, rt);
-		else if (line[0] == 's' && line[1] == 'p' && line[2] == ' ')
-			validate_sp(line, rt);
-		// else if (line[i] == 'pl' && line[1] == 'l' && line[2] == ' ')
+		if (element[0] == 'A' && element[1] == ' ')
+			validate_a(element, rt);
+		else if (element[0] == 'C' && element[1] == ' ') //dar trim em todos os element antes dessa verificação
+			validate_c(element, rt);
+		else if (element[0] == 'L' && element[1] == ' ')
+			validate_l(element, rt);
+		else if (element[0] == 's' && element[1] == 'p' && element[2] == ' ')
+			validate_sp(element, rt);
+		// else if (element[i] == 'pl' && element[1] == 'l' && element[2] == ' ')
 		// 	return (pl);
-		// else if (line[i] == 'cy' && line[1] == 'y' && line[2] == ' ')
+		// else if (element[i] == 'cy' && element[1] == 'y' && element[2] == ' ')
 		// 	return (cy);
 	}
+	free(element);
 }
 
 void	validate_scene(t_rt *rt)

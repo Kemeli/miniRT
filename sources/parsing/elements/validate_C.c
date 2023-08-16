@@ -1,6 +1,6 @@
 #include <minirt.h>
 
-static void	validate_C_element(char *str, char type, t_rt *rt)
+static void	validate_c_element(char *str, char type, t_rt *rt)
 {
 	if (type == 'c')
 	{
@@ -23,28 +23,25 @@ static void	validate_C_element(char *str, char type, t_rt *rt)
 	free(str);
 }
 
-void	validate_C(char *C_line, t_rt *rt)
+void	validate_c(char *element, t_rt *rt)
 {
-	char	*str;
 	int		i;
 	int		j;
 	char	*sub;
 
-	str = ft_strtrim(C_line, " \t\n\v\f\r");
 	i = 1;
-	i = skip_spaces(i, str);
-	j = go_through_char(i, str);
-	sub = ft_substr(str, i, j - i);
-	validate_C_element(sub, 'c', rt);
-	i = skip_spaces(j, str);
-	j = go_through_char(i, str);
-	sub = ft_substr(str, i, j - i);
-	validate_C_element(sub, 'n', rt);
-	i = skip_spaces(j, str);
-	j = go_through_char(i, str);
-	sub = ft_substr(str, i, j - i);
-	validate_C_element(sub, 'a', rt);
-	free(str);
+	i = skip_spaces(i, element);
+	j = go_through_char(i, element);
+	sub = ft_substr(element, i, j - i);
+	validate_c_element(sub, 'c', rt);
+	i = skip_spaces(j, element);
+	j = go_through_char(i, element);
+	sub = ft_substr(element, i, j - i);
+	validate_c_element(sub, 'n', rt);
+	i = skip_spaces(j, element);
+	j = go_through_char(i, element);
+	sub = ft_substr(element, i, j - i);
+	validate_c_element(sub, 'a', rt);
 	// printf("C_coordinates: %f %f %f\n", rt->C_coordinates[0], rt->C_coordinates[1], rt->C_coordinates[2]);
 	// printf("C_normal: %f %f %f\n", rt->C_normal[0], rt->C_normal[1], rt->C_normal[2]);
 	// printf("C_fov: %f\n", rt->C_fov);
