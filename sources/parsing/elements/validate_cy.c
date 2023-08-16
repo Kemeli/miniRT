@@ -75,10 +75,10 @@ char	validate_cy(char *element, t_rt *rt)
 	j = go_through_char(i, element);
 	sub = ft_substr(element, i, j - i);
 	get_cy_values(sub, rt, 'c');
-	// printf("cy_coordinates: %f %f %f\n", rt->cy_coordinates[0], rt->cy_coordinates[1], rt->cy_coordinates[2]);
-	// printf("cy_normal: %f %f %f\n", rt->cy_normal[0], rt->cy_normal[1], rt->cy_normal[2]);
-	// printf("cy_diameter: %f\n", rt->cy_diameter);
-	// printf("cy_height: %f\n", rt->cy_height);
-	// printf("cy_color: %f %f %f\n", rt->cy_color[0], rt->cy_color[1], rt->cy_color[2]);
+	printf("cy_coordinates: %f %f %f\n", rt->cy_coordinates[0], rt->cy_coordinates[1], rt->cy_coordinates[2]);
+	printf("cy_normal: %f %f %f\n", rt->cy_normal[0], rt->cy_normal[1], rt->cy_normal[2]);
+	printf("cy_diameter: %f\n", rt->cy_diameter);
+	printf("cy_height: %f\n", rt->cy_height);
+	printf("cy_color: %f %f %f\n", rt->cy_color[0], rt->cy_color[1], rt->cy_color[2]);
 	return (1);
 }

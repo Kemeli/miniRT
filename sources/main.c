@@ -156,8 +156,8 @@ int	main(int argc, char **argv)
 {
 	t_rt	*rt;
 
-	rt = ft_calloc(1, sizeof(t_rt));
 	input_validation(argc);
+	rt = ft_calloc(1, sizeof(t_rt));
 	rt->scene_name = ft_strdup(argv[1]);
 	extension_validation(rt->scene_name);
 	validate_scene(rt);

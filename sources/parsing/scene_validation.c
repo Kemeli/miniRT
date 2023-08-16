@@ -95,7 +95,6 @@ void	validate_scene(t_rt *rt)
 		i++;
 	}
 	free_split(matrix);
-} //validar mais de uma quebra de linha
-//validar só um elemento de cada
+}
 //limpar memoria antes dos exit
 
