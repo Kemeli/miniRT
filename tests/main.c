@@ -49,6 +49,7 @@
 #include "parsing/validate_normal_test.c"
 #include "parsing/validate_angle_test.c"
 #include "parsing/is_float_test.c"
+#include "parsing/utils_parsing_test.c"
 
 int	copy_size;
 
@@ -119,6 +120,7 @@ int	main()
 	MU_RUN_SUITE(test_validate_normal_parsing);
 	MU_RUN_SUITE(test_validate_angle);
 	MU_RUN_SUITE(test_is_float);
+	MU_RUN_SUITE(test_utils_parsing);
 
 
 	MU_REPORT();

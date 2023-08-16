@@ -253,7 +253,7 @@ void			validate_A(char *A_line, t_rt *rt);
 void			validate_scene(t_rt *rt);
 void			free_split(char **split);
 void			validate_L(char *line, t_rt *rt);
-int				count_comma(char *str, int *i, int comma);
+void			count_comma(int *index, int *comma);
 float			get_float(char *str, int i, int j);
 int				go_through_num(char *str, int i);
 t_tuple			validate_tuple(char *str, float *n);

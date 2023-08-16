@@ -1,13 +1,9 @@
 #include <minirt.h>
 
-int	count_comma(char *str, int *i, int comma)
+void	count_comma(int *index, int *comma)
 {
-	if (str[(*i)] == ',')
-	{
-		(*i)++;
-		return (comma + 1);
-	}
-	return (comma);
+	(*comma)++;
+	(*index)++;
 }
 
 int	go_through_num(char *str, int i)

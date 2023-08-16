@@ -24,10 +24,11 @@ t_tuple	validate_tuple(char *str, float *n)
 			i++;
 		i = go_through_num(str, i);
 		n[pos++] = get_float(str, i, j);
-		comma = count_comma(str, &i, comma);
+		if (str[i] == ',')
+			count_comma(&i, &comma);
 		if (((comma != 2 && !ft_isdigit(str[i]))))
 			return (NULL);
 		j = i;
 	}
-	return(n);
+	return (n);
 }

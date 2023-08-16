@@ -31,7 +31,8 @@ t_tuple	validate_color(char *str)
 		if (n[pos] < 0 || n[pos] > 255)
 			return (NULL);
 		pos++;
-		comma = count_comma(str, &i, comma);
+		if (str[i] == ',')
+			count_comma(&comma, &i);
 		if (comma != 2 && !ft_isdigit(str[i]))
 			return (NULL);
 		j = i;
