@@ -2,22 +2,15 @@
 
 char	is_float(char *str)
 {
-	if (*str != '-')
+	if (*str == '-')
 		str++;
+	if (!ft_isdigit(*str) || (ft_strchr(str, '.') != ft_strrchr(str, '.')))
+		return (0);
 	while (*str)
 	{
 		if (*str == '.')
-		{
 			str++;
-			break ;
-		}
-		if (!ft_isdigit(*str))
-			return (0);
-		str++;
-	}
-	while (*str)
-	{
-		if (!ft_isdigit(*str))
+		if (!ft_isdigit(*str) && !ft_strrchr(".\0", *str))
 			return (0);
 		str++;
 	}

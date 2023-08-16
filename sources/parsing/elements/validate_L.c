@@ -8,7 +8,7 @@ static void	validate_L_element(char *str, char type, t_rt *rt)
 	// 	if (!rt->L_color)
 	// 		error_and_exit("invalid A color");
 	// }
-	else if (type == 'l')
+	if (type == 'l')
 	{
 		rt->L_coordinates = validate_coordinates(str);
 		if (!rt->L_coordinates)
