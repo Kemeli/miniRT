@@ -260,22 +260,22 @@ t_tuple			char_to_color(char *str);
 t_tuple			validate_coordinates(char *str);
 t_tuple			validate_normal(char *str);
 float			validate_angle(char *angle);
-void			validate_c(char *C_line, t_rt *rt);
+char			validate_c(char *C_line, t_rt *rt);
 int				skip_spaces(int index, char *str);
 int				go_through_char(int index, char *str);
 void			error_and_exit(char *error_message);
-void			validate_a(char *A_line, t_rt *rt);
+char			validate_a(char *A_line, t_rt *rt);
 void			validate_scene(t_rt *rt);
 void			free_split(char **split);
-void			validate_l(char *line, t_rt *rt);
+char			validate_l(char *line, t_rt *rt);
 void			count_comma(int *index, int *comma);
 float			get_float(char *str, int i, int j);
 int				go_through_num(char *str, int i);
 float			*validate_tuple(char *str, float *n);
 char			is_float(char *str);
-void			validate_sp(char *line, t_rt *rt);
-void			validate_pl(char *element, t_rt *rt);
-void			validate_cy(char *element, t_rt *rt);
+char			validate_sp(char *line, t_rt *rt);
+char			validate_pl(char *element, t_rt *rt);
+char			validate_cy(char *element, t_rt *rt);
 float			verify_and_get_float(char *str);
 
 #endif

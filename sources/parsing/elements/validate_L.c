@@ -23,7 +23,7 @@ static void	validate_l_element(char *str, char type, t_rt *rt)
 	free(str);
 }
 
-void	validate_l(char *element, t_rt *rt)
+char	validate_l(char *element, t_rt *rt)
 {
 	int		i;
 	int		j;
@@ -45,4 +45,5 @@ void	validate_l(char *element, t_rt *rt)
 	// printf("\nl_coordinates: %f %f %f\n", rt->l_coordinates[0], rt->l_coordinates[1], rt->l_coordinates[2]);
 	// printf("l_brightness: %f\n", rt->l_brightness);
 	// printf("l_color: %f %f %f\n", rt->l_color[0], rt->l_color[1], rt->l_color[2]);
+	return (1);
 }

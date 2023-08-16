@@ -1,6 +1,6 @@
 #include <minirt.h>
 
-void	validate_a(char *element, t_rt *rt)
+char	validate_a(char *element, t_rt *rt)
 {
 	int		i;
 	int		j;
@@ -21,4 +21,5 @@ void	validate_a(char *element, t_rt *rt)
 		error_and_exit("invalid A color");
 	// printf("a_color: %f %f %f\n", rt->a_color[0], rt->a_color[1], rt->a_color[2]);
 	// printf("a_ratio: %f\n", rt->a_ratio);
+	return (1);
 }

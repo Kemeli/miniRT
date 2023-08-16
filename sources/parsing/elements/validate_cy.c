@@ -49,36 +49,36 @@ static void	get_cy_values(char *sub, t_rt *rt, char type)
 	free(sub);
 }
 
-void	validate_cy(char *element, t_rt *rt)
+char	validate_cy(char *element, t_rt *rt)
 {
 	int		i;
 	int		j;
 	char	*sub;
 
-	i = 2;
-	i = skip_spaces(i,element);
-	j = go_through_char(i,element);
+	i = skip_spaces(2, element);
+	j = go_through_char(i, element);
 	sub = ft_substr(element, i, j - i);
 	get_cy_values(sub, rt, 'm');
-	i = skip_spaces(j,element);
-	j = go_through_char(i,element);
+	i = skip_spaces(j, element);
+	j = go_through_char(i, element);
 	sub = ft_substr(element, i, j - i);
 	get_cy_values(sub, rt, 'n');
-	i = skip_spaces(j,element);
-	j = go_through_char(i,element);
+	i = skip_spaces(j, element);
+	j = go_through_char(i, element);
 	sub = ft_substr(element, i, j - i);
 	get_cy_values(sub, rt, 'd');
-	i = skip_spaces(j,element);
-	j = go_through_char(i,element);
+	i = skip_spaces(j, element);
+	j = go_through_char(i, element);
 	sub = ft_substr(element, i, j - i);
 	get_cy_values(sub, rt, 'h');
-	i = skip_spaces(j,element);
-	j = go_through_char(i,element);
+	i = skip_spaces(j, element);
+	j = go_through_char(i, element);
 	sub = ft_substr(element, i, j - i);
 	get_cy_values(sub, rt, 'c');
-	printf("cy_coordinates: %f %f %f\n", rt->cy_coordinates[0], rt->cy_coordinates[1], rt->cy_coordinates[2]);
-	printf("cy_normal: %f %f %f\n", rt->cy_normal[0], rt->cy_normal[1], rt->cy_normal[2]);
-	printf("cy_diameter: %f\n", rt->cy_diameter);
-	printf("cy_height: %f\n", rt->cy_height);
-	printf("cy_color: %f %f %f\n", rt->cy_color[0], rt->cy_color[1], rt->cy_color[2]);
+	// printf("cy_coordinates: %f %f %f\n", rt->cy_coordinates[0], rt->cy_coordinates[1], rt->cy_coordinates[2]);
+	// printf("cy_normal: %f %f %f\n", rt->cy_normal[0], rt->cy_normal[1], rt->cy_normal[2]);
+	// printf("cy_diameter: %f\n", rt->cy_diameter);
+	// printf("cy_height: %f\n", rt->cy_height);
+	// printf("cy_color: %f %f %f\n", rt->cy_color[0], rt->cy_color[1], rt->cy_color[2]);
+	return (1);
 }

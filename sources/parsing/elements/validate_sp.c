@@ -26,7 +26,7 @@ static void	get_sp_values(char *sub, t_rt *rt, char type)
 	free(sub);
 }
 
-void	validate_sp(char *element, t_rt *rt)
+char	validate_sp(char *element, t_rt *rt)
 {
 	int		i;
 	int		j;
@@ -45,4 +45,5 @@ void	validate_sp(char *element, t_rt *rt)
 	j = go_through_char(i,element);
 	sub = ft_substr(element, i, j - i);
 	get_sp_values(sub, rt, 'c');
+	return (1);
 }

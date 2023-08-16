@@ -23,7 +23,7 @@ static void	validate_c_element(char *str, char type, t_rt *rt)
 	free(str);
 }
 
-void	validate_c(char *element, t_rt *rt)
+char	validate_c(char *element, t_rt *rt)
 {
 	int		i;
 	int		j;
@@ -45,4 +45,5 @@ void	validate_c(char *element, t_rt *rt)
 	// printf("c_coordinates: %f %f %f\n", rt->c_coordinates[0], rt->c_coordinates[1], rt->c_coordinates[2]);
 	// printf("c_normal: %f %f %f\n", rt->c_normal[0], rt->c_normal[1], rt->c_normal[2]);
 	// printf("c_fov: %f\n", rt->c_fov);
+	return (1);
 }

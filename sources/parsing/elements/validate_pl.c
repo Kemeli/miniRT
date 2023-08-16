@@ -23,7 +23,7 @@ static void	get_pl_values(char *sub, char type, t_rt *rt)
 	free(sub);
 }
 
-void	validate_pl(char *element, t_rt *rt)
+char	validate_pl(char *element, t_rt *rt)
 {
 	int		i;
 	int		j;
@@ -45,4 +45,5 @@ void	validate_pl(char *element, t_rt *rt)
 	// printf("pl coordinates: %f %f %f\n", rt->pl_coordinates[0], rt->pl_coordinates[1], rt->pl_coordinates[2]);
 	// printf("pl normal: %f %f %f\n", rt->pl_normal[0], rt->pl_normal[1], rt->pl_normal[2]);
 	// printf("pl color: %f %f %f\n", rt->pl_color[0], rt->pl_color[1], rt->pl_color[2]);
+	return (1);
 }
