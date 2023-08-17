@@ -144,13 +144,16 @@ typedef struct s_rt
 	char	*scene_name;
 	char	*cpy_scene;
 
+	char	a;
 	t_tuple	a_color;
 	float	a_ratio;
 
+	char	c;
 	t_tuple	c_coordinates;
 	t_tuple	c_normal;
 	float	c_fov;
 
+	char	l;
 	t_tuple	l_coordinates;
 	t_tuple	l_color;
 	float	l_brightness;
@@ -263,7 +266,7 @@ float			validate_angle(char *angle);
 char			validate_c(char *C_line, t_rt *rt);
 int				skip_spaces(int index, char *str);
 int				go_through_char(int index, char *str);
-void			error_and_exit(char *error_message);
+char			error_msg(char *error_message);
 char			validate_a(char *A_line, t_rt *rt);
 void			validate_scene(t_rt *rt);
 void			free_split(char **split);
@@ -277,5 +280,7 @@ char			validate_sp(char *line, t_rt *rt);
 char			validate_pl(char *element, t_rt *rt);
 char			validate_cy(char *element, t_rt *rt);
 float			verify_and_get_float(char *str);
+void			free_rt(t_rt *rt);
+void			ft_free_ptr(void **ptr);
 
 #endif

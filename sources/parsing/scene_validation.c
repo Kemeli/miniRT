@@ -21,22 +21,23 @@ static char	*get_line(char *buffer, int fd)
 	return (buffer);
 }
 
-static void	get_scene(t_rt *rt)
+static char	get_scene(t_rt *rt)
 {
 	int		fd;
 	char	*buffer;
 
 	fd = open(rt->scene_name, O_RDONLY);
 	if (fd < 0)
-		error_and_exit("couldn't open fd");
+		return(error_msg("couldn't open fd"));
 	buffer = ft_calloc(1, sizeof(char));
 	buffer = get_line(buffer, fd);
 	rt->cpy_scene = ft_strdup(buffer);
 	free(buffer);
 	if(rt->cpy_scene[0] == '\0')
-		error_and_exit("scene is empty");
+		return(error_msg("scene is empty"));
 	if (close(fd) == -1)
-		error_and_exit("couldn't close fd");
+		return(error_msg("couldn't close fd"));
+	return(1);
 }
 
 char	is_object(char *element, t_rt *rt)
@@ -47,54 +48,51 @@ char	is_object(char *element, t_rt *rt)
 		return(validate_pl(element, rt));
 	else if (element[0] == 'c' && element[1] == 'y' && element[2] == ' ')
 		return(validate_cy(element, rt));
-	return (0);
+	return (error_msg("invalid element"));
 }
 
-static void	validate_identifier(char *line, t_rt *rt)
+static char	validate_identifier(char *line, t_rt *rt)
 {
 	char	*element;
-	char	a;
-	char	c;
-	char	l;
+	char	ret;
 
-	a = 0;
-	c = 0;
-	l = 0;
+	ret = 0;
 	element = ft_strtrim(line, " \t\n\v\f\r");
-	if (element && element[0] && element[1] && element[2])
+	if (element && element[0] && element[1] && element[2]) //talvez n precise desse if
 	{
-		if (element[0] == 'A' && element[1] == ' ' && !a)
-			a = validate_a(element, rt);
-		else if (element[0] == 'C' && element[1] == ' ' && !c)
-			c = validate_c(element, rt);
-		else if (element[0] == 'L' && element[1] == ' ' && !l)
-			l = validate_l(element, rt);
-		else if (!is_object(element, rt))
-		{
-			printf("element: %s\n", element);
-			error_and_exit("invalid element");
-		}
+		if (element[0] == 'A' && element[1] == ' ' && !rt->a)
+			ret = validate_a(element, rt);
+		else if (element[0] == 'C' && element[1] == ' ' && !rt->c)
+			ret = validate_c(element, rt);
+		else if (element[0] == 'L' && element[1] == ' ' && !rt->l)
+			ret = validate_l(element, rt);
+		else
+			ret = is_object(element, rt);
 	}
 	free(element);
+	return (ret);
 }
 
 void	validate_scene(t_rt *rt)
 {
 	char		*trimmed;
-	char		**matrix;
+	char		**splitted_scene;
 	int			i;
+	char		ret;
 
+	ret = 1;
 	i = 0;
 	get_scene(rt);
 	trimmed = ft_strtrim(rt->cpy_scene, " \t\n\v\f\r");
-	matrix = ft_split(trimmed, '\n');
+	splitted_scene = ft_split(trimmed, '\n');
 	free(trimmed);
-	while(matrix[i])
+	while(splitted_scene[i])
 	{
-		validate_identifier(matrix[i], rt);
+		ret = validate_identifier(splitted_scene[i], rt);
+		if (!ret)
+			break ;
 		i++;
 	}
-	free_split(matrix);
+	free_split(splitted_scene);
 }
-//limpar memoria antes dos exit
 

@@ -75,6 +75,7 @@ SRC				+= is_float.c
 SRC				+= validate_sp.c
 SRC				+= validate_pl.c
 SRC				+= validate_cy.c
+SRC				+= free_rt.c
 
 OBJ_DIR			= ./obj
 OBJ				= $(SRC:.c=.o)

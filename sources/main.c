@@ -120,37 +120,28 @@ enum	e_scene
 void	input_validation(int argc)
 {
 	if (argc != 2)
-		error_and_exit("invalid number of arguments");
+	{
+		printf ("ERROR\n");
+		printf ("invalid number of arguments\n");
+		exit (0);
+	}
 }
 
-void	extension_validation(char *scene)
+void	extension_validation(t_rt *rt)
 {
 	char	*extension;
-	extension = ft_strrchr(scene, '.');
+	extension = ft_strrchr(rt->scene_name, '.');
 	if (!extension || ft_memcmp(extension, ".rt", 3))
-		error_and_exit("invalid scene extension");
+	{
+		free(rt->scene_name);
+		free(rt);
+		printf ("ERROR\n");
+		printf ("invalid scene extension\n");
+		exit (0);
+	}
 }
 
-void	free_rt(t_rt *rt)
-{
-	free(rt->scene_name);
-	free(rt->cpy_scene);
-	free(rt->a_color);
-	free(rt->c_coordinates);
-	free(rt->c_normal);
-	free(rt->l_coordinates);
-	free(rt->l_color);
-	free(rt->sp_coordinates);
-	free(rt->sp_color);
-	free(rt->pl_coordinates);
-	free(rt->pl_normal);
-	free(rt->pl_color);
-	free(rt->cy_coordinates);
-	free(rt->cy_normal);
-	free(rt->cy_color);
 
-	free(rt);
-}
 
 int	main(int argc, char **argv)
 {
@@ -159,7 +150,7 @@ int	main(int argc, char **argv)
 	input_validation(argc);
 	rt = ft_calloc(1, sizeof(t_rt));
 	rt->scene_name = ft_strdup(argv[1]);
-	extension_validation(rt->scene_name);
+	extension_validation(rt);
 	validate_scene(rt);
 	free_rt(rt);
 }

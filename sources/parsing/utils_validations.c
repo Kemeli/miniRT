@@ -1,10 +1,10 @@
 #include <minirt.h>
 
-void	error_and_exit(char *error_message)
+char	error_msg(char *error_message)
 {
 	printf ("ERROR\n");
 	printf ("%s\n", error_message);
-	exit (0);
+	return (0);
 }
 
 float *validate_tuple(char *str, float *n)
