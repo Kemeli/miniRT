@@ -141,17 +141,17 @@ void	extension_validation(t_rt *rt)
 	}
 }
 
-
-
 int	main(int argc, char **argv)
 {
 	t_rt	*rt;
+	t_world	*w;
 
 	input_validation(argc);
 	rt = ft_calloc(1, sizeof(t_rt));
 	rt->scene_name = ft_strdup(argv[1]);
 	extension_validation(rt);
-	validate_scene(rt);
+	w = create_world();
+	validate_scene(rt, w);
 	free_rt(rt);
 }
 

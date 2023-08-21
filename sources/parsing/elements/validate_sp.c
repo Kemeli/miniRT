@@ -27,7 +27,32 @@ static char	get_sp_values(char *sub, t_rt *rt, char type)
 	return (1);
 }
 
-char	validate_sp(char *element, t_rt *rt)
+void	add_object(t_world *w, t_object *obj)
+{
+	t_node	*node;
+
+	node = ft_calloc(1, sizeof(t_node));
+	node->object = obj;
+	ft_lstadd_back(&w->head, ft_lstnew(node));
+
+	printf("\n %f, %f, %f\n", node->object->sphere->center[0], node->object->sphere->center[1], node->object->sphere->center[2]);
+	printf("\n %f\n", node->object->sphere->radius);
+	printf("\n object %c added to the scene\n", obj->shape);
+	printf("\n %f, %f, %f\n", node->object->material->color[0], node->object->material->color[1], node->object->material->color[2]);
+}
+
+void	get_sphere(t_rt *rt, t_world *w)
+{
+	t_object *obj;
+	obj = create_object('s'); //colocar proteção de erro aqui? //colocar os valores diretamente depois
+	free(obj->sphere->center);
+	obj->sphere->center = point(rt->sp_coordinates[0], rt->sp_coordinates[1], rt->sp_coordinates[2]);
+	obj->sphere->radius = rt->sp_diameter / 2;
+	obj->material->color = color(rt->sp_color[0], rt->sp_color[1], rt->sp_color[2]);
+	add_object(w, obj);
+}
+
+char	validate_sp(char *element, t_rt *rt, t_world *w)
 {
 	int		i;
 	int		j;
@@ -49,5 +74,7 @@ char	validate_sp(char *element, t_rt *rt)
 	sub = ft_substr(element, i, j - i);
 	if(!get_sp_values(sub, rt, 'c'))
 		return(0);
+	get_sphere(rt, w);
+
 	return (1);
 }

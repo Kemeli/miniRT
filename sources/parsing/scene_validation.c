@@ -40,10 +40,10 @@ static char	get_scene(t_rt *rt)
 	return(1);
 }
 
-char	is_object(char *element, t_rt *rt)
+static char	is_object(char *element, t_rt *rt, t_world *w)
 {
 	if (element[0] == 's' && element[1] == 'p' && element[2] == ' ')
-		return(validate_sp(element, rt));
+		return(validate_sp(element, rt, w));
 	else if (element[0] == 'p' && element[1] == 'l' && element[2] == ' ')
 		return(validate_pl(element, rt));
 	else if (element[0] == 'c' && element[1] == 'y' && element[2] == ' ')
@@ -51,7 +51,7 @@ char	is_object(char *element, t_rt *rt)
 	return (error_msg("invalid element"));
 }
 
-static char	validate_identifier(char *line, t_rt *rt)
+static char	validate_identifier(char *line, t_rt *rt, t_world *w)
 {
 	char	*element;
 	char	ret;
@@ -67,13 +67,13 @@ static char	validate_identifier(char *line, t_rt *rt)
 		else if (element[0] == 'L' && element[1] == ' ' && !rt->l)
 			ret = validate_l(element, rt);
 		else
-			ret = is_object(element, rt);
+			ret = is_object(element, rt, w);
 	}
 	free(element);
 	return (ret);
 }
 
-void	validate_scene(t_rt *rt)
+char	validate_scene(t_rt *rt, t_world *w)
 {
 	char		*trimmed;
 	char		**splitted_scene;
@@ -88,11 +88,15 @@ void	validate_scene(t_rt *rt)
 	free(trimmed);
 	while(splitted_scene[i])
 	{
-		ret = validate_identifier(splitted_scene[i], rt);
+		ret = validate_identifier(splitted_scene[i], rt, w);
 		if (!ret)
-			break ;
+		{
+			free_split(splitted_scene);
+			return (0);
+		}
 		i++;
 	}
 	free_split(splitted_scene);
+	return(1);
 }
 
