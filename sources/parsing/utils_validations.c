@@ -39,3 +39,17 @@ float	 verify_and_get_float(char *str) //refatorar
 		return(ft_atof(str));
 	return (0);
 }
+
+void	add_object(t_world *w, t_object *obj)
+{
+	t_node	*node;
+
+	if (!((t_node *)w->head->content)->object)
+		((t_node *)w->head->content)->object = obj; //n funciona passando direto para a lista pq o head n é null
+	else
+	{
+		node = ft_calloc(1, sizeof(t_node));
+		node->object = obj;
+		ft_lstadd_back(&w->head, ft_lstnew(node));
+	}
+}

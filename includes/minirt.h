@@ -37,11 +37,13 @@ typedef struct s_cylinder
 	float	minimum;
 	float	maximum;
 	char	closed;
+	t_tuple	center;
+	float	radius; //sera que o diametro éusado para calcular o raio?
 }	t_cylinder;
 
 typedef struct s_plane
 {
-	char	pass;
+	t_tuple	plane_point;
 }	t_plane;
 
 typedef struct s_sphere
@@ -59,6 +61,7 @@ typedef struct s_object
 		t_plane		*plane;
 		t_cylinder	*cylinder;
 	};
+	t_tuple		normal;
 	t_ray		*saved_ray;
 	float		**transform;
 	t_material	*material;
@@ -163,11 +166,11 @@ typedef struct s_rt
 	float	sp_diameter;
 
 	t_tuple	pl_coordinates;
-	t_tuple	pl_normal;
+	t_tuple	pl_normalized_v;
 	t_tuple	pl_color;
 
 	t_tuple	cy_coordinates;
-	t_tuple	cy_normal;
+	t_tuple	cy_normalized_v;
 	float	cy_diameter;
 	float	cy_height;
 	t_tuple	cy_color;
@@ -277,10 +280,11 @@ int				go_through_num(char *str, int i);
 float			*validate_tuple(char *str, float *n);
 char			is_float(char *str);
 char			validate_sp(char *line, t_rt *rt, t_world *w);
-char			validate_pl(char *element, t_rt *rt);
-char			validate_cy(char *element, t_rt *rt);
+char			validate_pl(char *element, t_rt *rt, t_world *w);
+char			validate_cy(char *element, t_rt *rt, t_world *w);
 float			verify_and_get_float(char *str);
 void			free_rt(t_rt *rt);
 void			ft_free_ptr(void **ptr);
+void			add_object(t_world *w, t_object *obj);
 
 #endif

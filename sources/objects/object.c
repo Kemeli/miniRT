@@ -9,6 +9,7 @@ t_object	*create_object(char shape)
 	object->transform = identity_matrix(4);
 	object->material = material();
 	object->change_my_material = change_material;
+	object->normal = NULL;
 	if (shape == 's')
 		object->sphere = create_sphere();
 	if (shape == 'p')

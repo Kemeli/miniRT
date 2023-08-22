@@ -1,5 +1,27 @@
 #include <minirt.h>
 
+void	get_cylinder(t_rt *rt, t_world *w)
+{
+	t_object	*obj;
+
+	obj = create_object('c');
+	obj->material->color = color(
+		rt->cy_color[0],
+		rt->cy_color[1],
+		rt->cy_color[2]);
+	obj->normal = vector(rt->cy_normalized_v[0], rt->cy_normalized_v[1], rt->cy_normalized_v[2]);
+	obj->cylinder->center = point(
+		rt->cy_coordinates[0],
+		rt->cy_coordinates[1],
+		rt->cy_coordinates[2]);
+	obj->cylinder->radius = rt->cy_diameter / 2; //como usar esse valor?
+	obj->cylinder->maximum = rt->cy_height  ; //ta certo isso?
+	add_object(w, obj);
+	free(rt->cy_coordinates);
+	free(rt->cy_normalized_v);
+	free(rt->cy_color);
+}
+
 static char	check_errors(char *msg, t_tuple element)
 {
 	if (!element)
@@ -16,8 +38,8 @@ static char	check_tuples(char *sub, t_rt *rt, char type)
 	}
 	else if (type == 'n')
 	{
-		rt->cy_normal = validate_normal(sub);
-		return(check_errors("invalid cy normal", rt->cy_normal));
+		rt->cy_normalized_v = validate_normal(sub);
+		return(check_errors("invalid cy normal", rt->cy_normalized_v));
 	}
 	else if (type == 'c')
 	{
@@ -50,7 +72,7 @@ static char	get_cy_values(char *sub, t_rt *rt, char type)
 	return (ret);
 }
 
-char	validate_cy(char *element, t_rt *rt)
+char	validate_cy(char *element, t_rt *rt, t_world *w)
 {
 	int		i;
 	int		j;
@@ -82,9 +104,10 @@ char	validate_cy(char *element, t_rt *rt)
 	if(!get_cy_values(sub, rt, 'c'))
 		return (0);
 	// printf("cy_coordinates: %f %f %f\n", rt->cy_coordinates[0], rt->cy_coordinates[1], rt->cy_coordinates[2]);
-	// printf("cy_normal: %f %f %f\n", rt->cy_normal[0], rt->cy_normal[1], rt->cy_normal[2]);
+	// printf("cy_normalized_v: %f %f %f\n", rt->cy_normalized_v[0], rt->cy_normalized_v[1], rt->cy_normalized_v[2]);
 	// printf("cy_diameter: %f\n", rt->cy_diameter);
 	// printf("cy_height: %f\n", rt->cy_height);
 	// printf("cy_color: %f %f %f\n", rt->cy_color[0], rt->cy_color[1], rt->cy_color[2]);
+	get_cylinder(rt, w);
 	return (1);
 }

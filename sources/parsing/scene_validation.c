@@ -45,9 +45,9 @@ static char	is_object(char *element, t_rt *rt, t_world *w)
 	if (element[0] == 's' && element[1] == 'p' && element[2] == ' ')
 		return(validate_sp(element, rt, w));
 	else if (element[0] == 'p' && element[1] == 'l' && element[2] == ' ')
-		return(validate_pl(element, rt));
+		return(validate_pl(element, rt, w));
 	else if (element[0] == 'c' && element[1] == 'y' && element[2] == ' ')
-		return(validate_cy(element, rt));
+		return(validate_cy(element, rt, w));
 	return (error_msg("invalid element"));
 }
 

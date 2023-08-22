@@ -152,7 +152,53 @@ int	main(int argc, char **argv)
 	extension_validation(rt);
 	w = create_world();
 	validate_scene(rt, w);
+
+
 	free_rt(rt);
 }
 
 //lighting é inicializado com os valores passados por parametro
+//parece que o "plane" não tem valores, talvez seja interessante retir a struct dele
+//deu segfault com normal do cylinder invalido
+//verificar vazamento de memória quando der erro nas validations
+
+/*
+
+	printf("\n object 1: %c added to the scene\n", ((t_node *)w->head->content)->object->shape);
+	printf("\n %f, %f, %f\n", ((t_node *)w->head->content)->object->sphere->center[0], ((t_node *)w->head->content)->object->sphere->center[1], ((t_node *)w->head->content)->object->sphere->center[2]);
+	printf("\n %f\n", ((t_node *)w->head->content)->object->sphere->radius);
+	printf("\n %f, %f, %f\n", ((t_node *)w->head->content)->object->material->color[0], ((t_node *)w->head->content)->object->material->color[1], ((t_node *)w->head->content)->object->material->color[2]);
+
+	printf("\n");
+	printf("\n");
+	printf("\n %f, %f, %f\n", ((t_node *)w->head->next->content)->object->sphere->center[0], ((t_node *)w->head->next->content)->object->sphere->center[1], ((t_node *)w->head->next->content)->object->sphere->center[2]);
+	printf("\n %f\n", ((t_node *)w->head->next->content)->object->sphere->radius);
+	printf("\n object 2: %c added to the scene\n", ((t_node *)w->head->next->content)->object->shape);
+	printf("\n %f, %f, %f\n", ((t_node *)w->head->next->content)->object->material->color[0], ((t_node *)w->head->next->content)->object->material->color[1], ((t_node *)w->head->next->content)->object->material->color[2]);
+	printf("\n");
+	printf("\n");
+	printf("\n %f, %f, %f\n", ((t_node *)w->head->next->next->content)->object->plane->plane_point[0], ((t_node *)w->head->next->next->content)->object->plane->plane_point[1], ((t_node *)w->head->next->next->content)->object->plane->plane_point[2]);
+	printf("\n %f, %f, %f\n", ((t_node *)w->head->next->next->content)->object->normal[0], ((t_node *)w->head->next->next->content)->object->normal[1], ((t_node *)w->head->next->next->content)->object->normal[2]);
+	printf("\n object 3: %c added to the scene\n", ((t_node *)w->head->next->next->content)->object->shape);
+	printf("\n %f, %f, %f\n", ((t_node *)w->head->next->next->content)->object->material->color[0], ((t_node *)w->head->next->next->content)->object->material->color[1], ((t_node *)w->head->next->next->content)->object->material->color[2]);
+	printf("\n");
+	printf("\n");
+	printf("\n %f, %f, %f\n", ((t_node *)w->head->next->next->next->content)->object->plane->plane_point[0], ((t_node *)w->head->next->next->next->content)->object->plane->plane_point[1], ((t_node *)w->head->next->next->next->content)->object->plane->plane_point[2]);
+	printf("\n %f, %f, %f\n", ((t_node *)w->head->next->next->next->content)->object->normal[0], ((t_node *)w->head->next->next->next->content)->object->normal[1], ((t_node *)w->head->next->next->next->content)->object->normal[2]);
+	printf("\n object 4: %c added to the scene\n", ((t_node *)w->head->next->next->next->content)->object->shape);
+	printf("\n %f, %f, %f\n", ((t_node *)w->head->next->next->next->content)->object->material->color[0], ((t_node *)w->head->next->next->next->content)->object->material->color[1], ((t_node *)w->head->next->next->next->content)->object->material->color[2]);
+	printf("\n");
+	printf("\n");
+	printf("\n %f, %f, %f\n", ((t_node *)w->head->next->next->next->next->content)->object->material->color[0], ((t_node *)w->head->next->next->next->next->content)->object->material->color[1], ((t_node *)w->head->next->next->next->next->content)->object->material->color[2]);
+	printf("\n object 5: %c added to the scene\n", ((t_node *)w->head->next->next->next->next->content)->object->shape);
+	printf("\n %f, %f, %f\n", ((t_node *)w->head->next->next->next->next->content)->object->normal[0], ((t_node *)w->head->next->next->next->next->content)->object->normal[1], ((t_node *)w->head->next->next->next->next->content)->object->normal[2]);
+	printf("\n %f\n", ((t_node *)w->head->next->next->next->next->content)->object->cylinder->radius);
+	printf("\n %f\n", ((t_node *)w->head->next->next->next->next->content)->object->cylinder->maximum);
+
+	printf("\n");
+	printf("\n");
+	printf("\n %f, %f, %f\n", ((t_node *)w->head->next->next->next->next->next->content)->object->material->color[0], ((t_node *)w->head->next->next->next->next->next->content)->object->material->color[1], ((t_node *)w->head->next->next->next->next->next->content)->object->material->color[2]);
+	printf("\n object 6: %c added to the scene\n", ((t_node *)w->head->next->next->next->next->next->content)->object->shape);
+	printf("\n %f, %f, %f\n", ((t_node *)w->head->next->next->next->next->next->content)->object->normal[0], ((t_node *)w->head->next->next->next->next->next->content)->object->normal[1], ((t_node *)w->head->next->next->next->next->next->content)->object->normal[2]);
+	printf("\n %f\n", ((t_node *)w->head->next->next->next->next->next->content)->object->cylinder->radius);
+	printf("\n %f\n", ((t_node *)w->head->next->next->next->next->next->content)->object->cylinder->maximum);*/
