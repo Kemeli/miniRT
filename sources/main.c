@@ -154,12 +154,19 @@ char	is_normalized(t_tuple v)
 void	creat_scene(t_rt *rt, t_world *w)
 {
 	t_data	*data;
+	t_tuple	normalized;
 
 	data = ft_calloc(1, sizeof(t_data));
-	data->c = ft_calloc(1, sizeof(t_camera));
+	data->c = camera(100, 100, rt->c_fov);
 	data->c->field_of_view = rt->c_fov;
+	free(data->c->transform);
 	data->c->transform = translation(
 			rt->c_coordinates[0], rt->c_coordinates[1], rt->c_coordinates[2]);
+	data->c->field_of_view = rt->c_fov;
+	if (!is_normalized(rt->c_normal))
+	{
+		normalized = normalize(rt->c_normal);
+	}
 }
 
 int	main(int argc, char **argv)

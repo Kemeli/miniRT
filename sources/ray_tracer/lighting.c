@@ -83,7 +83,7 @@ t_tuple	lighting(t_lighting *l)
 	if (l->in_shadow)
 	{
 		free_aux(aux);
-		return(ambient);
+		return (ambient);
 	}
 	aux->light_v = ligth_vector(l);
 	aux->light_dot_normal = dot(aux->light_v, l->normal);
