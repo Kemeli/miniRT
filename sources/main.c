@@ -141,6 +141,27 @@ void	extension_validation(t_rt *rt)
 	}
 }
 
+char	is_normalized(t_tuple v)
+{
+	float	magnitude;
+
+	magnitude = sqrt(pow(v[0], 2) + pow(v[1], 2) + pow(v[2], 2));
+	if (magnitude == 1)
+		return (1);
+	return (0);
+}
+
+void	creat_scene(t_rt *rt, t_world *w)
+{
+	t_data	*data;
+
+	data = ft_calloc(1, sizeof(t_data));
+	data->c = ft_calloc(1, sizeof(t_camera));
+	data->c->field_of_view = rt->c_fov;
+	data->c->transform = translation(
+			rt->c_coordinates[0], rt->c_coordinates[1], rt->c_coordinates[2]);
+}
+
 int	main(int argc, char **argv)
 {
 	t_rt	*rt;
@@ -151,9 +172,8 @@ int	main(int argc, char **argv)
 	rt->scene_name = ft_strdup(argv[1]);
 	extension_validation(rt);
 	w = create_world();
-	validate_scene(rt, w);
-
-
+	if (validate_scene(rt, w));
+		creat_scene(rt, w);
 	free_rt(rt);
 }
 

@@ -23,11 +23,6 @@ MU_TEST(test_go_through_num)
 	mu_check(go_through_num("1.0,3.20", 4) == 8);
 	mu_check(go_through_num("1.0,3.20", 0) == 3);
 }
-// MU_TEST(test_go_through_num)
-// {
-
-
-// }
 
 MU_TEST_SUITE(test_utils_parsing)
 {
