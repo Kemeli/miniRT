@@ -156,6 +156,7 @@ void	creat_scene(t_rt *rt, t_world *w)
 	t_data	*data;
 	t_tuple	normalized;
 
+	(void)w;
 	data = ft_calloc(1, sizeof(t_data));
 	data->c = camera(100, 100, rt->c_fov);
 	data->c->field_of_view = rt->c_fov;
@@ -179,8 +180,9 @@ int	main(int argc, char **argv)
 	rt->scene_name = ft_strdup(argv[1]);
 	extension_validation(rt);
 	w = create_world();
-	if (validate_scene(rt, w));
+	if (validate_scene(rt, w))
 		creat_scene(rt, w);
+	
 	free_rt(rt);
 }
 

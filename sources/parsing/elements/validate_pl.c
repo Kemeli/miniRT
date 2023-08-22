@@ -9,7 +9,10 @@ void	get_plane(t_rt *rt, t_world *w)
 		rt->pl_color[0],
 		rt->pl_color[1],
 		rt->pl_color[2]);
-	obj->normal = vector(rt->pl_normalized_v[0], rt->pl_normalized_v[1], rt->pl_normalized_v[2]);
+	obj->normal = vector(
+		rt->pl_normalized_v[0],
+		rt->pl_normalized_v[1],
+		rt->pl_normalized_v[2]);
 	obj->plane->plane_point = point(
 		rt->pl_coordinates[0],
 		rt->pl_coordinates[1],

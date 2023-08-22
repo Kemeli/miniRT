@@ -9,13 +9,17 @@ void	get_cylinder(t_rt *rt, t_world *w)
 		rt->cy_color[0],
 		rt->cy_color[1],
 		rt->cy_color[2]);
-	obj->normal = vector(rt->cy_normalized_v[0], rt->cy_normalized_v[1], rt->cy_normalized_v[2]);
+	obj->normal = vector(
+		rt->cy_normalized_v[0],
+		rt->cy_normalized_v[1],
+		rt->cy_normalized_v[2]);
 	obj->cylinder->center = point(
 		rt->cy_coordinates[0],
 		rt->cy_coordinates[1],
 		rt->cy_coordinates[2]);
 	obj->cylinder->radius = rt->cy_diameter / 2; //como usar esse valor?
-	obj->cylinder->maximum = rt->cy_height  ; //ta certo isso?
+	obj->cylinder->maximum = rt->cy_coordinates[1] + rt->cy_height / 2;
+	obj->cylinder->minimum = rt->cy_coordinates[1] - rt->cy_height / 2;
 	add_object(w, obj);
 	free(rt->cy_coordinates);
 	free(rt->cy_normalized_v);
