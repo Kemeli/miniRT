@@ -151,29 +151,54 @@ char	is_normalized(t_tuple v)
 	return (0);
 }
 
-void	creat_scene(t_rt *rt, t_world *w)
+t_data	*creat_scene(t_rt *rt, t_world *w)
 {
 	t_data	*data;
 	t_tuple	normalized;
+	t_tuple	origin;
 
-	(void)w;
+	origin = point(0, 0, 0);
 	data = ft_calloc(1, sizeof(t_data));
+	w->light = point_light(rt->l_coordinates, rt->l_color);
+	data->w = w;
 	data->c = camera(100, 100, rt->c_fov);
-	data->c->field_of_view = rt->c_fov;
-	free(data->c->transform);
-	data->c->transform = translation(
-			rt->c_coordinates[0], rt->c_coordinates[1], rt->c_coordinates[2]);
 	data->c->field_of_view = rt->c_fov;
 	if (!is_normalized(rt->c_normal))
 	{
 		normalized = normalize(rt->c_normal);
+		free(rt->c_normal);
+		rt->c_normal = normalized;
 	}
+	free(data->c->transform);
+	data->c->transform = view_transform(rt->c_coordinates, origin,
+			rt->c_normal);
+	return (data);
+}
+
+int	make_scene(t_data *data)
+{
+	render (data);
+	if (data->win_ptr != NULL)
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
+		data->img->mlx_img, 0, 0);
+	return (0);
+}
+
+int	handle_keypress(int keysym, t_data *data)
+{
+	if (keysym == XK_Escape)
+	{
+		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+		data->win_ptr = NULL;
+	}
+	return (0);
 }
 
 int	main(int argc, char **argv)
 {
 	t_rt	*rt;
 	t_world	*w;
+	t_data	*data;
 
 	input_validation(argc);
 	rt = ft_calloc(1, sizeof(t_rt));
@@ -181,8 +206,27 @@ int	main(int argc, char **argv)
 	extension_validation(rt);
 	w = create_world();
 	if (validate_scene(rt, w))
-		creat_scene(rt, w);
-	
+	{
+		data = creat_scene(rt, w);
+		data->img = ft_calloc(1, sizeof(t_image));
+		data->mlx_ptr = mlx_init();
+		data->win_ptr = mlx_new_window(data->mlx_ptr, 200, 100, "print sphere");
+		data->img->mlx_img = mlx_new_image(data->mlx_ptr, 200, 100);
+		data->img->addr = mlx_get_data_addr(
+			data->img->mlx_img,
+			&data->img->bpp,
+			&data->img->line_len,
+			&data->img->endian
+		);
+		mlx_loop_hook(data->mlx_ptr, &make_scene, &data);
+		mlx_hook(data->win_ptr, KeyPress, KeyPressMask, &handle_keypress, &data);
+		mlx_loop(data->mlx_ptr);
+
+		mlx_destroy_image(data->mlx_ptr, data->img->mlx_img);
+		mlx_destroy_display(data->mlx_ptr);
+		free(data->mlx_ptr);
+	}
+	// validate_scene(rt, w);
 	free_rt(rt);
 }
 
