@@ -51,7 +51,7 @@ static char	is_object(char *element, t_rt *rt, t_world *w)
 	return (error_msg("invalid element"));
 }
 
-static char	validate_identifier(char *line, t_rt *rt, t_world *w)
+static char	validate_identifier(char *line, t_rt *rt, t_data *data)
 {
 	char	*element;
 	char	ret;
@@ -60,20 +60,29 @@ static char	validate_identifier(char *line, t_rt *rt, t_world *w)
 	element = ft_strtrim(line, " \t\n\v\f\r");
 	if (element && element[0] && element[1] && element[2]) //talvez n precise desse if
 	{
-		if (element[0] == 'A' && element[1] == ' ' && !rt->a)
-			ret = validate_a(element, rt);
-		else if (element[0] == 'C' && element[1] == ' ' && !rt->c)
-			ret = validate_c(element, rt);
-		else if (element[0] == 'L' && element[1] == ' ' && !rt->l)
-			ret = validate_l(element, rt);
+		if (element[0] == 'A' && element[1] == ' ' && !data->w->ambient)
+		{
+			data->w->ambient = validate_a(element, rt);
+			ret = 1;
+		}
+		else if (element[0] == 'C' && element[1] == ' ' && !data->c)
+		{
+			data->c = validate_c(element, rt);
+			ret = 1;
+		}
+		else if (element[0] == 'L' && element[1] == ' ' && !data->w->light)
+		{
+			data->w->light = validate_l(element, rt);
+			ret = 1;
+		}
 		else
-			ret = is_object(element, rt, w);
+			ret = is_object(element, rt, data->w);
 	}
 	free(element);
 	return (ret);
 }
 
-char	validate_scene(t_rt *rt, t_world *w)
+char	validate_scene(t_rt *rt, t_data *data)
 {
 	char		*trimmed;
 	char		**splitted_scene;
@@ -88,7 +97,7 @@ char	validate_scene(t_rt *rt, t_world *w)
 	free(trimmed);
 	while(splitted_scene[i])
 	{
-		ret = validate_identifier(splitted_scene[i], rt, w);
+		ret = validate_identifier(splitted_scene[i], rt, data);
 		if (!ret)
 		{
 			free_split(splitted_scene);

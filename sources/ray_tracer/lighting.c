@@ -17,7 +17,8 @@ static void	free_aux(t_aux *aux)
 	free(aux->effective_c);
 	free(aux->light_v);
 	free(aux->ambient);
-	free(aux->diffuse);
+	if(aux && aux->diffuse)
+		free(aux->diffuse);
 	free(aux->specular);
 	free(aux->sum);
 	free(aux);
@@ -71,6 +72,17 @@ static void	get_difuse_and_specular(t_aux *aux, t_lighting *l)
 	}
 }
 
+static t_tuple	multiply_color(t_tuple color, t_tuple amb)
+{
+	t_tuple	response;
+
+	response = ft_calloc(3, sizeof(float));
+	response[0] = color[0] * amb[0];
+	response[1] = color[1] * amb[1];
+	response[2] = color[2] * amb[2];
+	return (response);
+}
+
 t_tuple	lighting(t_lighting *l)
 {
 	t_aux	*aux;
@@ -79,7 +91,7 @@ t_tuple	lighting(t_lighting *l)
 
 	aux = ft_calloc(1, sizeof(t_aux));
 	aux->effective_c = multiply_colors(l->material->color, l->light->intensity);
-	ambient = multiply_tuple_by_scalar(aux->effective_c, l->material->ambient);
+	ambient = multiply_color(aux->effective_c, l->material->ambient);
 	if (l->in_shadow)
 	{
 		free_aux(aux);

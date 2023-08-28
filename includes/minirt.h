@@ -14,6 +14,9 @@
 # define TRUE 1
 # define FALSE 0
 
+#define HEIGHT 100
+#define WIDTH 200
+
 typedef float*	t_tuple;
 typedef float**	t_matrix;
 
@@ -26,7 +29,7 @@ typedef struct s_ray
 typedef struct s_material
 {
 	t_tuple	color;
-	float	ambient;
+	t_tuple	ambient;
 	float	diffuse;
 	float	specular;
 	float	shininess;
@@ -100,6 +103,7 @@ typedef struct s_world
 {
 	t_list			*head;
 	t_point_light	*light;
+	t_tuple			ambient;
 }	t_world;
 
 typedef struct s_comps
@@ -150,6 +154,7 @@ typedef struct s_rt
 	char	a;
 	t_tuple	a_color;
 	float	a_ratio;
+	t_tuple	ambient;
 
 	char	c;
 	t_tuple	c_coordinates;
@@ -266,14 +271,14 @@ t_tuple			char_to_color(char *str);
 t_tuple			validate_coordinates(char *str);
 t_tuple			validate_normal(char *str);
 float			validate_angle(char *angle);
-char			validate_c(char *C_line, t_rt *rt);
+t_camera		*validate_c(char *element, t_rt *rt);
 int				skip_spaces(int index, char *str);
 int				go_through_char(int index, char *str);
 char			error_msg(char *error_message);
-char			validate_a(char *A_line, t_rt *rt);
-char			validate_scene(t_rt *rt, t_world *w);
+t_tuple			validate_a(char *element, t_rt *rt);
+char			validate_scene(t_rt *rt, t_data *data);
 void			free_split(char **split);
-char			validate_l(char *line, t_rt *rt);
+t_point_light	*validate_l(char *element, t_rt *rt);
 void			count_comma(int *index, int *comma);
 float			get_float(char *str, int i, int j);
 int				go_through_num(char *str, int i);

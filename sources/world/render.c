@@ -12,27 +12,23 @@ void	write_pixel(t_image *img, int x, int y, t_tuple color)
 
 void	render(t_data *data)
 {
-	float	x;
-	float	y;
+	unsigned long long	x;
+	unsigned long long	y;
 	t_ray	*r;
 	t_tuple	to_color;
 
 	y = 0;
 	x = 0;
-	while (y < data->c->vsize)
+	while (y < (data->c->vsize - 1))
 	{
 		x = 0;
-		while (x < data->c->hsize)
+		while (x < (data->c->hsize - 1))
 		{
 			r = ray_for_pixel(data->c, x, y);
 			to_color = color_at(data->w, r);
-			if (to_color[0] > 1)
-				to_color[0] = 1;
-			if (to_color[1] > 1)
-				to_color[1] = 1;
-			if (to_color[2] > 1)
-				to_color[2] = 1;
+			free_ray(r);
 			write_pixel(data->img, x, y, to_color);
+			free(to_color);
 			x++;
 		}
 		y++;

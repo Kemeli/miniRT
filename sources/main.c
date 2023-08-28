@@ -106,129 +106,123 @@ int main(void)
 
 #include<stdio.h>
 
-enum	e_scene
-{
-	error,
-	A,
-	C,
-	L,
-	sp,
-	pl,
-	cy
-};
+// enum	e_scene
+// {
+// 	error,
+// 	A,
+// 	C,
+// 	L,
+// 	sp,
+// 	pl,
+// 	cy
+// };
 
-void	input_validation(int argc)
-{
-	if (argc != 2)
-	{
-		printf ("ERROR\n");
-		printf ("invalid number of arguments\n");
-		exit (0);
-	}
-}
+// void	input_validation(int argc)
+// {
+// 	if (argc != 2)
+// 	{
+// 		printf ("ERROR\n");
+// 		printf ("invalid number of arguments\n");
+// 		exit (0);
+// 	}
+// }
 
-void	extension_validation(t_rt *rt)
-{
-	char	*extension;
-	extension = ft_strrchr(rt->scene_name, '.');
-	if (!extension || ft_memcmp(extension, ".rt", 3))
-	{
-		free(rt->scene_name);
-		free(rt);
-		printf ("ERROR\n");
-		printf ("invalid scene extension\n");
-		exit (0);
-	}
-}
+// void	extension_validation(t_rt *rt)
+// {
+// 	char	*extension;
+// 	extension = ft_strrchr(rt->scene_name, '.');
+// 	if (!extension || ft_memcmp(extension, ".rt", 3))
+// 	{
+// 		free(rt->scene_name);
+// 		free(rt);
+// 		printf ("ERROR\n");
+// 		printf ("invalid scene extension\n");
+// 		exit (0);
+// 	}
+// }
 
-char	is_normalized(t_tuple v)
-{
-	float	magnitude;
+// void	set_amb(t_world *w)
+// {
+// 	t_list *aux;
 
-	magnitude = sqrt(pow(v[0], 2) + pow(v[1], 2) + pow(v[2], 2));
-	if (magnitude == 1)
-		return (1);
-	return (0);
-}
+// 	aux = w->head;
+// 	while (aux && aux->content && ((t_node *)aux->content)->object)
+// 	{
+// 		free(((t_node *)aux->content)->object->material->ambient);
+// 		((t_node *)aux->content)->object->material->ambient = w->ambient;
+// 		aux = aux->next;
+// 	}
+// }
 
-t_data	*creat_scene(t_rt *rt, t_world *w)
-{
-	t_data	*data;
-	t_tuple	normalized;
-	t_tuple	origin;
+// int	make_scene(t_data *data)
+// {
+// 	render (data);
 
-	origin = point(0, 0, 0);
-	data = ft_calloc(1, sizeof(t_data));
-	w->light = point_light(rt->l_coordinates, rt->l_color);
-	data->w = w;
-	data->c = camera(100, 100, rt->c_fov);
-	data->c->field_of_view = rt->c_fov;
-	if (!is_normalized(rt->c_normal))
-	{
-		normalized = normalize(rt->c_normal);
-		free(rt->c_normal);
-		rt->c_normal = normalized;
-	}
-	free(data->c->transform);
-	data->c->transform = view_transform(rt->c_coordinates, origin,
-			rt->c_normal);
-	return (data);
-}
+// 	if (data->win_ptr != NULL)
+// 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
+// 		data->img->mlx_img, 0, 0);
+// 	return (0);
+// }
 
-int	make_scene(t_data *data)
-{
-	render (data);
-	if (data->win_ptr != NULL)
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
-		data->img->mlx_img, 0, 0);
-	return (0);
-}
+// int	handle_keypress(int keysym, t_data *data)
+// {
+// 	if (keysym == XK_Escape)
+// 	{
+// 		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+// 		data->win_ptr = NULL;
+// 	}
+// 	return (0);
+// }
 
-int	handle_keypress(int keysym, t_data *data)
-{
-	if (keysym == XK_Escape)
-	{
-		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-		data->win_ptr = NULL;
-	}
-	return (0);
-}
+// int	put_image_again(t_data *data)
+// {
+// 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img->mlx_img, 0, 0);
+// 	return (0);
+// }
 
-int	main(int argc, char **argv)
-{
-	t_rt	*rt;
-	t_world	*w;
-	t_data	*data;
+// int	main(int argc, char **argv)
+// {
+// 	t_rt	*rt;
+// 	t_data	*data;
 
-	input_validation(argc);
-	rt = ft_calloc(1, sizeof(t_rt));
-	rt->scene_name = ft_strdup(argv[1]);
-	extension_validation(rt);
-	w = create_world();
-	if (validate_scene(rt, w))
-	{
-		data = creat_scene(rt, w);
-		data->img = ft_calloc(1, sizeof(t_image));
-		data->mlx_ptr = mlx_init();
-		data->win_ptr = mlx_new_window(data->mlx_ptr, 200, 100, "print sphere");
-		data->img->mlx_img = mlx_new_image(data->mlx_ptr, 200, 100);
-		data->img->addr = mlx_get_data_addr(
-			data->img->mlx_img,
-			&data->img->bpp,
-			&data->img->line_len,
-			&data->img->endian
-		);
-		mlx_loop_hook(data->mlx_ptr, &make_scene, &data);
-		mlx_hook(data->win_ptr, KeyPress, KeyPressMask, &handle_keypress, &data);
-		mlx_loop(data->mlx_ptr);
+// 	data = ft_calloc(1, sizeof(t_data));
+// 	input_validation(argc);
+// 	rt = ft_calloc(1, sizeof(t_rt));
+// 	rt->scene_name = ft_strdup(argv[1]);
+// 	extension_validation(rt);
 
-		mlx_destroy_image(data->mlx_ptr, data->img->mlx_img);
-		mlx_destroy_display(data->mlx_ptr);
-		free(data->mlx_ptr);
-	}
-	// validate_scene(rt, w);
-	free_rt(rt);
-}
+// 	data->w = create_world();
+// 	if (validate_scene(rt, data))
+// 	{
+// 		data->img = ft_calloc(1, sizeof(t_image));
+// 		data->mlx_ptr = mlx_init();
+// 		data->win_ptr = mlx_new_window(data->mlx_ptr, WIDTH, HEIGHT, "print sphere");
+
+// 		data->img->mlx_img = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
+// 		data->img->addr = mlx_get_data_addr(
+// 			data->img->mlx_img,
+// 			&data->img->bpp,
+// 			&data->img->line_len,
+// 			&data->img->endian
+// 		);
+// 	}
+// 	set_amb(data->w);
+// 	make_scene(data);
+
+
+// 	free_rt(rt);
+// /*	free(data->mlx_ptr);
+// 	mlx_expose_hook(data->win_ptr, put_image_again, data);
+
+
+// 	mlx_loop_hook(data->mlx_ptr, &make_scene, data);
+// 	mlx_hook(data->win_ptr, KeyPress, KeyPressMask, &handle_keypress, data);
+
+// 	mlx_destroy_image(data->mlx_ptr, data->img->mlx_img);
+// 	mlx_destroy_display(data->mlx_ptr);*/
+
+// 	mlx_loop(data->mlx_ptr);
+// }
 
 //lighting é inicializado com os valores passados por parametro
 //parece que o "plane" não tem valores, talvez seja interessante retir a struct dele
@@ -275,3 +269,24 @@ int	main(int argc, char **argv)
 	printf("\n %f, %f, %f\n", ((t_node *)w->head->next->next->next->next->next->content)->object->normal[0], ((t_node *)w->head->next->next->next->next->next->content)->object->normal[1], ((t_node *)w->head->next->next->next->next->next->content)->object->normal[2]);
 	printf("\n %f\n", ((t_node *)w->head->next->next->next->next->next->content)->object->cylinder->radius);
 	printf("\n %f\n", ((t_node *)w->head->next->next->next->next->next->content)->object->cylinder->maximum);*/
+
+#include <time.h>
+
+
+int main() {
+    clock_t start_time, end_time;
+    double cpu_time_used;
+
+    start_time = clock();  // Record the start time
+
+    yourFunction();  // Call the function you want to measure
+
+    end_time = clock();  // Record the end time
+
+    cpu_time_used = ((double) (end_time - start_time)) / CLOCKS_PER_SEC;  // Calculate the time used in seconds
+
+    printf("Time taken by the function: %f seconds\n", cpu_time_used);
+
+    return 0;
+}
+

@@ -1,10 +1,24 @@
 #include <minunit.h>
 #include <minirt.h>
 
+#include <time.h>
+
 MU_TEST(test_constructing_a_ray_through_the_center_of_the_canvas)
 {
+
 	t_camera	*c = camera(201, 101, M_PI / 2);
+	clock_t start_time, end_time;
+    double cpu_time_used;
+
+    start_time = clock();  // Record the start time
+
 	t_ray		*r = ray_for_pixel(c, 100, 50);
+
+    end_time = clock();  // Record the end time
+
+    cpu_time_used = ((double) (end_time - start_time)) / CLOCKS_PER_SEC;  // Calculate the time used in seconds
+
+    printf("Time taken by the function: %f seconds\n", cpu_time_used);
 
 	t_tuple		p = point(0, 0, 0);
 	t_tuple		v = vector(0, 0, -1);

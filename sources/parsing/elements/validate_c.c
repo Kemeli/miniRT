@@ -24,31 +24,57 @@ static char	validate_c_element(char *str, char type, t_rt *rt)
 	return (1);
 }
 
-char	validate_c(char *element, t_rt *rt)
+char	is_normalized(t_tuple v)
 {
-	int		i;
-	int		j;
-	char	*sub;
+	float	magnitude;
+
+	magnitude = sqrt(pow(v[0], 2) + pow(v[1], 2) + pow(v[2], 2));
+	if (magnitude == 1)
+		return (1);
+	return (0);
+}
+
+t_camera	*set_camera(t_rt *rt)
+{
+	t_tuple		origin;
+	t_camera	*cam;
+	t_tuple		normalized;
+
+	origin = rt->c_coordinates;
+	cam = camera(200, 100, rt->c_fov * M_PI / 180);
+	if (!is_normalized(rt->c_normal))
+	{
+		normalized = normalize(rt->c_normal);
+		free(rt->c_normal);
+		rt->c_normal = normalized;
+	}
+	free(cam->transform);
+	cam->transform = view_transform(origin, rt->c_normal,
+			normalize(rt->c_normal));
+	return (cam);
+}
+
+t_camera	*validate_c(char *element, t_rt *rt)
+{
+	int			i;
+	int			j;
+	char		*sub;
 
 	i = 1;
 	i = skip_spaces(i, element);
 	j = go_through_char(i, element);
 	sub = ft_substr(element, i, j - i);
 	if(!validate_c_element(sub, 'c', rt))
-		return(0);
+		return(NULL);
 	i = skip_spaces(j, element);
 	j = go_through_char(i, element);
 	sub = ft_substr(element, i, j - i);
 	if(!validate_c_element(sub, 'n', rt))
-		return(0);
+		return(NULL);
 	i = skip_spaces(j, element);
 	j = go_through_char(i, element);
 	sub = ft_substr(element, i, j - i);
 	if(!validate_c_element(sub, 'a', rt))
-		return(0);
-	// printf("c_coordinates: %f %f %f\n", rt->c_coordinates[0], rt->c_coordinates[1], rt->c_coordinates[2]);
-	// printf("c_normal: %f %f %f\n", rt->c_normal[0], rt->c_normal[1], rt->c_normal[2]);
-	// printf("c_fov: %f\n", rt->c_fov);
-	rt->c = 1;
-	return (1);
+		return(NULL);
+	return (set_camera(rt));
 }

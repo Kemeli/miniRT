@@ -19,7 +19,7 @@ MU_TEST(test_the_default_material)
 	t_material *m = material();
 	t_tuple color_to_compare = color(1, 1, 1);
 	mu_check(compare_tuples(m->color, color_to_compare));
-	mu_assert_double_eq(0.1, m->ambient);
+	mu_check(compare_tuples(color(0.1, 0.1, 0.1), m->ambient));
 	mu_assert_double_eq(0.9, m->diffuse);
 	mu_assert_double_eq(0.9, m->specular);
 	mu_assert_double_eq(200.0, m->shininess);
@@ -35,7 +35,7 @@ MU_TEST(test_an_object_has_a_default_material)
 	t_material *expected = material();
 
 	mu_check(compare_tuples(expected->color, m->color));
-	mu_assert_double_eq(expected->ambient, m->ambient);
+	mu_check(compare_tuples(expected->ambient, m->ambient));
 	mu_assert_double_eq(expected->diffuse, m->diffuse);
 	mu_assert_double_eq(expected->specular, m->specular);
 	mu_assert_double_eq(expected->shininess, m->shininess);
@@ -50,10 +50,10 @@ MU_TEST(test_that_an_object_may_be_assigned_a_material)
 	t_object *o = create_object('s');
 	t_material *m = material();
 
-	m->ambient = 1;
+	m->ambient = color(1, 1, 1);
 	o->change_my_material(o, m);
 	mu_check(compare_tuples(m->color, o->material->color));
-	mu_assert_double_eq(m->ambient, o->material->ambient);
+	mu_check(compare_tuples(m->ambient, o->material->ambient));
 	mu_assert_double_eq(m->diffuse, o->material->diffuse);
 	mu_assert_double_eq(m->specular, o->material->specular);
 	mu_assert_double_eq(m->shininess, o->material->shininess);

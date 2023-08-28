@@ -16,7 +16,7 @@ t_material	*material(void)
 
 	material = ft_calloc(1, sizeof(t_material));
 	material->color = color(1, 1, 1);
-	material->ambient = 0.1f;
+	material->ambient = color(0.1f, 0.1f, 0.1f);
 	material->diffuse = 0.9f;
 	material->specular = 0.9f;
 	material->shininess = 200.0f;
