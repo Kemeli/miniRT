@@ -60,6 +60,46 @@ static void	bubble_sort(t_list **head)
 		}
 	}
 }
+#include <stdlib.h>
+
+
+// t_list *partition(t_list *low, t_list *high) {
+// 	int pivot = ((t_node *)high->content)->t;
+// 	t_list *i = low;
+
+// 	for (t_list *j = low; j != high; j = j->next) {
+// 		if (((t_node *)j->content)->t <= pivot) {
+// 			// Trocar i e j
+// 			t_node *temp = i->content;
+// 			i->content = j->content;
+// 			j->content = temp;
+// 			i = i->next;
+// 		}
+// 	}
+
+// 	t_node *temp = i->content;
+// 	i->content = high->content;
+// 	high->content = temp;
+
+// 	return i;
+// }
+
+// void quicksort(t_list **head, t_list *low, t_list *high) {
+// 	if (high != NULL && low != high && low != high->next) {
+// 		t_list *pivot = partition(low, high);
+// 		quicksort(head, low, pivot);
+// 		quicksort(head, pivot->next, high);
+// 	}
+// }
+
+// void quick_sort(t_list **head) {
+// 	t_list *last = *head;
+// 	while (last->next != NULL)
+// 		last = last->next;
+
+// 	quicksort(head, *head, last);
+// }
+
 
 t_intersect	*intersect_world(t_world *world, t_ray *ray)
 {

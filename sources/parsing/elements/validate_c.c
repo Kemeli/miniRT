@@ -41,7 +41,7 @@ t_camera	*set_camera(t_rt *rt)
 	t_tuple		normalized;
 
 	origin = rt->c_coordinates;
-	cam = camera(200, 100, rt->c_fov * M_PI / 180);
+	cam = camera(WIDTH, HEIGHT, rt->c_fov * M_PI / 180);
 	if (!is_normalized(rt->c_normal))
 	{
 		normalized = normalize(rt->c_normal);

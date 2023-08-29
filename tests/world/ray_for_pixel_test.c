@@ -112,6 +112,12 @@ MU_TEST(test_rendering_a_world_with_a_camera)
 	free_camera(c);
 }
 */
+
+// MU_RUN_TEST(test_render_function)
+// {
+
+// }
+
 MU_TEST_SUITE(test_ray_for_pixel)
 {
 	MU_RUN_TEST(test_constructing_a_ray_through_the_center_of_the_canvas);

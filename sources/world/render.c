@@ -19,10 +19,10 @@ void	render(t_data *data)
 
 	y = 0;
 	x = 0;
-	while (y < (data->c->vsize - 1))
+	while (y < ((unsigned long long)data->c->vsize))
 	{
 		x = 0;
-		while (x < (data->c->hsize - 1))
+		while (x < ((unsigned long long)data->c->hsize))
 		{
 			r = ray_for_pixel(data->c, x, y);
 			to_color = color_at(data->w, r);

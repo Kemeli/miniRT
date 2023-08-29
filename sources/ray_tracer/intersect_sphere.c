@@ -22,19 +22,26 @@ t_intersect	*handle_discriminant(
 	t_list		*first_inter;
 	t_list		*second_inter;
 
-	first_inter = NULL;
-	second_inter = NULL;
 	intersect_list = ft_calloc(1, sizeof(t_intersect));
+	intersect_list->count = 0;
 	discriminant = pow(b, 2) - 4 * a * c;
+	if (discriminant < 0)
+		return (intersect_list);
 	sqrtd = sqrt(discriminant);
-	first_inter = new_intersection((-b - sqrtd) / (2.0 * a), object);
-	second_inter = new_intersection((-b + sqrtd) / (2.0 * a), object);
-	ft_lstadd_back(&first_inter, second_inter);
-	intersect_list->head = first_inter;
 	if (discriminant == 0)
+	{
 		intersect_list->count = 1;
+		first_inter = new_intersection((-b - sqrtd) / (2.0 * a), object);
+		intersect_list->head = first_inter;
+	}
 	else if (discriminant > 0)
+	{
 		intersect_list->count = 2;
+		first_inter = new_intersection((-b - sqrtd) / (2.0 * a), object);
+		intersect_list->head = first_inter;
+		second_inter = new_intersection((-b + sqrtd) / (2.0 * a), object);
+		ft_lstadd_back(&first_inter, second_inter);
+	}
 	return (intersect_list);
 }
 

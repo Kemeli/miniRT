@@ -97,6 +97,8 @@ char	validate_scene(t_rt *rt, t_data *data)
 	free(trimmed);
 	while(splitted_scene[i])
 	{
+		if (splitted_scene[i][0] == '\r') //gamb, como resolver?
+			i++;
 		ret = validate_identifier(splitted_scene[i], rt, data);
 		if (!ret)
 		{

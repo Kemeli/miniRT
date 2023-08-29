@@ -14,8 +14,8 @@
 # define TRUE 1
 # define FALSE 0
 
-#define HEIGHT 100
-#define WIDTH 200
+#define HEIGHT 200
+#define WIDTH 300
 
 typedef float*	t_tuple;
 typedef float**	t_matrix;
@@ -119,8 +119,8 @@ typedef struct s_comps
 
 typedef struct s_camera
 {
-	float		hsize;
-	float		vsize;
+	int			hsize;
+	int			vsize;
 	float		field_of_view;
 	float		pixel_size;
 	float		half_width;
@@ -254,7 +254,7 @@ void			free_object(t_object *object);
 t_tuple			shade_hit(t_world *world, t_comps *comps);
 t_tuple			color_at(t_world *w, t_ray *r);
 t_matrix		view_transform(t_tuple from, t_tuple to, t_tuple direction);
-t_camera		*camera(float hsize, float vsize, float field_of_view);
+t_camera		*camera(float hsize, int vsize, int field_of_view);
 void			free_camera(t_camera *c);
 t_ray			*ray_for_pixel(t_camera *c, float px, float py);
 void			render(t_data *data);
