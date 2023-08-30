@@ -1,20 +1,26 @@
 #include <minirt.h>
 
-t_list	*new_intersection(float t, t_object *object)
+t_node	*new_intersection(float t, t_object *object)
 {
-	t_node	*content;
-	t_list	*list;
+	t_node	*node;
 
-	content = ft_calloc(1, sizeof(t_node));
-	content->t = t;
-	content->object = object;
-	list = ft_lstnew(content);
-	return (list);
+	node = ft_calloc(1, sizeof(t_node));
+	node->t = t;
+	node->object = object;
+	node->next = NULL;
+	return (node);
 }
 
 void	free_intersections(t_intersect *list)
 {
-	ft_lstclear(&list->head, free);
+	t_node	*aux;
+
+	while (list->head)
+	{
+		aux = list->head;
+		list->head = list->head->next;
+		free(aux);
+	}
 	free(list);
 }
 

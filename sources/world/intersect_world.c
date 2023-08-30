@@ -1,94 +1,112 @@
 #include <minirt.h>
 #include <time.h>
+#include <minirt.h>
 
-// int	is_ordered(int *numbers, int index, int size)
-// {
-// 	while (index < size)
-// 	{
-// 		if (numbers[index] > numbers[index + 1])
-// 			return (0);
-// 		index++;
-// 	}
-// 	return (1);
-// }
-
-// void	order_array(int *numbers, int index, int pivot)
-// {
-// 	int	mid;
-// 	int	aux;
-
-// 	mid = index;
-// 	aux = 0;
-// 	if (!is_ordered(numbers, index, pivot))
-// 	{
-// 		while (numbers[index] != numbers[pivot])
-// 		{
-// 			if (numbers[index] < numbers[pivot])
-// 			{
-// 				aux = numbers[index];
-// 				numbers[index] = numbers[mid];
-// 				numbers[mid] = aux;
-// 				mid++;
-// 			}
-// 			index++;
-// 		}
-// 		aux = numbers[pivot];
-// 		numbers[pivot] = numbers[mid];
-// 		numbers[mid] = aux;
-// 		order_array(numbers, 0, mid - 1);
-// 		order_array(numbers, mid + 1, pivot);
-// 	}
-// }
-
-void	ft_lstswap(t_list *a, t_list *b)
+typedef struct s_aux
 {
-	t_list	*aux;
+	t_node	*temp;
+	t_node	*ptr;
+	t_node	*prev;
+}	t_aux;
 
-	aux = a;
-	a = b;
-	b = aux;
+static int	ft_is_sorted(t_node **list)
+{
+	int		flag;
+	t_node	*temp;
+
+	if(!(*list) || !(*list)->next)
+		return (0);
+	flag = 0;
+	temp = *list;
+	while (temp->next)
+	{
+		if (temp->t > temp->next->t)
+			flag = 1;
+		else if (flag == 1)
+			break ;
+		temp = temp->next;
+	}
+	return (flag);
 }
 
-void	sort(t_list **head)
+void	curr_t_bigger_than_next_t(t_aux *aux, t_node **head)
 {
-	t_list	*aux;
+	aux->ptr = aux->temp->next;
+	aux->temp->next = aux->ptr->next;
+	aux->ptr->next = aux->temp;
+	if (aux->prev)
+		aux->prev->next = aux->ptr;
+	else
+		(*head) = aux->ptr;
+	aux->prev = aux->ptr;
+}
 
-	aux = (*head);
-	while (aux && aux->next)
+static void	bubble_sort(t_node **head)
+{
+	t_aux	aux;
+
+	while (ft_is_sorted(head))
 	{
-		if (((t_node *)aux->content)->t < ((t_node *)aux->next->content)->t)
+		aux.temp = *head;
+		aux.prev = NULL;
+		while (aux.temp->next)
 		{
-			aux = aux->next;
-
-		}
-		else
-		{
-
-			ft_lstswap(aux, aux->next);
-
-			aux = (*head);
-			aux = aux->next;
+			if (aux.temp->t > aux.temp->next->t)
+				curr_t_bigger_than_next_t(&aux, head);
+			else
+			{
+				aux.prev = aux.temp;
+				aux.temp = aux.temp->next;
+			}
 		}
 	}
 }
+
+
+// void	swap_intersections(t_node *a, t_node *b)
+// {
+// 	t_node	*aux;
+
+// 	aux = a;
+// 	a = b;
+// 	b = aux;
+// }
+
+// void	sort(t_node **head)
+// {
+// 	t_node	*aux;
+
+// 	aux = (*head);
+// 	while (aux && aux->next)
+// 	{
+// 		if (aux->t < aux->t)
+// 			aux = aux->next;
+// 		else
+// 		{
+// 			swap_intersections(aux, aux->next);
+// 			aux = (*head);
+// 			aux = aux->next;
+// 		}
+// 	}
+// }
 
 t_intersect	*intersect_world(t_world *world, t_ray *ray)
 {
 	t_intersect	*xs;
 	t_intersect	*temp;
-	t_list		*aux;
+	t_object	*aux;
 
 	aux = world->head;
-	xs = intersect(&((t_node *)aux->content)->object, ray);
+	xs = intersect(&aux, ray);
 	aux = aux->next;
 	while (aux)
 	{
-		temp = intersect(&((t_node *)aux->content)->object, ray);
-		ft_lstadd_back(&xs->head, temp->head);
+		temp = intersect(&aux, ray);
+		append_node(&xs->head, temp->head);
 		free(temp);
 		aux = aux->next;
 	}
-	sort(&(xs->head));
-	xs->count = ft_lstsize(xs->head);
+	bubble_sort(&(xs->head));
+	xs->count = intersect_lst_size(xs->head);
 	return (xs);
 }

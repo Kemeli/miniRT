@@ -1,5 +1,20 @@
 #include <minirt.h>
 
+int	intersect_lst_size(t_node *head)
+{
+	int		count;
+	t_node	*aux;
+
+	count = 0;
+	aux = head;
+	while (aux)
+	{
+		count++;
+		aux = aux->next;
+	}
+	return (count);
+}
+
 static char	check_cap(t_ray *ray, float t)
 {
 	float	x;
@@ -24,14 +39,10 @@ static void	intersect_caps(t_object *object, t_ray *ray, t_intersect *xs)
 		return ;
 	t = (object->cylinder->minimum - ray->origin[1]) / ray->direction[1];
 	if (check_cap(ray, t))
-	{
-		ft_lstadd_back(&xs->head, new_intersection(t, object));
-	}
+		append_node(&xs->head, new_intersection(t, object));
 	t = (object->cylinder->maximum - ray->origin[1]) / ray->direction[1];
 	if (check_cap(ray, t))
-	{
-		ft_lstadd_back(&xs->head, new_intersection(t, object));
-	}
+		append_node(&xs->head, new_intersection(t, object));
 }
 
 static void	create_intersection(
@@ -47,10 +58,10 @@ static void	create_intersection(
 		(*xs)->head = new_intersection(t[0], object);
 	y[1] = ray->origin[1] + (t[1] * ray->direction[1]);
 	if (object->cylinder->minimum < y[1] && y[1] < object->cylinder->maximum)
-		ft_lstadd_back(&(*xs)->head, new_intersection(t[1], object));
+		append_node(&(*xs)->head, new_intersection(t[1], object));
 	if (object->cylinder->closed)
 		intersect_caps(object, ray, (*xs));
-	(*xs)->count = ft_lstsize((*xs)->head);
+	(*xs)->count = intersect_lst_size((*xs)->head);
 }
 
 t_intersect	*intersect_cylinder(t_object *object, t_ray *ray)

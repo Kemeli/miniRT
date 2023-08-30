@@ -5,31 +5,30 @@ t_world	*create_world(void)
 	t_world	*world;
 
 	world = ft_calloc(1, sizeof(t_world));
-	world->head = ft_calloc(1, sizeof(t_list));
-	world->head->content = (void *)ft_calloc(1, sizeof(t_node));
-	((t_node *)world->head->content)->object = NULL;
+	world->head = ft_calloc(1, sizeof(t_object));
+	world->head = (void *)ft_calloc(1, sizeof(t_node));
+	world->head = NULL;
 	world->light = NULL;
 	return (world);
 }
 
-static t_list	*objects_list(t_list *head)
+static t_object	*objects_list(t_object *head)
 {
 	t_node		*next_node;
 	t_material	*mat;
 
-	((t_node *)head->content)->object = create_object('s');
+	head = create_object('s');
 	next_node = ft_calloc(1, sizeof(t_node));
 	next_node->object = create_object('s');
 	free_matrix(next_node->object->transform);
 	next_node->object->transform = scaling(0.5, 0.5, 0.5);
-	ft_lstadd_back(&head, ft_lstnew(next_node));
+	append_object(&head, &next_node->object);
 	mat = material();
 	free(mat->color);
 	mat->color = color(0.8, 1.0, 0.6);
 	mat->diffuse = 0.7;
 	mat->specular = 0.2;
-	((t_node *)head->content)->object->change_my_material(
-		((t_node*)head->content)->object, mat);
+	head->change_my_material(head, mat);
 	return (head);
 }
 

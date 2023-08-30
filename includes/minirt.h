@@ -69,17 +69,19 @@ typedef struct s_object
 	float		**transform;
 	t_material	*material;
 	void		(*change_my_material)(struct s_object *obj, t_material *m);
+	struct s_object	*next;
 }	t_object;
 
 typedef struct s_node
 {
-	float		t;
-	t_object	*object;
+	float			t;
+	t_object		*object;
+	struct s_node	*next;
 }	t_node;
 
 typedef struct s_intersect
 {
-	t_list	*head;
+	t_node	*head;
 	int		count;
 }	t_intersect;
 
@@ -101,7 +103,7 @@ typedef struct s_lighting
 
 typedef struct s_world
 {
-	t_list			*head;
+	t_object		*head;
 	t_point_light	*light;
 	t_tuple			ambient;
 }	t_world;
@@ -227,7 +229,7 @@ t_sphere		*create_sphere(void);
 void			free_sphere(t_sphere *s);
 void			change_material(t_object *obj, t_material *m);
 t_intersect		*intersect_sphere(t_object *object);
-t_list			*new_intersection(float t, t_object *object);
+t_node			*new_intersection(float t, t_object *object);
 void			free_intersections(t_intersect *list);
 t_intersect		*add_intersection_to_list(t_intersect *list, t_node *new);
 t_node			*hit(t_intersect *xs);
@@ -291,5 +293,8 @@ float			verify_and_get_float(char *str);
 void			free_rt(t_rt *rt);
 void			ft_free_ptr(void **ptr);
 void			add_object(t_world *w, t_object *obj);
+void			append_node(t_node **head, t_node *new);
+void			append_object(t_object **head, t_object **new);
+int				intersect_lst_size(t_node *head);
 
 #endif

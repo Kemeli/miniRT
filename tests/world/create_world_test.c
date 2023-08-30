@@ -58,10 +58,10 @@ MU_TEST(test_Intersect_a_world_with_a_ray)
 
 	xs = intersect_world(world, r);
 	mu_check(4 == xs->count);
-	mu_check(4 == ((t_node *)xs->head->content)->t);
-	mu_check(4.5 == ((t_node *)xs->head->next->content)->t);
-	mu_check(5.5 == ((t_node *)xs->head->next->next->content)->t);
-	mu_check(6 == ((t_node *)xs->head->next->next->next->content)->t);
+	mu_check(4 == xs->head->t);
+	mu_check(4.5 == xs->head->next->t);
+	mu_check(5.5 == xs->head->next->next->t);
+	mu_check(6 == xs->head->next->next->next->t);
 
 	free_world(world);
 	free_intersections(xs);

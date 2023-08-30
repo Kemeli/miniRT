@@ -70,8 +70,8 @@ MU_TEST(test_a_ray_strikes_a_cylinder)
 
 	t_intersect *xs = intersect(&o, r);
 	mu_check(xs->count == 2);
-	mu_check(((t_node *)xs->head->content)->t == 5);
-	mu_check(((t_node *)xs->head->next->content)->t == 5);
+	mu_check(xs->head->t == 5);
+	mu_check(xs->head->next->t == 5);
 
 	free(direction);
 	free_intersections(xs);
@@ -90,8 +90,8 @@ MU_TEST(test_a_ray_strikes_a_cylinder2)
 
 	t_intersect *xs = intersect(&o, r);
 	mu_check(xs->count == 2);
-	mu_check(((t_node *)xs->head->content)->t == 4);
-	mu_check(((t_node *)xs->head->next->content)->t == 6);
+	mu_check(xs->head->t == 4);
+	mu_check(xs->head->next->t == 6);
 
 	free(direction);
 	free_intersections(xs);
@@ -111,8 +111,8 @@ MU_TEST(test_a_ray_strikes_a_cylinder3)
 	t_intersect *xs = intersect(&o, r);
 	mu_check(xs->count == 2);
 
-	mu_check(compare_floats(((t_node *)xs->head->content)->t, 6.8080)); // 6.80798
-	mu_check(compare_floats(((t_node *)xs->head->next->content)->t, 7.0887));
+	mu_check(compare_floats(xs->head->t, 6.8080)); // 6.80798
+	mu_check(compare_floats(xs->head->next->t, 7.0887));
 
 	free(direction);
 	free_intersections(xs);

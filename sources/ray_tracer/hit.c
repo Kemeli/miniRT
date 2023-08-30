@@ -3,18 +3,18 @@
 t_node	*hit(t_intersect *xs)
 {
 	t_node	*hit;
-	t_list	*aux;
+	t_node	*aux;
 
 	hit = NULL;
 	aux = xs->head;
 	while (aux)
 	{
-		if (((t_node *)aux->content)->t > 0)
+		if (aux->t > 0)
 		{
 			if (hit == NULL)
-				hit = (t_node *)aux->content;
-			else if (((t_node *)aux->content)->t < hit->t)
-				hit = (t_node *)aux->content;
+				hit = aux;
+			else if (aux->t < hit->t)
+				hit = aux;
 		}
 		aux = aux->next;
 	}

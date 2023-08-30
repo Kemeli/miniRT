@@ -1,5 +1,8 @@
 #include <minirt.h>
 
+#include <time.h>
+
+
 void	write_pixel(t_image *img, int x, int y, t_tuple color)
 {
 	int	pixel_offset = (y * img->line_len) + (x * (img->bpp / 8));
@@ -21,6 +24,7 @@ void	render(t_data *data)
 	x = 0;
 	while (y < ((unsigned long long)data->c->vsize))
 	{
+		printf("Rendering line %llu\n", y);
 		x = 0;
 		while (x < ((unsigned long long)data->c->hsize))
 		{

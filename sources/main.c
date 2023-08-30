@@ -1,6 +1,20 @@
 #include <minirt.h>
 #include <time.h>
 
+void	append_object(t_object **head, t_object **new)
+{
+	t_object	*aux;
+
+	if (!*head)
+	{
+		*head = *new;
+		return ;
+	}
+	aux = *head;
+	while (aux->next)
+		aux = aux->next;
+	aux->next = *new;
+}
 
 int render_first_scene(t_data *data)
 {
@@ -33,23 +47,10 @@ int render_first_scene(t_data *data)
 	left->material->diffuse = 0.7;
 	left->material->specular = 0.3;
 
-	data->w->head = ft_calloc(1, sizeof(t_dlist));
-	data->w->head->content = (void *)ft_calloc(1, sizeof(t_node));
-
-	((t_node *)data->w->head->content)->object = floor;
-
-	t_node *node4 = ft_calloc(1, sizeof(t_node));
-	node4->object = middle;
-
-	t_node *node5 = ft_calloc(1, sizeof(t_node));
-	node5->object = right;
-
-	t_node *node6 = ft_calloc(1, sizeof(t_node));
-	node6->object = left;
-
-	ft_lstadd_back(&data->w->head, ft_lstnew(node4));
-	ft_lstadd_back(&data->w->head, ft_lstnew(node5));
-	ft_lstadd_back(&data->w->head, ft_lstnew(node6));
+	data->w->head = floor;
+	append_object(&data->w->head, &middle);
+	append_object(&data->w->head, &right);
+	append_object(&data->w->head, &left);
 
 	render(data);
 
@@ -67,6 +68,12 @@ int	handle_keypress(int keysym, t_data *data)
 		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 		data->win_ptr = NULL;
 	}
+	return (0);
+}
+
+int	put_image_again(t_data *data)
+{
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img->mlx_img, 0, 0);
 	return (0);
 }
 
@@ -95,14 +102,15 @@ int main(void)
 	w->light = point_light(point(-10, 10, -10), color(1, 1, 1));
 	data.w = w;
 	data.c = c;
-	mlx_loop_hook(data.mlx_ptr, &render_first_scene, &data);
+	render_first_scene(&data);
+	// mlx_loop_hook(data.mlx_ptr, &render_first_scene, &data);
+	mlx_expose_hook(data.win_ptr, put_image_again, &data);
 	mlx_hook(data.win_ptr, KeyPress, KeyPressMask, &handle_keypress, &data);
 	mlx_loop(data.mlx_ptr);
 
 	mlx_destroy_image(data.mlx_ptr, data.img->mlx_img);
 	mlx_destroy_display(data.mlx_ptr);
 	free(data.mlx_ptr);
-
 	return (0);
 }
 /*

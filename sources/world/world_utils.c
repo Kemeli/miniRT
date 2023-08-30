@@ -1,14 +1,17 @@
 #include <minirt.h>
 
-static void	free_content(void *node)
+static void	free_content(t_object *obj)
 {
-	free_object(((t_node *)node)->object);
-	free((t_node *)node);
+	while(obj)
+	{
+		free_object(obj);
+		obj = obj->next;
+	}
 }
 
 void	free_world(t_world *world)
 {
-	ft_lstclear(&(world->head), free_content);
+	free_content(world->head);
 	free(world->light->intensity);
 	free(world->light->position);
 	free(world->light);
