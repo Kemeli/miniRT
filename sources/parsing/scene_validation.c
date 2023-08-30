@@ -1,3 +1,4 @@
+
 #include <minirt.h>
 
 static char	*get_line(char *buffer, int fd)
@@ -97,6 +98,11 @@ char	validate_scene(t_rt *rt, t_data *data)
 	free(trimmed);
 	while(splitted_scene[i])
 	{
+		if (splitted_scene[i][0] == '\r')
+		{
+			i++;
+			continue;
+		}
 		if (splitted_scene[i][0] == '\r') //gamb, como resolver?
 			i++;
 		ret = validate_identifier(splitted_scene[i], rt, data);
@@ -110,4 +116,3 @@ char	validate_scene(t_rt *rt, t_data *data)
 	free_split(splitted_scene);
 	return(1);
 }
-

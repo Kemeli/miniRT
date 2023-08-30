@@ -1,4 +1,5 @@
 #include <minirt.h>
+#include <time.h>
 
 typedef struct s_aux
 {
@@ -60,46 +61,46 @@ static void	bubble_sort(t_list **head)
 		}
 	}
 }
-#include <stdlib.h>
 
 
-// t_list *partition(t_list *low, t_list *high) {
-// 	int pivot = ((t_node *)high->content)->t;
-// 	t_list *i = low;
+// int	is_ordered(int *numbers, int index, int size)
+// {
+// 	while (index < size)
+// 	{
+// 		if (numbers[index] > numbers[index + 1])
+// 			return (0);
+// 		index++;
+// 	}
+// 	return (1);
+// }
 
-// 	for (t_list *j = low; j != high; j = j->next) {
-// 		if (((t_node *)j->content)->t <= pivot) {
-// 			// Trocar i e j
-// 			t_node *temp = i->content;
-// 			i->content = j->content;
-// 			j->content = temp;
-// 			i = i->next;
+// void	order_array(int *numbers, int index, int pivot)
+// {
+// 	int	mid;
+// 	int	aux;
+
+// 	mid = index;
+// 	aux = 0;
+// 	if (!is_ordered(numbers, index, pivot))
+// 	{
+// 		while (numbers[index] != numbers[pivot])
+// 		{
+// 			if (numbers[index] < numbers[pivot])
+// 			{
+// 				aux = numbers[index];
+// 				numbers[index] = numbers[mid];
+// 				numbers[mid] = aux;
+// 				mid++;
+// 			}
+// 			index++;
 // 		}
-// 	}
-
-// 	t_node *temp = i->content;
-// 	i->content = high->content;
-// 	high->content = temp;
-
-// 	return i;
-// }
-
-// void quicksort(t_list **head, t_list *low, t_list *high) {
-// 	if (high != NULL && low != high && low != high->next) {
-// 		t_list *pivot = partition(low, high);
-// 		quicksort(head, low, pivot);
-// 		quicksort(head, pivot->next, high);
+// 		aux = numbers[pivot];
+// 		numbers[pivot] = numbers[mid];
+// 		numbers[mid] = aux;
+// 		order_array(numbers, 0, mid - 1);
+// 		order_array(numbers, mid + 1, pivot);
 // 	}
 // }
-
-// void quick_sort(t_list **head) {
-// 	t_list *last = *head;
-// 	while (last->next != NULL)
-// 		last = last->next;
-
-// 	quicksort(head, *head, last);
-// }
-
 
 t_intersect	*intersect_world(t_world *world, t_ray *ray)
 {
@@ -121,4 +122,3 @@ t_intersect	*intersect_world(t_world *world, t_ray *ray)
 	xs->count = ft_lstsize(xs->head);
 	return (xs);
 }
-

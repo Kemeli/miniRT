@@ -1,5 +1,7 @@
 #include <minirt.h>
-/*
+#include <time.h>
+
+
 int render_first_scene(t_data *data)
 {
 	t_object	*floor = create_object('p');
@@ -31,7 +33,7 @@ int render_first_scene(t_data *data)
 	left->material->diffuse = 0.7;
 	left->material->specular = 0.3;
 
-	data->w->head = ft_calloc(1, sizeof(t_list));
+	data->w->head = ft_calloc(1, sizeof(t_dlist));
 	data->w->head->content = (void *)ft_calloc(1, sizeof(t_node));
 
 	((t_node *)data->w->head->content)->object = floor;
@@ -58,6 +60,7 @@ int render_first_scene(t_data *data)
 }
 
 int	handle_keypress(int keysym, t_data *data)
+
 {
 	if (keysym == XK_Escape)
 	{
@@ -75,8 +78,8 @@ int main(void)
 
 	data.img = ft_calloc(1, sizeof(t_image));
 	data.mlx_ptr = mlx_init();
-	data.win_ptr = mlx_new_window(data.mlx_ptr, 200, 100, "print sphere");
-	data.img->mlx_img = mlx_new_image(data.mlx_ptr, 200, 100);
+	data.win_ptr = mlx_new_window(data.mlx_ptr, WIDTH, HEIGHT, "print sphere");
+	data.img->mlx_img = mlx_new_image(data.mlx_ptr, WIDTH, HEIGHT);
 	data.img->addr = mlx_get_data_addr(
 		data.img->mlx_img,
 		&data.img->bpp,
@@ -85,7 +88,7 @@ int main(void)
 	);
 
 	w = default_world();
-	c = camera(200, 100, M_PI / 3);
+	c = camera(WIDTH, HEIGHT, 70 * M_PI  / 180);
 	free_matrix(c->transform);
 	c->transform = view_transform(point(0, 1.5, -5), point(0, 1, 0), vector(0, 1, 0));
 	free(w->light);
@@ -102,8 +105,7 @@ int main(void)
 
 	return (0);
 }
-*/
-
+/*
 #include<stdio.h>
 
 enum	e_scene
@@ -143,7 +145,7 @@ void	extension_validation(t_rt *rt)
 
 void	set_amb(t_world *w)
 {
-	t_list *aux;
+	t_dlist *aux;
 
 	aux = w->head;
 	while (aux && aux->content && ((t_node *)aux->content)->object)
@@ -205,15 +207,17 @@ int	main(int argc, char **argv)
 			&data->img->line_len,
 			&data->img->endian
 		);
-		set_amb(data->w);
-		make_scene(data);
+		render(data);
+		// set_amb(data->w);
+		// make_scene(data);
 		data->win_ptr = mlx_new_window(data->mlx_ptr, WIDTH, HEIGHT, "print sphere");
 		free_rt(rt);
 		mlx_loop(data->mlx_ptr);
 	}
 
-
 	mlx_expose_hook(data->win_ptr, put_image_again, data);
+}
+*/
 /*	free(data->mlx_ptr);
 
 
@@ -223,71 +227,9 @@ int	main(int argc, char **argv)
 	mlx_destroy_image(data->mlx_ptr, data->img->mlx_img);
 	mlx_destroy_display(data->mlx_ptr);*/
 
-}
+// }
 
 //lighting é inicializado com os valores passados por parametro
 //parece que o "plane" não tem valores, talvez seja interessante retir a struct dele
 //deu segfault com normal do cylinder invalido
 //verificar vazamento de memória quando der erro nas validations
-
-/*
-
-	printf("\n object 1: %c added to the scene\n", ((t_node *)w->head->content)->object->shape);
-	printf("\n %f, %f, %f\n", ((t_node *)w->head->content)->object->sphere->center[0], ((t_node *)w->head->content)->object->sphere->center[1], ((t_node *)w->head->content)->object->sphere->center[2]);
-	printf("\n %f\n", ((t_node *)w->head->content)->object->sphere->radius);
-	printf("\n %f, %f, %f\n", ((t_node *)w->head->content)->object->material->color[0], ((t_node *)w->head->content)->object->material->color[1], ((t_node *)w->head->content)->object->material->color[2]);
-
-	printf("\n");
-	printf("\n");
-	printf("\n %f, %f, %f\n", ((t_node *)w->head->next->content)->object->sphere->center[0], ((t_node *)w->head->next->content)->object->sphere->center[1], ((t_node *)w->head->next->content)->object->sphere->center[2]);
-	printf("\n %f\n", ((t_node *)w->head->next->content)->object->sphere->radius);
-	printf("\n object 2: %c added to the scene\n", ((t_node *)w->head->next->content)->object->shape);
-	printf("\n %f, %f, %f\n", ((t_node *)w->head->next->content)->object->material->color[0], ((t_node *)w->head->next->content)->object->material->color[1], ((t_node *)w->head->next->content)->object->material->color[2]);
-	printf("\n");
-	printf("\n");
-	printf("\n %f, %f, %f\n", ((t_node *)w->head->next->next->content)->object->plane->plane_point[0], ((t_node *)w->head->next->next->content)->object->plane->plane_point[1], ((t_node *)w->head->next->next->content)->object->plane->plane_point[2]);
-	printf("\n %f, %f, %f\n", ((t_node *)w->head->next->next->content)->object->normal[0], ((t_node *)w->head->next->next->content)->object->normal[1], ((t_node *)w->head->next->next->content)->object->normal[2]);
-	printf("\n object 3: %c added to the scene\n", ((t_node *)w->head->next->next->content)->object->shape);
-	printf("\n %f, %f, %f\n", ((t_node *)w->head->next->next->content)->object->material->color[0], ((t_node *)w->head->next->next->content)->object->material->color[1], ((t_node *)w->head->next->next->content)->object->material->color[2]);
-	printf("\n");
-	printf("\n");
-	printf("\n %f, %f, %f\n", ((t_node *)w->head->next->next->next->content)->object->plane->plane_point[0], ((t_node *)w->head->next->next->next->content)->object->plane->plane_point[1], ((t_node *)w->head->next->next->next->content)->object->plane->plane_point[2]);
-	printf("\n %f, %f, %f\n", ((t_node *)w->head->next->next->next->content)->object->normal[0], ((t_node *)w->head->next->next->next->content)->object->normal[1], ((t_node *)w->head->next->next->next->content)->object->normal[2]);
-	printf("\n object 4: %c added to the scene\n", ((t_node *)w->head->next->next->next->content)->object->shape);
-	printf("\n %f, %f, %f\n", ((t_node *)w->head->next->next->next->content)->object->material->color[0], ((t_node *)w->head->next->next->next->content)->object->material->color[1], ((t_node *)w->head->next->next->next->content)->object->material->color[2]);
-	printf("\n");
-	printf("\n");
-	printf("\n %f, %f, %f\n", ((t_node *)w->head->next->next->next->next->content)->object->material->color[0], ((t_node *)w->head->next->next->next->next->content)->object->material->color[1], ((t_node *)w->head->next->next->next->next->content)->object->material->color[2]);
-	printf("\n object 5: %c added to the scene\n", ((t_node *)w->head->next->next->next->next->content)->object->shape);
-	printf("\n %f, %f, %f\n", ((t_node *)w->head->next->next->next->next->content)->object->normal[0], ((t_node *)w->head->next->next->next->next->content)->object->normal[1], ((t_node *)w->head->next->next->next->next->content)->object->normal[2]);
-	printf("\n %f\n", ((t_node *)w->head->next->next->next->next->content)->object->cylinder->radius);
-	printf("\n %f\n", ((t_node *)w->head->next->next->next->next->content)->object->cylinder->maximum);
-
-	printf("\n");
-	printf("\n");
-	printf("\n %f, %f, %f\n", ((t_node *)w->head->next->next->next->next->next->content)->object->material->color[0], ((t_node *)w->head->next->next->next->next->next->content)->object->material->color[1], ((t_node *)w->head->next->next->next->next->next->content)->object->material->color[2]);
-	printf("\n object 6: %c added to the scene\n", ((t_node *)w->head->next->next->next->next->next->content)->object->shape);
-	printf("\n %f, %f, %f\n", ((t_node *)w->head->next->next->next->next->next->content)->object->normal[0], ((t_node *)w->head->next->next->next->next->next->content)->object->normal[1], ((t_node *)w->head->next->next->next->next->next->content)->object->normal[2]);
-	printf("\n %f\n", ((t_node *)w->head->next->next->next->next->next->content)->object->cylinder->radius);
-	printf("\n %f\n", ((t_node *)w->head->next->next->next->next->next->content)->object->cylinder->maximum);*/
-
-// #include <time.h>
-
-
-// int main() {
-//     clock_t start_time, end_time;
-//     double cpu_time_used;
-
-//     start_time = clock();  // Record the start time
-
-//     yourFunction();  // Call the function you want to measure
-
-//     end_time = clock();  // Record the end time
-
-//     cpu_time_used = ((double) (end_time - start_time)) / CLOCKS_PER_SEC;  // Calculate the time used in seconds
-
-//     printf("Time taken by the function: %f seconds\n", cpu_time_used);
-
-//     return 0;
-// }
-
