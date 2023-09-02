@@ -14,8 +14,8 @@
 # define TRUE 1
 # define FALSE 0
 
-#define HEIGHT 200
-#define WIDTH 300
+#define HEIGHT 700
+#define WIDTH 1000
 
 typedef double*	t_tuple;
 typedef double**	t_matrix;
@@ -67,6 +67,7 @@ typedef struct s_object
 	t_tuple		normal;
 	t_ray		*saved_ray;
 	double		**transform;
+	double		**inverse;
 	t_material	*material;
 	void		(*change_my_material)(struct s_object *obj, t_material *m);
 	struct s_object	*next;
@@ -244,7 +245,7 @@ void			free_intersections(t_intersect *list);
 t_intersect		*add_intersection_to_list(t_intersect *list, t_node *new);
 t_node			*hit(t_intersect *xs);
 t_ray			*transform_ray(t_ray *ray, t_matrix matrix);
-void			set_transform(t_object **obj, t_matrix translation);
+void			set_transform(t_object *o, t_matrix transform);
 t_tuple			normal_at(t_object *object, t_tuple point);
 t_tuple			reflect(t_tuple in, t_tuple normal);
 t_point_light	*point_light(t_tuple position, t_tuple intensity);

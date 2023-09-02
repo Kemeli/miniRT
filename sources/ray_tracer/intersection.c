@@ -27,13 +27,11 @@ void	free_intersections(t_intersect *list)
 t_intersect	*intersect(t_object **object, t_ray *ray)
 {
 	t_intersect	*intersect;
-	t_matrix	inv;
 
 	if((*object)->saved_ray)
 		free_ray((*object)->saved_ray);
-	inv = inverse((*object)->transform);
-	(*object)->saved_ray = transform_ray(ray, inv);
-	free_matrix(inv);
+
+	(*object)->saved_ray = transform_ray(ray, (*object)->inverse);
 	intersect = NULL;
 	if ((*object)->shape == 's')
 		intersect = intersect_sphere((*object));

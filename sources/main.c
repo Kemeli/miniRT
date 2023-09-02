@@ -22,12 +22,14 @@ int render_first_scene(t_data *data)
 	floor->transform = scaling(10, 0.1, 10);
 	floor->material->color = color(1, 0.9, 0.9);
 	floor->material->specular = 0;
+	floor->inverse = inverse(floor->transform);
 
 	t_object *middle = create_object('s');
 	middle->transform = translation(-0.5, 1, 0.5);
 	middle->material->color = color(0.1, 1, 0.5);
 	middle->material->diffuse = 0.7;
 	middle->material->specular = 0.3;
+	middle->inverse = inverse(middle->transform);
 
 	t_object *right = create_object('s');
 	right->transform = multiply_matrix(
@@ -37,6 +39,7 @@ int render_first_scene(t_data *data)
 	right->material->color = color(0.5, 1, 0.1);
 	right->material->diffuse = 0.7;
 	right->material->specular = 0.3;
+	right->inverse = inverse(right->transform);
 
 	t_object *left = create_object('s');
 	left->transform = multiply_matrix(
@@ -46,6 +49,7 @@ int render_first_scene(t_data *data)
 	left->material->color = color(1, 0.8, 0.1);
 	left->material->diffuse = 0.7;
 	left->material->specular = 0.3;
+	left->inverse = inverse(left->transform);
 
 	data->w->head = floor;
 	append_object(&data->w->head, &middle);

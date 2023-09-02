@@ -1,5 +1,15 @@
 #include <minirt.h>
 
+void	set_sphere_transform(t_object *obj)
+{
+	t_matrix	translate;
+	t_matrix	scale;
+
+	translate = translation(obj->sphere->center[0], obj->sphere->center[1], obj->sphere->center[2]);
+	scale = scaling(obj->sphere->radius, obj->sphere->radius, obj->sphere->radius);
+	set_transform(obj, multiply_matrix(translate, scale));
+}
+
 void	get_sphere(t_rt *rt, t_world *w)
 {
 	t_object *obj;
@@ -15,6 +25,7 @@ void	get_sphere(t_rt *rt, t_world *w)
 		rt->sp_color[0],
 		rt->sp_color[1],
 		rt->sp_color[2]);
+	set_sphere_transform(obj);
 	add_object(w, obj);
 	free(rt->sp_coordinates);
 	free(rt->sp_color);

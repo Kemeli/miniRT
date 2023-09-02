@@ -31,9 +31,10 @@ double	**identity_matrix(unsigned int n)
 		j = 0;
 		while (j < n)
 		{
-			m[i][j] = 0;
 			if (i == j)
 				m[i][j] = 1;
+			else
+				m[i][j] = 0;
 			j++;
 		}
 		i++;

@@ -18,8 +18,9 @@ t_tuple	color_at(t_world *w, t_ray *r)
 	// end_time = clock();  // Record the end time
     // cpu_time_used = ((double) (end_time - start_time)) / CLOCKS_PER_SEC;  // Calculate the time used in seconds
     // printf("Time taken by the function: %f seconds\n", cpu_time_used);
-
-	the_hit = hit(xs);
+	the_hit = NULL;
+	if(xs->count != 0)
+		the_hit = hit(xs);
 	if (the_hit)
 	{
 		comps = prepare_computations(the_hit, r);

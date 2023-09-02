@@ -9,7 +9,6 @@ t_tuple	multiply_matrix_with_tuple(t_matrix matrix_A, t_tuple tuple_A)
 	int		counter;
 
 	row = 0;
-	counter = 0;
 	while (row < 4)
 	{
 		product = 0;
