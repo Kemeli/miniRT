@@ -213,7 +213,7 @@ t_tuple			color(double r, double g, double b);
 int				compare_matrices(t_matrix matrix_A, t_matrix matrix_B);
 t_tuple			multiply_colors(t_tuple c1, t_tuple c2);
 t_matrix		matrix(unsigned int n);
-// void			free_matrix(t_matrix m);
+void			free_matrix(t_matrix m);
 t_matrix		multiply_matrix(t_matrix matrix_A, t_matrix matrix_B);
 t_tuple			multiply_matrix_with_tuple(t_matrix matrix_A, t_tuple tuple_A);
 t_matrix		transpose_matrix(t_matrix matrix_A);

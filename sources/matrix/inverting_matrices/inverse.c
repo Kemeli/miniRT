@@ -58,11 +58,11 @@ t_mat	create_matrix(int size)
 	int			i;
 
 	m.size = size;
-	m.matrix = (double **) malloc(sizeof(double *) * size);
+	m.matrix = ft_calloc(size + 1, sizeof(double *));
 	i = 0;
 	while (i < size)
 	{
-		m.matrix[i] = (double *)malloc(sizeof(double) * size);
+		m.matrix[i] = ft_calloc(size + 1, sizeof(double));
 		i++;
 	}
 	return (m);
@@ -132,7 +132,7 @@ double	get_minor(t_mat m, int row, int column)
 
 	submatrix = get_submatrix(m, row, column);
 	minor = get_determinant(submatrix);
-	// //free_matrix(submatrix.matrix);
+	free_matrix(submatrix.matrix);
 	return (minor);
 }
 
@@ -180,7 +180,7 @@ t_matrix	inverse(t_matrix matrix)
 		return (identity_matrix(m.size));
 	cofactor = cofactor_matrix(m);
 	inverse = transposed_matrix(cofactor);
-	// //free_matrix(cofactor.matrix);
+	free_matrix(cofactor.matrix);
 	i = 0;
 	while (i < inverse.size)
 	{

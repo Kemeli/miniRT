@@ -41,15 +41,15 @@ double	**identity_matrix(unsigned int n)
 	return (m);
 }
 
-// void	free_matrix(t_matrix m)
-// {
-// 	unsigned int	i;
+void	free_matrix(t_matrix m)
+{
+	unsigned int	i;
 
-// 	i = 0;
-// 	while (m[i])
-// 	{
-// 		free(m[i]);
-// 		i++;
-// 	}
-// 	free(m);
-// }
+	i = 0;
+	while (m[i])
+	{
+		ft_free_ptr((void *) &m[i]);
+		i++;
+	}
+	ft_free_ptr((void *) &m);
+}

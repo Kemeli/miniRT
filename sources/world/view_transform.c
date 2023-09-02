@@ -20,8 +20,8 @@ static void	free_view_transform(t_aux *aux, t_matrix orient, t_matrix transl)
 	free(aux);
 	(void)orient;
 	(void)transl;
-	//free_matrix(orient);
-	//free_matrix(transl);
+	free_matrix(orient);
+	free_matrix(transl);
 }
 
 static t_matrix	get_orientation(t_tuple left, t_tuple true_up, t_tuple forward)

@@ -33,7 +33,7 @@ t_intersect	*intersect(t_object **object, t_ray *ray)
 		free_ray((*object)->saved_ray);
 	inv = inverse((*object)->transform);
 	(*object)->saved_ray = transform_ray(ray, inv);
-	//free_matrix(inv);
+	free_matrix(inv);
 	intersect = NULL;
 	if ((*object)->shape == 's')
 		intersect = intersect_sphere((*object));

@@ -20,7 +20,7 @@ static t_object	*objects_list(t_object *head)
 	head = create_object('s');
 	next_node = ft_calloc(1, sizeof(t_node));
 	next_node->object = create_object('s');
-	//free_matrix(next_node->object->transform);
+	free_matrix(next_node->object->transform);
 	next_node->object->transform = scaling(0.5, 0.5, 0.5);
 	append_object(&head, &next_node->object);
 	mat = material();
