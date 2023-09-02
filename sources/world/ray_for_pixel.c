@@ -16,7 +16,7 @@ t_ray	*ray_for_pixel(t_camera *c, double px, double py)
 	origin = get_origin(inv);
 	sub = subtract(pixel, origin);
 	direction = normalize(sub);
-	free_matrix(inv);
+	//free_matrix(inv);
 	free(pixel);
 	free(sub);
 	return (create_ray(origin, direction));

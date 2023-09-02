@@ -185,6 +185,15 @@ typedef struct s_rt
 }	t_rt;
 //tuples são double e as cores são int, pode dar erro
 
+
+//////////////////
+typedef struct s_mat
+{
+	double	**matrix;
+	int		size;
+}	t_mat;
+/////////////////////
+
 t_tuple			tuple(double x, double y, double z, double w);
 t_tuple			vector(double x, double y, double z);
 t_tuple			point(double x, double y, double z);
@@ -204,7 +213,7 @@ t_tuple			color(double r, double g, double b);
 int				compare_matrices(t_matrix matrix_A, t_matrix matrix_B);
 t_tuple			multiply_colors(t_tuple c1, t_tuple c2);
 t_matrix		matrix(unsigned int n);
-void			free_matrix(t_matrix m);
+// void			free_matrix(t_matrix m);
 t_matrix		multiply_matrix(t_matrix matrix_A, t_matrix matrix_B);
 t_tuple			multiply_matrix_with_tuple(t_matrix matrix_A, t_tuple tuple_A);
 t_matrix		transpose_matrix(t_matrix matrix_A);
@@ -215,6 +224,7 @@ int				get_size(t_matrix matrix);
 double			minor(t_matrix matrix, int i, int j);
 double			cofactor(t_matrix matrix, int i, int j);
 double			determinant(t_matrix matrix);
+// t_matrix		inverse(t_matrix matrix);
 t_matrix		inverse(t_matrix matrix);
 char			compare_doubles(double n1, double n2);
 t_matrix		translation(double x, double y, double z);

@@ -2,7 +2,7 @@
 
 void	free_camera(t_camera *camera)
 {
-	free_matrix(camera->transform);
+	//free_matrix(camera->transform);
 	free(camera);
 }
 

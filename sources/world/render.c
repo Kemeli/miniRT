@@ -30,6 +30,12 @@ void	render(t_data *data)
 		{
 			r = ray_for_pixel(data->c, x, y);
 			to_color = color_at(data->w, r);
+			if (to_color[0] > 1)
+				to_color[0] = 1;
+			if (to_color[1] > 1)
+				to_color[1] = 1;
+			if (to_color[2] > 1)
+				to_color[2] = 1;
 			free_ray(r);
 			write_pixel(data->img, x, y, to_color);
 			free(to_color);

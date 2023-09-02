@@ -96,7 +96,7 @@ int main(void)
 
 	w = default_world();
 	c = camera(WIDTH, HEIGHT, 70 * M_PI  / 180);
-	free_matrix(c->transform);
+	//free_matrix(c->transform);
 	c->transform = view_transform(point(0, 1.5, -5), point(0, 1, 0), vector(0, 1, 0));
 	free(w->light);
 	w->light = point_light(point(-10, 10, -10), color(1, 1, 1));
