@@ -1,6 +1,6 @@
 #include <minirt.h>
 
-float	**inverse(t_matrix original_matrix)
+double	**inverse(t_matrix original_matrix)
 {
 	t_matrix	inversed_matrix;
 	int			size;

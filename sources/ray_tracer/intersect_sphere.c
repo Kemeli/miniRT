@@ -25,14 +25,14 @@ void	append_node(t_node **head, t_node *new)
 }
 
 t_intersect	*handle_discriminant(
-	float a,
-	float b,
-	float c,
+	double a,
+	double b,
+	double c,
 	t_object *object
 )
 {
-	float		sqrtd;
-	float		discriminant;
+	double		sqrtd;
+	double		discriminant;
 	t_intersect	*intersect_lst;
 	t_node		*first_inter;
 	t_node		*second_inter;

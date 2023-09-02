@@ -1,13 +1,13 @@
 #include <minirt.h>
 #include <stdio.h>
 
-static float	multiply_elements(t_matrix matrix_A,
+static double	multiply_elements(t_matrix matrix_A,
 	t_matrix matrix_B, int i, int j)
 {
-	float	first;
-	float	second;
-	float	third;
-	float	fourth;
+	double	first;
+	double	second;
+	double	third;
+	double	fourth;
 
 	first = matrix_A[i][0] * matrix_B[0][j];
 	second = matrix_A[i][1] * matrix_B[1][j];

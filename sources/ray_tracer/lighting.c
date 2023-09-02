@@ -8,8 +8,8 @@ typedef struct s_aux
 	t_tuple	diffuse;
 	t_tuple	specular;
 	t_tuple	sum;
-	float	light_dot_normal;
-	float	f_reflect_dot_eye;
+	double	light_dot_normal;
+	double	f_reflect_dot_eye;
 }	t_aux;
 
 static void	free_aux(t_aux *aux)
@@ -24,11 +24,11 @@ static void	free_aux(t_aux *aux)
 	free(aux);
 }
 
-static float	reflect_dot_eye(t_lighting *l, t_tuple light_v)
+static double	reflect_dot_eye(t_lighting *l, t_tuple light_v)
 {
 	t_tuple	neg;
 	t_tuple	reflect_v;
-	float	reflect_dot_eye;
+	double	reflect_dot_eye;
 
 	neg = negative(light_v);
 	reflect_v = reflect(neg, l->normal);
@@ -38,10 +38,10 @@ static float	reflect_dot_eye(t_lighting *l, t_tuple light_v)
 	return (reflect_dot_eye);
 }
 
-static t_tuple	calculate_specular(t_lighting *l, float ref_dot_eye)
+static t_tuple	calculate_specular(t_lighting *l, double ref_dot_eye)
 {
 	t_tuple	specular;
-	float	factor;
+	double	factor;
 
 	if (ref_dot_eye <= 0)
 		specular = color(0, 0, 0);
@@ -76,7 +76,7 @@ static t_tuple	multiply_color(t_tuple color, t_tuple amb)
 {
 	t_tuple	response;
 
-	response = ft_calloc(3, sizeof(float));
+	response = ft_calloc(3, sizeof(double));
 	response[0] = color[0] * amb[0];
 	response[1] = color[1] * amb[1];
 	response[2] = color[2] * amb[2];

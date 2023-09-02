@@ -26,9 +26,9 @@ static int	has_sign(char **str)
 	return (sign);
 }
 
-float	ft_atof(const char *str)
+double	ft_atof(const char *str)
 {
-	float			result;
+	double			result;
 	struct s_aux	aux;
 
 	result = 0.0;

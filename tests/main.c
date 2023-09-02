@@ -48,14 +48,14 @@
 #include "parsing/coordinates_test.c"
 #include "parsing/validate_normal_test.c"
 #include "parsing/validate_angle_test.c"
-#include "parsing/is_float_test.c"
+#include "parsing/is_double_test.c"
 #include "parsing/utils_parsing_test.c"
 
 int	copy_size;
 
-float	**copy_matrix(float a[copy_size][copy_size])
+double	**copy_matrix(double a[copy_size][copy_size])
 {
-	float	**m = matrix(copy_size);
+	double	**m = matrix(copy_size);
 	for(int i = 0; i < copy_size; i++)
 		for (int j = 0; j < copy_size; j++)
 			m[i][j] = a[i][j];
@@ -119,7 +119,7 @@ int	main()
 	MU_RUN_SUITE(test_coordinates);
 	MU_RUN_SUITE(test_validate_normal_parsing);
 	MU_RUN_SUITE(test_validate_angle);
-	MU_RUN_SUITE(test_is_float);
+	MU_RUN_SUITE(test_is_double);
 	MU_RUN_SUITE(test_utils_parsing);
 
 

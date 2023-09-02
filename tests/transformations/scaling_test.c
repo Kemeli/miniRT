@@ -3,7 +3,7 @@
 
 MU_TEST(test_to_ensure_scaling_matrix_multiplied_to_a_point_has_expected_point_values)
 {
-	float **transform = scaling(2, 3, 4);
+	double **transform = scaling(2, 3, 4);
 	t_tuple p = point(-4, 6, 8);
 	t_tuple expected = point(-8, 18, 32);
 	t_tuple result = multiply_matrix_with_tuple(transform, p);
@@ -17,7 +17,7 @@ MU_TEST(test_to_ensure_scaling_matrix_multiplied_to_a_point_has_expected_point_v
 
 MU_TEST(test_to_ensure_scaling_matrix_multiplied_to_a_vector_changes_its_length)
 {
-	float **transform = scaling(2, 3, 4);
+	double **transform = scaling(2, 3, 4);
 	t_tuple v = vector(-4, 6, 8);
 	t_tuple expected = vector(-8, 18, 32);
 	t_tuple result = multiply_matrix_with_tuple(transform, v);
@@ -30,8 +30,8 @@ MU_TEST(test_to_ensure_scaling_matrix_multiplied_to_a_vector_changes_its_length)
 
 MU_TEST(test_that_multiplying_a_tuple_by_the_inverse_of_a_scaling_matrix_scales_in_the_opposite_way)
 {
-	float **transform = scaling(2, 3, 4);
-	float **inv = inverse(transform);
+	double **transform = scaling(2, 3, 4);
+	double **inv = inverse(transform);
 	t_tuple v = vector(-4, 6, 8);
 	t_tuple expected = vector(-2, 2, 2);
 	t_tuple result = multiply_matrix_with_tuple(inv, v);
@@ -46,7 +46,7 @@ MU_TEST(test_that_multiplying_a_tuple_by_the_inverse_of_a_scaling_matrix_scales_
 
 MU_TEST(test_that_reflection_is_scaling_by_a_negative_value)
 {
-	float **transform = scaling(-1, 1, 1);
+	double **transform = scaling(-1, 1, 1);
 	t_tuple p = point(2, 3, 4);
 	t_tuple expected = point(-2, 3, 4);
 	t_tuple result = multiply_matrix_with_tuple(transform, p);

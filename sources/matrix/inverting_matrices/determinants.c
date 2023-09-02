@@ -1,10 +1,10 @@
 #include "minirt.h"
 
-float	determinant_2X2_matrix(t_matrix matrix)
+double	determinant_2X2_matrix(t_matrix matrix)
 {
-	float	result;
-	float	first_diagonal;
-	float	second_diagonal;
+	double	result;
+	double	first_diagonal;
+	double	second_diagonal;
 
 	first_diagonal = matrix[0][0] * matrix[1][1];
 	second_diagonal = matrix[0][1] * matrix[1][0];
@@ -12,10 +12,10 @@ float	determinant_2X2_matrix(t_matrix matrix)
 	return (result);
 }
 
-float	determinant(t_matrix matrix)
+double	determinant(t_matrix matrix)
 {
-	float	size;
-	float	determ;
+	double	size;
+	double	determ;
 	int		j;
 
 	size = get_size(matrix);

@@ -4,15 +4,15 @@
 MU_TEST(test_calculate_of_a_element_in_a_3x3_matrix)
 {
 	copy_size = 3;
-	float	x[3][3] = {
+	double	x[3][3] = {
 		{3, 5, 0},
 		{2, -1, -7},
 		{6, -1, 5}
 	};
-	float	**A = copy_matrix(x);
-	float	minor_result = minor(A, 0, 0);
-	float	cofactor_result = cofactor(A, 0, 0);
-	float	expected = -12;
+	double	**A = copy_matrix(x);
+	double	minor_result = minor(A, 0, 0);
+	double	cofactor_result = cofactor(A, 0, 0);
+	double	expected = -12;
 
 	mu_assert_double_eq(minor_result, expected);
 	mu_assert_double_eq(cofactor_result, expected);

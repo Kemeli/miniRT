@@ -18,7 +18,7 @@ t_ray	*create_ray(t_tuple origin, t_tuple direction)
 	return (ray);
 }
 
-t_tuple	get_point_position(t_ray *ray, float t)
+t_tuple	get_point_position(t_ray *ray, double t)
 {
 	t_tuple	position;
 	t_tuple	multiplication_result;

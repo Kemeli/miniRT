@@ -4,11 +4,11 @@
 MU_TEST(test_determinant_of_matrix_2x2_values_1_5_minus_3_2_is_17)
 {
 	t_matrix	matrix_A = matrix(2);
-	float	matrix_values[2][2] = {
+	double	matrix_values[2][2] = {
 		{1, 5},
 		{-3, 2}
 	};
-	float	expected = 17;
+	double	expected = 17;
 
 	for(int i = 0; i < 2; i++)
 		for (int j = 0; j < 2; j++)
@@ -20,7 +20,7 @@ MU_TEST(test_determinant_of_matrix_2x2_values_1_5_minus_3_2_is_17)
 
 MU_TEST(test_determinant_of_3x3_matrix)
 {
-	float matrix_A_values[3][3] = {
+	double matrix_A_values[3][3] = {
 		{1, 2, 6},
 		{-5, 8, -4},
 		{2, 6, 4}
@@ -36,7 +36,7 @@ MU_TEST(test_determinant_of_3x3_matrix)
 
 MU_TEST(test_determinant_of_4x4_matrix)
 {
-	float matrix_A_values[4][4] = {
+	double matrix_A_values[4][4] = {
 		{-2, -8, 3, 5},
 		{-3, 1, 7, 3},
 		{1, 2, -9, 6},

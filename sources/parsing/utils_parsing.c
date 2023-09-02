@@ -17,10 +17,10 @@ int	go_through_num(char *str, int i)
 	return (i);
 }
 
-float	get_float(char *str, int i, int j)
+double	get_double(char *str, int i, int j)
 {
 	char	*ptr;
-	float	num;
+	double	num;
 
 	ptr = ft_substr(str, j, i);
 	num = ft_atof(ptr);

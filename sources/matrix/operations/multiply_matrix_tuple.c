@@ -3,8 +3,8 @@
 t_tuple	multiply_matrix_with_tuple(t_matrix matrix_A, t_tuple tuple_A)
 {
 	t_tuple	result;
-	float	sum[4];
-	float	product;
+	double	sum[4];
+	double	product;
 	int		row;
 	int		counter;
 

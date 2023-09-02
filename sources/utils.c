@@ -1,8 +1,8 @@
 #include <minirt.h>
 
-char	compare_floats(float n1, float n2)
+char	compare_doubles(double n1, double n2)
 {
-	float	epsilon;
+	double	epsilon;
 
 	epsilon = 0.00001;
 	if (fabs(n1 - n2) <= epsilon)

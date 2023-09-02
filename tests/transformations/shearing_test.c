@@ -5,7 +5,7 @@
 
 MU_TEST(test_that_a_shearing_transformation_moves_x_in_proportion_to_y)
 {
-	float **transform = shearing(0, 1);
+	double **transform = shearing(0, 1);
 	t_tuple p = point(2, 3, 4);
 	t_tuple expected = point (5, 3, 4);
 	t_tuple result = multiply_matrix_with_tuple(transform, p);
@@ -19,7 +19,7 @@ MU_TEST(test_that_a_shearing_transformation_moves_x_in_proportion_to_y)
 
 MU_TEST(test_that_a_shearing_transformation_moves_x_in_proportion_to_z)
 {
-	float **transform = shearing(1, 1);
+	double **transform = shearing(1, 1);
 	t_tuple p = point (2, 3, 4);
 	t_tuple expected = point(6, 3, 4);
 	t_tuple result = multiply_matrix_with_tuple(transform, p);
@@ -33,7 +33,7 @@ MU_TEST(test_that_a_shearing_transformation_moves_x_in_proportion_to_z)
 
 MU_TEST(test_that_a_shearing_transformation_moves_y_in_proportion_to_x)
 {
-	float **transform = shearing(2, 1);
+	double **transform = shearing(2, 1);
 	t_tuple p = point (2, 3, 4);
 	t_tuple expected = point(2, 5, 4);
 	t_tuple result = multiply_matrix_with_tuple(transform, p);
@@ -47,7 +47,7 @@ MU_TEST(test_that_a_shearing_transformation_moves_y_in_proportion_to_x)
 
 MU_TEST(test_that_a_shearing_transformation_moves_y_in_proportion_to_z)
 {
-	float **transform = shearing(3, 1);
+	double **transform = shearing(3, 1);
 	t_tuple p = point(2, 3, 4);
 	t_tuple expected = point(2, 7, 4);
 	t_tuple result = multiply_matrix_with_tuple(transform, p);
@@ -61,7 +61,7 @@ MU_TEST(test_that_a_shearing_transformation_moves_y_in_proportion_to_z)
 
 MU_TEST(test_that_a_shearing_transformation_moves_z_in_proportion_to_x)
 {
-	float **transform = shearing(4, 1);
+	double **transform = shearing(4, 1);
 	t_tuple p = point(2, 3, 4);
 	t_tuple expected =  point(2, 3, 6);
 	t_tuple result = multiply_matrix_with_tuple(transform, p);
@@ -75,7 +75,7 @@ MU_TEST(test_that_a_shearing_transformation_moves_z_in_proportion_to_x)
 
 MU_TEST(test_that_a_shearing_transformation_moves_z_in_proportion_to_y)
 {
-	float **transform = shearing(5, 1);
+	double **transform = shearing(5, 1);
 	t_tuple p = point(2, 3, 4);
 	t_tuple expected = point(2, 3, 7);
 	t_tuple result = multiply_matrix_with_tuple(transform, p);

@@ -3,7 +3,7 @@
 t_comps	*prepare_computations(t_node *hit, t_ray *ray)
 {
 	t_comps	*comps;
-	float	dot_p;
+	double	dot_p;
 	t_tuple	temp;
 	t_tuple	mult;
 

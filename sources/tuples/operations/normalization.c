@@ -2,10 +2,10 @@
 
 t_tuple	normalize(t_tuple v)
 {
-	float	x;
-	float	y;
-	float	z;
-	float	w;
+	double	x;
+	double	y;
+	double	z;
+	double	w;
 	t_tuple	result;
 
 	x = v[0] / magnitude(v);

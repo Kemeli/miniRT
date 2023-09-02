@@ -33,8 +33,8 @@ MU_TEST(test_magnitude_of_a_normalized_vector_should_be_1)
 {
 	t_tuple	v = vector(1, 2, 3);
 	t_tuple	norm = normalize(v);
-	float	expected = 1;
-	float	result = magnitude(norm);
+	double	expected = 1;
+	double	result = magnitude(norm);
 	mu_assert_double_eq(result, expected);
 	free(v);
 	free(norm);

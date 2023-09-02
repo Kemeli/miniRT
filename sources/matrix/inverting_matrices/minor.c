@@ -1,9 +1,9 @@
 #include <minirt.h>
 
-float	minor(t_matrix matrix, int i, int j)
+double	minor(t_matrix matrix, int i, int j)
 {
 	t_matrix	m;
-	float		result;
+	double		result;
 
 	m = submatrix(matrix, i, j);
 	result = determinant(m);

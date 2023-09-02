@@ -1,13 +1,13 @@
 #include <minirt.h>
 
-float	validate_angle(char *angle)
+double	validate_angle(char *angle)
 {
 	int		i;
 	char	*s_angle;
-	float	f_angle;
+	double	f_angle;
 
 	i = 0;
-	if (!is_float(angle))
+	if (!is_double(angle))
 		return (-1);
 	while (angle[i])
 		i++;

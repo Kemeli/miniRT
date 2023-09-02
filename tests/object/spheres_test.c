@@ -4,7 +4,7 @@
 MU_TEST(test_object_default_transformation)
 {
 	t_object *o = create_object('s');
-	float **expected = identity_matrix(4);
+	double **expected = identity_matrix(4);
 	mu_check(compare_matrices(o->transform, expected));
 
 	free_matrix(expected);
@@ -13,7 +13,7 @@ MU_TEST(test_object_default_transformation)
 
 MU_TEST(test_changing_an_object_transformation)
 {
-	float **t;
+	double **t;
 	t_object *o = create_object('s');
 	t = translation(2, 3, 4);
 	set_transform(&o, t);
@@ -28,7 +28,7 @@ MU_TEST(test_intersecting_a_scaled_sphere_with_a_ray)
 	t_ray		*r;
 	t_tuple		p;
 	t_tuple		v;
-	float		**scale;
+	double		**scale;
 
 	p = point(0, 0, -5);
 	v = vector(0, 0, 1);
@@ -54,7 +54,7 @@ MU_TEST(test_intersecting_a_translated_sphere_with_a_ray)
 	t_ray		*r;
 	t_tuple		p;
 	t_tuple		v;
-	float		**t;
+	double		**t;
 
 	t = translation(5, 0, 0);
 	p = point(0, 0, -5);

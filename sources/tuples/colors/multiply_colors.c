@@ -2,9 +2,9 @@
 
 t_tuple	multiply_colors(t_tuple c1, t_tuple c2)
 {
-	float	r;
-	float	g;
-	float	b;
+	double	r;
+	double	g;
+	double	b;
 	t_tuple	result;
 
 	r = c1[0] * c2[0];

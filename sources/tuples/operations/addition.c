@@ -3,10 +3,10 @@
 t_tuple	tuple_addition(t_tuple point, t_tuple vector)
 {
 	t_tuple	result;
-	float	x;
-	float	y;
-	float	z;
-	float	w;
+	double	x;
+	double	y;
+	double	z;
+	double	w;
 
 	x = point[0] + vector[0];
 	y = point[1] + vector[1];

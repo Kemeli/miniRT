@@ -6,7 +6,7 @@ MU_TEST(test_intersecting_a_scaled_shape_with_a_ray)
 	t_ray		*r;
 	t_tuple		p;
 	t_tuple		v;
-	float		**scale;
+	double		**scale;
 
 	p = point(0, 0, -5);
 	v = vector(0, 0, 1);
@@ -37,7 +37,7 @@ MU_TEST(test_intersecting_a_translated_shape_with_a_ray)
 	t_ray		*r;
 	t_tuple		p;
 	t_tuple		v;
-	float		**scale;
+	double		**scale;
 
 	p = point(0, 0, -5);
 	v = vector(0, 0, 1);

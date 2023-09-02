@@ -1,6 +1,6 @@
 #include <minirt.h>
 
-t_matrix	scaling(float x, float y, float z)
+t_matrix	scaling(double x, double y, double z)
 {
 	t_matrix scaling_matrix;
 

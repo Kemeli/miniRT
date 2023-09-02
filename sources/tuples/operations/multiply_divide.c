@@ -1,12 +1,12 @@
 #include <minirt.h>
 
-t_tuple	multiply_tuple_by_scalar(t_tuple tuple_a, float times_to_multiply)
+t_tuple	multiply_tuple_by_scalar(t_tuple tuple_a, double times_to_multiply)
 {
 	t_tuple	result;
-	float	x;
-	float	y;
-	float	z;
-	float	w;
+	double	x;
+	double	y;
+	double	z;
+	double	w;
 
 	x = tuple_a[0] * times_to_multiply;
 	y = tuple_a[1] * times_to_multiply;
@@ -16,13 +16,13 @@ t_tuple	multiply_tuple_by_scalar(t_tuple tuple_a, float times_to_multiply)
 	return (result);
 }
 
-t_tuple	scalar_division(t_tuple tuple_a, float times_to_divide)
+t_tuple	scalar_division(t_tuple tuple_a, double times_to_divide)
 {
 	t_tuple	result;
-	float	x;
-	float	y;
-	float	z;
-	float	w;
+	double	x;
+	double	y;
+	double	z;
+	double	w;
 
 	x = tuple_a[0] / times_to_divide;
 	y = tuple_a[1] / times_to_divide;

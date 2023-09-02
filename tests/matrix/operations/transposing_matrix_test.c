@@ -3,17 +3,17 @@
 
 MU_TEST(test_transposed_row_0930_should_become_col_0930)
 {
-	float	**matrix_A = matrix(4);
-	float	**result;
-	float	**expected = matrix(4);
-	float	values_matrix_A[4][4] = {
+	double	**matrix_A = matrix(4);
+	double	**result;
+	double	**expected = matrix(4);
+	double	values_matrix_A[4][4] = {
 		{0, 9, 3, 0},
 		{9, 8, 0, 8},
 		{1, 8, 5, 3},
 		{0, 0, 5, 8}
 	};
 
-	float values_expected[4][4] = {
+	double values_expected[4][4] = {
 		{0, 9, 1, 0},
 		{9, 8, 8, 0},
 		{3, 0, 5, 5},
@@ -37,9 +37,9 @@ MU_TEST(test_transposed_row_0930_should_become_col_0930)
 
 MU_TEST(test_transpose_identity_matrix_should_return_itself)
 {
-	float	**identity = identity_matrix(4);
-	float	**result = transpose_matrix(identity);
-	float	**expected = identity;
+	double	**identity = identity_matrix(4);
+	double	**result = transpose_matrix(identity);
+	double	**expected = identity;
 
 	mu_assert(
 		compare_matrices(result, expected),

@@ -3,16 +3,16 @@
 
 MU_TEST(test_validate_angle_cases)
 {
-	float	n0 = validate_angle("75");
-	float	n1 = validate_angle("180.1");
-	float	n2 = validate_angle("-80.1");
-	float	n3 = validate_angle("0,785");
-	float	n4 = validate_angle("0.785");
-	float	n5 = validate_angle("0.a85");
-	float	n6 = validate_angle("n");
-	float	n7 = validate_angle("10.9");
-	float	n8 = validate_angle(".0.785");
-	float	n9 = validate_angle("0..785");
+	double	n0 = validate_angle("75");
+	double	n1 = validate_angle("180.1");
+	double	n2 = validate_angle("-80.1");
+	double	n3 = validate_angle("0,785");
+	double	n4 = validate_angle("0.785");
+	double	n5 = validate_angle("0.a85");
+	double	n6 = validate_angle("n");
+	double	n7 = validate_angle("10.9");
+	double	n8 = validate_angle(".0.785");
+	double	n9 = validate_angle("0..785");
 
 
 	// printf("\nn0 = %f\n", n0);

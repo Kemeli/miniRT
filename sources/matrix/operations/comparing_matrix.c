@@ -15,7 +15,7 @@ int	compare_matrices(t_matrix matrix_A, t_matrix matrix_B)
 	int		i;
 	int		j;
 	int		size;
-	float	epsilon;
+	double	epsilon;
 
 	i = 0;
 	epsilon = 0.00001;

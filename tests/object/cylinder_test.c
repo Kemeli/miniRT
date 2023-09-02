@@ -111,8 +111,8 @@ MU_TEST(test_a_ray_strikes_a_cylinder3)
 	t_intersect *xs = intersect(&o, r);
 	mu_check(xs->count == 2);
 
-	mu_check(compare_floats(xs->head->t, 6.8080)); // 6.80798
-	mu_check(compare_floats(xs->head->next->t, 7.0887));
+	mu_check(compare_doubles(xs->head->t, 6.8080)); // 6.80798
+	mu_check(compare_doubles(xs->head->next->t, 7.0887));
 
 	free(direction);
 	free_intersections(xs);

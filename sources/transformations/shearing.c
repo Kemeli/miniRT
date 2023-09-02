@@ -1,8 +1,8 @@
 #include <minirt.h>
 
-float	**shearing(int axis, float value)
+double	**shearing(int axis, double value)
 {
-	float	**transform;
+	double	**transform;
 
 	transform = identity_matrix(4);
 	if (axis == 0)

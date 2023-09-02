@@ -1,6 +1,6 @@
 #include <minirt.h>
 
-float	**transpose_matrix(t_matrix matrix_A)
+double	**transpose_matrix(t_matrix matrix_A)
 {
 	t_matrix	result;
 	int			i;

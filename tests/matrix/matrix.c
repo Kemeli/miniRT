@@ -3,11 +3,11 @@
 
 MU_TEST(test_should_create_and_assign_right_values_to_a_2x2_matrix)
 {
-	float	expected[2][2] = {
+	double	expected[2][2] = {
 		{-3, 5},
 		{1, -2}
 	};
-	float	**m = matrix(2);
+	double	**m = matrix(2);
 	m[0][0] = -3;
 	m[0][1] = 5;
 	m[1][0] = 1;
@@ -23,12 +23,12 @@ MU_TEST(test_should_create_and_assign_right_values_to_a_2x2_matrix)
 
 MU_TEST(test_should_create_and_assign_right_values_to_a_3x3_matrix)
 {
-	float	expected[3][3] = {
+	double	expected[3][3] = {
 		{-3, 5, 0},
 		{1, -2, -7},
 		{0, 1, 1}
 	};
-	float	**m = matrix(3);
+	double	**m = matrix(3);
 	m[0][0] = -3;
 	m[0][1] = 5;
 	m[0][2] = 0;
@@ -54,13 +54,13 @@ MU_TEST(test_should_create_and_assign_right_values_to_a_3x3_matrix)
 
 MU_TEST(test_should_create_and_assign_right_values_to_a_4x4_matrix)
 {
-	float	expected[4][4] = {
+	double	expected[4][4] = {
 		{1, 2, 3, 4},
 		{5.5, 6.5, 7.5, 8.5},
 		{9, 10, 11, 12},
 		{13.5, 14.5, 15.5, 16.5}
 	};
-	float	**m = matrix(4);
+	double	**m = matrix(4);
 	m[0][0] = 1;
 	m[0][1] = 2;
 	m[0][2] = 3;

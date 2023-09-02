@@ -3,7 +3,7 @@
 
 MU_TEST(test_multiplication)
 {
-	float	times_to_multiply = 3.5;
+	double	times_to_multiply = 3.5;
 	t_tuple	tuple_a = tuple(1, -2, 3, -4);
 	t_tuple	expected = tuple(3.5, -7, 10.5, -14);
 	t_tuple	result = multiply_tuple_by_scalar(tuple_a, times_to_multiply);
@@ -19,7 +19,7 @@ MU_TEST(test_multiplication)
 
 MU_TEST(test_multiplication_by_decimal)
 {
-	float	times_to_multiply = 0.5;
+	double	times_to_multiply = 0.5;
 	t_tuple	tuple_a = tuple(1, -2, 3, -4);
 	t_tuple	expected = tuple(0.5, -1, 1.5, -2);
 	t_tuple	result = multiply_tuple_by_scalar(tuple_a, times_to_multiply);
@@ -35,7 +35,7 @@ MU_TEST(test_multiplication_by_decimal)
 
 MU_TEST(test_division)
 {
-	float	times_to_divide = 2;
+	double	times_to_divide = 2;
 	t_tuple	tuple_a = tuple(1, -2, 3, -4);
 	t_tuple	expected = tuple(0.5, -1, 1.5, -2);
 	t_tuple	result = scalar_division(tuple_a, times_to_divide);
@@ -52,7 +52,7 @@ MU_TEST(test_division)
 MU_TEST(test_multiplying_color_by_scalar)
 {
 	t_tuple c1 = color(0.2, 0.3, 0.4);
-	float   scalar = 2;
+	double   scalar = 2;
 	t_tuple expected = color(0.4, 0.6, 0.8);
 	t_tuple result = multiply_tuple_by_scalar(c1, scalar);
 

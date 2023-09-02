@@ -8,17 +8,17 @@ t_matrix	matrix(unsigned int n)
 	if (n == 0)
 		return (NULL);
 	i = 0;
-	m = ft_calloc(n + 1, sizeof(float *));
+	m = ft_calloc(n + 1, sizeof(double *));
 	while (i < n)
 	{
-		m[i] = ft_calloc(n + 1, sizeof(float));
+		m[i] = ft_calloc(n + 1, sizeof(double));
 		i++;
 	}
 	m[i] = NULL;
 	return (m);
 }
 
-float	**identity_matrix(unsigned int n)
+double	**identity_matrix(unsigned int n)
 {
 	t_matrix		m;
 	unsigned int	i;

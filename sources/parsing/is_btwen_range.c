@@ -1,14 +1,14 @@
 #include <minirt.h>
 
 int		len_to_space(char *str);
-float	ft_atof(const char *str);
+double	ft_atof(const char *str);
 char	*make_num(char *str);
 
-float	is_btwen_range(char *ratio, char *r0, char *r1)
+double	is_btwen_range(char *ratio, char *r0, char *r1)
 {
 	int		k;
 	char	*s_num;
-	float	num;
+	double	num;
 
 	k = 0;
 	if ((r0[0] != '-' && ratio[k] == '-') || r1[0] == '-')

@@ -60,13 +60,13 @@ static char	get_cy_values(char *sub, t_rt *rt, char type)
 	ret = 1;
 	if (type == 'd')
 	{
-		rt->cy_diameter = verify_and_get_float(sub);
+		rt->cy_diameter = verify_and_get_double(sub);
 		if (!rt->cy_diameter)
 			ret = error_msg("invalid cy diameter");
 	}
 	else if (type == 'h')
 	{
-		rt->cy_height = verify_and_get_float(sub);
+		rt->cy_height = verify_and_get_double(sub);
 		if (!rt->cy_height)
 			ret = error_msg("invalid cy height");
 	}

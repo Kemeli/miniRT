@@ -26,7 +26,7 @@ static char	validate_c_element(char *str, char type, t_rt *rt)
 
 char	is_normalized(t_tuple v)
 {
-	float	magnitude;
+	double	magnitude;
 
 	magnitude = sqrt(pow(v[0], 2) + pow(v[1], 2) + pow(v[2], 2));
 	if (magnitude == 1)

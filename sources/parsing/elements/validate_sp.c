@@ -31,7 +31,7 @@ static char	get_sp_values(char *sub, t_rt *rt, char type)
 	}
 	else if (type == 'd')
 	{
-		rt->sp_diameter = verify_and_get_float(sub);
+		rt->sp_diameter = verify_and_get_double(sub);
 		// printf("sp_diameter: %f\n", rt->sp_diameter);
 		if(!rt->sp_diameter)
 			return(error_msg("invalid sp diameter"));

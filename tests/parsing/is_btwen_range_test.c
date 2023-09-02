@@ -3,7 +3,7 @@
 
 MU_TEST(test_validate_1_0)
 {
-	float	result = is_btwen_range("1.0", "0.0", "1.0");
+	double	result = is_btwen_range("1.0", "0.0", "1.0");
 	mu_check( result == 1.0f);
 }
 
@@ -19,13 +19,13 @@ MU_TEST(test_validate_1_9)
 
 MU_TEST(test_validate_0_0)
 {
-	float	result = is_btwen_range("0.0", "0.0", "1.0");
+	double	result = is_btwen_range("0.0", "0.0", "1.0");
 	mu_check(result == 0.0);
 }
 
 MU_TEST(test_validate_0_9)
 {
-	float	result = is_btwen_range("0.9", "0.0", "1.0");
+	double	result = is_btwen_range("0.9", "0.0", "1.0");
 	mu_check(result == 0.9f);
 }
 
@@ -46,13 +46,13 @@ MU_TEST(test_validate__0_9)
 
 MU_TEST(test_validate__0_9_)
 {
-	float	result = is_btwen_range("-0.9", "-1.0", "1.0");
+	double	result = is_btwen_range("-0.9", "-1.0", "1.0");
 	mu_check(result == -0.9f);
 }
 
 MU_TEST(test_validate_1_3_btwen_1_0_and_1_5)
 {
-	float	result = is_btwen_range("1.3", "1.0", "1.5");
+	double	result = is_btwen_range("1.3", "1.0", "1.5");
 	mu_check(result == 1.3f);
 }
 

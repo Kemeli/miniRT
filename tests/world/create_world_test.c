@@ -35,8 +35,8 @@ MU_TEST(test_default_world)
 	mu_check(compare_tuples(world->light->intensity, light->intensity));
 
 	mu_check(compare_tuples(((t_node*)world->head->content)->object->material->color, o1->material->color));
-	mu_check(compare_floats(((t_node*)world->head->content)->object->material->diffuse, o1->material->diffuse));
-	mu_check(compare_floats(((t_node*)world->head->content)->object->material->specular, o1->material->specular));
+	mu_check(compare_doubles(((t_node*)world->head->content)->object->material->diffuse, o1->material->diffuse));
+	mu_check(compare_doubles(((t_node*)world->head->content)->object->material->specular, o1->material->specular));
 
 	mu_check(compare_matrices(((t_node*)world->head->next->content)->object->transform, o2->transform));
 

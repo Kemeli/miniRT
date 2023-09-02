@@ -2,7 +2,7 @@
 
 t_tuple	validate_coordinates(char *str)
 {
-	float	n[3];
+	double	n[3];
 
 	if (!validate_tuple(str, n))
 		return (NULL);

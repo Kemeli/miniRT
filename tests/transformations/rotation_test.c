@@ -5,8 +5,8 @@
 MU_TEST(test_that_a_point_rotate_around_the_x_axis)
 {
 	t_tuple p = point(0, 1, 0);
-	float **half_quarter = rotation_x(M_PI / 4);
-	float **full_quarter = rotation_x(M_PI / 2);
+	double **half_quarter = rotation_x(M_PI / 4);
+	double **full_quarter = rotation_x(M_PI / 2);
 	t_tuple expected_half_quarter = point(0, sqrt(2) / 2, sqrt(2) / 2);
 	t_tuple expected_full_quarter = point(0, 0, 1);
 	t_tuple result_half_quarter = multiply_matrix_with_tuple(half_quarter, p);
@@ -26,8 +26,8 @@ MU_TEST(test_that_a_point_rotate_around_the_x_axis)
 MU_TEST(test_that_the_inverse_of_a_rotation_rotates_in_the_opposite_direction)
 {
 	t_tuple p = point(0, 1, 0);
-	float **half_quarter = rotation_x(M_PI / 4);
-	float **inv = inverse(half_quarter);
+	double **half_quarter = rotation_x(M_PI / 4);
+	double **inv = inverse(half_quarter);
 	t_tuple expected = point(0, sqrt(2) / 2, -sqrt(2) / 2);
 	t_tuple result = multiply_matrix_with_tuple(inv, p);
 	mu_check(compare_tuples(expected, result));
@@ -42,8 +42,8 @@ MU_TEST(test_that_the_inverse_of_a_rotation_rotates_in_the_opposite_direction)
 MU_TEST(test_that_a_point_rotate_around_the_y_axis)
 {
 	t_tuple p = point(0, 0, 1);
-	float **half_quarter = rotation_y(M_PI / 4);
-	float **full_quarter = rotation_y(M_PI / 2);
+	double **half_quarter = rotation_y(M_PI / 4);
+	double **full_quarter = rotation_y(M_PI / 2);
 	t_tuple expected_half_quarter = point(sqrt(2) / 2, 0, sqrt(2) / 2);
 	t_tuple expected_full_quarter = point(1, 0, 0);
 	t_tuple result_half_quarter = multiply_matrix_with_tuple(half_quarter, p);
@@ -63,8 +63,8 @@ MU_TEST(test_that_a_point_rotate_around_the_y_axis)
 MU_TEST(test_that_a_point_rotate_around_the_z_axis)
 {
 	t_tuple p = point(0, 1, 0);
-	float **half_quarter = rotation_z(M_PI / 4);
-	float **full_quarter = rotation_z(M_PI / 2);
+	double **half_quarter = rotation_z(M_PI / 4);
+	double **full_quarter = rotation_z(M_PI / 2);
 	t_tuple expected_half_quarter = point(-sqrt(2) / 2, sqrt(2) / 2, 0);
 	t_tuple expected_full_quarter = point(-1, 0, 0);
 	t_tuple result_half_quarter = multiply_matrix_with_tuple(half_quarter, p);

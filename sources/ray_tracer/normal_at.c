@@ -19,7 +19,7 @@ t_tuple local_normal_at(t_object *object, t_tuple local_point)
 
 static t_tuple local_normal_at_cy(t_object *object, t_tuple local_point)
 {
-	float	distance;
+	double	distance;
 
 	distance = pow(local_point[0], 2) + pow(local_point[2], 2);
 	if (distance < 1 && local_point[1] >= object->cylinder->maximum - EPSILON)

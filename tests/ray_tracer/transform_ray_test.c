@@ -6,7 +6,7 @@ MU_TEST(test_translating_ray)
 	t_tuple p = point(1, 2, 3);
 	t_tuple v = vector(0, 1, 0);
 	t_ray *r = create_ray(p, v);
-	float **m = translation(3, 4, 5);
+	double **m = translation(3, 4, 5);
 	t_ray *r2 = transform_ray(r, m);
 	t_tuple p1 = point(4, 6, 8);
 	t_tuple v1 = vector(0, 1, 0);
@@ -29,7 +29,7 @@ MU_TEST(test_scaling_ray)
 	t_tuple p = point(1, 2, 3);
 	t_tuple v = vector(0, 1, 0);
 	t_ray *r = create_ray(p, v);
-	float **m = scaling(2, 3, 4);
+	double **m = scaling(2, 3, 4);
 	t_ray *r2 = transform_ray(r, m);
 	t_tuple p1 = point(2, 6, 12);
 	t_tuple v1 = vector(0, 3, 0);

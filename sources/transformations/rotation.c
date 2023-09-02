@@ -1,8 +1,8 @@
 #include <minirt.h>
 
-float	**rotation_x(float radian)
+double	**rotation_x(double radian)
 {
-	float	**rotation_matrix;
+	double	**rotation_matrix;
 
 	rotation_matrix = identity_matrix(4);
 	rotation_matrix[1][1] = cos(radian);
@@ -12,9 +12,9 @@ float	**rotation_x(float radian)
 	return (rotation_matrix);
 }
 
-float	**rotation_y(float radian)
+double	**rotation_y(double radian)
 {
-	float	**rotation_matrix;
+	double	**rotation_matrix;
 
 	rotation_matrix = identity_matrix(4);
 	rotation_matrix[0][0] = cos(radian);
@@ -24,9 +24,9 @@ float	**rotation_y(float radian)
 	return (rotation_matrix);
 }
 
-float	**rotation_z(float radian)
+double	**rotation_z(double radian)
 {
-	float	**rotation_matrix;
+	double	**rotation_matrix;
 
 	rotation_matrix = identity_matrix(4);
 	rotation_matrix[0][0] = cos(radian);

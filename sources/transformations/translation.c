@@ -1,8 +1,8 @@
 #include <minirt.h>
 
-float	**translation(float x, float y, float z)
+double	**translation(double x, double y, double z)
 {
-	float	**translation_matrix;
+	double	**translation_matrix;
 
 	translation_matrix = identity_matrix(4);
 	translation_matrix[0][3] = x;

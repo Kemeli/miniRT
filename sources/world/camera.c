@@ -6,11 +6,11 @@ void	free_camera(t_camera *camera)
 	free(camera);
 }
 
-t_camera	*camera(float hsize, int vsize, int field_of_view)
+t_camera	*camera(double hsize, int vsize, int field_of_view)
 {
 	t_camera	*camera;
-	float		half_view;
-	float		aspect;
+	double		half_view;
+	double		aspect;
 
 	camera = ft_calloc(1, sizeof(t_camera));
 	camera->hsize = hsize;
@@ -18,7 +18,7 @@ t_camera	*camera(float hsize, int vsize, int field_of_view)
 	camera->field_of_view = field_of_view;
 	camera->transform = identity_matrix(4);
 	half_view = tan(camera->field_of_view / 2);
-	aspect = (float)camera->hsize / (float)camera->vsize;
+	aspect = (double)camera->hsize / (double)camera->vsize;
 	if (aspect >= 1)
 	{
 		camera->half_width = half_view;
@@ -29,6 +29,6 @@ t_camera	*camera(float hsize, int vsize, int field_of_view)
 		camera->half_width = half_view * aspect;
 		camera->half_height = half_view;
 	}
-	camera->pixel_size = (camera->half_width * 2) / (float)camera->hsize;
+	camera->pixel_size = (camera->half_width * 2) / (double)camera->hsize;
 	return (camera);
 }

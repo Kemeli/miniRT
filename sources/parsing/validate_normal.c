@@ -1,6 +1,6 @@
 #include <minirt.h>
 
-static char	validate_range(float *n)
+static char	validate_range(double *n)
 {
 	int	i;
 
@@ -16,8 +16,8 @@ static char	validate_range(float *n)
 
 t_tuple	validate_normal(char *str)
 {
-	float	n[3];
-	float *normal;
+	double	n[3];
+	double *normal;
 
 	normal = validate_tuple(str, n);
 	if (normal && validate_range(normal))

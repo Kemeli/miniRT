@@ -4,8 +4,8 @@
 MU_TEST(test_magnitude_of_a_vector_1_0_0_should_be_equal_to_1)
 {
 	t_tuple	v = vector(1, 0, 0);
-	float	expected = 1.0;
-	float	result = magnitude(v);
+	double	expected = 1.0;
+	double	result = magnitude(v);
 
 	mu_assert_double_eq(result, expected);
 
@@ -15,8 +15,8 @@ MU_TEST(test_magnitude_of_a_vector_1_0_0_should_be_equal_to_1)
 MU_TEST(test_magnitude_of_a_vector_0_1_0_should_be_equal_to_1)
 {
 	t_tuple	v = vector(0, 1, 0);
-	float	expected = 1.0;
-	float	result = magnitude(v);
+	double	expected = 1.0;
+	double	result = magnitude(v);
 
 	mu_assert_double_eq(result, expected);
 
@@ -26,8 +26,8 @@ MU_TEST(test_magnitude_of_a_vector_0_1_0_should_be_equal_to_1)
 MU_TEST(test_magnitude_of_a_vector_0_0_1_should_be_equal_to_1)
 {
 	t_tuple	v = vector(0, 0, 1);
-	float	expected = 1.0;
-	float	result = magnitude(v);
+	double	expected = 1.0;
+	double	result = magnitude(v);
 
 	mu_assert_double_eq(result, expected);
 
@@ -37,8 +37,8 @@ MU_TEST(test_magnitude_of_a_vector_0_0_1_should_be_equal_to_1)
 MU_TEST(test_magnitude_of_a_vector_1_2_3_should_be_equal_to_sqrt_14)
 {
 	t_tuple	v = vector(1, 2, 3);
-	float	expected = sqrt(14);
-	float	result = magnitude(v);
+	double	expected = sqrt(14);
+	double	result = magnitude(v);
 
 	mu_assert_double_eq(result, expected);
 

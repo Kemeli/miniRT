@@ -84,7 +84,7 @@ MU_TEST(test_the_normal_is_a_normalized_vector)
 MU_TEST(test_computing_the_normal_on_a_translated_object)
 {
 	t_object	*o = create_object('s');
-	float		**t = translation(0, 1, 0);
+	double		**t = translation(0, 1, 0);
 	t_tuple		p = point(0, 1.70711f, -0.70711f);
 	t_tuple		esperado;
 	t_tuple		n;
@@ -105,9 +105,9 @@ MU_TEST(test_computing_the_normal_on_a_transformed_object)
 {
 	t_object *o = create_object('s');
 
-	float **scaled = scaling(1, 0.5, 1);
-	float **rotated = rotation_z(M_PI / 5);
-	float **result = multiply_matrix(scaled, rotated);
+	double **scaled = scaling(1, 0.5, 1);
+	double **rotated = rotation_z(M_PI / 5);
+	double **result = multiply_matrix(scaled, rotated);
 	set_transform(&o, result);
 	t_tuple p = point(0, sqrt(2)/2, -sqrt(2)/2);
 	t_tuple n = normal_at(o, p);

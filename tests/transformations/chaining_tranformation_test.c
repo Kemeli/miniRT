@@ -4,9 +4,9 @@
 MU_TEST(test_that_individual_transformations_are_applied_in_sequence)
 {
 	t_tuple p = point(1, 0, 1);
-	float **a = rotation_x(M_PI / 2);
-	float **b = scaling(5, 5, 5);
-	float **c = translation(10, 5, 7);
+	double **a = rotation_x(M_PI / 2);
+	double **b = scaling(5, 5, 5);
+	double **c = translation(10, 5, 7);
 	// apply rotation first
 	t_tuple p2 = multiply_matrix_with_tuple(a, p);
 	t_tuple p2_expected = point(1, -1, 0);
@@ -35,11 +35,11 @@ MU_TEST(test_that_individual_transformations_are_applied_in_sequence)
 MU_TEST(test_that_chained_transformation_must_be_applied_in_reverse_order)
 {
 	t_tuple p = point(1, 0, 1);
-	float **a = rotation_x(M_PI / 2);
-	float **b = scaling(5, 5, 5);
-	float **c = translation(10, 5, 7);
-	float **t = multiply_matrix(c, b);
-	float **t2 = multiply_matrix(t, a);
+	double **a = rotation_x(M_PI / 2);
+	double **b = scaling(5, 5, 5);
+	double **c = translation(10, 5, 7);
+	double **t = multiply_matrix(c, b);
+	double **t2 = multiply_matrix(t, a);
 	t_tuple p2 = multiply_matrix_with_tuple(t2, p);
 	t_tuple p2_expected = point(15, 0, 7);
 	mu_check(compare_tuples(p2, p2_expected));

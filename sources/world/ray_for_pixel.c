@@ -1,9 +1,9 @@
 #include <minirt.h>
 
-t_tuple static	get_pixel(t_camera *c, float px, float py, t_matrix inv);
+t_tuple static	get_pixel(t_camera *c, double px, double py, t_matrix inv);
 t_tuple static	get_origin(t_matrix inv);
 
-t_ray	*ray_for_pixel(t_camera *c, float px, float py)
+t_ray	*ray_for_pixel(t_camera *c, double px, double py)
 {
 	t_tuple		pixel;
 	t_tuple		origin;
@@ -33,10 +33,10 @@ t_tuple static	get_origin(t_matrix inv)
 	return (origin);
 }
 
-t_tuple static	get_pixel(t_camera *c, float px, float py, t_matrix inv)
+t_tuple static	get_pixel(t_camera *c, double px, double py, t_matrix inv)
 {
-	float		offset_xy[2];
-	float		world_xy[2];
+	double		offset_xy[2];
+	double		world_xy[2];
 	t_tuple		p;
 	t_tuple		pixel;
 

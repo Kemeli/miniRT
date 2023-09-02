@@ -3,14 +3,14 @@
 
 MU_TEST(test_matrix_4x4_are_equal)
 {
-	float	values[4][4] = {
+	double	values[4][4] = {
 		{1, 2, 3, 4},
 		{5, 6, 7, 8},
 		{9, 8, 7, 6},
 		{5, 4, 3, 2}
 	};
-	float	**matrix_A = matrix(4);
-	float	**matrix_B = matrix(4);
+	double	**matrix_A = matrix(4);
+	double	**matrix_B = matrix(4);
 	for(int i = 0; i < 4; i++){
 		for(int j = 0; j < 4; j++){
 			matrix_A[i][j] = values[i][j];
@@ -25,20 +25,20 @@ MU_TEST(test_matrix_4x4_are_equal)
 
 MU_TEST(test_matrix_4x4_are_different)
 {
-	float	values_A[4][4] = {
+	double	values_A[4][4] = {
 		{1, 2, 3, 4},
 		{5, 6, 7, 8},
 		{9, 8, 7, 6},
 		{5, 4, 3, 2}
 	};
-	float	values_B[4][4] = {
+	double	values_B[4][4] = {
 		{1, 3, 4, 5},
 		{6, 6, 8, 9},
 		{8, 7, 7, 5},
 		{4, 3, 2, 2}
 	};
-	float	**matrix_A = matrix(4);
-	float	**matrix_B = matrix(4);
+	double	**matrix_A = matrix(4);
+	double	**matrix_B = matrix(4);
 	for(int i = 0; i < 4; i++){
 		for(int j = 0; j < 4; j++){
 			matrix_A[i][j] = values_A[i][j];

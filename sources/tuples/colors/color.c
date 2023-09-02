@@ -1,6 +1,6 @@
 #include <minirt.h>
 
-t_tuple	color(float r, float g, float b)
+t_tuple	color(double r, double g, double b)
 {
 	t_tuple	c;
 

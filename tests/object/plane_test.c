@@ -75,7 +75,7 @@ MU_TEST(test_a_ray_intersecting_a_plane_from_above)
 	t_intersect *xs = intersect(&o, r);
 
 	mu_check(xs->count == 1);
-	mu_check(compare_floats(xs->head->t, 1));
+	mu_check(compare_doubles(xs->head->t, 1));
 	mu_check(compare_pointers(xs->head->object, o));
 
 	free_object(o);
@@ -94,7 +94,7 @@ MU_TEST(test_a_ray_intersecting_a_plane_from_below)
 	t_intersect *xs = intersect(&o, r);
 
 	mu_check(xs->count == 1);
-	mu_check(compare_floats(xs->head->t, 1));
+	mu_check(compare_doubles(xs->head->t, 1));
 	mu_check(compare_pointers(xs->head->object, o));
 
 	free_object(o);
