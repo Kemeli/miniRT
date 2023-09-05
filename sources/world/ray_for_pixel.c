@@ -1,7 +1,7 @@
 #include <minirt.h>
 
 t_tuple static	get_pixel(t_camera *c, double px, double py, t_matrix inv);
-t_tuple static	get_origin(t_matrix inv);
+// t_tuple static	get_origin(t_matrix inv);
 
 t_ray	*ray_for_pixel(t_camera *c, double px, double py)
 {
@@ -9,29 +9,27 @@ t_ray	*ray_for_pixel(t_camera *c, double px, double py)
 	t_tuple		origin;
 	t_tuple		direction;
 	t_tuple		sub;
-	t_matrix	inv;
 
-	inv = inverse(c->transform);
-	pixel = get_pixel(c, px, py, inv);
-	origin = get_origin(inv);
+	pixel = get_pixel(c, px, py, c->inverse);
+	// origin = get_origin(c->inverse);
+	origin = point(0.000000, 1.500000, -5.000000); //isso é temporario
 	sub = subtract(pixel, origin);
 	direction = normalize(sub);
-	free_matrix(inv);
 	free(pixel);
 	free(sub);
 	return (create_ray(origin, direction));
 }
+// pq usar o inverse para calcular a origem?
+// t_tuple static	get_origin(t_matrix inv)
+// {
+// 	t_tuple		p;
+// 	t_tuple		origin;
 
-t_tuple static	get_origin(t_matrix inv)
-{
-	t_tuple		p;
-	t_tuple		origin;
-
-	p = point(0, 0, 0);
-	origin = multiply_matrix_with_tuple(inv, p);
-	free(p);
-	return (origin);
-}
+// 	p = point(0, 0, 0);
+// 	origin = multiply_matrix_with_tuple(inv, p);
+// 	free(p);
+// 	return (origin);
+// }
 
 t_tuple static	get_pixel(t_camera *c, double px, double py, t_matrix inv)
 {

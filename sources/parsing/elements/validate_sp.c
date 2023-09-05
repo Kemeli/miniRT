@@ -8,6 +8,8 @@ void	set_sphere_transform(t_object *obj)
 	translate = translation(obj->sphere->center[0], obj->sphere->center[1], obj->sphere->center[2]);
 	scale = scaling(obj->sphere->radius, obj->sphere->radius, obj->sphere->radius);
 	set_transform(obj, multiply_matrix(translate, scale));
+	free(translate);
+	free(scale);
 }
 
 void	get_sphere(t_rt *rt, t_world *w)

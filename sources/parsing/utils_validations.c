@@ -10,25 +10,19 @@ char	error_msg(char *error_message)
 double *validate_tuple(char *str, double *n)
 {
 	int		i;
-	int		j;
 	int		pos;
-	int		comma;
+	char	**num;
 
-	i = 0;
-	j = 0;
 	pos = 0;
-	comma = 0;
-	while (str && str[i])
+	i = 0;
+	num = ft_split(str, ',');
+	while (num && num[i])
 	{
-		if (str && str[i] && str[i] == '-')
-			i++;
-		i = go_through_num(str, i);
-		n[pos++] = get_double(str, i, j);
-		if (str[i] == ',')
-			count_comma(&i, &comma);
-		if (((comma != 2 && !ft_isdigit(str[i]))))
+		if(is_double(num[i]))
+			n[pos++] = ft_atof(num[i]);
+		else
 			return (NULL);
-		j = i;
+		i++;
 	}
 	return (n);
 }

@@ -1,7 +1,6 @@
 #include <minirt.h>
 #include <time.h>
 
-
 t_tuple	color_at(t_world *w, t_ray *r)
 {
 	t_intersect	*xs;
@@ -32,4 +31,3 @@ t_tuple	color_at(t_world *w, t_ray *r)
 	free_intersections(xs);
 	return (c);
 }
-

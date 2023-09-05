@@ -41,7 +41,8 @@ typedef struct s_cylinder
 	double	maximum;
 	char	closed;
 	t_tuple	center;
-	double	radius; //sera que o diametro éusado para calcular o raio?
+	double	radius;
+	double	height;
 }	t_cylinder;
 
 typedef struct s_plane
@@ -68,6 +69,7 @@ typedef struct s_object
 	t_ray		*saved_ray;
 	double		**transform;
 	double		**inverse;
+	double		**transpose_inverse;
 	t_material	*material;
 	void		(*change_my_material)(struct s_object *obj, t_material *m);
 	struct s_object	*next;
@@ -128,7 +130,9 @@ typedef struct s_camera
 	double		pixel_size;
 	double		half_width;
 	double		half_height;
+	t_tuple		origin;
 	t_matrix	transform;
+	t_matrix	inverse;
 }	t_camera;
 
 typedef struct s_image

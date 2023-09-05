@@ -36,12 +36,12 @@ char	is_normalized(t_tuple v)
 
 t_camera	*set_camera(t_rt *rt)
 {
-	t_tuple		origin;
+	// t_tuple		origin;
 	t_camera	*cam;
 	t_tuple		normalized;
 
-	origin = rt->c_coordinates;
 	cam = camera(WIDTH, HEIGHT, rt->c_fov * M_PI / 180);
+	cam->origin = rt->c_coordinates;
 	if (!is_normalized(rt->c_normal))
 	{
 		normalized = normalize(rt->c_normal);
@@ -49,8 +49,9 @@ t_camera	*set_camera(t_rt *rt)
 		rt->c_normal = normalized;
 	}
 	free(cam->transform);
-	cam->transform = view_transform(origin, rt->c_normal,
+	cam->transform = view_transform(cam->origin, rt->c_normal,
 			normalize(rt->c_normal));
+	cam->inverse = inverse(cam->transform);
 	return (cam);
 }
 

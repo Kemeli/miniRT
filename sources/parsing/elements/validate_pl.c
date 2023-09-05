@@ -1,5 +1,20 @@
 #include <minirt.h>
 
+void	set_plane_transform(t_object *obj)
+{
+	// t_matrix	translate;
+	// t_matrix	scale;
+	// t_matrix	rotation;
+
+	// translate = translation(obj->plane->plane_point[0], obj->plane->plane_point[1], obj->plane->plane_point[2]);
+	// scale = scaling(obj->cylinder->radius, 1, obj->cylinder->radius);
+	// rotation = rotation_x(obj->normal);
+	free(obj->transform);
+	obj->transform = translation(obj->plane->plane_point[0], obj->plane->plane_point[1], obj->plane->plane_point[2]);
+	obj->inverse = inverse(obj->transform);
+	obj->transpose_inverse = transpose_matrix(obj->inverse);
+}
+
 void	get_plane(t_rt *rt, t_world *w)
 {
 	t_object	*obj;
@@ -17,6 +32,7 @@ void	get_plane(t_rt *rt, t_world *w)
 		rt->pl_coordinates[0],
 		rt->pl_coordinates[1],
 		rt->pl_coordinates[2]);
+	set_plane_transform(obj);
 	add_object(w, obj);
 	free(rt->pl_coordinates);
 	free(rt->pl_normalized_v);
@@ -73,5 +89,8 @@ char	validate_pl(char *element, t_rt *rt, t_world *w)
 	// printf("pl normal: %f %f %f\n", rt->pl_normalized_v[0], rt->pl_normalized_v[1], rt->pl_normalized_v[2]);
 	// printf("pl color: %f %f %f\n", rt->pl_color[0], rt->pl_color[1], rt->pl_color[2]);
 	get_plane(rt, w);
+	// free(rt->pl_coordinates);
+	// free(rt->pl_normalized_v);
+	// free(rt->pl_color);
 	return (1);
 }

@@ -1,5 +1,19 @@
 #include <minirt.h>
 
+void	set_cylinder_trnasform(t_object *obj)
+{
+	free(obj->transform);
+	obj->transform = multiply_matrix(
+		translation(obj->cylinder->center[0], obj->cylinder->center[1], obj->cylinder->center[2]),
+		multiply_matrix(
+			rotation_x(M_PI / 2),
+			scaling(obj->cylinder->radius, obj->cylinder->height, obj->cylinder->radius)
+		)
+	);
+	obj->inverse = inverse(obj->transform);
+	obj->transpose_inverse = transpose_matrix(obj->inverse);
+}
+
 void	get_cylinder(t_rt *rt, t_world *w)
 {
 	t_object	*obj;
@@ -20,6 +34,7 @@ void	get_cylinder(t_rt *rt, t_world *w)
 	obj->cylinder->radius = rt->cy_diameter / 2; //como usar esse valor?
 	obj->cylinder->maximum = rt->cy_coordinates[1] + rt->cy_height / 2;
 	obj->cylinder->minimum = rt->cy_coordinates[1] - rt->cy_height / 2;
+	set_cylinder_trnasform(obj);
 	add_object(w, obj);
 	free(rt->cy_coordinates);
 	free(rt->cy_normalized_v);
@@ -107,11 +122,6 @@ char	validate_cy(char *element, t_rt *rt, t_world *w)
 	sub = ft_substr(element, i, j - i);
 	if(!get_cy_values(sub, rt, 'c'))
 		return (0);
-	// printf("cy_coordinates: %f %f %f\n", rt->cy_coordinates[0], rt->cy_coordinates[1], rt->cy_coordinates[2]);
-	// printf("cy_normalized_v: %f %f %f\n", rt->cy_normalized_v[0], rt->cy_normalized_v[1], rt->cy_normalized_v[2]);
-	// printf("cy_diameter: %f\n", rt->cy_diameter);
-	// printf("cy_height: %f\n", rt->cy_height);
-	// printf("cy_color: %f %f %f\n", rt->cy_color[0], rt->cy_color[1], rt->cy_color[2]);
 	get_cylinder(rt, w);
 	return (1);
 }

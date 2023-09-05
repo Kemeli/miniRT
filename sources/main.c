@@ -16,6 +16,7 @@ void	append_object(t_object **head, t_object **new)
 	aux->next = *new;
 }
 
+/*
 int render_first_scene(t_data *data)
 {
 	t_object	*floor = create_object('p');
@@ -23,6 +24,7 @@ int render_first_scene(t_data *data)
 	floor->material->color = color(1, 0.9, 0.9);
 	floor->material->specular = 0;
 	floor->inverse = inverse(floor->transform);
+	floor->transpose_inverse = transpose_matrix(floor->inverse);
 
 	t_object *middle = create_object('s');
 	middle->transform = translation(-0.5, 1, 0.5);
@@ -30,6 +32,7 @@ int render_first_scene(t_data *data)
 	middle->material->diffuse = 0.7;
 	middle->material->specular = 0.3;
 	middle->inverse = inverse(middle->transform);
+	middle->transpose_inverse = transpose_matrix(middle->inverse);
 
 	t_object *right = create_object('s');
 	right->transform = multiply_matrix(
@@ -40,6 +43,7 @@ int render_first_scene(t_data *data)
 	right->material->diffuse = 0.7;
 	right->material->specular = 0.3;
 	right->inverse = inverse(right->transform);
+	right->transpose_inverse = transpose_matrix(right->inverse);
 
 	t_object *left = create_object('s');
 	left->transform = multiply_matrix(
@@ -50,6 +54,7 @@ int render_first_scene(t_data *data)
 	left->material->diffuse = 0.7;
 	left->material->specular = 0.3;
 	left->inverse = inverse(left->transform);
+	left->transpose_inverse = transpose_matrix(left->inverse);
 
 	data->w->head = floor;
 	append_object(&data->w->head, &middle);
@@ -102,6 +107,8 @@ int main(void)
 	c = camera(WIDTH, HEIGHT, 70 * M_PI  / 180);
 	free_matrix(c->transform);
 	c->transform = view_transform(point(0, 1.5, -5), point(0, 1, 0), vector(0, 1, 0));
+
+	c->inverse = inverse(c->transform);
 	free(w->light);
 	w->light = point_light(point(-10, 10, -10), color(1, 1, 1));
 	data.w = w;
@@ -117,7 +124,7 @@ int main(void)
 	free(data.mlx_ptr);
 	return (0);
 }
-/*
+*/
 #include<stdio.h>
 
 enum	e_scene
@@ -157,13 +164,13 @@ void	extension_validation(t_rt *rt)
 
 void	set_amb(t_world *w)
 {
-	t_dlist *aux;
+	t_object *aux;
 
 	aux = w->head;
-	while (aux && aux->content && ((t_node *)aux->content)->object)
+	while (aux)
 	{
-		free(((t_node *)aux->content)->object->material->ambient);
-		((t_node *)aux->content)->object->material->ambient = w->ambient;
+		free(aux->material->ambient);
+		aux->material->ambient = w->ambient;
 		aux = aux->next;
 	}
 }
@@ -173,7 +180,7 @@ int	make_scene(t_data *data)
 	render (data);
 
 	if (data->win_ptr != NULL)
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
+		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
 		data->img->mlx_img, 0, 0);
 	return (0);
 }
@@ -219,17 +226,17 @@ int	main(int argc, char **argv)
 			&data->img->line_len,
 			&data->img->endian
 		);
-		render(data);
-		// set_amb(data->w);
-		// make_scene(data);
+		// render(data);
 		data->win_ptr = mlx_new_window(data->mlx_ptr, WIDTH, HEIGHT, "print sphere");
+		set_amb(data->w);
+		make_scene(data);
 		free_rt(rt);
 		mlx_loop(data->mlx_ptr);
 	}
 
 	mlx_expose_hook(data->win_ptr, put_image_again, data);
 }
-*/
+
 /*	free(data->mlx_ptr);
 
 

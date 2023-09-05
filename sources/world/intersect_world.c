@@ -63,32 +63,32 @@ static void	bubble_sort(t_node **head)
 }
 
 
-void	swap_intersections(t_node **a, t_node **b)
-{
-	t_node	*aux;
+// void	swap_intersections(t_node **a, t_node **b)
+// {
+// 	t_node	*aux;
 
-	aux = (*a);
-	(*a) = (*b);
-	(*b) = aux;
-}
+// 	aux = (*a);
+// 	(*a) = (*b);
+// 	(*b) = aux;
+// }
 
-void	sort(t_node **head)
-{
-	t_node	*aux;
+// void	sort(t_node **head)
+// {
+// 	t_node	*aux;
 
-	aux = (*head);
-	while (aux && aux->next)
-	{
-		if (aux->t < aux->next->t)
-			aux = aux->next;
-		else
-		{
-			swap_intersections(&aux, &aux->next);
-			aux = (*head);
-			aux = aux->next;
-		}
-	}
-}
+// 	aux = (*head);
+// 	while (aux && aux->next)
+// 	{
+// 		if (aux->t < aux->next->t)
+// 			aux = aux->next;
+// 		else
+// 		{
+// 			swap_intersections(&aux, &aux->next);
+// 			aux = (*head);
+// 			aux = aux->next;
+// 		}
+// 	}
+// }
 
 t_intersect	*intersect_world(t_world *world, t_ray *ray)
 {
@@ -97,8 +97,9 @@ t_intersect	*intersect_world(t_world *world, t_ray *ray)
 	t_object	*aux;
 
 	aux = world->head;
-	xs = intersect(&aux, ray);
-	aux = aux->next;
+	// xs = intersect(&aux, ray);
+	// aux = aux->next;
+	xs = ft_calloc(1, sizeof(t_intersect)); //talvez isso seja um problema no "append_node"
 	while (aux)
 	{
 		temp = intersect(&aux, ray);

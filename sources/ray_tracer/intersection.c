@@ -28,8 +28,8 @@ t_intersect	*intersect(t_object **object, t_ray *ray)
 {
 	t_intersect	*intersect;
 
-	if((*object)->saved_ray)
-		free_ray((*object)->saved_ray);
+	// if((*object)->saved_ray)
+	// 	free_ray((*object)->saved_ray);
 
 	(*object)->saved_ray = transform_ray(ray, (*object)->inverse);
 	intersect = NULL;
@@ -38,6 +38,6 @@ t_intersect	*intersect(t_object **object, t_ray *ray)
 	else if ((*object)->shape == 'p')
 		intersect = intersect_plane((*object), ray);
 	else if ((*object)->shape == 'c')
-		intersect = intersect_cylinder((*object), ray);
+		intersect = intersect_cylinder((*object), ray); //falta verificar aqui
 	return (intersect);
 }
