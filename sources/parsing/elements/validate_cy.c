@@ -2,16 +2,22 @@
 
 void	set_cylinder_trnasform(t_object *obj)
 {
-	free(obj->transform);
-	obj->transform = multiply_matrix(
-		translation(obj->cylinder->center[0], obj->cylinder->center[1], obj->cylinder->center[2]),
-		multiply_matrix(
-			rotation_x(M_PI / 2),
-			scaling(obj->cylinder->radius, obj->cylinder->height, obj->cylinder->radius)
-		)
-	);
-	obj->inverse = inverse(obj->transform);
-	obj->transpose_inverse = transpose_matrix(obj->inverse);
+	t_matrix	translate;
+	t_matrix	scale;
+	t_matrix	rotate;
+	t_matrix	tmp;
+
+	translate = translation(obj->cylinder->center[0],
+			obj->cylinder->center[1],
+			obj->cylinder->center[2]);
+	scale = scaling(obj->cylinder->radius, 1, obj->cylinder->radius);
+	rotate = get_rotation_matrix(obj->normal);
+	tmp = multiply_matrix(translate, rotate);
+	set_transform(obj, multiply_matrix(tmp, scale));
+	free_matrix(translate);
+	free_matrix(scale);
+	free_matrix(rotate);
+	free_matrix(tmp);
 }
 
 void	get_cylinder(t_rt *rt, t_world *w)
@@ -24,20 +30,20 @@ void	get_cylinder(t_rt *rt, t_world *w)
 		rt->cy_color[1],
 		rt->cy_color[2]);
 	obj->normal = vector(
-		rt->cy_normalized_v[0],
-		rt->cy_normalized_v[1],
-		rt->cy_normalized_v[2]);
+		rt->cy_orientation_v[0],
+		rt->cy_orientation_v[1],
+		rt->cy_orientation_v[2]);
 	obj->cylinder->center = point(
 		rt->cy_coordinates[0],
 		rt->cy_coordinates[1],
 		rt->cy_coordinates[2]);
 	obj->cylinder->radius = rt->cy_diameter / 2; //como usar esse valor?
-	obj->cylinder->maximum = rt->cy_coordinates[1] + rt->cy_height / 2;
+	obj->cylinder->maximum = rt->cy_coordinates[1] + rt->cy_height / 2; //precisa dessa soma?
 	obj->cylinder->minimum = rt->cy_coordinates[1] - rt->cy_height / 2;
 	set_cylinder_trnasform(obj);
 	add_object(w, obj);
 	free(rt->cy_coordinates);
-	free(rt->cy_normalized_v);
+	free(rt->cy_orientation_v);
 	free(rt->cy_color);
 }
 
@@ -57,8 +63,8 @@ static char	check_tuples(char *sub, t_rt *rt, char type)
 	}
 	else if (type == 'n')
 	{
-		rt->cy_normalized_v = validate_normal(sub);
-		return(check_errors("invalid cy normal", rt->cy_normalized_v));
+		rt->cy_orientation_v = validate_normal(sub);
+		return(check_errors("invalid cy normal", rt->cy_orientation_v));
 	}
 	else if (type == 'c')
 	{

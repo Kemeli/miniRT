@@ -47,7 +47,7 @@ typedef struct s_cylinder
 
 typedef struct s_plane
 {
-	t_tuple	plane_point;
+	t_tuple	center;
 }	t_plane;
 
 typedef struct s_sphere
@@ -178,11 +178,11 @@ typedef struct s_rt
 	double	sp_diameter;
 
 	t_tuple	pl_coordinates;
-	t_tuple	pl_normalized_v;
+	t_tuple	pl_orientation_v;
 	t_tuple	pl_color;
 
 	t_tuple	cy_coordinates;
-	t_tuple	cy_normalized_v;
+	t_tuple	cy_orientation_v;
 	double	cy_diameter;
 	double	cy_height;
 	t_tuple	cy_color;
@@ -311,5 +311,6 @@ void			add_object(t_world *w, t_object *obj);
 void			append_node(t_node **head, t_node *new);
 void			append_object(t_object **head, t_object **new);
 int				intersect_lst_size(t_node *head);
+t_matrix		get_rotation_matrix(t_tuple orientation);
 
 #endif

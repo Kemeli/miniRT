@@ -1,18 +1,65 @@
 #include <minirt.h>
 
+static t_matrix	get_x_y_rotation(t_tuple orientation)
+{
+	t_matrix	rotate_x;
+	t_matrix	rotate_y;
+	t_matrix	rotate;
+
+	rotate_x = rotation_x(M_PI / 2);
+	rotate_y = rotation_y(atan(orientation[0]/ orientation[2]));
+	rotate = multiply_matrix(rotate_y, rotate_x);
+	free_matrix(rotate_x);
+	free_matrix(rotate_y);
+	return (rotate);
+}
+
+static t_matrix	get_z_x_rotation(t_tuple orientation)
+{
+	t_matrix	rotate_x;
+	t_matrix	rotate_z;
+	t_matrix	rotate;
+
+	rotate_x = rotation_x(atan(orientation[2] / orientation[1]));
+	rotate_z = rotation_z(atan(-orientation[0] / orientation[1]));
+	rotate = multiply_matrix(rotate_z, rotate_x);
+	free_matrix(rotate_x);
+	free_matrix(rotate_z);
+	return (rotate);
+}
+
+t_matrix	get_rotation_matrix(t_tuple orientation)
+{
+	if (compare_tuples(vector(0, 1, 0), orientation))
+		return (identity_matrix(4));
+	else if (compare_tuples(vector(0, -1, 0), orientation))
+		return (rotation_x(M_PI));
+	else if (compare_tuples(vector(1, 0, 0), orientation))
+		return (rotation_z(-M_PI / 2));
+	else if (compare_tuples(vector(-1, 0, 0), orientation))
+		return (rotation_z(M_PI / 2));
+	else if (compare_tuples(vector(0, 0, 1), orientation))
+		return (rotation_x(M_PI / 2));
+	else if (compare_tuples(vector(0, 0, -1), orientation))
+		return (rotation_x(-M_PI / 2));
+	if (compare_doubles(orientation[1], 0))
+		return (get_x_y_rotation(orientation));
+	else
+		return (get_z_x_rotation(orientation));
+}
+
 void	set_plane_transform(t_object *obj)
 {
-	// t_matrix	translate;
-	// t_matrix	scale;
-	// t_matrix	rotation;
+	t_matrix	translate;
+	t_matrix	transform;
+	t_matrix	rotation;
 
-	// translate = translation(obj->plane->plane_point[0], obj->plane->plane_point[1], obj->plane->plane_point[2]);
-	// scale = scaling(obj->cylinder->radius, 1, obj->cylinder->radius);
-	// rotation = rotation_x(obj->normal);
-	free(obj->transform);
-	obj->transform = translation(obj->plane->plane_point[0], obj->plane->plane_point[1], obj->plane->plane_point[2]);
-	obj->inverse = inverse(obj->transform);
-	obj->transpose_inverse = transpose_matrix(obj->inverse);
+	translate = translation(obj->plane->center[0],
+			obj->plane->center[1],
+			obj->plane->center[2]);
+	rotation = get_rotation_matrix(obj->normal);
+	transform = multiply_matrix(translate, rotation);
+	set_transform(obj, transform);
 }
 
 void	get_plane(t_rt *rt, t_world *w)
@@ -25,17 +72,17 @@ void	get_plane(t_rt *rt, t_world *w)
 		rt->pl_color[1],
 		rt->pl_color[2]);
 	obj->normal = vector(
-		rt->pl_normalized_v[0],
-		rt->pl_normalized_v[1],
-		rt->pl_normalized_v[2]);
-	obj->plane->plane_point = point(
+		rt->pl_orientation_v[0],
+		rt->pl_orientation_v[1],
+		rt->pl_orientation_v[2]);
+	obj->plane->center = point(
 		rt->pl_coordinates[0],
 		rt->pl_coordinates[1],
 		rt->pl_coordinates[2]);
 	set_plane_transform(obj);
 	add_object(w, obj);
 	free(rt->pl_coordinates);
-	free(rt->pl_normalized_v);
+	free(rt->pl_orientation_v);
 	free(rt->pl_color);
 }
 
@@ -49,8 +96,8 @@ static char	get_pl_values(char *sub, char type, t_rt *rt)
 	}
 	else if (type == 'n')
 	{
-		rt->pl_normalized_v = validate_normal(sub);
-		if (!rt->pl_normalized_v)
+		rt->pl_orientation_v = validate_normal(sub);
+		if (!rt->pl_orientation_v)
 			return(error_msg("invalid pl normal"));
 	}
 	else if (type == 'c')
