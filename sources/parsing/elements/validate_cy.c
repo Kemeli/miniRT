@@ -87,41 +87,40 @@ static char	get_cy_values(char *sub, t_rt *rt, char type)
 	}
 	else
 		ret = check_tuples(sub, rt, type);
-	free (sub);
 	return (ret);
 }
 
 char	validate_cy(char *element, t_rt *rt, t_world *w)
 {
-	int		i;
-	int		j;
-	char	*sub;
+	char	**sub;
 
-	i = skip_spaces(2, element);
-	j = go_through_char(i, element);
-	sub = ft_substr(element, i, j - i);
-	if(!get_cy_values(sub, rt, 'm'))
+	sub = ft_split(element, ' ');
+	if(!get_cy_values(sub[1], rt, 'm'))
+	{
+		free_split(sub);
 		return (0);
-	i = skip_spaces(j, element);
-	j = go_through_char(i, element);
-	sub = ft_substr(element, i, j - i);
-	if(!get_cy_values(sub, rt, 'n'))
+	}
+	if(!get_cy_values(sub[2], rt, 'n'))
+	{
+		free_split(sub);
 		return (0);
-	i = skip_spaces(j, element);
-	j = go_through_char(i, element);
-	sub = ft_substr(element, i, j - i);
-	if(!get_cy_values(sub, rt, 'd'))
+	}
+	if(!get_cy_values(sub[3], rt, 'd'))
+	{
+		free_split(sub);
 		return (0);
-	i = skip_spaces(j, element);
-	j = go_through_char(i, element);
-	sub = ft_substr(element, i, j - i);
-	if(!get_cy_values(sub, rt, 'h'))
+	}
+	if(!get_cy_values(sub[4], rt, 'h'))
+	{
+		free_split(sub);
 		return (0);
-	i = skip_spaces(j, element);
-	j = go_through_char(i, element);
-	sub = ft_substr(element, i, j - i);
-	if(!get_cy_values(sub, rt, 'c'))
+	}
+	if(!get_cy_values(sub[5], rt, 'c'))
+	{
+		free_split(sub);
 		return (0);
+	}
 	get_cylinder(rt, w);
+	free_split(sub);
 	return (1);
 }

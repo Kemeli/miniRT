@@ -59,38 +59,30 @@ static char	get_pl_values(char *sub, char type, t_rt *rt)
 		if(!rt->pl_color)
 			return(error_msg("invalid pl color"));
 	}
-	free(sub);
 	return (1);
 }
 
 char	validate_pl(char *element, t_rt *rt, t_world *w)
 {
-	int		i;
-	int		j;
-	char	*sub;
+	char	**sub;
 
-	i = 2;
-	i = skip_spaces(i, element);
-	j = go_through_char(i, element);
-	sub = ft_substr(element, i, j - i);
-	if(!get_pl_values(sub, 'p', rt))
+	sub = ft_split(element, ' ');
+	if(!get_pl_values(sub[1], 'p', rt))
+	{
+		free_split(sub);
 		return (0);
-	i = skip_spaces(j, element);
-	j = go_through_char(i, element);
-	sub = ft_substr(element, i, j - i);
-	if(!get_pl_values(sub, 'n', rt))
+	}
+	if(!get_pl_values(sub[2], 'n', rt))
+	{
+		free_split(sub);
 		return (0);
-	i = skip_spaces(j, element);
-	j = go_through_char(i, element);
-	sub = ft_substr(element, i, j - i);
-	if(!get_pl_values(sub, 'c', rt))
+	}
+	if(!get_pl_values(sub[3], 'c', rt))
+	{
+		free_split(sub);
 		return (0);
-	// printf("pl coordinates: %f %f %f\n", rt->pl_coordinates[0], rt->pl_coordinates[1], rt->pl_coordinates[2]);
-	// printf("pl normal: %f %f %f\n", rt->pl_normalized_v[0], rt->pl_normalized_v[1], rt->pl_normalized_v[2]);
-	// printf("pl color: %f %f %f\n", rt->pl_color[0], rt->pl_color[1], rt->pl_color[2]);
+	}
 	get_plane(rt, w);
-	// free(rt->pl_coordinates);
-	// free(rt->pl_normalized_v);
-	// free(rt->pl_color);
+	free_split(sub);
 	return (1);
 }

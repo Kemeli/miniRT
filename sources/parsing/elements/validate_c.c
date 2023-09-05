@@ -20,7 +20,6 @@ static char	validate_c_element(char *str, char type, t_rt *rt)
 		if (!rt->c_fov)
 			return(error_msg("invalid C fov"));
 	}
-	free(str);
 	return (1);
 }
 
@@ -57,25 +56,24 @@ t_camera	*set_camera(t_rt *rt)
 
 t_camera	*validate_c(char *element, t_rt *rt)
 {
-	int			i;
-	int			j;
-	char		*sub;
+	char		**sub;
 
-	i = 1;
-	i = skip_spaces(i, element);
-	j = go_through_char(i, element);
-	sub = ft_substr(element, i, j - i);
-	if(!validate_c_element(sub, 'c', rt))
+	sub = ft_split(element, ' ');
+	if(!validate_c_element(sub[1], 'c', rt))
+	{
+		free_split(sub);
 		return(NULL);
-	i = skip_spaces(j, element);
-	j = go_through_char(i, element);
-	sub = ft_substr(element, i, j - i);
-	if(!validate_c_element(sub, 'n', rt))
+	}
+	if(!validate_c_element(sub[2], 'n', rt))
+	{
+		free_split(sub);
 		return(NULL);
-	i = skip_spaces(j, element);
-	j = go_through_char(i, element);
-	sub = ft_substr(element, i, j - i);
-	if(!validate_c_element(sub, 'a', rt))
+	}
+	if(!validate_c_element(sub[3], 'a', rt))
+	{
+		free_split(sub);
 		return(NULL);
+	}
+	free_split(sub);
 	return (set_camera(rt));
 }

@@ -56,32 +56,22 @@ static char	get_sp_values(char *sub, t_rt *rt, char type)
 		if(!rt->sp_color)
 			return(error_msg("invalid sp color"));
 	}
-	free(sub);
 	return (1);
 }
 
 char	validate_sp(char *element, t_rt *rt, t_world *w)
 {
-	int		i;
-	int		j;
-	char	*sub;
+	char	**sub;
 
-	i = 2;
-	i = skip_spaces(i,element);
-	j = go_through_char(i,element);
-	sub = ft_substr(element, i, j - i);
-	if(!get_sp_values(sub, rt, 'm'))
+	sub = ft_split(element, ' ');
+	if(!get_sp_values(sub[1], rt, 'm'))
 		return(0);
-	i = skip_spaces(j,element);
-	j = go_through_char(i,element);
-	sub = ft_substr(element, i, j - i);
-	if(!get_sp_values(sub, rt, 'd'))
+	if(!get_sp_values(sub[2], rt, 'd'))
 		return(0);
-	i = skip_spaces(j,element);
-	j = go_through_char(i,element);
-	sub = ft_substr(element, i, j - i);
-	if(!get_sp_values(sub, rt, 'c'))
+	if(!get_sp_values(sub[3], rt, 'c'))
 		return(0);
 	get_sphere(rt, w);
+	free_split(sub);
 	return (1);
 }
+//free nos erros
