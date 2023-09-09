@@ -6,12 +6,12 @@ t_tuple	normalize(t_tuple v)
 	double	y;
 	double	z;
 	double	w;
-	t_tuple	result;
+	double	length;
 
-	x = v[0] / magnitude(v);
-	y = v[1] / magnitude(v);
-	z = v[2] / magnitude(v);
-	w = v[3] / magnitude(v);
-	result = tuple(x, y, z, w);
-	return (result);
+	length = magnitude(v);
+	x = v[0] / length;
+	y = v[1] / length;
+	z = v[2] / length;
+	w = v[3] / length;
+	return (tuple(x, y, z, w));
 }

@@ -11,8 +11,8 @@ typedef struct s_aux{
 
 static void	free_view_transform(t_aux *aux, t_matrix orient, t_matrix transl)
 {
-	free(aux->sub);
-	free(aux->forward);
+	// free(aux->sub);
+	// free(aux->forward);
 	free(aux->normal_up);
 	free(aux->left);
 	free(aux->true_up);
@@ -50,12 +50,15 @@ t_matrix	view_transform(t_tuple from, t_tuple to, t_tuple up)
 	t_aux		*aux;
 
 	aux = ft_calloc(1, sizeof(t_aux));
-	aux->sub = subtract(to, from);
-	aux->forward = normalize(aux->sub);
+	// aux->sub = subtract(to, from);
+	// aux->forward = normalize(aux->sub);
 	aux->normal_up = normalize(up);
-	aux->left = cross(aux->forward, aux->normal_up);
-	aux->true_up = cross(aux->left, aux->forward);
-	orientation = get_orientation(aux->left, aux->true_up, aux->forward);
+	// aux->left = cross(aux->forward, aux->normal_up);
+
+	aux->left = cross(to, aux->normal_up);
+
+	aux->true_up = cross(aux->left, to);
+	orientation = get_orientation(aux->left, aux->true_up, to);
 	aux->neg = negative(from);
 	transl = translation(aux->neg[0], aux->neg[1], aux->neg[2]);
 	mult = multiply_matrix(orientation, transl);

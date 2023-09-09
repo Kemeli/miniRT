@@ -33,23 +33,33 @@ char	is_normalized(t_tuple v)
 	return (0);
 }
 
+t_tuple	set_up(t_tuple orientation)
+{
+	if (compare_doubles(orientation[1], 1))
+		return (normalize(vector(0, 0, -1)));
+	if (compare_doubles(orientation[1], -1))
+		return (normalize(vector(0, 0, 1)));
+	return (vector(0, 1, 0));
+}
+
 t_camera	*set_camera(t_rt *rt)
 {
-	// t_tuple		origin;
 	t_camera	*cam;
-	t_tuple		normalized;
+	t_tuple		setup;
 
 	cam = camera(WIDTH, HEIGHT, rt->c_fov * M_PI / 180);
 	cam->origin = rt->c_coordinates;
-	if (!is_normalized(rt->c_normal))
-	{
-		normalized = normalize(rt->c_normal);
-		free(rt->c_normal);
-		rt->c_normal = normalized;
-	}
+	// if (!is_normalized(rt->c_normal))
+	// {
+	// 	normalized = normalize(rt->c_normal);
+	// 	free(rt->c_normal);
+	// 	rt->c_normal = normalized;
+	// }
+	cam->orientation = rt->c_normal;
 	free(cam->transform);
-	cam->transform = view_transform(cam->origin, rt->c_normal,
-			normalize(rt->c_normal));
+	setup = set_up(cam->orientation);
+	cam->transform = view_transform(cam->origin, cam->orientation,
+			setup);
 	cam->inverse = inverse(cam->transform);
 	return (cam);
 }

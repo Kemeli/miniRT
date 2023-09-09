@@ -47,7 +47,8 @@ typedef struct s_cylinder
 
 typedef struct s_plane
 {
-	t_tuple	center;
+	t_tuple	point;
+	t_tuple	orientation;
 }	t_plane;
 
 typedef struct s_sphere
@@ -131,6 +132,7 @@ typedef struct s_camera
 	double		half_width;
 	double		half_height;
 	t_tuple		origin;
+	t_tuple		orientation;
 	t_matrix	transform;
 	t_matrix	inverse;
 }	t_camera;
@@ -271,7 +273,7 @@ void			free_object(t_object *object);
 t_tuple			shade_hit(t_world *world, t_comps *comps);
 t_tuple			color_at(t_world *w, t_ray *r);
 t_matrix		view_transform(t_tuple from, t_tuple to, t_tuple direction);
-t_camera		*camera(double hsize, int vsize, int field_of_view);
+t_camera		*camera(int hsize, int vsize, double field_of_view) ;
 void			free_camera(t_camera *c);
 t_ray			*ray_for_pixel(t_camera *c, double px, double py);
 void			render(t_data *data);

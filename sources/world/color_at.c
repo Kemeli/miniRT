@@ -1,5 +1,4 @@
 #include <minirt.h>
-#include <time.h>
 
 t_tuple	color_at(t_world *w, t_ray *r)
 {
@@ -8,15 +7,8 @@ t_tuple	color_at(t_world *w, t_ray *r)
 	t_tuple		c;
 	t_node		*the_hit;
 
-	// clock_t start_time, end_time;
-    // double cpu_time_used;
-    // start_time = clock();  // Record the start time
-	// printf("entrando...\n");
 	xs = intersect_world(w, r);
 
-	// end_time = clock();  // Record the end time
-    // cpu_time_used = ((double) (end_time - start_time)) / CLOCKS_PER_SEC;  // Calculate the time used in seconds
-    // printf("Time taken by the function: %f seconds\n", cpu_time_used);
 	the_hit = NULL;
 	if(xs->count != 0)
 		the_hit = hit(xs);
@@ -31,3 +23,12 @@ t_tuple	color_at(t_world *w, t_ray *r)
 	free_intersections(xs);
 	return (c);
 }
+
+// #include <time.h>
+	// clock_t start_time, end_time;
+    // double cpu_time_used;
+    // start_time = clock();  // Record the start time
+	// printf("entrando...\n");
+	// end_time = clock();  // Record the end time
+    // cpu_time_used = ((double) (end_time - start_time)) / CLOCKS_PER_SEC;  // Calculate the time used in seconds
+    // printf("Time taken by the function: %f seconds\n", cpu_time_used);

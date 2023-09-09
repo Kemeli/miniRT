@@ -48,16 +48,16 @@ t_matrix	get_rotation_matrix(t_tuple orientation)
 		return (get_z_x_rotation(orientation));
 }
 
-void	set_plane_transform(t_object *obj)
+void	set_plane_transform(t_object *obj, t_rt *rt)
 {
 	t_matrix	translate;
 	t_matrix	transform;
 	t_matrix	rotation;
 
-	translate = translation(obj->plane->center[0],
-			obj->plane->center[1],
-			obj->plane->center[2]);
-	rotation = get_rotation_matrix(obj->normal);
+	translate = translation(rt->pl_coordinates[0],
+			rt->pl_coordinates[1],
+			rt->pl_coordinates[2]);
+	rotation = get_rotation_matrix(rt->pl_orientation_v);
 	transform = multiply_matrix(translate, rotation);
 	set_transform(obj, transform);
 }
@@ -71,15 +71,16 @@ void	get_plane(t_rt *rt, t_world *w)
 		rt->pl_color[0],
 		rt->pl_color[1],
 		rt->pl_color[2]);
-	obj->normal = vector(
-		rt->pl_orientation_v[0],
-		rt->pl_orientation_v[1],
-		rt->pl_orientation_v[2]);
-	obj->plane->center = point(
-		rt->pl_coordinates[0],
-		rt->pl_coordinates[1],
-		rt->pl_coordinates[2]);
-	set_plane_transform(obj);
+	obj->material->specular = 0.2;
+	// obj->normal = vector(
+	// 	rt->pl_orientation_v[0],
+	// 	rt->pl_orientation_v[1],
+	// 	rt->pl_orientation_v[2]);
+	// obj->plane->center = point(
+	// 	rt->pl_coordinates[0],
+	// 	rt->pl_coordinates[1],
+	// 	rt->pl_coordinates[2]);
+	set_plane_transform(obj, rt);
 	add_object(w, obj);
 	free(rt->pl_coordinates);
 	free(rt->pl_orientation_v);

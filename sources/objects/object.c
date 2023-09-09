@@ -6,10 +6,10 @@ t_object	*create_object(char shape)
 
 	object = ft_calloc(1, sizeof(t_object));
 	object->shape = shape;
-	object->transform = identity_matrix(4);
 	object->material = material();
 	object->change_my_material = change_material;
-	object->normal = NULL;
+	// object->normal = NULL;
+	object->transform = identity_matrix(4);
 	object->inverse = NULL;
 	object->transpose_inverse = NULL; //será que deve ser NULL ou identity_matrix?
 	if (shape == 's')

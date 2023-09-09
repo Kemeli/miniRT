@@ -12,7 +12,7 @@ t_ray	*ray_for_pixel(t_camera *c, double px, double py)
 
 	pixel = get_pixel(c, px, py, c->inverse);
 	// origin = get_origin(c->inverse);
-	origin = point(0.000000, 1.500000, -5.000000); //isso é temporario
+	origin = c->origin;
 	sub = subtract(pixel, origin);
 	direction = normalize(sub);
 	free(pixel);
