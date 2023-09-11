@@ -71,7 +71,9 @@ t_intersect	*intersect_sphere(t_object *object)
 	orig_center = subtract(object->saved_ray->origin, object->sphere->center);
 	abc[0] = dot(object->saved_ray->direction, object->saved_ray->direction);
 	abc[1] = 2 * dot(object->saved_ray->direction, orig_center);
-	abc[2] = dot(orig_center, orig_center) - pow(object->sphere->radius, 2);
+	// abc[2] = dot(orig_center, orig_center) - pow(object->sphere->radius, 2);
+	abc[2] = dot(orig_center, orig_center) - 1;
+
 	intersect_lst = handle_discriminant(abc[0], abc[1], abc[2], object);
 	free_sphere_intersection(orig_center, abc);
 	return (intersect_lst);
