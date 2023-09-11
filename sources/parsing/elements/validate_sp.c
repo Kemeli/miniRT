@@ -1,13 +1,13 @@
 #include <minirt.h>
 
-void	set_sphere_transform(t_object *obj)
+void	set_sphere_transform(t_object *obj, t_rt *rt)
 {
 	t_matrix	translate;
 	t_matrix	scale;
 
-	translate = translation(obj->sphere->center[0],
-			obj->sphere->center[1],
-			obj->sphere->center[2]);
+	translate = translation(rt->sp_coordinates[0],
+			rt->sp_coordinates[1],
+			rt->sp_coordinates[2]);
 	scale = scaling(obj->sphere->radius, obj->sphere->radius, obj->sphere->radius);
 	set_transform(obj, multiply_matrix(translate, scale));
 	free(translate);
@@ -18,18 +18,18 @@ void	get_sphere(t_rt *rt, t_world *w)
 {
 	t_object *obj;
 	obj = create_object('s'); //colocar proteção de erro aqui? //colocar os valores diretamente depois
-	free(obj->sphere->center);
-	obj->sphere->center = point(
-		rt->sp_coordinates[0],
-		rt->sp_coordinates[1],
-		rt->sp_coordinates[2]);
+	// free(obj->sphere->center);
+	// obj->sphere->center = point(
+	// 	rt->sp_coordinates[0],
+	// 	rt->sp_coordinates[1],
+	// 	rt->sp_coordinates[2]);
 	obj->sphere->radius = rt->sp_diameter / 2;
 	free(obj->material->color);
 	obj->material->color = color(
 		rt->sp_color[0],
 		rt->sp_color[1],
 		rt->sp_color[2]);
-	set_sphere_transform(obj);
+	set_sphere_transform(obj, rt);
 	add_object(w, obj);
 	free(rt->sp_coordinates);
 	free(rt->sp_color);

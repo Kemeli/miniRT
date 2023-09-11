@@ -36,8 +36,8 @@ t_intersect	*intersect(t_object **object, t_ray *ray)
 	if ((*object)->shape == 's')
 		intersect = intersect_sphere((*object));
 	else if ((*object)->shape == 'p')
-		intersect = intersect_plane((*object), ray);
+		intersect = intersect_plane((*object), (*object)->saved_ray);
 	else if ((*object)->shape == 'c')
-		intersect = intersect_cylinder((*object), ray); //falta verificar aqui
+		intersect = intersect_cylinder((*object), (*object)->saved_ray); //falta verificar aqui
 	return (intersect);
 }
