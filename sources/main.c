@@ -80,7 +80,7 @@ int	handle_keypress(int keysym, t_data *data)
 	return (0);
 }
 
-int	put_image_again(t_data *data)
+int	repeat_image(t_data *data)
 {
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img->mlx_img, 0, 0);
 	return (0);
@@ -115,7 +115,7 @@ int main(void)
 	data.c = c;
 	render_first_scene(&data);
 	// mlx_loop_hook(data.mlx_ptr, &render_first_scene, &data);
-	mlx_expose_hook(data.win_ptr, put_image_again, &data);
+	mlx_expose_hook(data.win_ptr, repeat_image, &data);
 	mlx_hook(data.win_ptr, KeyPress, KeyPressMask, &handle_keypress, &data);
 	mlx_loop(data.mlx_ptr);
 
@@ -191,11 +191,12 @@ int	handle_keypress(int keysym, t_data *data)
 	{
 		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 		data->win_ptr = NULL;
+		exit(0);
 	}
 	return (0);
 }
 
-int	put_image_again(t_data *data)
+int	repeat_image(t_data *data)
 {
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img->mlx_img, 0, 0);
 	return (0);
@@ -231,17 +232,17 @@ int	main(int argc, char **argv)
 		set_amb(data->w);
 		make_scene(data);
 		free_rt(rt);
-		mlx_loop(data->mlx_ptr);
 	}
 
-	mlx_expose_hook(data->win_ptr, put_image_again, data);
+	mlx_expose_hook(data->win_ptr, repeat_image, data);
+	mlx_hook(data->win_ptr, KeyPress, KeyPressMask, &handle_keypress, data);
+	mlx_loop(data->mlx_ptr);
 }
 
 /*	free(data->mlx_ptr);
 
 
 	mlx_loop_hook(data->mlx_ptr, &make_scene, data);
-	mlx_hook(data->win_ptr, KeyPress, KeyPressMask, &handle_keypress, data);
 
 	mlx_destroy_image(data->mlx_ptr, data->img->mlx_img);
 	mlx_destroy_display(data->mlx_ptr);*/
