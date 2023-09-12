@@ -72,40 +72,40 @@ static void	get_difuse_and_specular(t_aux *aux, t_lighting *l)
 	}
 }
 
-// static t_tuple	multiply_color(t_tuple color, t_tuple amb)
-// {
-// 	t_tuple	response;
+static t_tuple	multiply_color(t_tuple color, t_tuple amb)
+{
+	t_tuple	response;
 
-// 	response = ft_calloc(3, sizeof(double));
-// 	response[0] = color[0] * amb[0];
-// 	response[1] = color[1] * amb[1];
-// 	response[2] = color[2] * amb[2];
-// 	return (response);
-// }
+	response = ft_calloc(3, sizeof(double));
+	response[0] = color[0] * amb[0];
+	response[1] = color[1] * amb[1];
+	response[2] = color[2] * amb[2];
+	return (response);
+}
 
 t_tuple	lighting(t_lighting *l)
 {
 	t_aux	*aux;
 	t_tuple	response;
-	// t_tuple	ambient;
+	t_tuple	ambient;
 
 	aux = ft_calloc(1, sizeof(t_aux));
 	aux->effective_c = multiply_colors(l->material->color, l->light->intensity);
-	// ambient = multiply_color(aux->effective_c, l->material->ambient);
+	ambient = multiply_color(aux->effective_c, l->material->ambient);
 	if (l->in_shadow)
 	{
 		free_aux(aux);
-		// return (ambient);
-		return (color(0, 0, 0));
+		return (ambient);
+		// return (color(0, 0, 0));
 	}
 	aux->light_v = ligth_vector(l);
 	aux->light_dot_normal = dot(aux->light_v, l->normal);
 	get_difuse_and_specular(aux, l);
-	// aux->sum = tuple_addition(ambient, aux->diffuse);
-	// response = tuple_addition(aux->sum, aux->specular);
-	response = tuple_addition(aux->diffuse, aux->specular);
+	aux->sum = tuple_addition(ambient, aux->diffuse);
+	response = tuple_addition(aux->sum, aux->specular);
+	// response = tuple_addition(aux->diffuse, aux->specular);
 	free_aux(aux);
-	// free(ambient);
+	free(ambient);
 	return (response);
 }
 //o ambiente que saiu daqui foi pra onde?

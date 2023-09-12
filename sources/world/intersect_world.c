@@ -103,7 +103,7 @@ t_intersect	*intersect_world(t_world *world, t_ray *ray)
 	while (aux)
 	{
 		temp = intersect(&aux, ray);
-		append_node(&xs->head, temp->head);
+		append_node(&xs->head, temp->head); //verificar a interseção antes de fazer o append
 		free(temp);
 		aux = aux->next;
 	}

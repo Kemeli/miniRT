@@ -1,17 +1,17 @@
 #include <minirt.h>
 
-void	set_cylinder_trnasform(t_object *obj)
+void	set_cylinder_transform(t_object *obj, t_rt *rt)
 {
 	t_matrix	translate;
 	t_matrix	scale;
 	t_matrix	rotate;
 	t_matrix	tmp;
 
-	translate = translation(obj->cylinder->center[0],
-			obj->cylinder->center[1],
-			obj->cylinder->center[2]);
-	scale = scaling(obj->cylinder->radius, 1, obj->cylinder->radius);
-	rotate = get_rotation_matrix(obj->normal);
+	translate = translation(rt->cy_coordinates[0],
+			rt->cy_coordinates[1],
+			rt->cy_coordinates[2]);
+	scale = scaling(rt->cy_diameter / 2, 1, rt->cy_diameter / 2); //rt->cy_diameter / 2 = radius
+	rotate = get_rotation_matrix(rt->cy_orientation_v);
 	tmp = multiply_matrix(translate, rotate);
 	set_transform(obj, multiply_matrix(tmp, scale));
 	free_matrix(translate);
@@ -23,24 +23,20 @@ void	set_cylinder_trnasform(t_object *obj)
 void	get_cylinder(t_rt *rt, t_world *w)
 {
 	t_object	*obj;
+	double		half_height;
 
 	obj = create_object('c');
 	obj->material->color = color(
 		rt->cy_color[0],
 		rt->cy_color[1],
 		rt->cy_color[2]);
-	obj->normal = vector(
-		rt->cy_orientation_v[0],
-		rt->cy_orientation_v[1],
-		rt->cy_orientation_v[2]);
-	obj->cylinder->center = point(
-		rt->cy_coordinates[0],
-		rt->cy_coordinates[1],
-		rt->cy_coordinates[2]);
-	obj->cylinder->radius = rt->cy_diameter / 2; //como usar esse valor?
-	obj->cylinder->maximum = rt->cy_coordinates[1] + rt->cy_height / 2; //precisa dessa soma?
-	obj->cylinder->minimum = rt->cy_coordinates[1] - rt->cy_height / 2;
-	set_cylinder_trnasform(obj);
+	// obj->cylinder->radius = rt->cy_diameter / 2;
+	// obj->cylinder->maximum = rt->cy_coordinates[1] + rt->cy_height / 2; //precisa dessa soma?
+	half_height = rt->cy_height / 2;
+	obj->cylinder->maximum = half_height;
+	// obj->cylinder->minimum = rt->cy_coordinates[1] - rt->cy_height / 2;
+	obj->cylinder->minimum = -half_height;
+	set_cylinder_transform(obj, rt);
 	add_object(w, obj);
 	free(rt->cy_coordinates);
 	free(rt->cy_orientation_v);

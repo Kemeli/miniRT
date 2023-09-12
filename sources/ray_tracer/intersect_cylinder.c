@@ -15,12 +15,12 @@ int	intersect_lst_size(t_node *head)
 	return (count);
 }
 
-static char	check_cap(t_ray *ray, double t)
+static char	check_cap(t_ray *ray, float t)
 {
-	double	x;
-	double	z;
-	double	uno;
-	double	result;
+	float	x;
+	float	z;
+	float	uno;
+	float	result;
 
 	uno = 1.0f;
 	x = ray->origin[0] + (t * ray->direction[0]);
@@ -33,7 +33,7 @@ static char	check_cap(t_ray *ray, double t)
 
 static void	intersect_caps(t_object *object, t_ray *ray, t_intersect *xs)
 {
-	double	t;
+	float	t;
 
 	if (!object->cylinder->closed || fabs(ray->direction[1]) < EPSILON)
 		return ;
@@ -48,10 +48,10 @@ static void	intersect_caps(t_object *object, t_ray *ray, t_intersect *xs)
 static void	create_intersection(
 	t_object *object,
 	t_ray *ray,
-	double *t,
+	float *t,
 	t_intersect **xs)
 {
-	double	y[2];
+	float	y[2];
 
 	y[0] = ray->origin[1] + (t[0] * ray->direction[1]);
 	if (object->cylinder->minimum < y[0] && y[0] < object->cylinder->maximum)
@@ -66,9 +66,9 @@ static void	create_intersection(
 
 t_intersect	*intersect_cylinder(t_object *object, t_ray *ray)
 {
-	double		abc[3];
-	double		discriminant;
-	double		t[2];
+	float		abc[3];
+	float		discriminant;
+	float		t[2];
 	t_intersect	*xs;
 
 	xs = ft_calloc(1, sizeof(t_intersect));
