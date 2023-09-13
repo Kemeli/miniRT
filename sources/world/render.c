@@ -36,11 +36,11 @@ void	render(t_data *data)
 				to_color[1] = 1;
 			if (to_color[2] > 1)
 				to_color[2] = 1;
-			// free_ray(r); //checar onde ta o free do origin pra dar aqui tb
 			write_pixel(data->img, x, y, to_color);
 			free(to_color);
 			x++;
 		}
 		y++;
 	}
+	// free_ray(r); //checar onde ta o free do origin pra dar aqui tb
 }

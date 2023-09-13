@@ -26,8 +26,8 @@ void	free_split(char **split)
 	i = 0;
 	while (split[i])
 	{
-		ft_free_ptr((void *) &split[i]);
+		free(split[i]);
 		i++;
 	}
-	ft_free_ptr((void *) split);
+	free(split);
 }

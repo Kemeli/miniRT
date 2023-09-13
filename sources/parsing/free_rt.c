@@ -1,6 +1,6 @@
 #include <minirt.h>
 
-void	ft_free_ptr(void **ptr)
+void	ft_free_ptr(void **ptr) //tirar do .h
 {
 	if (*ptr)
 	{

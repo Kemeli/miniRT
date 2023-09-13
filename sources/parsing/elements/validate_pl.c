@@ -97,6 +97,7 @@ void	get_plane(t_rt *rt, t_world *w)
 	t_object	*obj;
 
 	obj = create_object('p');
+	free(obj->material->color); //talvez deixar null antes
 	obj->material->color = color(
 		rt->pl_color[0],
 		rt->pl_color[1],

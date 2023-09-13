@@ -21,9 +21,13 @@ double *validate_tuple(char *str, double *n)
 		if(is_double(num[i]))
 			n[pos++] = ft_atof(num[i]);
 		else
+		{
+			free_split(num);
 			return (NULL);
+		}
 		i++;
 	}
+	free_split(num);
 	return (n);
 }
 
