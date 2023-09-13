@@ -28,25 +28,52 @@ static t_matrix	get_z_x_rotation(t_tuple orientation)
 	return (rotate);
 }
 
-t_matrix	get_rotation_matrix(t_tuple orientation)
+// t_matrix	get_rotation_matrix(t_tuple orientation)
+// {
+// 	if (compare_tuples(vector(0, 1, 0), orientation))
+// 		return (identity_matrix(4));
+// 	else if (compare_tuples(vector(0, -1, 0), orientation))
+// 		return (rotation_x(M_PI));
+// 	else if (compare_tuples(vector(1, 0, 0), orientation))
+// 		return (rotation_z(-M_PI / 2));
+// 	else if (compare_tuples(vector(-1, 0, 0), orientation))
+// 		return (rotation_z(M_PI / 2));
+// 	else if (compare_tuples(vector(0, 0, 1), orientation))
+// 		return (rotation_x(M_PI / 2));
+// 	else if (compare_tuples(vector(0, 0, -1), orientation))
+// 		return (rotation_x(-M_PI / 2));
+// 	if (compare_doubles(orientation[1], 0))
+// 		return (get_x_y_rotation(orientation));
+// 	else
+// 		return (get_z_x_rotation(orientation));
+// }
+
+t_matrix get_rotation_matrix(t_tuple orientation)
 {
-	if (compare_tuples(vector(0, 1, 0), orientation))
-		return (identity_matrix(4));
-	else if (compare_tuples(vector(0, -1, 0), orientation))
-		return (rotation_x(M_PI));
-	else if (compare_tuples(vector(1, 0, 0), orientation))
-		return (rotation_z(-M_PI / 2));
-	else if (compare_tuples(vector(-1, 0, 0), orientation))
-		return (rotation_z(M_PI / 2));
-	else if (compare_tuples(vector(0, 0, 1), orientation))
-		return (rotation_x(M_PI / 2));
-	else if (compare_tuples(vector(0, 0, -1), orientation))
-		return (rotation_x(-M_PI / 2));
+	if (compare_doubles(orientation[0], 0) && compare_doubles(orientation[2], 0))
+	{
+		if (compare_doubles(orientation[1], 1))
+			return identity_matrix(4);
+		else if (compare_doubles(orientation[1], -1))
+			return rotation_x(M_PI);
+	}
+	else if (compare_doubles(orientation[1], 0))
+	{
+		if (compare_doubles(orientation[0], 1))
+			return rotation_z(-M_PI / 2);
+		else if (compare_doubles(orientation[0], -1))
+			return rotation_z(M_PI / 2);
+		else if (compare_doubles(orientation[2], 1))
+			return rotation_x(M_PI / 2);
+		else if (compare_doubles(orientation[2], -1))
+			return rotation_x(-M_PI / 2);
+	}
 	if (compare_doubles(orientation[1], 0))
 		return (get_x_y_rotation(orientation));
 	else
 		return (get_z_x_rotation(orientation));
 }
+
 
 void	set_plane_transform(t_object *obj, t_rt *rt)
 {
