@@ -21,6 +21,7 @@ t_point_light	*validate_l(char *element, t_rt *rt)
 {
 	char			**sub;
 	t_point_light	*light;
+	t_tuple			c;
 
 	sub = ft_split(element, ' ');
 	if(!validate_l_element(sub[1], 'l', rt))
@@ -33,9 +34,11 @@ t_point_light	*validate_l(char *element, t_rt *rt)
 		free_split(sub);
 		return(NULL);
 	}
+	c = color(1, 1, 1);
 	light = point_light(
 		rt->l_coordinates,
-		multiply_tuple_by_scalar(color(1, 1, 1), rt->l_brightness));
+		multiply_tuple_by_scalar(c, rt->l_brightness));
 	free_split(sub);
+	free(c);
 	return(light);
 }

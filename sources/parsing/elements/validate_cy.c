@@ -3,6 +3,7 @@
 void	set_cylinder_transform(t_object *obj, t_rt *rt)
 {
 	t_matrix	translate;
+	t_matrix	transform;
 	t_matrix	scale;
 	t_matrix	rotate;
 	t_matrix	tmp;
@@ -13,7 +14,9 @@ void	set_cylinder_transform(t_object *obj, t_rt *rt)
 	scale = scaling(rt->cy_diameter / 2, 1, rt->cy_diameter / 2); //rt->cy_diameter / 2 = radius
 	rotate = get_rotation_matrix(rt->cy_orientation_v);
 	tmp = multiply_matrix(translate, rotate);
-	set_transform(obj, multiply_matrix(tmp, scale));
+	transform = multiply_matrix(tmp, scale);
+	set_transform(obj, transform);
+	free_matrix(transform);
 	free_matrix(translate);
 	free_matrix(scale);
 	free_matrix(rotate);

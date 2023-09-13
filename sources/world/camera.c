@@ -16,7 +16,7 @@ t_camera	*camera(int hsize, int vsize, double field_of_view)
 	camera->hsize = hsize;
 	camera->vsize = vsize;
 	camera->field_of_view = field_of_view;
-	camera->transform = identity_matrix(4);
+	camera->transform = NULL;
 	half_view = tan(camera->field_of_view / 2);
 	aspect = (double)hsize / (double)vsize;
 	if (aspect >= 1)

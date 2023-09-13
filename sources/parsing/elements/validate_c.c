@@ -56,11 +56,12 @@ t_camera	*set_camera(t_rt *rt)
 	// 	rt->c_normal = normalized;
 	// }
 	cam->orientation = rt->c_normal;
-	free(cam->transform);
+	// free(cam->transform);
 	setup = set_up(cam->orientation);
 	cam->transform = view_transform(cam->origin, cam->orientation,
 			setup);
 	cam->inverse = inverse(cam->transform);
+	free(setup);
 	return (cam);
 }
 

@@ -37,15 +37,16 @@ t_tuple	ligth_vector(t_lighting *l)
 void	free_material(t_material *m)
 {
 	free(m->color);
+	free(m->ambient);
 	free(m);
 }
 
-void	free_lighting(t_lighting *l)
-{
-	free(l->eye);
-	free(l->light);
-	free(l->normal);
-	free(l->position);
-	free_material(l->material);
-	free(l);
-}
+// void	free_lighting(t_lighting *l)
+// {
+// 	// free(l->eye);
+// 	// free(l->light);
+// 	// free(l->normal);
+// 	// free(l->position);
+// 	// free_material(l->material);
+// 	free(l);
+// }

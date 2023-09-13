@@ -60,6 +60,9 @@ void	set_plane_transform(t_object *obj, t_rt *rt)
 	rotation = get_rotation_matrix(rt->pl_orientation_v);
 	transform = multiply_matrix(translate, rotation);
 	set_transform(obj, transform);
+	free_matrix(translate);
+	free_matrix(rotation);
+	free_matrix(transform);
 }
 
 void	get_plane(t_rt *rt, t_world *w)

@@ -2,10 +2,10 @@
 
 void	set_transform(t_object *o, t_matrix transform)
 {
-	free_matrix(o->transform);
-	o->transform = transform;
+	// free_matrix(o->transform);
+	// o->transform = transform;
 	// free_matrix(o->inverse);
-	o->inverse = inverse(o->transform);
+	o->inverse = inverse(transform);
 	o->transpose_inverse = transpose_matrix(o->inverse);
 	// t_matrix	transform;
 

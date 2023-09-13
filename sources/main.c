@@ -232,6 +232,7 @@ int	main(int argc, char **argv)
 		set_amb(data->w);
 		make_scene(data);
 		free_rt(rt);
+		// free_world(data->w);
 	}
 
 	mlx_expose_hook(data->win_ptr, repeat_image, data);

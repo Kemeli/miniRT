@@ -4,14 +4,17 @@ void	set_sphere_transform(t_object *obj, t_rt *rt)
 {
 	t_matrix	translate;
 	t_matrix	scale;
+	t_matrix	transform;
 
 	translate = translation(rt->sp_coordinates[0],
 			rt->sp_coordinates[1],
 			rt->sp_coordinates[2]);
 	scale = scaling(obj->sphere->radius, obj->sphere->radius, obj->sphere->radius);
-	set_transform(obj, multiply_matrix(translate, scale));
-	free(translate);
-	free(scale);
+	transform = multiply_matrix(translate, scale);
+	set_transform(obj, transform);
+	free_matrix(translate);
+	free_matrix(transform);
+	free_matrix(scale);
 }
 
 void	get_sphere(t_rt *rt, t_world *w)
