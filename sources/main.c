@@ -192,8 +192,11 @@ int	handle_keypress(int keysym, t_data *data)
 
 		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 		mlx_destroy_image(data->mlx_ptr, data->img->mlx_img);
+		free(data->img);
 		mlx_destroy_display(data->mlx_ptr);
+		free(data->mlx_ptr);
 		data->win_ptr = NULL;
+		free(data);
 		exit(0);
 	}
 	return (0);
