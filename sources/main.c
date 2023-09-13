@@ -189,7 +189,10 @@ int	handle_keypress(int keysym, t_data *data)
 {
 	if (keysym == XK_Escape)
 	{
+
 		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+		mlx_destroy_image(data->mlx_ptr, data->img->mlx_img);
+		mlx_destroy_display(data->mlx_ptr);
 		data->win_ptr = NULL;
 		exit(0);
 	}
@@ -202,12 +205,18 @@ int	repeat_image(t_data *data)
 	return (0);
 }
 
+void	set_mlx_hooks(t_data *data)
+{
+	mlx_expose_hook(data->win_ptr, repeat_image, data);
+	mlx_hook(data->win_ptr, KeyPress, KeyPressMask, &handle_keypress, data);
+}
+
 int	main(int argc, char **argv)
 {
 	t_rt	*rt;
 	t_data	*data;
 
-	data = ft_calloc(1, sizeof(t_data));
+	data = ft_calloc(1, sizeof(t_data)); //dar free nesse ponteiro
 	input_validation(argc);
 	rt = ft_calloc(1, sizeof(t_rt));
 	rt->scene_name = ft_strdup(argv[1]);
@@ -217,7 +226,7 @@ int	main(int argc, char **argv)
 	if (validate_scene(rt, data))
 	{
 		printf("\n\nentrou\n\n");
-		data->img = ft_calloc(1, sizeof(t_image));
+		data->img = ft_calloc(1, sizeof(t_image)); //free aqui
 		data->mlx_ptr = mlx_init();
 
 		data->img->mlx_img = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
@@ -234,10 +243,13 @@ int	main(int argc, char **argv)
 		free_rt(rt);
 		free_world(data->w);
 	}
-
-	mlx_expose_hook(data->win_ptr, repeat_image, data);
-	mlx_hook(data->win_ptr, KeyPress, KeyPressMask, &handle_keypress, data);
+	set_mlx_hooks(data);
+	// mlx_expose_hook(data->win_ptr, repeat_image, data);
+	// mlx_hook(data->win_ptr, KeyPress, KeyPressMask, &handle_keypress, data);
+	free_camera(data->c);
 	mlx_loop(data->mlx_ptr);
+	// mlx_destroy_image(data->mlx_ptr, data->img->mlx_img);
+	// mlx_destroy_display(data->mlx_ptr);
 }
 
 /*	free(data->mlx_ptr);
@@ -245,8 +257,6 @@ int	main(int argc, char **argv)
 
 	mlx_loop_hook(data->mlx_ptr, &make_scene, data);
 
-	mlx_destroy_image(data->mlx_ptr, data->img->mlx_img);
-	mlx_destroy_display(data->mlx_ptr);*/
 
 // }
 
@@ -254,3 +264,4 @@ int	main(int argc, char **argv)
 //parece que o "plane" não tem valores, talvez seja interessante retir a struct dele
 //deu segfault com normal do cylinder invalido
 //verificar vazamento de memória quando der erro nas validations
+*/
