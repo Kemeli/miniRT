@@ -5,8 +5,6 @@ t_world	*create_world(void)
 	t_world	*world;
 
 	world = ft_calloc(1, sizeof(t_world));
-	world->head = ft_calloc(1, sizeof(t_object));
-	world->head = (void *)ft_calloc(1, sizeof(t_node));
 	world->head = NULL;
 	world->light = NULL;
 	return (world);

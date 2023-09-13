@@ -11,6 +11,8 @@ void	free_object(t_object *object)
 {
 	free(object->material->color);
 	free(object->material);
+	free_matrix(object->inverse);
+	free_matrix(object->transpose_inverse);
 	// free_matrix(object->transform);
 	// if (object->saved_ray)
 	// 	free_ray(object->saved_ray);
@@ -20,5 +22,6 @@ void	free_object(t_object *object)
 		free_plane(object->plane);
 	else if(object->shape == 'c')
 		free(object->cylinder);
-	// free(object);
+	free(object);
+	// object = NULL;
 }

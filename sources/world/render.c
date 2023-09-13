@@ -36,6 +36,8 @@ void	render(t_data *data)
 				to_color[1] = 1;
 			if (to_color[2] > 1)
 				to_color[2] = 1;
+			free(r->direction);
+			free(r);
 			write_pixel(data->img, x, y, to_color);
 			free(to_color);
 			x++;
