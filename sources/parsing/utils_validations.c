@@ -46,3 +46,13 @@ void	add_object(t_world *w, t_object *obj)
 	else
 		append_object(&w->head, &obj);
 }
+
+int	count_infos(char **infos)
+{
+	int	i;
+
+	i = 0;
+	while (infos[i])
+		i++;
+	return (i - 1);
+}

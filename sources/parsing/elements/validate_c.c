@@ -70,6 +70,13 @@ t_camera	*validate_c(char *element, t_rt *rt)
 	char		**sub;
 
 	sub = ft_split(element, ' ');
+	if (count_infos(sub) != 3)
+	{
+		printf("count infos: %d\n", count_infos(sub));
+		error_msg("invalid amount of camera infos");
+		free_split(sub);
+		return(NULL);
+	}
 	if(!validate_c_element(sub[1], 'c', rt))
 	{
 		free_split(sub);

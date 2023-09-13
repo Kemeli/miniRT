@@ -66,6 +66,12 @@ char	validate_sp(char *element, t_rt *rt, t_world *w)
 	char	**sub;
 
 	sub = ft_split(element, ' ');
+	if (count_infos(sub) != 3)
+	{
+		error_msg("invalid amount of sphere infos");
+		free_split(sub);
+		return(0);
+	}
 	if(!get_sp_values(sub[1], rt, 'm'))
 		return(0);
 	if(!get_sp_values(sub[2], rt, 'd'))

@@ -101,6 +101,12 @@ char	validate_cy(char *element, t_rt *rt, t_world *w)
 	char	**sub;
 
 	sub = ft_split(element, ' ');
+	if (count_infos(sub) != 5)
+	{
+		error_msg("invalid amount of sphere infos");
+		free_split(sub);
+		return(0);
+	}
 	if(!get_cy_values(sub[1], rt, 'm'))
 	{
 		free_split(sub);

@@ -1,5 +1,6 @@
 #include <minirt.h>
-#include <time.h>
+
+void	free_objects_list(t_object *obj);
 
 void	append_object(t_object **head, t_object **new)
 {
@@ -245,12 +246,31 @@ int	main(int argc, char **argv)
 		make_scene(data);
 		free_rt(rt);
 		free_world(data->w);
+		set_mlx_hooks(data);
+		free_camera(data->c);
+		mlx_loop(data->mlx_ptr);
 	}
-	set_mlx_hooks(data);
+	else
+	{
+		free_rt(rt);
+		if(data->w->ambient)
+			free(data->w->ambient);
+		if(data->w->light)
+		{
+			free(data->w->light->intensity);
+			// free(data->w->light->position);
+			free(data->w->light);
+		}
+		if(data->w->head)
+			free_objects_list(data->w->head);
+		free(data->w);
+		if(data->c)
+			free_camera(data->c);
+		free(data);
+
+	}
 	// mlx_expose_hook(data->win_ptr, repeat_image, data);
 	// mlx_hook(data->win_ptr, KeyPress, KeyPressMask, &handle_keypress, data);
-	free_camera(data->c);
-	mlx_loop(data->mlx_ptr);
 	// mlx_destroy_image(data->mlx_ptr, data->img->mlx_img);
 	// mlx_destroy_display(data->mlx_ptr);
 }

@@ -146,6 +146,12 @@ char	validate_pl(char *element, t_rt *rt, t_world *w)
 	char	**sub;
 
 	sub = ft_split(element, ' ');
+	if (count_infos(sub) != 3)
+	{
+		error_msg("invalid amount of plane infos");
+		free_split(sub);
+		return(0);
+	}
 	if(!get_pl_values(sub[1], 'p', rt))
 	{
 		free_split(sub);

@@ -24,6 +24,12 @@ t_point_light	*validate_l(char *element, t_rt *rt)
 	t_tuple			c;
 
 	sub = ft_split(element, ' ');
+	if (count_infos(sub) != 3)
+	{
+		error_msg("invalid amount of light infos");
+		free_split(sub);
+		return(NULL);
+	}
 	if(!validate_l_element(sub[1], 'l', rt))
 	{
 		free_split(sub);

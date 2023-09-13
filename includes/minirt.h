@@ -317,5 +317,7 @@ void			append_node(t_node **head, t_node *new);
 void			append_object(t_object **head, t_object **new);
 int				intersect_lst_size(t_node *head);
 t_matrix		get_rotation_matrix(t_tuple orientation);
+int				count_infos(char **infos);
+
 
 #endif

@@ -6,6 +6,12 @@ t_tuple	validate_a(char *element, t_rt *rt)
 	t_tuple	ambient;
 
 	sub = ft_split(element, ' ');
+	if (count_infos(sub) != 2)
+	{
+		error_msg("invalid amount of ambient infos");
+		free_split(sub);
+		return(NULL);
+	}
 	rt->a_ratio = is_btwen_range(sub[1], "0", "1");
 	if (!rt->a_ratio)
 	{

@@ -64,17 +64,26 @@ static char	validate_identifier(char *line, t_rt *rt, t_data *data)
 		if (element[0] == 'A' && element[1] == ' ' && !data->w->ambient)
 		{
 			data->w->ambient = validate_a(element, rt);
-			ret = 1;
+			if (!data->w->ambient)
+				ret = 0;
+			else
+				ret = 1;
 		}
 		else if (element[0] == 'C' && element[1] == ' ' && !data->c)
 		{
 			data->c = validate_c(element, rt);
-			ret = 1;
+			if (!data->c)
+				ret = 0;
+			else
+				ret = 1;
 		}
 		else if (element[0] == 'L' && element[1] == ' ' && !data->w->light)
 		{
 			data->w->light = validate_l(element, rt);
-			ret = 1;
+			if (!data->w->light)
+				ret = 0;
+			else
+				ret = 1;
 		}
 		else
 			ret = is_object(element, rt, data->w);

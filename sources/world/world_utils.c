@@ -1,6 +1,6 @@
 #include <minirt.h>
 
-static void	free_objects_list(t_object *obj)
+void	free_objects_list(t_object *obj)
 {
 	t_object	*next;
 
