@@ -14,8 +14,8 @@
 # define TRUE 1
 # define FALSE 0
 
-#define HEIGHT 100
-#define WIDTH 200
+#define HEIGHT 700
+#define WIDTH 1000
 
 #define DESTROY_NOTIFY 17
 #define KeyPress 2

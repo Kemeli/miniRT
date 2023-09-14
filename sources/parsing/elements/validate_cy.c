@@ -103,7 +103,7 @@ char	validate_cy(char *element, t_rt *rt, t_world *w)
 	sub = ft_split(element, ' ');
 	if (count_infos(sub) != 5)
 	{
-		error_msg("invalid amount of sphere infos");
+		error_msg("invalid amount of cylinder infos");
 		free_split(sub);
 		return(0);
 	}
