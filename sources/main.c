@@ -149,14 +149,12 @@ void	input_validation(int argc)
 	}
 }
 
-void	extension_validation(t_rt *rt)
+void	extension_validation(char *scene_name)
 {
 	char	*extension;
-	extension = ft_strrchr(rt->scene_name, '.');
+	extension = ft_strrchr(scene_name, '.');
 	if (!extension || ft_memcmp(extension, ".rt", 3))
 	{
-		free(rt->scene_name);
-		free(rt);
 		printf ("ERROR\n");
 		printf ("invalid scene extension\n");
 		exit (0);
@@ -228,11 +226,11 @@ int	main(int argc, char **argv)
 	t_rt	*rt;
 	t_data	*data;
 
-	data = ft_calloc(1, sizeof(t_data));
 	input_validation(argc);
+	extension_validation(argv[1]);
 	rt = ft_calloc(1, sizeof(t_rt));
 	rt->scene_name = ft_strdup(argv[1]);
-	extension_validation(rt);
+	data = ft_calloc(1, sizeof(t_data));
 
 	data->w = create_world();
 	if (validate_scene(rt, data))
