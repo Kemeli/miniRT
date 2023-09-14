@@ -2,8 +2,10 @@
 
 void	free_camera(t_camera *camera)
 {
-	free_matrix(camera->transform);
-	free_matrix(camera->inverse);
+	if(camera->transform)
+		free_matrix(camera->transform);
+	if(camera->inverse)
+		free_matrix(camera->inverse);
 	free(camera);
 }
 

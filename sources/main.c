@@ -215,6 +215,14 @@ void	set_mlx_hooks(t_data *data)
 	mlx_hook(data->win_ptr, KeyPress, KeyPressMask, &handle_keypress, data);
 }
 
+void	free_scene(t_rt *rt, t_data *data)
+{
+	free_rt(rt);
+	free_world(data->w);
+	if(data->c)
+		free_camera(data->c);
+}
+
 int	main(int argc, char **argv)
 {
 	t_rt	*rt;
@@ -229,7 +237,6 @@ int	main(int argc, char **argv)
 	data->w = create_world();
 	if (validate_scene(rt, data))
 	{
-		printf("\n\nentrou\n\n");
 		data->img = ft_calloc(1, sizeof(t_image)); //free aqui
 		data->mlx_ptr = mlx_init();
 
@@ -244,31 +251,34 @@ int	main(int argc, char **argv)
 		data->win_ptr = mlx_new_window(data->mlx_ptr, WIDTH, HEIGHT, "print sphere");
 		set_amb(data->w);
 		make_scene(data);
-		free_rt(rt);
-		free_world(data->w);
+		free_scene(rt, data);
 		set_mlx_hooks(data);
-		free_camera(data->c);
 		mlx_loop(data->mlx_ptr);
 	}
 	else
 	{
-		free_rt(rt);
-		if(data->w->ambient)
-			free(data->w->ambient);
-		if(data->w->light)
-		{
-			free(data->w->light->intensity);
-			// free(data->w->light->position);
-			free(data->w->light);
-		}
-		if(data->w->head)
-			free_objects_list(data->w->head);
-		free(data->w);
-		if(data->c)
-			free_camera(data->c);
+		free_scene(rt, data);
 		free(data);
-
 	}
+	// else
+	// {
+	// 	free_rt(rt);
+	// 	if(data->w->ambient)
+	// 		free(data->w->ambient);
+	// 	if(data->w->light)
+	// 	{
+	// 		free(data->w->light->intensity);
+	// 		// free(data->w->light->position);
+	// 		free(data->w->light);
+	// 	}
+	// 	if(data->w->head)
+	// 		free_objects_list(data->w->head);
+	// 	free(data->w);
+	// 	if(data->c)
+	// 		free_camera(data->c);
+	// 	free(data);
+
+	// }
 	// mlx_expose_hook(data->win_ptr, repeat_image, data);
 	// mlx_hook(data->win_ptr, KeyPress, KeyPressMask, &handle_keypress, data);
 	// mlx_destroy_image(data->mlx_ptr, data->img->mlx_img);

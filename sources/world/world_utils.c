@@ -14,12 +14,15 @@ void	free_objects_list(t_object *obj)
 
 void	free_world(t_world *world)
 {
-	free_objects_list(world->head);
-	free(world->light->intensity);
-	// free(world->light->position);
-	free(world->light);
-	free(world->ambient);
-	// free(world->head);
+	if (world->head)
+		free_objects_list(world->head);
+	if(world->light)
+	{
+		free(world->light->intensity);
+		free(world->light);
+	}
+	if(world->ambient)
+		free(world->ambient);
 	free(world);
 	world = NULL;
 }
