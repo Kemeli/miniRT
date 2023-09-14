@@ -228,7 +228,7 @@ int	main(int argc, char **argv)
 	t_rt	*rt;
 	t_data	*data;
 
-	data = ft_calloc(1, sizeof(t_data)); //dar free nesse ponteiro
+	data = ft_calloc(1, sizeof(t_data));
 	input_validation(argc);
 	rt = ft_calloc(1, sizeof(t_rt));
 	rt->scene_name = ft_strdup(argv[1]);
@@ -237,7 +237,7 @@ int	main(int argc, char **argv)
 	data->w = create_world();
 	if (validate_scene(rt, data))
 	{
-		data->img = ft_calloc(1, sizeof(t_image)); //free aqui
+		data->img = ft_calloc(1, sizeof(t_image));
 		data->mlx_ptr = mlx_init();
 
 		data->img->mlx_img = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
@@ -247,7 +247,6 @@ int	main(int argc, char **argv)
 			&data->img->line_len,
 			&data->img->endian
 		);
-		// render(data);
 		data->win_ptr = mlx_new_window(data->mlx_ptr, WIDTH, HEIGHT, "print sphere");
 		set_amb(data->w);
 		make_scene(data);
@@ -260,41 +259,5 @@ int	main(int argc, char **argv)
 		free_scene(rt, data);
 		free(data);
 	}
-	// else
-	// {
-	// 	free_rt(rt);
-	// 	if(data->w->ambient)
-	// 		free(data->w->ambient);
-	// 	if(data->w->light)
-	// 	{
-	// 		free(data->w->light->intensity);
-	// 		// free(data->w->light->position);
-	// 		free(data->w->light);
-	// 	}
-	// 	if(data->w->head)
-	// 		free_objects_list(data->w->head);
-	// 	free(data->w);
-	// 	if(data->c)
-	// 		free_camera(data->c);
-	// 	free(data);
-
-	// }
-	// mlx_expose_hook(data->win_ptr, repeat_image, data);
-	// mlx_hook(data->win_ptr, KeyPress, KeyPressMask, &handle_keypress, data);
-	// mlx_destroy_image(data->mlx_ptr, data->img->mlx_img);
-	// mlx_destroy_display(data->mlx_ptr);
 }
-
-/*	free(data->mlx_ptr);
-
-
-	mlx_loop_hook(data->mlx_ptr, &make_scene, data);
-
-
-// }
-
-//lighting é inicializado com os valores passados por parametro
-//parece que o "plane" não tem valores, talvez seja interessante retir a struct dele
-//deu segfault com normal do cylinder invalido
-//verificar vazamento de memória quando der erro nas validations
-*/
+//testar arquivo invalido e arquivo vazio
