@@ -1,36 +1,68 @@
 #include <minirt.h>
 
-t_tuple	validate_a(char *element)
+char	**get_infos(char *element)
 {
-	char	**sub;
-	t_tuple	ambient;
-	double	ratio;
-	t_tuple	color;
+	char	**infos;
 
-	sub = ft_split(element, ' ');
-	if (count_infos(sub) != 2)
+	infos = ft_split(element, ' ');
+	if (count_infos(infos) != 2)
 	{
 		error_msg("invalid amount of ambient infos");
-		free_split(sub);
-		return(NULL);
+		free_split(infos);
+		return(0);
 	}
-	ratio = is_btwen_range(sub[1], "0", "1");
+	return (infos);
+}
+
+double	get_ratio(char *str)
+{
+	double	ratio;
+
+	ratio = is_btwen_range(str, "0", "1"); //colocar essa função pra retornar -1
 	if (!ratio)
 	{
-		error_msg("invalid A ratio");
-		free_split(sub);
-		return(NULL);
+		error_msg("invalid ambient ratio");
+		return (-1);
 	}
-	color = validate_color(sub[2]);
-	if(!color)
-	{
-		error_msg("invalid A color");
-		free_split(sub);
-		return(NULL);
-	}
-	ambient = multiply_tuple_by_scalar(color, ratio);
-	free(color);
-	free_split(sub);
-	return (ambient);
+	return (ratio);
 }
-//tirar o rt daqui
+
+t_tuple	get_color(char *str)
+{
+	t_tuple	color;
+
+	color = validate_color(str);
+	if (!color)
+	{
+		error_msg("invalid ambient color");
+		return (NULL);
+	}
+	return (color);
+}
+
+char	ambient_error(char **infos)
+{
+	free_split(infos);
+	return (0);
+}
+
+char	validate_a(char *element, t_world *w)
+{
+	double	ratio;
+	char	**infos;
+	t_tuple	color;
+
+	infos = get_infos(element);
+	if (!infos)
+		return (0);
+	ratio = get_ratio(infos[1]);
+	if (ratio == -1)
+		return (ambient_error(infos));
+	color = get_color(infos[2]);
+	if(!color)
+		return (ambient_error(infos));
+	w->ambient = multiply_tuple_by_scalar(color, ratio);
+	free(color);
+	free_split(infos);
+	return (1);
+}

@@ -298,7 +298,7 @@ int				skip_spaces(int index, char *str);
 int				go_through_char(int index, char *str);
 char			error_msg(char *error_message);
 void			*error_msg_ptr(char *error_message);
-t_tuple			validate_a(char *element);
+char			validate_a(char *element, t_world *w);
 char			validate_scene(t_rt *rt, char *scene_name, t_data *data);
 void			free_split(char **split);
 t_point_light	*validate_l(char *element, t_rt *rt);
