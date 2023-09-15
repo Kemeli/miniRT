@@ -63,7 +63,6 @@ static char	validate_identifier(char *line, t_rt *rt, t_data *data)
 	{
 		if (element[0] == 'A' && element[1] == ' ' && !data->w->ambient)
 			ret = validate_a(element, data->w);
-
 		else if (element[0] == 'C' && element[1] == ' ' && !data->c)
 		{
 			data->c = validate_c(element, rt);

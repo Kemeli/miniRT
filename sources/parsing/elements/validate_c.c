@@ -49,20 +49,19 @@ t_camera	*set_camera(t_rt *rt)
 
 	cam = camera(WIDTH, HEIGHT, rt->c_fov * M_PI / 180);
 	cam->origin = rt->c_coordinates;
-	// if (!is_normalized(rt->c_normal))
-	// {
-	// 	normalized = normalize(rt->c_normal);
-	// 	free(rt->c_normal);
-	// 	rt->c_normal = normalized;
-	// }
 	cam->orientation = rt->c_normal;
-	// free(cam->transform);
 	setup = set_up(cam->orientation);
 	cam->transform = view_transform(cam->origin, cam->orientation,
 			setup);
 	cam->inverse = inverse(cam->transform);
 	free(setup);
 	return (cam);
+}
+
+void	*camera_error(char **infos)
+{
+	free_split(infos);
+	return (NULL);
 }
 
 t_camera	*validate_c(char *element, t_rt *rt)
@@ -72,26 +71,15 @@ t_camera	*validate_c(char *element, t_rt *rt)
 	sub = ft_split(element, ' ');
 	if (count_infos(sub) != 3)
 	{
-		printf("count infos: %d\n", count_infos(sub));
 		error_msg("invalid amount of camera infos");
-		free_split(sub);
-		return(NULL);
+		return(camera_error(sub));
 	}
 	if(!validate_c_element(sub[1], 'c', rt))
-	{
-		free_split(sub);
-		return(NULL);
-	}
+		return(camera_error(sub));
 	if(!validate_c_element(sub[2], 'n', rt))
-	{
-		free_split(sub);
-		return(NULL);
-	}
+		return(camera_error(sub));
 	if(!validate_c_element(sub[3], 'a', rt))
-	{
-		free_split(sub);
-		return(NULL);
-	}
+		return(camera_error(sub));
 	free_split(sub);
 	return (set_camera(rt));
 }
