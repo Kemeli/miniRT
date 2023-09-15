@@ -23,16 +23,6 @@ static char	validate_c_element(char *str, char type, t_rt *rt)
 	return (1);
 }
 
-char	is_normalized(t_tuple v)
-{
-	double	magnitude;
-
-	magnitude = sqrt(pow(v[0], 2) + pow(v[1], 2) + pow(v[2], 2));
-	if (magnitude == 1)
-		return (1);
-	return (0);
-}
-
 t_tuple	set_up(t_tuple orientation)
 {
 	if (compare_doubles(orientation[1], 1))
@@ -51,8 +41,8 @@ t_camera	*set_camera(t_rt *rt)
 	cam->origin = rt->c_coordinates;
 	cam->orientation = rt->c_normal;
 	setup = set_up(cam->orientation);
-	cam->transform = view_transform(cam->origin, cam->orientation,
-			setup);
+	cam->transform = view_transform(
+		cam->origin, cam->orientation, setup);
 	cam->inverse = inverse(cam->transform);
 	free(setup);
 	return (cam);
@@ -66,7 +56,7 @@ void	*camera_error(char **infos)
 
 t_camera	*validate_c(char *element, t_rt *rt)
 {
-	char		**sub;
+	char	**sub;
 
 	sub = ft_split(element, ' ');
 	if (count_infos(sub) != 3)
