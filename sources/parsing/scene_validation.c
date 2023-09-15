@@ -1,4 +1,3 @@
-
 #include <minirt.h>
 
 static char	*get_line(char *buffer, int fd)

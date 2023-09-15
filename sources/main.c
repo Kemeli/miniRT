@@ -230,31 +230,28 @@ int	main(int argc, char **argv)
 	input_validation(argc);
 	extension_validation(argv[1]);
 	data = ft_calloc(1, sizeof(t_data));
-
 	data->w = create_world();
-	if (validate_scene(rt, argv[1], data))
-	{
-		data->img = ft_calloc(1, sizeof(t_image));
-		data->mlx_ptr = mlx_init();
-
-		data->img->mlx_img = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
-		data->img->addr = mlx_get_data_addr(
-			data->img->mlx_img,
-			&data->img->bpp,
-			&data->img->line_len,
-			&data->img->endian
-		);
-		data->win_ptr = mlx_new_window(data->mlx_ptr, WIDTH, HEIGHT, "print sphere");
-		set_amb(data->w);
-		make_scene(data);
-		free_scene(rt, data);
-		set_mlx_hooks(data);
-		mlx_loop(data->mlx_ptr);
-	}
-	else
+	if (!validate_scene(rt, argv[1], data))
 	{
 		free_scene(rt, data);
 		free(data);
+		return (0);
 	}
+	data->img = ft_calloc(1, sizeof(t_image));
+	data->mlx_ptr = mlx_init();
+	data->img->mlx_img = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
+	data->img->addr = mlx_get_data_addr(
+		data->img->mlx_img,
+		&data->img->bpp,
+		&data->img->line_len,
+		&data->img->endian
+	);
+	data->win_ptr = mlx_new_window(data->mlx_ptr, WIDTH, HEIGHT, "print sphere");
+	set_amb(data->w);
+	make_scene(data);
+	free_scene(rt, data);
+	set_mlx_hooks(data);
+	mlx_loop(data->mlx_ptr);
+
 }
 //testar arquivo invalido e arquivo vazio
