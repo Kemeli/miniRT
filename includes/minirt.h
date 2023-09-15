@@ -293,7 +293,7 @@ t_tuple			char_to_color(char *str);
 t_tuple			validate_coordinates(char *str);
 t_tuple			validate_normal(char *str);
 double			validate_angle(char *angle);
-t_camera		*validate_c(char *element, t_rt *rt);
+char			validate_c(char *element, t_rt *rt, t_camera **cam);
 int				skip_spaces(int index, char *str);
 int				go_through_char(int index, char *str);
 char			error_msg(char *error_message);

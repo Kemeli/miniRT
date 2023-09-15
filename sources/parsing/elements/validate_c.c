@@ -4,7 +4,7 @@ static char	validate_c_element(char *str, char type, t_rt *rt)
 {
 	if (type == 'c')
 	{
-		rt->c_coordinates =  validate_coordinates(str);
+		rt->c_coordinates = validate_coordinates(str);
 		if (!rt->c_coordinates)
 			return(error_msg("invalid C coordinates"));
 	}
@@ -23,7 +23,7 @@ static char	validate_c_element(char *str, char type, t_rt *rt)
 	return (1);
 }
 
-t_tuple	set_up(t_tuple orientation)
+static t_tuple	set_up(t_tuple orientation)
 {
 	if (compare_doubles(orientation[1], 1))
 		return (normalize(vector(0, 0, -1)));
@@ -32,7 +32,7 @@ t_tuple	set_up(t_tuple orientation)
 	return (vector(0, 1, 0));
 }
 
-t_camera	*set_camera(t_rt *rt)
+static t_camera	*set_camera(t_rt *rt)
 {
 	t_camera	*cam;
 	t_tuple		setup;
@@ -48,13 +48,13 @@ t_camera	*set_camera(t_rt *rt)
 	return (cam);
 }
 
-void	*camera_error(char **infos)
+char	camera_error(char **infos) //tentar reutilizar
 {
 	free_split(infos);
-	return (NULL);
+	return (0);
 }
 
-t_camera	*validate_c(char *element, t_rt *rt)
+char	validate_c(char *element, t_rt *rt, t_camera **cam)
 {
 	char	**sub;
 
@@ -71,5 +71,6 @@ t_camera	*validate_c(char *element, t_rt *rt)
 	if(!validate_c_element(sub[3], 'a', rt))
 		return(camera_error(sub));
 	free_split(sub);
-	return (set_camera(rt));
+	*cam = set_camera(rt);
+	return (1);
 }
