@@ -41,3 +41,9 @@ int	skip_spaces(int index, char *str)
 		index++;
 	return (index);
 }
+
+char	input_error(char *message, char **infos)
+{
+	free_split(infos);
+	return(error_msg(message));
+}

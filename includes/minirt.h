@@ -307,7 +307,7 @@ double			get_double(char *str, int i, int j);
 int				go_through_num(char *str, int i);
 double			*validate_tuple(char *str, double *n);
 char			is_double(char *str);
-char			validate_sp(char *line, t_rt *rt, t_world *w);
+char			validate_sp(char *element, t_rt *rt, t_world *w);
 char			validate_pl(char *element, t_rt *rt, t_world *w);
 char			validate_cy(char *element, t_rt *rt, t_world *w);
 double			verify_and_get_double(char *str);
@@ -319,6 +319,6 @@ void			append_object(t_object **head, t_object **new);
 int				intersect_lst_size(t_node *head);
 t_matrix		get_rotation_matrix(t_tuple orientation);
 int				count_infos(char **infos);
-
+char			input_error(char *message, char **infos);
 
 #endif
