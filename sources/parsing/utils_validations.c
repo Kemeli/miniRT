@@ -7,6 +7,13 @@ char	error_msg(char *error_message)
 	return (0);
 }
 
+void	*error_msg_ptr(char *error_message)
+{
+	printf ("ERROR\n");
+	printf ("%s\n", error_message);
+	return (NULL);
+}
+
 double *validate_tuple(char *str, double *n)
 {
 	int		i;

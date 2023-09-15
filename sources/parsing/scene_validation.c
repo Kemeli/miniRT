@@ -22,23 +22,24 @@ static char	*get_line(char *buffer, int fd)
 	return (buffer);
 }
 
-static char	get_scene(t_rt *rt)
+static char	*get_scene(char *scene_name)
 {
 	int		fd;
 	char	*buffer;
+	char	*cpy_scene;
 
-	fd = open(rt->scene_name, O_RDONLY);
+	fd = open(scene_name, O_RDONLY);
 	if (fd < 0)
-		return(error_msg("couldn't open fd"));
+		return(error_msg_ptr("couldn't open fd"));
 	buffer = ft_calloc(1, sizeof(char));
 	buffer = get_line(buffer, fd);
-	rt->cpy_scene = ft_strdup(buffer);
+	cpy_scene = ft_strdup(buffer);
 	free(buffer);
-	if(rt->cpy_scene[0] == '\0')
-		return(error_msg("scene is empty"));
+	if(cpy_scene[0] == '\0')
+		return(error_msg_ptr("scene is empty"));
 	if (close(fd) == -1)
-		return(error_msg("couldn't close fd"));
-	return(1);
+		return(error_msg_ptr("couldn't close fd"));
+	return(cpy_scene);
 }
 
 static char	is_object(char *element, t_rt *rt, t_world *w)
@@ -92,17 +93,19 @@ static char	validate_identifier(char *line, t_rt *rt, t_data *data)
 	return (ret);
 }
 
-char	validate_scene(t_rt *rt, t_data *data)
+char	validate_scene(t_rt *rt, char *scene_name, t_data *data)
 {
 	char		*trimmed;
 	char		**splitted_scene;
 	int			i;
 	char		ret;
+	char		*scene;
 
 	ret = 1;
 	i = 0;
-	get_scene(rt);
-	trimmed = ft_strtrim(rt->cpy_scene, " \t\n\v\f\r");
+	scene = get_scene(scene_name);
+	trimmed = ft_strtrim(scene, " \t\n\v\f\r");
+	free(scene);
 	splitted_scene = ft_split(trimmed, '\n');
 	free(trimmed);
 	while(splitted_scene[i])

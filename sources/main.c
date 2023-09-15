@@ -226,14 +226,13 @@ int	main(int argc, char **argv)
 	t_rt	*rt;
 	t_data	*data;
 
+	rt = ft_calloc(1, sizeof(t_rt));
 	input_validation(argc);
 	extension_validation(argv[1]);
-	rt = ft_calloc(1, sizeof(t_rt));
-	rt->scene_name = ft_strdup(argv[1]);
 	data = ft_calloc(1, sizeof(t_data));
 
 	data->w = create_world();
-	if (validate_scene(rt, data))
+	if (validate_scene(rt, argv[1], data))
 	{
 		data->img = ft_calloc(1, sizeof(t_image));
 		data->mlx_ptr = mlx_init();
