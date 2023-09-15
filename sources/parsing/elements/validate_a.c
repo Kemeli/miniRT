@@ -1,9 +1,11 @@
 #include <minirt.h>
 
-t_tuple	validate_a(char *element, t_rt *rt)
+t_tuple	validate_a(char *element)
 {
 	char	**sub;
 	t_tuple	ambient;
+	double	ratio;
+	t_tuple	color;
 
 	sub = ft_split(element, ' ');
 	if (count_infos(sub) != 2)
@@ -12,21 +14,22 @@ t_tuple	validate_a(char *element, t_rt *rt)
 		free_split(sub);
 		return(NULL);
 	}
-	rt->a_ratio = is_btwen_range(sub[1], "0", "1");
-	if (!rt->a_ratio)
+	ratio = is_btwen_range(sub[1], "0", "1");
+	if (!ratio)
 	{
 		error_msg("invalid A ratio");
 		free_split(sub);
 		return(NULL);
 	}
-	rt->a_color = validate_color(sub[2]);
-	if(!rt->a_color)
+	color = validate_color(sub[2]);
+	if(!color)
 	{
 		error_msg("invalid A color");
 		free_split(sub);
 		return(NULL);
 	}
-	ambient = multiply_tuple_by_scalar(rt->a_color, rt->a_ratio);
+	ambient = multiply_tuple_by_scalar(color, ratio);
+	free(color);
 	free_split(sub);
 	return (ambient);
 }
