@@ -54,7 +54,7 @@ static char	check_tuples(char *info, t_rt *rt, char type)
 	}
 	else if (type == 'n')
 	{
-		rt->cy_orientation_v = validate_normal(info);
+		rt->cy_orientation_v = validate_orientation(info);
 		if (!rt->cy_orientation_v)
 			return(0);
 	}

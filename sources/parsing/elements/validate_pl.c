@@ -45,7 +45,7 @@ static char	get_pl_values(char *info, char type, t_rt *rt)
 	}
 	else if (type == 'n')
 	{
-		rt->pl_orientation_v = validate_normal(info);
+		rt->pl_orientation_v = validate_orientation(info);
 		if (!rt->pl_orientation_v)
 			return(0);
 	}

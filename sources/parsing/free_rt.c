@@ -13,8 +13,8 @@ void	free_elements(t_rt *rt)
 {
 	if (rt->c_coordinates)
 		ft_free_ptr((void *) &rt->c_coordinates);
-	if (rt->c_normal)
-		ft_free_ptr((void *) &rt->c_normal);
+	if (rt->c_orientation)
+		ft_free_ptr((void *) &rt->c_orientation);
 	if (rt->a_color)
 		ft_free_ptr((void *) &rt->a_color);
 	if (rt->l_coordinates)

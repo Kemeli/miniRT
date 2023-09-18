@@ -14,7 +14,7 @@ static char	validate_range(double *n)
 	return (1);
 }
 
-t_tuple	validate_normal(char *str)
+t_tuple	validate_orientation(char *str)
 {
 	double	n[3];
 	double *normal;

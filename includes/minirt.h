@@ -170,7 +170,7 @@ typedef struct s_rt
 
 	char	c;
 	t_tuple	c_coordinates;
-	t_tuple	c_normal;
+	t_tuple	c_orientation;
 	double	c_fov;
 
 	char	l;
@@ -291,13 +291,13 @@ t_tuple			validate_color(char *str);
 double			ft_atof(const char *str);
 t_tuple			char_to_color(char *str);
 t_tuple			validate_coordinates(char *str);
-t_tuple			validate_normal(char *str);
+t_tuple			validate_orientation(char *str);
 double			validate_angle(char *angle);
 char			validate_c(char *element, t_rt *rt, t_camera **cam);
 int				skip_spaces(int index, char *str);
 int				go_through_char(int index, char *str);
 char			error_msg(char *error_message);
-void			*error_msg_ptr(char *error_message);
+void			*error_msg_scene(char *error_message);
 char			validate_a(char *element, t_world *w);
 char			validate_scene(t_rt *rt, char *scene_name, t_data *data);
 void			free_split(char **split);

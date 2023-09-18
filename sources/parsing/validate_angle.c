@@ -18,5 +18,3 @@ double	validate_angle(char *angle)
 		return (-1);
 	return (f_angle);
 }
-
-	// printf("\n%d: %c\n", i, angle[i]);

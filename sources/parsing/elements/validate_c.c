@@ -10,8 +10,8 @@ static char	validate_c_element(char *str, char type, t_rt *rt)
 	}
 	else if (type == 'n')
 	{
-		rt->c_normal = validate_normal(str);
-		if (!rt->c_normal)
+		rt->c_orientation = validate_orientation(str);
+		if (!rt->c_orientation)
 			return(error_msg("invalid C normal"));
 	}
 	else if (type == 'a')
@@ -39,7 +39,7 @@ static t_camera	*set_camera(t_rt *rt)
 
 	cam = camera(WIDTH, HEIGHT, rt->c_fov * M_PI / 180);
 	cam->origin = rt->c_coordinates;
-	cam->orientation = rt->c_normal;
+	cam->orientation = rt->c_orientation;
 	setup = set_up(cam->orientation);
 	cam->transform = view_transform(
 		cam->origin, cam->orientation, setup);

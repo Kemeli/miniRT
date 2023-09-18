@@ -30,15 +30,15 @@ static char	*get_scene(char *scene_name)
 
 	fd = open(scene_name, O_RDONLY);
 	if (fd < 0)
-		return(error_msg_ptr("couldn't open fd"));
+		return(error_msg_scene("couldn't open fd"));
 	buffer = ft_calloc(1, sizeof(char));
 	buffer = get_line(buffer, fd);
 	cpy_scene = ft_strdup(buffer);
 	free(buffer);
 	if(cpy_scene[0] == '\0')
-		return(error_msg_ptr("scene is empty"));
+		return(error_msg_scene("scene is empty"));
 	if (close(fd) == -1)
-		return(error_msg_ptr("couldn't close fd"));
+		return(error_msg_scene("couldn't close fd"));
 	ret = ft_strtrim(cpy_scene, " \t\n\v\f\r");
 	free(cpy_scene);
 	return(ret);
