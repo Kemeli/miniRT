@@ -14,8 +14,8 @@
 # define TRUE 1
 # define FALSE 0
 
-#define HEIGHT 100
-#define WIDTH 200
+#define HEIGHT 700
+#define WIDTH 1000
 
 #define DESTROY_NOTIFY 17
 #define KeyPress 2
@@ -310,5 +310,7 @@ t_matrix		get_rotation_matrix(t_tuple orientation);
 int				count_infos(char **infos);
 char			input_error(char *message, char **infos);
 t_matrix		get_rotation_matrix(t_tuple orientation);
+t_matrix	cofactor_matrix(t_matrix m, int size);
+
 
 #endif
