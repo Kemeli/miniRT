@@ -26,6 +26,7 @@ static char	*get_scene(char *scene_name)
 	int		fd;
 	char	*buffer;
 	char	*cpy_scene;
+	char	*ret;
 
 	fd = open(scene_name, O_RDONLY);
 	if (fd < 0)
@@ -38,7 +39,9 @@ static char	*get_scene(char *scene_name)
 		return(error_msg_ptr("scene is empty"));
 	if (close(fd) == -1)
 		return(error_msg_ptr("couldn't close fd"));
-	return(cpy_scene);
+	ret = ft_strtrim(cpy_scene, " \t\n\v\f\r");
+	free(cpy_scene);
+	return(ret);
 }
 
 static char	is_object(char *element, t_rt *rt, t_world *w)
@@ -76,36 +79,26 @@ static char	validate_identifier(char *line, t_rt *rt, t_data *data)
 
 char	validate_scene(t_rt *rt, char *scene_name, t_data *data)
 {
-	char		*trimmed;
-	char		**splitted_scene;
-	int			i;
-	char		ret;
-	char		*scene;
+	char	**elements;
+	int		i;
+	char	ret;
+	char	*scene;
+	char	*element;
 
-	ret = 1;
-	i = 0;
 	scene = get_scene(scene_name);
-	trimmed = ft_strtrim(scene, " \t\n\v\f\r");
+	elements = ft_split(scene, '\n');
 	free(scene);
-	splitted_scene = ft_split(trimmed, '\n');
-	free(trimmed);
-	while(splitted_scene[i])
+	ret = 0;
+	i = 0;
+	while(elements[i])
 	{
-		if (splitted_scene[i][0] == '\r')
-		{
-			i++;
-			continue;
-		}
-		if (splitted_scene[i][0] == '\r') //gamb, como resolver?
-			i++;
-		ret = validate_identifier(splitted_scene[i], rt, data);
+		element = ft_strtrim(elements[i], " \t\n\v\f\r");
+		ret = validate_identifier(element, rt, data);
+		free(element);
 		if (!ret)
-		{
-			free_split(splitted_scene);
-			return (0);
-		}
+			break;
 		i++;
 	}
-	free_split(splitted_scene);
-	return(1);
+	free_split(elements);
+	return(ret);
 }
