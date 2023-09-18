@@ -15,8 +15,6 @@ void	free_elements(t_rt *rt)
 		ft_free_ptr((void *) &rt->c_coordinates);
 	if (rt->c_orientation)
 		ft_free_ptr((void *) &rt->c_orientation);
-	if (rt->a_color)
-		ft_free_ptr((void *) &rt->a_color);
 	if (rt->l_coordinates)
 		ft_free_ptr((void *) &rt->l_coordinates);
 	if (rt->l_color)
@@ -45,10 +43,6 @@ void	free_elements(t_rt *rt)
 
 void	free_rt(t_rt *rt)
 {
-	if (rt->scene_name)
-		ft_free_ptr((void *) &rt->scene_name);
-	if (rt->cpy_scene)
-		ft_free_ptr((void *) &rt->cpy_scene);
 	free_elements(rt);
 	// free_objects(rt);
 	ft_free_ptr((void *) &rt);

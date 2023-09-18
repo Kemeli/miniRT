@@ -160,20 +160,10 @@ typedef struct s_data
 
 typedef struct s_rt
 {
-	char	*scene_name;
-	char	*cpy_scene;
-
-	char	a;
-	t_tuple	a_color;
-	double	a_ratio;
-	t_tuple	ambient;
-
-	char	c;
 	t_tuple	c_coordinates;
 	t_tuple	c_orientation;
 	double	c_fov;
 
-	char	l;
 	t_tuple	l_coordinates;
 	t_tuple	l_color;
 	double	l_brightness;

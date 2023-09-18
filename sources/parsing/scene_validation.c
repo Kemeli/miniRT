@@ -55,25 +55,19 @@ static char	is_object(char *element, t_rt *rt, t_world *w)
 	return (error_msg("invalid element"));
 }
 
-static char	validate_identifier(char *line, t_rt *rt, t_data *data)
+static char	validate_identifier(char *element, t_rt *rt, t_data *data)
 {
-	char	*element;
 	char	ret;
 
 	ret = 0;
-	element = ft_strtrim(line, " \t\n\v\f\r");
-	if (element && element[0] && element[1] && element[2]) //talvez n precise desse if
-	{
-		if (element[0] == 'A' && element[1] == ' ' && !data->w->ambient)
-			ret = validate_a(element, data->w);
-		else if (element[0] == 'C' && element[1] == ' ' && !data->c)
-			ret = validate_c(element, rt, &data->c);
-		else if (element[0] == 'L' && element[1] == ' ' && !data->w->light)
-			ret = validate_l(element, rt, &data->w->light);
-		else
-			ret = is_object(element, rt, data->w);
-	}
-	free(element);
+	if (element[0] == 'A' && element[1] == ' ' && !data->w->ambient)
+		ret = validate_a(element, data->w);
+	else if (element[0] == 'C' && element[1] == ' ' && !data->c)
+		ret = validate_c(element, rt, &data->c);
+	else if (element[0] == 'L' && element[1] == ' ' && !data->w->light)
+		ret = validate_l(element, rt, &data->w->light);
+	else
+		ret = is_object(element, rt, data->w);
 	return (ret);
 }
 
@@ -83,18 +77,15 @@ char	validate_scene(t_rt *rt, char *scene_name, t_data *data)
 	int		i;
 	char	ret;
 	char	*scene;
-	char	*element;
 
 	scene = get_scene(scene_name);
 	elements = ft_split(scene, '\n');
 	free(scene);
 	ret = 0;
 	i = 0;
-	while(elements[i])
+	while(elements[i]) //se der problema aqui é por causa do \r
 	{
-		element = ft_strtrim(elements[i], " \t\n\v\f\r");
-		ret = validate_identifier(element, rt, data);
-		free(element);
+		ret = validate_identifier(elements[i], rt, data);
 		if (!ret)
 			break;
 		i++;

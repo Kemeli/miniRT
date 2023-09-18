@@ -6,7 +6,7 @@ static void	*clear_and_return(char **str)
 	return (NULL);
 }
 
-static char	is_valid_num(char *str)
+static char	is_num(char *str)
 {
 	int	i;
 
@@ -32,7 +32,7 @@ t_tuple	validate_color(char *str)
 	rgb = ft_split(str, ',');
 	while (rgb[i])
 	{
-		if(!is_valid_num(rgb[i]))
+		if(!is_num(rgb[i]))
 			return(clear_and_return(rgb));
 		num[pos] = ft_atoi(rgb[i]);
 		if (num[pos] < 0 || num[pos] > 255)

@@ -1,7 +1,5 @@
 #include <minirt.h>
 
-
-
 int	go_through_num(char *str, int i)
 {
 	while (str && str[i] && ft_isdigit(str[i]) && str[i] != ',')
