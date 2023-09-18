@@ -24,22 +24,22 @@ t_tuple	validate_color(char *str)
 {
 	int		i;
 	int		pos;
-	int		n[3];
-	char	**nums;
+	int		num[3];
+	char	**rgb;
 
 	i = 0;
 	pos = 0;
-	nums = ft_split(str, ',');
-	while (nums[i])
+	rgb = ft_split(str, ',');
+	while (rgb[i])
 	{
-		if(!is_valid_num(nums[i]))
-			return(clear_and_return(nums));
-		n[pos] = ft_atoi(nums[i]);
-		if (n[pos] < 0 || n[pos] > 255)
-			return(clear_and_return(nums));
+		if(!is_valid_num(rgb[i]))
+			return(clear_and_return(rgb));
+		num[pos] = ft_atoi(rgb[i]);
+		if (num[pos] < 0 || num[pos] > 255)
+			return(clear_and_return(rgb));
 		pos++;
 		i++;
 	}
-	free_split(nums);
-	return (color(n[0] / 255.0, n[1] / 255.0, n[2] / 255.0));
+	free_split(rgb);
+	return (color(num[0] / 255.0, num[1] / 255.0, num[2] / 255.0));
 }
