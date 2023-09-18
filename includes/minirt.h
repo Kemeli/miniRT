@@ -320,5 +320,6 @@ int				intersect_lst_size(t_node *head);
 t_matrix		get_rotation_matrix(t_tuple orientation);
 int				count_infos(char **infos);
 char			input_error(char *message, char **infos);
+t_matrix		get_rotation_matrix(t_tuple orientation);
 
 #endif

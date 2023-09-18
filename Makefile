@@ -74,6 +74,7 @@ SRC				+= utils_parsing.c
 SRC				+= is_double.c
 SRC				+= validate_sp.c
 SRC				+= validate_pl.c
+SRC				+= pl_rotation.c
 SRC				+= validate_cy.c
 SRC				+= free_rt.c
 
