@@ -16,7 +16,7 @@ double	**inverse(t_mat original_matrix)
 		while (j < size)
 		{
 			inversed_matrix[j][i] = cofactor(original_matrix, i, j)
-				/ determinant(original_matrix);
+				/ get_determinant(original_matrix);
 			j++;
 		}
 		i++;

@@ -6,7 +6,7 @@ double	minor(t_matrix matrix, int i, int j)
 	double		result;
 
 	m = submatrix(matrix, i, j);
-	result = determinant(m);
+	result = get_determinant(m);
 	free_matrix(m);
 	return (result);
 }

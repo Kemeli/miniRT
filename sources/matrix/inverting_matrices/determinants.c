@@ -12,7 +12,7 @@ double	determinant_2X2_matrix(t_matrix matrix)
 	return (result);
 }
 
-double	determinant(t_matrix matrix)
+double	get_determinant(t_matrix matrix)
 {
 	double	size;
 	double	determ;

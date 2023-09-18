@@ -223,7 +223,7 @@ t_matrix		submatrix(t_matrix matrix, int row, int col);
 int				get_size(t_matrix matrix);
 double			minor(t_matrix matrix, int i, int j);
 double			cofactor(t_matrix matrix, int i, int j);
-double			determinant(t_matrix matrix);
+double			get_determinant(t_matrix matrix);
 // t_matrix		inverse(t_matrix matrix);
 t_matrix		inverse(t_matrix matrix);
 char			compare_doubles(double n1, double n2);
