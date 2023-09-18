@@ -1,41 +1,45 @@
 #include <minirt.h>
 
-static int	get_number(char *color, int i, int j)
+static void	*clear_and_return(char **str)
 {
-	char	*str;
-	int		num;
+	free_split(str);
+	return (NULL);
+}
 
-	str = ft_substr(color, j, i);
-	num = ft_atoi(str);
-	free(str);
-	return (num);
+static char	is_valid_num(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]))
+			return (0);
+		i++;
+	}
+	return (1);
 }
 
 t_tuple	validate_color(char *str)
 {
 	int		i;
-	int		j;
 	int		pos;
-	int		comma;
 	int		n[3];
+	char	**nums;
 
 	i = 0;
-	j = 0;
-	comma = 0;
 	pos = 0;
-	while (str && str[i])
+	nums = ft_split(str, ',');
+	while (nums[i])
 	{
-		while (str && str[i] && ft_isdigit(str[i]) && str[i] != ',')
-			i++;
-		n[pos] = get_number(str, i, j);
+		if(!is_valid_num(nums[i]))
+			return(clear_and_return(nums));
+		n[pos] = ft_atoi(nums[i]);
 		if (n[pos] < 0 || n[pos] > 255)
-			return (NULL);
+			return(clear_and_return(nums));
 		pos++;
-		if (str[i] == ',')
-			count_comma(&comma, &i);
-		if (comma != 2 && !ft_isdigit(str[i]))
-			return (NULL);
-		j = i;
+		i++;
 	}
+	free_split(nums);
 	return (color(n[0] / 255.0, n[1] / 255.0, n[2] / 255.0));
 }

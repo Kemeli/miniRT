@@ -302,7 +302,6 @@ char			validate_a(char *element, t_world *w);
 char			validate_scene(t_rt *rt, char *scene_name, t_data *data);
 void			free_split(char **split);
 char			validate_l(char *element, t_rt *rt, t_point_light **light);
-void			count_comma(int *index, int *comma);
 double			get_double(char *str, int i, int j);
 int				go_through_num(char *str, int i);
 double			*validate_tuple(char *str, double *n);

@@ -1,10 +1,6 @@
 #include <minirt.h>
 
-void	count_comma(int *index, int *comma)
-{
-	(*comma)++;
-	(*index)++;
-}
+
 
 int	go_through_num(char *str, int i)
 {
