@@ -21,7 +21,6 @@ static void	free_aux(t_aux *aux)
 		free(aux->diffuse);
 	free(aux->specular);
 	free(aux->sum);
-	free(aux);
 }
 
 static double	reflect_dot_eye(t_lighting *l, t_tuple light_v)
@@ -74,24 +73,20 @@ static void	get_difuse_and_specular(t_aux *aux, t_lighting *l)
 
 t_tuple	lighting(t_lighting *l)
 {
-	t_aux	*aux;
+	t_aux	aux;
 	t_tuple	response;
 	t_tuple	ambient;
 
-	aux = ft_calloc(1, sizeof(t_aux));
-	aux->effective_c = multiply_colors(l->material->color, l->light->intensity);
-	ambient = multiply_color(aux->effective_c, l->material->ambient);
+	aux.effective_c = multiply_colors(l->material->color, l->light->intensity);
+	ambient = multiply_color(aux.effective_c, l->material->ambient);
 	if (l->in_shadow)
-	{
-		free_aux(aux);
 		return (ambient);
-	}
-	aux->light_v = ligth_vector(l);
-	aux->light_dot_normal = dot(aux->light_v, l->normal);
-	get_difuse_and_specular(aux, l);
-	aux->sum = tuple_addition(ambient, aux->diffuse);
-	response = tuple_addition(aux->sum, aux->specular);
-	free_aux(aux);
+	aux.light_v = ligth_vector(l);
+	aux.light_dot_normal = dot(aux.light_v, l->normal);
+	get_difuse_and_specular(&aux, l);
+	aux.sum = tuple_addition(ambient, aux.diffuse);
+	response = tuple_addition(aux.sum, aux.specular);
+	free_aux(&aux);
 	free(ambient);
 	return (response);
 }
