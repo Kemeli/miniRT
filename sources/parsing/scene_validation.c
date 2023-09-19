@@ -74,9 +74,9 @@ static char	validate_identifier(char *element, t_rt *rt, t_data *data)
 char	validate_scene(t_rt *rt, char *scene_name, t_data *data)
 {
 	char	**elements;
-	int		i;
 	char	ret;
 	char	*scene;
+	int		i;
 
 	scene = get_scene(scene_name);
 	if (!scene)

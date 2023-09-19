@@ -26,7 +26,6 @@ void	get_sphere(t_rt *rt, t_world *w)
 
 	obj = create_object('s');
 	obj->sphere->radius = rt->sp_diameter / 2;
-	free(obj->material->color);
 	obj->material->color = color( //passar o valor diretamente?
 		rt->sp_color[0],
 		rt->sp_color[1],

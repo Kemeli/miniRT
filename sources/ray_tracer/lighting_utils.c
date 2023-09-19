@@ -15,8 +15,8 @@ t_material	*material(void)
 	t_material	*material;
 
 	material = ft_calloc(1, sizeof(t_material));
-	material->color = color(1, 1, 1);
-	material->ambient = color(0.1f, 0.1f, 0.1f);
+	material->color = NULL;
+	material->ambient = NULL;
 	material->diffuse = 0.9f;
 	material->specular = 0.9f;
 	material->shininess = 200.0f;
@@ -40,13 +40,3 @@ void	free_material(t_material *m)
 	free(m->ambient);
 	free(m);
 }
-
-// void	free_lighting(t_lighting *l)
-// {
-// 	// free(l->eye);
-// 	// free(l->light);
-// 	// free(l->normal);
-// 	// free(l->position);
-// 	// free_material(l->material);
-// 	free(l);
-// }

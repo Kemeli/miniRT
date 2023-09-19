@@ -29,7 +29,6 @@ void	get_cylinder(t_rt *rt, t_world *w)
 	double		half_height;
 
 	obj = create_object('c');
-	free(obj->material->color);
 	obj->material->color = color(
 		rt->cy_color[0],
 		rt->cy_color[1],

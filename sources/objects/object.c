@@ -7,7 +7,7 @@ t_object	*create_object(char shape)
 	object = ft_calloc(1, sizeof(t_object));
 	object->shape = shape;
 	object->material = material();
-	object->change_my_material = change_material;
+	// object->change_my_material = change_material;
 	object->inverse = NULL;
 	object->transpose_inverse = NULL;
 	object->next = NULL;
@@ -20,9 +20,9 @@ t_object	*create_object(char shape)
 	return (object);
 }
 
-void	change_material(t_object *obj, t_material *m)
-{
-	free(obj->material->color);
-	free(obj->material);
-	obj->material = m;
-}
+// void	change_material(t_object *obj, t_material *m)
+// {
+// 	free(obj->material->color);
+// 	free(obj->material);
+// 	obj->material = m;
+// }

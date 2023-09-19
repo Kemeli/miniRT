@@ -8,7 +8,7 @@ void	free_plane(t_plane *plane)
 
 void	free_object(t_object *object)
 {
-	free(object->material->color);
+	ft_free_ptr((void *) &object->material->color);
 	free(object->material);
 	free_matrix(object->inverse);
 	free_matrix(object->transpose_inverse);
