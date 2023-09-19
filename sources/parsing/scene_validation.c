@@ -85,7 +85,7 @@ char	validate_scene(t_rt *rt, char *scene_name, t_data *data)
 	free(scene);
 	ret = 0;
 	i = 0;
-	while(elements[i]) //se der problema aqui é por causa do \r
+	while(elements[i])
 	{
 		ret = validate_identifier(elements[i], rt, data);
 		if (!ret)
