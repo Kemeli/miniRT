@@ -77,6 +77,8 @@ SRC				+= validate_pl.c
 SRC				+= pl_rotation.c
 SRC				+= validate_cy.c
 SRC				+= free_rt.c
+SRC				+= handle_mlx.c
+SRC				+= scene.c
 
 OBJ_DIR			= ./obj
 OBJ				= $(SRC:.c=.o)

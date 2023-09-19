@@ -21,13 +21,7 @@ double	 verify_and_get_double(char *str) //refatorar
 	return (0);
 }
 
-void	add_object(t_world *w, t_object *obj)
-{
-	if (!w->head)
-		w->head = obj;
-	else
-		append_object(&w->head, &obj);
-}
+
 
 int	count_infos(char **infos)
 {

@@ -1,6 +1,6 @@
 #include <minirt.h>
 
-t_sphere	*create_sphere(void) //passar um valor unuico cade vez que a esfera é criada
+t_sphere	*create_sphere(void)
 {
 	t_sphere	*sphere;
 

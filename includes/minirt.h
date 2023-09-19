@@ -232,7 +232,7 @@ t_matrix		scaling(double x, double y, double z);
 t_matrix		rotation_x(double radian);
 t_matrix		rotation_y(double radian);
 t_matrix		rotation_z(double radian);
-t_matrix		shearing(int axis, double value);
+// t_matrix		shearing(int axis, double value);
 t_ray			*create_ray(t_tuple origin, t_tuple direction);
 t_tuple			get_point_position(t_ray *ray, double t);
 t_sphere		*create_sphere(void);
@@ -310,7 +310,13 @@ t_matrix		get_rotation_matrix(t_tuple orientation);
 int				count_infos(char **infos);
 char			input_error(char *message, char **infos);
 t_matrix		get_rotation_matrix(t_tuple orientation);
-t_matrix	cofactor_matrix(t_matrix m, int size);
-
+t_matrix		cofactor_matrix(t_matrix m, int size);
+void			start_mlx(t_data *data);
+void			set_mlx_hooks(t_data *data);
+int				repeat_image(t_data *data);
+int				handle_keypress(int keysym, t_data *data);
+void			append_object(t_object **head, t_object **new);
+void			free_scene(t_rt *rt, t_data *data);
+int				make_scene(t_data *data);
 
 #endif

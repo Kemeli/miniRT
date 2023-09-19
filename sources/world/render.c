@@ -1,8 +1,5 @@
 #include <minirt.h>
 
-#include <time.h>
-
-
 void	write_pixel(t_image *img, int x, int y, t_tuple color)
 {
 	int	pixel_offset = (y * img->line_len) + (x * (img->bpp / 8));
@@ -44,5 +41,4 @@ void	render(t_data *data)
 		}
 		y++;
 	}
-	// free_ray(r); //checar onde ta o free do origin pra dar aqui tb
 }

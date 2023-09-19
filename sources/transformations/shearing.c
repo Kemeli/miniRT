@@ -19,5 +19,4 @@ double	**shearing(int axis, double value)
 		transform[2][1] = value;
 	return (transform);
 }
-
-// verificar se essa função é válida
+//só é usaso nos testes

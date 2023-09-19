@@ -23,7 +23,7 @@ char	is_shadowed(t_world *world, t_tuple point)
 	intersect = intersect_world(world, ray);
 	if (intersect->count != 0)
 		try_hit = hit(intersect);
-	if (try_hit && try_hit->t < magnitude(v)) //mag = distance
+	if (try_hit && try_hit->t < magnitude(v))
 	{
 		free_shadow(ray, intersect, v);
 		return (TRUE);

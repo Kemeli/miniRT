@@ -8,10 +8,8 @@ t_object	*create_object(char shape)
 	object->shape = shape;
 	object->material = material();
 	object->change_my_material = change_material;
-	// object->normal = NULL;
-	// object->transform = identity_matrix(4);
 	object->inverse = NULL;
-	object->transpose_inverse = NULL; //será que deve ser NULL ou identity_matrix?
+	object->transpose_inverse = NULL;
 	object->next = NULL;
 	if (shape == 's')
 		object->sphere = create_sphere();

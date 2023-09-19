@@ -35,7 +35,7 @@ static void	intersect_caps(t_object *object, t_ray *ray, t_intersect *xs)
 {
 	double	t;
 
-	if (!object->cylinder->closed || fabs(ray->direction[1]) < EPSILON)
+	if (fabs(ray->direction[1]) < EPSILON)
 		return ;
 	t = (object->cylinder->minimum - ray->origin[1]) / ray->direction[1];
 	if (check_cap(ray, t))
@@ -59,8 +59,7 @@ static void	create_intersection(
 	y[1] = ray->origin[1] + (t[1] * ray->direction[1]);
 	if (object->cylinder->minimum < y[1] && y[1] < object->cylinder->maximum)
 		append_node(&(*xs)->head, new_intersection(t[1], object));
-	if (object->cylinder->closed)
-		intersect_caps(object, ray, (*xs));
+	intersect_caps(object, ray, (*xs));
 	(*xs)->count = intersect_lst_size((*xs)->head);
 }
 
