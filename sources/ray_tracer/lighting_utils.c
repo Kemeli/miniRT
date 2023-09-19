@@ -1,28 +1,5 @@
 #include <minirt.h>
 
-t_point_light	*point_light(t_tuple position, t_tuple intensity)
-{
-	t_point_light	*point_light;
-
-	point_light = ft_calloc(1, sizeof(t_point_light));
-	point_light->position = position;
-	point_light->intensity = intensity;
-	return (point_light);
-}
-
-t_material	*material(void)
-{
-	t_material	*material;
-
-	material = ft_calloc(1, sizeof(t_material));
-	material->color = NULL;
-	material->ambient = NULL;
-	material->diffuse = 0.9f;
-	material->specular = 0.9f;
-	material->shininess = 200.0f;
-	return (material);
-}
-
 t_tuple	ligth_vector(t_lighting *l)
 {
 	t_tuple	sub;
@@ -34,9 +11,14 @@ t_tuple	ligth_vector(t_lighting *l)
 	return (light_v);
 }
 
-void	free_material(t_material *m)
+t_tuple	multiply_color(t_tuple color, t_tuple amb)
 {
-	free(m->color);
-	free(m->ambient);
-	free(m);
+	t_tuple	response;
+
+	response = ft_calloc(4, sizeof(double));
+	response[0] = color[0] * amb[0];
+	response[1] = color[1] * amb[1];
+	response[2] = color[2] * amb[2];
+	response[3] = 0;
+	return (response);
 }

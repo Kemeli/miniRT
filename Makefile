@@ -79,6 +79,8 @@ SRC				+= validate_cy.c
 SRC				+= free_rt.c
 SRC				+= handle_mlx.c
 SRC				+= scene.c
+SRC				+= material.c
+SRC				+= light.c
 
 OBJ_DIR			= ./obj
 OBJ				= $(SRC:.c=.o)
