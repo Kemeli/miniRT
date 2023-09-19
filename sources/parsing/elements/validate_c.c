@@ -6,19 +6,19 @@ static char	validate_c_element(char *str, char type, t_rt *rt)
 	{
 		rt->c_coordinates = validate_coordinates(str);
 		if (!rt->c_coordinates)
-			return(error_msg("invalid C coordinates"));
+			return(0);
 	}
 	else if (type == 'n')
 	{
 		rt->c_orientation = validate_orientation(str);
 		if (!rt->c_orientation)
-			return(error_msg("invalid C normal"));
+			return(0);
 	}
 	else if (type == 'a')
 	{
 		rt->c_fov = validate_angle(str);
 		if (!rt->c_fov)
-			return(error_msg("invalid C fov"));
+			return(0);
 	}
 	return (1);
 }
@@ -48,29 +48,20 @@ static t_camera	*set_camera(t_rt *rt)
 	return (cam);
 }
 
-char	camera_error(char **infos) //tentar reutilizar
-{
-	free_split(infos);
-	return (0);
-}
-
 char	validate_c(char *element, t_rt *rt, t_camera **cam)
 {
-	char	**sub;
+	char	**infos;
 
-	sub = ft_split(element, ' ');
-	if (count_infos(sub) != 3)
-	{
-		error_msg("invalid amount of camera infos");
-		return(camera_error(sub));
-	}
-	if(!validate_c_element(sub[1], 'c', rt))
-		return(camera_error(sub));
-	if(!validate_c_element(sub[2], 'n', rt))
-		return(camera_error(sub));
-	if(!validate_c_element(sub[3], 'a', rt))
-		return(camera_error(sub));
-	free_split(sub);
+	infos = ft_split(element, ' ');
+	if (count_infos(infos) != 3)
+		return(input_error("invalid amount of camera infos", infos));
+	if(!validate_c_element(infos[1], 'c', rt))
+		return(input_error("invalid camera coordinates", infos));
+	if(!validate_c_element(infos[2], 'n', rt))
+		return(input_error("invalid camera orientation", infos));
+	if(!validate_c_element(infos[3], 'a', rt))
+		return(input_error("invalid camera fov", infos));
+	free_split(infos);
 	*cam = set_camera(rt);
 	return (1);
 }
