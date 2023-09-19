@@ -16,7 +16,6 @@ static void	free_aux(t_aux *aux)
 {
 	free(aux->effective_c);
 	free(aux->light_v);
-	free(aux->ambient);
 	if(aux && aux->diffuse)
 		free(aux->diffuse);
 	free(aux->specular);
