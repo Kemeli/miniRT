@@ -102,7 +102,7 @@ t_intersect	*intersect_world(t_world *world, t_ray *ray)
 	xs = ft_calloc(1, sizeof(t_intersect)); //talvez isso seja um problema no "append_node"
 	while (aux)
 	{
-		temp = intersect(&aux, ray);
+		temp = intersect(aux, ray);
 		append_node(&xs->head, temp->head); //verificar a interseção antes de fazer o append
 		free(temp);
 		aux = aux->next;

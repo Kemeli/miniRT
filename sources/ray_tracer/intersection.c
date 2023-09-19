@@ -24,20 +24,19 @@ void	free_intersections(t_intersect *list)
 	free(list);
 }
 
-t_intersect	*intersect(t_object **object, t_ray *ray)
+t_intersect	*intersect(t_object *object, t_ray *ray)
 {
+	t_ray		*saved_ray;
 	t_intersect	*intersect;
-	// if((*object)->saved_ray)
-	// 	free_ray((*object)->saved_ray);
 
-	(*object)->saved_ray = transform_ray(ray, (*object)->inverse); //trocar por uma variavel local
+	saved_ray = transform_ray(ray, object->inverse);
 	intersect = NULL;
-	if ((*object)->shape == 's')
-		intersect = intersect_sphere((*object));
-	else if ((*object)->shape == 'p')
-		intersect = intersect_plane((*object), (*object)->saved_ray);
-	else if ((*object)->shape == 'c')
-		intersect = intersect_cylinder((*object), (*object)->saved_ray); //falta verificar aqui
-	free_ray((*object)->saved_ray);
+	if (object->shape == 's')
+		intersect = intersect_sphere(object, saved_ray);
+	else if (object->shape == 'p')
+		intersect = intersect_plane(object, saved_ray);
+	else if (object->shape == 'c')
+		intersect = intersect_cylinder(object, saved_ray); //falta verificar aqui
+	free_ray(saved_ray);
 	return (intersect);
 }
