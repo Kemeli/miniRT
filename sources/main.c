@@ -27,8 +27,8 @@ int	main(int argc, char **argv)
 	t_rt	*rt;
 	t_data	*data;
 
-	rt = ft_calloc(1, sizeof(t_rt));
 	input_validation(argc);
+	rt = ft_calloc(1, sizeof(t_rt));
 	extension_validation(argv[1]);
 	data = ft_calloc(1, sizeof(t_data));
 	data->w = create_world();

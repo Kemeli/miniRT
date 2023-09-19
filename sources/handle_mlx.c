@@ -21,7 +21,8 @@ int	handle_keypress(int keysym, t_data *data)
 
 int	repeat_image(t_data *data)
 {
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img->mlx_img, 0, 0);
+	mlx_put_image_to_window(
+		data->mlx_ptr, data->win_ptr, data->img->mlx_img, 0, 0);
 	return (0);
 }
 
@@ -44,5 +45,5 @@ void	start_mlx(t_data *data)
 		&data->img->line_len,
 		&data->img->endian
 	);
-	data->win_ptr = mlx_new_window(data->mlx_ptr, WIDTH, HEIGHT, "print sphere");
+	data->win_ptr = mlx_new_window(data->mlx_ptr, WIDTH, HEIGHT, "miniRT");
 }

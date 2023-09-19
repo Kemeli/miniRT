@@ -79,6 +79,8 @@ char	validate_scene(t_rt *rt, char *scene_name, t_data *data)
 	char	*scene;
 
 	scene = get_scene(scene_name);
+	if (!scene)
+		return (0);
 	elements = ft_split(scene, '\n');
 	free(scene);
 	ret = 0;
