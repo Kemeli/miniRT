@@ -17,24 +17,18 @@ static char	validate_l_element(char *str, char type, t_rt *rt)
 	return(1);
 }
 
-char	light_error(char *message, char **infos)
-{
-	free_split(infos);
-	return(error_msg(message));
-}
-
 char	validate_l(char *element, t_rt *rt, t_point_light **light)
 {
 	char		**infos;
 	t_tuple		c;
 
 	infos = ft_split(element, ' ');
-	if (count_infos(infos) != 3) //a light vem sempre como 111
-		return(light_error("invalid amount of light infos", infos));
+	if (count_infos(infos) != 3)
+		return(input_error("invalid amount of light infos", infos));
 	if(!validate_l_element(infos[1], 'l', rt))
-		return(light_error("invalid light position", infos));
+		return(input_error("invalid light position", infos));
 	if(!validate_l_element(infos[2], 'b', rt))
-		return(light_error("invalid light brightness", infos));
+		return(input_error("invalid light brightness", infos));
 	c = color(1, 1, 1);
 	*light = point_light(
 		rt->l_coordinates,
