@@ -17,10 +17,7 @@
 #define HEIGHT 700
 #define WIDTH 1000
 
-#define DESTROY_NOTIFY 17
-#define KeyPress 2
-
-typedef double*	t_tuple;
+typedef double*		t_tuple;
 typedef double**	t_matrix;
 
 typedef struct s_ray
