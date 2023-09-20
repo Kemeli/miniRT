@@ -1,49 +1,5 @@
 #include <minirt.h>
 
-static char	*get_line(char *buffer, int fd)
-{
-	char	*temp;
-	char	*line;
-
-	line = "";
-	while (line)
-	{
-		line = get_next_line(fd);
-		if (line)
-		{
-			temp = ft_strjoin(buffer, line);
-			free(buffer);
-			buffer = ft_strjoin(temp, "\n");
-			free(temp);
-			free(line);
-		}
-	}
-	return (buffer);
-}
-
-static char	*get_scene(char *scene_name)
-{
-	int		fd;
-	char	*buffer;
-	char	*cpy_scene;
-	char	*ret;
-
-	fd = open(scene_name, O_RDONLY);
-	if (fd < 0)
-		return(error_msg_scene("couldn't open fd"));
-	buffer = ft_calloc(1, sizeof(char));
-	buffer = get_line(buffer, fd);
-	cpy_scene = ft_strdup(buffer);
-	free(buffer);
-	if(cpy_scene[0] == '\0')
-		return(clean_and_error_msg("scene is empty", cpy_scene));
-	if (close(fd) == -1)
-		return(clean_and_error_msg("couldn't close fd", cpy_scene));
-	ret = ft_strtrim(cpy_scene, " \t\n\v\f\r");
-	free(cpy_scene);
-	return(ret);
-}
-
 static char	is_object(char *element, t_rt *rt, t_world *w)
 {
 	if (element[0] == 's' && element[1] == 'p' && element[2] == ' ')
@@ -82,28 +38,30 @@ static char	check_mandatory_elements(t_data *data)
 	return (1);
 }
 
-// char	**get_elements()
-
-char	free_return(char *msg, char *scene)
+static char	**get_elements(char *scene_name)
 {
+	char	**elements;
+	char	*scene;
+
+	scene = get_scene(scene_name);
+	if (!scene)
+		return (0);
+	elements = ft_split(scene, '\n');
 	free(scene);
-	return (error_msg(msg));
+	if (!elements)
+		return (error_msg_scene("empty scene"));
+	return (elements);
 }
 
 char	validate_scene(t_rt *rt, char *scene_name, t_data *data)
 {
 	char	**elements;
 	char	ret;
-	char	*scene;
 	int		i;
 
-	scene = get_scene(scene_name);
-	if (!scene)
-		return (0);
-	elements = ft_split(scene, '\n');
+	elements = get_elements(scene_name);
 	if (!elements)
-		return (free_return("empty scene", scene));
-	free(scene);
+		return (0);
 	ret = 0;
 	i = -1;
 	while(elements[++i])

@@ -81,6 +81,7 @@ SRC				+= handle_mlx.c
 SRC				+= scene.c
 SRC				+= material.c
 SRC				+= light.c
+SRC				+= get_scene.c
 
 OBJ_DIR			= ./obj
 OBJ				= $(SRC:.c=.o)

@@ -79,7 +79,10 @@ t_tuple	lighting(t_lighting *l)
 	aux.effective_c = multiply_colors(l->material->color, l->light->intensity);
 	ambient = multiply_color(aux.effective_c, l->material->ambient);
 	if (l->in_shadow)
+	{
+		free(aux.effective_c);
 		return (ambient);
+	}
 	aux.light_v = ligth_vector(l);
 	aux.light_dot_normal = dot(aux.light_v, l->normal);
 	get_difuse_and_specular(&aux, l);
