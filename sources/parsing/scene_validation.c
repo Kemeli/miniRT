@@ -84,6 +84,12 @@ static char	check_mandatory_elements(t_data *data)
 
 // char	**get_elements()
 
+char	free_return(char *msg, char *scene)
+{
+	free(scene);
+	return (error_msg(msg));
+}
+
 char	validate_scene(t_rt *rt, char *scene_name, t_data *data)
 {
 	char	**elements;
@@ -95,8 +101,8 @@ char	validate_scene(t_rt *rt, char *scene_name, t_data *data)
 	if (!scene)
 		return (0);
 	elements = ft_split(scene, '\n');
-	if (!elements || !elements[0])
-		return (input_error("empty scene", elements));
+	if (!elements)
+		return (free_return("empty scene", scene));
 	free(scene);
 	ret = 0;
 	i = -1;
