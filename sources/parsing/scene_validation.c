@@ -49,7 +49,12 @@ static char	**get_elements(char *scene_name)
 	elements = ft_split(scene, '\n');
 	free(scene);
 	if (!elements)
-		return (error_msg_scene("empty scene"));
+		return (error_msg_scene("empty scene"));//se é null não tem nada pra dar free
+	if (!check_repeated_elements(elements))
+	{
+		free_split(elements);
+		return (NULL);
+	}
 	return (elements);
 }
 
