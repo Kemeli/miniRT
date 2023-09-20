@@ -14,7 +14,7 @@ double	is_btwen_range(char *ratio, char *r0, char *r1)
 	free(s_num);
 	if (num >= ft_atof(r0) && num <= ft_atof(r1))
 		return (num);
-	return (0);
+	return (-1);
 }
 
 char	*make_num(char *str)
