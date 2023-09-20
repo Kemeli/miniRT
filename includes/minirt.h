@@ -316,6 +316,7 @@ void			append_object(t_object **head, t_object **new);
 void			free_scene(t_rt *rt, t_data *data);
 int				make_scene(t_data *data);
 t_tuple			multiply_color(t_tuple color, t_tuple amb);
+void			*clean_and_error_msg(char *msg, char *cpy_scene);
 
 
 

@@ -36,9 +36,9 @@ static char	*get_scene(char *scene_name)
 	cpy_scene = ft_strdup(buffer);
 	free(buffer);
 	if(cpy_scene[0] == '\0')
-		return(error_msg_scene("scene is empty"));
+		return(clean_and_error_msg("scene is empty", cpy_scene));
 	if (close(fd) == -1)
-		return(error_msg_scene("couldn't close fd"));
+		return(clean_and_error_msg("couldn't close fd", cpy_scene));
 	ret = ft_strtrim(cpy_scene, " \t\n\v\f\r");
 	free(cpy_scene);
 	return(ret);
@@ -71,6 +71,19 @@ static char	validate_identifier(char *element, t_rt *rt, t_data *data)
 	return (ret);
 }
 
+static char	check_mandatory_elements(t_data *data)
+{
+	if (!data->w->ambient)
+		return(error_msg("missing ambient light"));
+	if (!data->c)
+		return(error_msg("missing camera"));
+	if (!data->w->light)
+		return(error_msg("missing light"));
+	return (1);
+}
+
+// char	**get_elements()
+
 char	validate_scene(t_rt *rt, char *scene_name, t_data *data)
 {
 	char	**elements;
@@ -82,16 +95,19 @@ char	validate_scene(t_rt *rt, char *scene_name, t_data *data)
 	if (!scene)
 		return (0);
 	elements = ft_split(scene, '\n');
+	if (!elements || !elements[0])
+		return (input_error("empty scene", elements));
 	free(scene);
 	ret = 0;
-	i = 0;
-	while(elements[i])
+	i = -1;
+	while(elements[++i])
 	{
 		ret = validate_identifier(elements[i], rt, data);
 		if (!ret)
 			break;
-		i++;
 	}
+	if (ret && !check_mandatory_elements(data))
+		ret = 0;
 	free_split(elements);
 	return(ret);
 }

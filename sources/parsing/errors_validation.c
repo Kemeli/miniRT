@@ -19,3 +19,9 @@ void	*error_msg_scene(char *error_message)
 	printf ("%s\n", error_message);
 	return (NULL);
 }
+
+void	*clean_and_error_msg(char *msg, char *cpy_scene)
+{
+	free(cpy_scene);
+	return (error_msg_scene(msg));
+}
