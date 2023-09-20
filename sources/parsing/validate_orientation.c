@@ -18,9 +18,15 @@ t_tuple	validate_orientation(char *str)
 {
 	double	n[3];
 	double *normal;
+	t_tuple	ret;
 
 	normal = validate_tuple(str, n);
 	if (normal && validate_range(normal))
-		return (vector(normal[0], normal[1], normal[2]));
+	{
+		ret = vector(normal[0], normal[1], normal[2]);
+		if (compare_doubles(magnitude(ret), 1))
+			return (ret);
+		free(ret);
+	}
 	return (NULL);
 }
