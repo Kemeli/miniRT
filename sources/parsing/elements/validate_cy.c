@@ -38,9 +38,6 @@ void	get_cylinder(t_rt *rt, t_world *w)
 	obj->cylinder->minimum = -half_height;
 	set_cylinder_transform(obj, rt, rt->cy_diameter / 2);
 	add_object(w, obj);
-	free(rt->cy_coordinates);
-	free(rt->cy_orientation_v);
-	free(rt->cy_color);
 }
 
 static char	check_tuples(char *info, t_rt *rt, char type)

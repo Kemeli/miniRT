@@ -29,9 +29,6 @@ void	get_plane(t_rt *rt, t_world *w)
 	obj->material->specular = 0.2;
 	set_plane_transform(obj, rt);
 	add_object(w, obj);
-	free(rt->pl_coordinates);
-	free(rt->pl_orientation_v);
-	free(rt->pl_color);
 }
 
 static char	get_pl_values(char *info, char type, t_rt *rt)

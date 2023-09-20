@@ -32,8 +32,6 @@ void	get_sphere(t_rt *rt, t_world *w)
 		rt->sp_color[2]);
 	set_sphere_transform(obj, rt);
 	add_object(w, obj);
-	free(rt->sp_coordinates);
-	free(rt->sp_color);
 }
 
 static char	get_sp_values(char *info, t_rt *rt, char type)
