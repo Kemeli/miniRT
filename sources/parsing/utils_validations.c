@@ -2,8 +2,14 @@
 
 double	 verify_and_get_double(char *str) //refatorar
 {
+	double	positive;
+
 	if(str && is_double(str))
-		return(ft_atof(str));
+	{
+		positive = ft_atof(str);
+		if (positive > 0)
+			return(positive);
+	}
 	return (0);
 }
 
