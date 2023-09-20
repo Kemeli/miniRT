@@ -11,7 +11,7 @@ static char	validate_l_element(char *str, char type, t_rt *rt)
 	else if (type == 'b')
 	{
 		rt->l_brightness = is_btwen_range(str, "0", "1");
-		if (!rt->l_brightness)
+		if (rt->l_brightness == -1)
 			return(0);
 	}
 	return(1);
