@@ -319,5 +319,7 @@ t_tuple			multiply_color(t_tuple color, t_tuple amb);
 void			*clean_and_error_msg(char *msg, char *cpy_scene);
 char			*get_scene(char *scene_name);
 char			check_repeated_elements(char **elements);
+char			check_text_format(char **elements);
+
 
 #endif

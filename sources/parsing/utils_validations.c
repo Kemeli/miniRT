@@ -23,6 +23,27 @@ int	count_infos(char **infos)
 	return (i - 1);
 }
 
+char	check_text_format(char **elements)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while(elements[i])
+	{
+		j = 0;
+		while(elements[i][j])
+		{
+			if (elements[i][j] == '\t')
+				return (error_msg("invalid text format (tab)"));
+			j++;
+		}
+		i++;
+	}
+	return (1);
+}
+
 char	check_repeated_elements(char **elements)
 {
 	char	a;

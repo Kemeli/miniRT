@@ -16,11 +16,11 @@ static char	validate_identifier(char *element, t_rt *rt, t_data *data)
 	char	ret;
 
 	ret = 0;
-	if (element[0] == 'A' && element[1] == ' ' && !data->w->ambient)
+	if (element[0] == 'A' && element[1] == ' ')
 		ret = validate_a(element, data->w);
-	else if (element[0] == 'C' && element[1] == ' ' && !data->c)
+	else if (element[0] == 'C' && element[1] == ' ')
 		ret = validate_c(element, rt, &data->c);
-	else if (element[0] == 'L' && element[1] == ' ' && !data->w->light)
+	else if (element[0] == 'L' && element[1] == ' ')
 		ret = validate_l(element, rt, &data->w->light);
 	else
 		ret = is_object(element, rt, data->w);
@@ -50,7 +50,7 @@ static char	**get_elements(char *scene_name)
 	free(scene);
 	if (!elements)
 		return (error_msg_scene("empty scene"));//se é null não tem nada pra dar free
-	if (!check_repeated_elements(elements))
+	if (!check_repeated_elements(elements) || !check_text_format(elements))
 	{
 		free_split(elements);
 		return (NULL);
