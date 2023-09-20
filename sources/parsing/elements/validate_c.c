@@ -17,7 +17,7 @@ static char	validate_c_element(char *str, char type, t_rt *rt)
 	else if (type == 'a')
 	{
 		rt->c_fov = validate_angle(str);
-		if (!rt->c_fov)
+		if (rt->c_fov == -1)
 			return(0);
 	}
 	return (1);
