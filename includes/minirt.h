@@ -14,8 +14,8 @@
 # define TRUE 1
 # define FALSE 0
 
-#define HEIGHT 700
-#define WIDTH 1000
+#define HEIGHT 100
+#define WIDTH 200
 
 typedef double*		t_tuple;
 typedef double**	t_matrix;

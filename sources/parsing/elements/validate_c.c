@@ -25,11 +25,21 @@ static char	validate_c_element(char *str, char type, t_rt *rt)
 
 static t_tuple	set_up(t_tuple orientation)
 {
+	t_tuple	a;
+	t_tuple	b;
+	t_tuple	setup;
+
+	a = vector(0, 0, -1);
+	b = vector(0, 0, 1);
 	if (compare_doubles(orientation[1], 1))
-		return (normalize(vector(0, 0, -1)));
-	if (compare_doubles(orientation[1], -1))
-		return (normalize(vector(0, 0, 1)));
-	return (vector(0, 1, 0));
+		setup = normalize(a);
+	else if (compare_doubles(orientation[1], -1))
+		setup = normalize(b);
+	else
+		setup = (vector(0, 1, 0));
+	free(a);
+	free(b);
+	return (setup);
 }
 
 static t_camera	*set_camera(t_rt *rt)
