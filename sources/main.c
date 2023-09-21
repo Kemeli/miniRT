@@ -28,8 +28,8 @@ int	main(int argc, char **argv)
 	t_data	*data;
 
 	input_validation(argc);
-	rt = ft_calloc(1, sizeof(t_rt));
 	extension_validation(argv[1]);
+	rt = ft_calloc(1, sizeof(t_rt));
 	data = ft_calloc(1, sizeof(t_data));
 	data->w = create_world();
 	if (!validate_scene(rt, argv[1], data))
