@@ -19,6 +19,7 @@ void	free_world(t_world *world)
 	if(world->light)
 	{
 		free(world->light->intensity);
+		free(world->light->position);
 		free(world->light);
 	}
 	if(world->ambient)

@@ -21,7 +21,7 @@ static char	validate_identifier(char *element, t_rt *rt, t_data *data)
 	else if (element[0] == 'C' && element[1] == ' ')
 		ret = validate_c(element, rt, &data->c);
 	else if (element[0] == 'L' && element[1] == ' ')
-		ret = validate_l(element, rt, &data->w->light);
+		ret = validate_l(element, &data->w->light);
 	else
 		ret = is_object(element, data->w);
 	return (ret);
