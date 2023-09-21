@@ -26,20 +26,20 @@ char	input_error(char *message, char **infos)
 	return(error_msg(message));
 }
 
-void	free_teste(t_teste *aux)
+void	free_rt(t_rt *rt)
 {
-	if (aux->coordinates)
-		free(aux->coordinates);
-	if (aux->color)
-		free(aux->color);
-	if (aux->orientation)
-		free(aux->orientation);
-	free(aux);
+	if (rt->coordinates)
+		free(rt->coordinates);
+	if (rt->color)
+		free(rt->color);
+	if (rt->orientation)
+		free(rt->orientation);
+	free(rt);
 }
 
-char	print_error(char *message, char **infos, t_teste *aux)
+char	print_error(char *message, char **infos, t_rt *rt)
 {
-	free_teste(aux);
+	free_rt(rt);
 	free_split(infos);
 	return(error_msg(message));
 }

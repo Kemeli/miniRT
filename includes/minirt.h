@@ -165,7 +165,7 @@ typedef struct s_teste
 	double		height;
 	double		brightness;
 	double		fov;
-}				t_teste;
+}				t_rt;
 
 t_tuple			tuple(double x, double y, double z, double w);
 t_tuple			vector(double x, double y, double z);
@@ -295,7 +295,7 @@ void			*clean_and_error_msg(char *msg, char *cpy_scene);
 char			*get_scene(char *scene_name);
 char			check_mandatory_elements(char **elements);
 char			check_text_format(char **elements);
-char			print_error(char *message, char **infos, t_teste *aux);
-void			free_teste(t_teste *aux);
+char			print_error(char *message, char **infos, t_rt *aux);
+void			free_rt(t_rt *aux);
 
 #endif
