@@ -11,7 +11,7 @@ static char	is_object(char *element, t_world *w)
 	return (error_msg("invalid element"));
 }
 
-static char	validate_identifier(char *element, t_rt *rt, t_data *data)
+static char	validate_identifier(char *element, t_data *data)
 {
 	char	ret;
 
@@ -19,7 +19,7 @@ static char	validate_identifier(char *element, t_rt *rt, t_data *data)
 	if (element[0] == 'A' && element[1] == ' ')
 		ret = validate_a(element, data->w);
 	else if (element[0] == 'C' && element[1] == ' ')
-		ret = validate_c(element, rt, &data->c);
+		ret = validate_c(element, &data->c);
 	else if (element[0] == 'L' && element[1] == ' ')
 		ret = validate_l(element, &data->w->light);
 	else
@@ -47,7 +47,7 @@ static char	**get_elements(char *scene_name)
 	return (elements);
 }
 
-char	validate_scene(t_rt *rt, char *scene_name, t_data *data)
+char	validate_scene(char *scene_name, t_data *data)
 {
 	char	**elements;
 	char	ret;
@@ -60,7 +60,7 @@ char	validate_scene(t_rt *rt, char *scene_name, t_data *data)
 	i = -1;
 	while(elements[++i])
 	{
-		ret = validate_identifier(elements[i], rt, data);
+		ret = validate_identifier(elements[i], data);
 		if (!ret)
 			break;
 	}

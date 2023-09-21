@@ -24,23 +24,21 @@ void	extension_validation(char *scene_name)
 
 int	main(int argc, char **argv)
 {
-	t_rt	*rt;
 	t_data	*data;
 
 	input_validation(argc);
 	extension_validation(argv[1]);
-	rt = ft_calloc(1, sizeof(t_rt));
 	data = ft_calloc(1, sizeof(t_data));
 	data->w = create_world();
-	if (!validate_scene(rt, argv[1], data))
+	if (!validate_scene(argv[1], data))
 	{
-		free_scene(rt, data);
+		free_scene(data);
 		free(data);
 		return (0);
 	}
 	start_mlx(data);
 	make_scene(data);
-	free_scene(rt, data);
+	free_scene(data);
 	set_mlx_hooks(data);
 	mlx_loop(data->mlx_ptr);
 }

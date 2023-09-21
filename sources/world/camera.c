@@ -6,6 +6,8 @@ void	free_camera(t_camera *camera)
 		free_matrix(camera->transform);
 	if(camera->inverse)
 		free_matrix(camera->inverse);
+	if(camera->origin)
+		free(camera->origin);
 	free(camera);
 }
 

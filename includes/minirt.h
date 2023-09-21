@@ -155,31 +155,6 @@ typedef struct s_data
 	t_image		*img;
 }t_data;
 
-typedef struct s_rt
-{
-	t_tuple	c_coordinates;
-	t_tuple	c_orientation;
-	double	c_fov;
-
-	t_tuple	l_coordinates;
-	t_tuple	l_color;
-	double	l_brightness;
-
-	t_tuple	sp_coordinates;
-	t_tuple	sp_color;
-	double	sp_diameter;
-
-	t_tuple	pl_coordinates;
-	t_tuple	pl_orientation_v;
-	t_tuple	pl_color;
-
-	t_tuple	cy_coordinates;
-	t_tuple	cy_orientation_v;
-	double	cy_diameter;
-	double	cy_height;
-	t_tuple	cy_color;
-
-}	t_rt;
 
 typedef struct s_teste
 {
@@ -189,6 +164,7 @@ typedef struct s_teste
 	double		diameter;
 	double		height;
 	double		brightness;
+	double		fov;
 }				t_teste;
 
 t_tuple			tuple(double x, double y, double z, double w);
@@ -280,13 +256,13 @@ t_tuple			char_to_color(char *str);
 t_tuple			validate_coordinates(char *str);
 t_tuple			validate_orientation(char *str);
 double			validate_angle(char *angle);
-char			validate_c(char *element, t_rt *rt, t_camera **cam);
+char			validate_c(char *element,t_camera **cam);
 int				skip_spaces(int index, char *str);
 int				go_through_char(int index, char *str);
 char			error_msg(char *error_message);
 void			*error_msg_scene(char *error_message);
 char			validate_a(char *element, t_world *w);
-char			validate_scene(t_rt *rt, char *scene_name, t_data *data);
+char			validate_scene(char *scene_name, t_data *data);
 void			free_split(char **split);
 char			validate_l(char *element, t_point_light **light);
 double			get_double(char *str, int i, int j);
@@ -297,7 +273,6 @@ char			validate_sp(char *element, t_world *w);
 char			validate_pl(char *element, t_world *w);
 char			validate_cy(char *element, t_world *w);
 double			verify_and_get_double(char *str);
-void			free_rt(t_rt *rt);
 void			ft_free_ptr(void **ptr);
 void			add_object(t_world *w, t_object *obj);
 void			append_node(t_node **head, t_node *new);
@@ -313,7 +288,7 @@ void			set_mlx_hooks(t_data *data);
 int				repeat_image(t_data *data);
 int				handle_keypress(int keysym, t_data *data);
 void			append_object(t_object **head, t_object **new);
-void			free_scene(t_rt *rt, t_data *data);
+void			free_scene(t_data *data);
 int				make_scene(t_data *data);
 t_tuple			multiply_color(t_tuple color, t_tuple amb);
 void			*clean_and_error_msg(char *msg, char *cpy_scene);

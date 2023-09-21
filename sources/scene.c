@@ -1,8 +1,7 @@
 #include <minirt.h>
 
-void	free_scene(t_rt *rt, t_data *data)
+void	free_scene(t_data *data)
 {
-	free_rt(rt);
 	free_world(data->w);
 	if(data->c)
 		free_camera(data->c);
