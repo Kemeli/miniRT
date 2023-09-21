@@ -25,3 +25,21 @@ char	input_error(char *message, char **infos)
 	free_split(infos);
 	return(error_msg(message));
 }
+
+void	free_teste(t_teste *aux)
+{
+	if (aux->coordinates)
+		free(aux->coordinates);
+	if (aux->color)
+		free(aux->color);
+	if (aux->orientation)
+		free(aux->orientation);
+	free(aux);
+}
+
+char	print_error(char *message, char **infos, t_teste *aux)
+{
+	free_teste(aux);
+	free_split(infos);
+	return(error_msg(message));
+}

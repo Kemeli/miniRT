@@ -180,16 +180,16 @@ typedef struct s_rt
 	t_tuple	cy_color;
 
 }	t_rt;
-//tuples são double e as cores são int, pode dar erro
 
-
-//////////////////
-typedef struct s_mat
+typedef struct s_teste
 {
-	double	**matrix;
-	int		size;
-}	t_mat;
-/////////////////////
+	t_tuple		coordinates;
+	t_tuple		orientation;
+	t_tuple		color;
+	double		diameter;
+	double		height;
+
+}				t_teste;
 
 t_tuple			tuple(double x, double y, double z, double w);
 t_tuple			vector(double x, double y, double z);
@@ -293,9 +293,9 @@ double			get_double(char *str, int i, int j);
 int				go_through_num(char *str, int i);
 double			*validate_tuple(char *str, double *n);
 char			is_double(char *str);
-char			validate_sp(char *element, t_rt *rt, t_world *w);
-char			validate_pl(char *element, t_rt *rt, t_world *w);
-char			validate_cy(char *element, t_rt *rt, t_world *w);
+char			validate_sp(char *element, t_world *w);
+char			validate_pl(char *element, t_world *w);
+char			validate_cy(char *element, t_world *w);
 double			verify_and_get_double(char *str);
 void			free_rt(t_rt *rt);
 void			ft_free_ptr(void **ptr);
@@ -320,6 +320,7 @@ void			*clean_and_error_msg(char *msg, char *cpy_scene);
 char			*get_scene(char *scene_name);
 char			check_mandatory_elements(char **elements);
 char			check_text_format(char **elements);
-
+char			print_error(char *message, char **infos, t_teste *aux);
+void			free_teste(t_teste *aux);
 
 #endif

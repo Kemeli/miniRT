@@ -1,6 +1,6 @@
 #include <minirt.h>
 
-void	set_cylinder_transform(t_object *obj, t_rt *rt, double radius)
+void	set_cylinder_transform(t_object *obj, t_teste *aux, double radius)
 {
 	t_matrix	translate;
 	t_matrix	transform;
@@ -8,11 +8,11 @@ void	set_cylinder_transform(t_object *obj, t_rt *rt, double radius)
 	t_matrix	rotate;
 	t_matrix	tmp;
 
-	translate = translation(rt->cy_coordinates[0],
-			rt->cy_coordinates[1],
-			rt->cy_coordinates[2]);
+	translate = translation(aux->coordinates[0],
+			aux->coordinates[1],
+			aux->coordinates[2]);
 	scale = scaling(radius, 1, radius);
-	rotate = get_rotation_matrix(rt->cy_orientation_v);
+	rotate = get_rotation_matrix(aux->orientation);
 	tmp = multiply_matrix(translate, rotate);
 	transform = multiply_matrix(tmp, scale);
 	set_transform(obj, transform);
@@ -23,41 +23,41 @@ void	set_cylinder_transform(t_object *obj, t_rt *rt, double radius)
 	free_matrix(tmp);
 }
 
-void	get_cylinder(t_rt *rt, t_world *w)
+void	get_cylinder(t_teste *aux, t_world *w)
 {
 	t_object	*obj;
 	double		half_height;
 
 	obj = create_object('c');
 	obj->material->color = color(
-		rt->cy_color[0],
-		rt->cy_color[1],
-		rt->cy_color[2]);
-	half_height = rt->cy_height / 2;
+		aux->color[0],
+		aux->color[1],
+		aux->color[2]);
+	half_height = aux->height / 2;
 	obj->cylinder->maximum = half_height;
 	obj->cylinder->minimum = -half_height;
-	set_cylinder_transform(obj, rt, rt->cy_diameter / 2);
+	set_cylinder_transform(obj, aux, aux->diameter / 2);
 	add_object(w, obj);
 }
 
-static char	check_tuples(char *info, t_rt *rt, char type)
+static char	check_tuples(char *info, t_teste *aux, char type)
 {
 	if (type == 'm')
 	{
-		rt->cy_coordinates = validate_coordinates(info);
-		if (!rt->cy_coordinates)
+		aux->coordinates = validate_coordinates(info);
+		if (!aux->coordinates)
 			return(0);
 	}
 	else if (type == 'n')
 	{
-		rt->cy_orientation_v = validate_orientation(info);
-		if (!rt->cy_orientation_v)
+		aux->orientation = validate_orientation(info);
+		if (!aux->orientation)
 			return(0);
 	}
 	else if (type == 'c')
 	{
-		rt->cy_color = validate_color(info);
-		if (!rt->cy_color)
+		aux->color = validate_color(info);
+		if (!aux->color)
 			return(0);
 	}
 	else
@@ -65,46 +65,49 @@ static char	check_tuples(char *info, t_rt *rt, char type)
 	return (1);
 }
 
-static char	get_cy_values(char *info, t_rt *rt, char type)
+static char	get_cy_values(char *info, t_teste *aux, char type)
 {
 	char	ret;
 
 	ret = 1;
 	if (type == 'd')
 	{
-		rt->cy_diameter = verify_and_get_double(info);
-		if (!rt->cy_diameter)
+		aux->diameter = verify_and_get_double(info);
+		if (!aux->diameter)
 			ret = 0;
 	}
 	else if (type == 'h')
 	{
-		rt->cy_height = verify_and_get_double(info);
-		if (!rt->cy_height)
+		aux->height = verify_and_get_double(info);
+		if (!aux->height)
 			ret = 0;
 	}
 	else
-		ret = check_tuples(info, rt, type);
+		ret = check_tuples(info, aux, type);
 	return (ret);
 }
 
-char	validate_cy(char *element, t_rt *rt, t_world *w)
+char	validate_cy(char *element, t_world *w)
 {
 	char	**infos;
+	t_teste	*aux;
 
+	aux = ft_calloc(1, sizeof(t_teste));
 	infos = ft_split(element, ' ');
 	if (count_infos(infos) != 5)
-		return(input_error("invalid amount of cylinder infos", infos));
-	if(!get_cy_values(infos[1], rt, 'm'))
-		return(input_error("invalid cylinder coordinates", infos));
-	if(!get_cy_values(infos[2], rt, 'n'))
-		return(input_error("invalid cylinder orientation", infos));
-	if(!get_cy_values(infos[3], rt, 'd'))
-		return(input_error("invalid cylinder diameter", infos));
-	if(!get_cy_values(infos[4], rt, 'h'))
-		return(input_error("invalid cylinder height", infos));
-	if(!get_cy_values(infos[5], rt, 'c'))
-		return(input_error("invalid cylinder color", infos));
-	get_cylinder(rt, w);
+		return(print_error("invalid amount of cylinder infos", infos, aux));
+	if(!get_cy_values(infos[1], aux, 'm'))
+		return(print_error("invalid cylinder coordinates", infos, aux));
+	if(!get_cy_values(infos[2], aux, 'n'))
+		return(print_error("invalid cylinder orientation", infos, aux));
+	if(!get_cy_values(infos[3], aux, 'd'))
+		return(print_error("invalid cylinder diameter", infos, aux));
+	if(!get_cy_values(infos[4], aux, 'h'))
+		return(print_error("invalid cylinder height", infos, aux));
+	if(!get_cy_values(infos[5], aux, 'c'))
+		return(print_error("invalid cylinder color", infos, aux));
+	get_cylinder(aux, w);
 	free_split(infos);
+	free_teste(aux);
 	return (1);
 }

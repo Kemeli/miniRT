@@ -1,13 +1,13 @@
 #include <minirt.h>
 
-static char	is_object(char *element, t_rt *rt, t_world *w)
+static char	is_object(char *element, t_world *w)
 {
 	if (element[0] == 's' && element[1] == 'p' && element[2] == ' ')
-		return(validate_sp(element, rt, w));
+		return(validate_sp(element, w));
 	else if (element[0] == 'p' && element[1] == 'l' && element[2] == ' ')
-		return(validate_pl(element, rt, w));
+		return(validate_pl(element, w));
 	else if (element[0] == 'c' && element[1] == 'y' && element[2] == ' ')
-		return(validate_cy(element, rt, w));
+		return(validate_cy(element, w));
 	return (error_msg("invalid element"));
 }
 
@@ -23,7 +23,7 @@ static char	validate_identifier(char *element, t_rt *rt, t_data *data)
 	else if (element[0] == 'L' && element[1] == ' ')
 		ret = validate_l(element, rt, &data->w->light);
 	else
-		ret = is_object(element, rt, data->w);
+		ret = is_object(element, data->w);
 	return (ret);
 }
 
@@ -64,8 +64,6 @@ char	validate_scene(t_rt *rt, char *scene_name, t_data *data)
 		if (!ret)
 			break;
 	}
-	if (ret)
-		ret = 0;
 	free_split(elements);
 	return(ret);
 }
