@@ -27,17 +27,6 @@ static char	validate_identifier(char *element, t_rt *rt, t_data *data)
 	return (ret);
 }
 
-static char	check_mandatory_elements(t_data *data)
-{
-	if (!data->w->ambient)
-		return(error_msg("missing ambient light"));
-	if (!data->c)
-		return(error_msg("missing camera"));
-	if (!data->w->light)
-		return(error_msg("missing light"));
-	return (1);
-}
-
 static char	**get_elements(char *scene_name)
 {
 	char	**elements;
@@ -50,7 +39,7 @@ static char	**get_elements(char *scene_name)
 	free(scene);
 	if (!elements)
 		return (error_msg_scene("empty scene"));//se é null não tem nada pra dar free
-	if (!check_repeated_elements(elements) || !check_text_format(elements))
+	if (!check_mandatory_elements(elements) || !check_text_format(elements))
 	{
 		free_split(elements);
 		return (NULL);
@@ -75,7 +64,7 @@ char	validate_scene(t_rt *rt, char *scene_name, t_data *data)
 		if (!ret)
 			break;
 	}
-	if (ret && !check_mandatory_elements(data))
+	if (ret)
 		ret = 0;
 	free_split(elements);
 	return(ret);

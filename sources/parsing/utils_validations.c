@@ -44,31 +44,31 @@ char	check_text_format(char **elements)
 	return (1);
 }
 
-char	check_repeated_elements(char **elements)
+char	check_mandatory_elements(char **elements)
 {
-	char	a;
-	char	c;
-	char	l;
+	int		acl[3];
 	int		i;
 
-	a = 0;
-	c = 0;
-	l = 0;
 	i = -1;
+	acl[0] = 0;
+	acl[1] = 0;
+	acl[2] = 0;
 	while (elements[++i])
 	{
-		if (elements[i][0] == 'A' && !a)
-			a = 1;
-		else if (elements[i][0] == 'A' && a)
+		if (elements[i][0] == 'A' && !acl[0])
+			acl[0] = 1;
+		else if (elements[i][0] == 'A' && acl[0])
 			return (error_msg("repeated ambient light"));
-		else if (elements[i][0] == 'C' && !c)
-			c = 1;
-		else if (elements[i][0] == 'C' && c)
+		else if (elements[i][0] == 'C' && !acl[1])
+			acl[1] = 1;
+		else if (elements[i][0] == 'C' && acl[1])
 			return (error_msg("repeated camera"));
-		else if (elements[i][0] == 'L' && !l)
-			l = 1;
-		else if (elements[i][0] == 'L' && l)
+		else if (elements[i][0] == 'L' && !acl[2])
+			acl[2] = 1;
+		else if (elements[i][0] == 'L' && acl[2])
 			return (error_msg("repeated light"));
 	}
+	if (!acl[0] || !acl[1] || !acl[2])
+		return (error_msg("missing mandatory element (A, C or L)"));
 	return (1);
 }
