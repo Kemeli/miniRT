@@ -26,11 +26,11 @@ char	validate_l(char *element, t_point_light **light)
 	rt = ft_calloc(1, sizeof(t_rt));
 	infos = ft_split(element, ' ');
 	if (count_infos(infos) != 3)
-		return(print_error("invalid amount of light infos", infos, rt));
+		return(invalid("invalid amount of light infos", "3", infos, rt));
 	if(!validate_l_element(infos[1], 'l', rt))
-		return(print_error("invalid light position", infos, rt));
+		return(invalid("invalid light position", COORDINATES, infos, rt));
 	if(!validate_l_element(infos[2], 'b', rt))
-		return(print_error("invalid light brightness", infos, rt));
+		return(invalid("invalid light brightness", BRIGHTNESS, infos, rt));
 	c = color(1, 1, 1);
 	*light = point_light(
 		point(rt->coordinates[0], rt->coordinates[1], rt->coordinates[2]),

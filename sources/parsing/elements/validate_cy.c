@@ -95,17 +95,17 @@ char	validate_cy(char *element, t_world *w)
 	rt = ft_calloc(1, sizeof(t_rt));
 	infos = ft_split(element, ' ');
 	if (count_infos(infos) != 5)
-		return(print_error("invalid amount of cylinder infos", infos, rt));
+		return(invalid("amount of cylinder infos","5", infos, rt));
 	if(!get_cy_values(infos[1], rt, 'm'))
-		return(print_error("invalid cylinder coordinates", infos, rt));
+		return(invalid("cylinder coordinates", COORDINATES, infos, rt));
 	if(!get_cy_values(infos[2], rt, 'n'))
-		return(print_error("invalid cylinder orientation", infos, rt));
+		return(invalid("cylinder orientation", ORIENTATION, infos, rt));
 	if(!get_cy_values(infos[3], rt, 'd'))
-		return(print_error("invalid cylinder diameter", infos, rt));
+		return(invalid("cylinder diameter", POSITIVE, infos, rt));
 	if(!get_cy_values(infos[4], rt, 'h'))
-		return(print_error("invalid cylinder height", infos, rt));
+		return(invalid("cylinder height", POSITIVE, infos, rt));
 	if(!get_cy_values(infos[5], rt, 'c'))
-		return(print_error("invalid cylinder color", infos, rt));
+		return(invalid("cylinder color", COLOR, infos, rt));
 	get_cylinder(rt, w);
 	free_split(infos);
 	free_rt(rt);

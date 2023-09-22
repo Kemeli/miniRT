@@ -5,7 +5,7 @@ void	input_validation(int argc)
 	if (argc != 2)
 	{
 		printf ("ERROR\n");
-		printf ("invalid number of arguments\n");
+		printf ("invalid number of arguments, it must be 2\n");
 		exit (0);
 	}
 }
@@ -17,7 +17,7 @@ void	extension_validation(char *scene_name)
 	if (!extension || ft_memcmp(extension, ".rt", 3))
 	{
 		printf ("ERROR\n");
-		printf ("invalid scene extension\n");
+		printf ("invalid scene extension, it must be .rt\n");
 		exit (0);
 	}
 }

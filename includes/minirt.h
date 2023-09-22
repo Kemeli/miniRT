@@ -17,6 +17,13 @@
 #define HEIGHT 100
 #define WIDTH 200
 
+#define POSITIVE "be a positive number"
+#define COLOR "contain 3 values, range 0 a 255 [0,255,180]"
+#define COORDINATES "contain 3 values, range -1000 a 1000 [0.0,1.0,0.5]" //precisaria validar isso
+#define ORIENTATION "contain 3 values, range -1 a 1 [0.0,1.0,0.5]" //talvez mudar o nome "orientation"
+#define FOV "be a positive between 0 and 180"
+#define BRIGHTNESS "be a value between 0.0 and 1.0"
+
 typedef double*		t_tuple;
 typedef double**	t_matrix;
 
@@ -259,7 +266,7 @@ double			validate_angle(char *angle);
 char			validate_c(char *element,t_camera **cam);
 int				skip_spaces(int index, char *str);
 int				go_through_char(int index, char *str);
-char			error_msg(char *error_message);
+char			error_msg(char *error_message, char *expected);
 void			*error_msg_scene(char *error_message);
 char			validate_a(char *element, t_world *w);
 char			validate_scene(char *scene_name, t_data *data);
@@ -280,7 +287,6 @@ void			append_object(t_object **head, t_object **new);
 int				intersect_lst_size(t_node *head);
 t_matrix		get_rotation_matrix(t_tuple orientation);
 int				count_infos(char **infos);
-char			input_error(char *message, char **infos);
 t_matrix		get_rotation_matrix(t_tuple orientation);
 t_matrix		cofactor_matrix(t_matrix m, int size);
 void			start_mlx(t_data *data);
@@ -295,7 +301,7 @@ void			*clean_and_error_msg(char *msg, char *cpy_scene);
 char			*get_scene(char *scene_name);
 char			check_mandatory_elements(char **elements);
 char			check_text_format(char **elements);
-char			print_error(char *message, char **infos, t_rt *aux);
+char			invalid(char *message, char *expected, char **infos, t_rt *aux);
 void			free_rt(t_rt *aux);
 
 #endif

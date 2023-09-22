@@ -8,7 +8,7 @@ static char	is_object(char *element, t_world *w)
 		return(validate_pl(element, w));
 	else if (element[0] == 'c' && element[1] == 'y' && element[2] == ' ')
 		return(validate_cy(element, w));
-	return (error_msg("invalid element"));
+	return (error_msg("invalid element", "contain only A, C, L, sp, pl, cy"));
 }
 
 static char	validate_identifier(char *element, t_data *data)

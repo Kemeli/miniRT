@@ -62,13 +62,13 @@ char	validate_pl(char *element, t_world *w)
 	rt = ft_calloc(1, sizeof(t_rt));
 	infos = ft_split(element, ' ');
 	if (count_infos(infos) != 3)
-		return(print_error("invalid amount of plane infos", infos, rt));
+		return(invalid("invalid amount of plane infos", "be 3", infos, rt));
 	if(!get_pl_values(infos[1], 'p', rt))
-		return(print_error("invalid plane coordinates", infos, rt));
+		return(invalid("invalid plane coordinates", COORDINATES, infos, rt));
 	if(!get_pl_values(infos[2], 'n', rt))
-		return(print_error("invalid plane orientation", infos, rt));
+		return(invalid("invalid plane orientation", ORIENTATION, infos, rt));
 	if(!get_pl_values(infos[3], 'c', rt))
-		return(print_error("invalid plane color", infos, rt));
+		return(invalid("invalid plane color", COLOR, infos, rt));
 	get_plane(rt, w);
 	free_split(infos);
 	free_rt(rt);

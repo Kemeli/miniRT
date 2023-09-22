@@ -7,7 +7,7 @@ char	**get_infos(char *element)
 	infos = ft_split(element, ' ');
 	if (count_infos(infos) != 2)
 	{
-		error_msg("invalid amount of ambient infos");
+		error_msg("invalid amount of ambient infos", "be 2");
 		free_split(infos);
 		return(0);
 	}
@@ -21,7 +21,7 @@ double	get_ratio(char *str)
 	ratio = is_btwen_range(str, "0", "1"); //colocar essa função pra retornar -1
 	if (ratio == -1)
 	{
-		error_msg("invalid ambient ratio");
+		error_msg("invalid ambient ratio", "be between 0 and 1");
 		return (-1);
 	}
 	return (ratio);
@@ -34,7 +34,7 @@ t_tuple	get_color(char *str)
 	color = validate_color(str);
 	if (!color)
 	{
-		error_msg("invalid ambient color");
+		error_msg("invalid ambient color", COLOR);
 		return (NULL);
 	}
 	return (color);

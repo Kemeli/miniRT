@@ -67,13 +67,13 @@ char	validate_c(char *element, t_camera **cam)
 	rt = ft_calloc(1, sizeof(t_rt));
 	infos = ft_split(element, ' ');
 	if (count_infos(infos) != 3)
-		return(print_error("invalid amount of camera infos", infos, rt));
+		return(invalid("invalid amount of camera infos", "be 2", infos, rt));
 	if(!validate_c_element(infos[1], 'c', rt))
-		return(print_error("invalid camera coordinates", infos, rt));
+		return(invalid("invalid camera coordinates", COORDINATES, infos, rt));
 	if(!validate_c_element(infos[2], 'n', rt))
-		return(print_error("invalid camera orientation", infos, rt));
+		return(invalid("invalid camera orientation", ORIENTATION, infos, rt));
 	if(!validate_c_element(infos[3], 'a', rt))
-		return(print_error("invalid camera fov", infos, rt));
+		return(invalid("invalid camera fov", FOV, infos, rt));
 	free_split(infos);
 	*cam = set_camera(rt);
 	free_rt(rt);

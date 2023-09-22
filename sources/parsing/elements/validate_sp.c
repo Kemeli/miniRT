@@ -65,13 +65,13 @@ char	validate_sp(char *element, t_world *w)
 	rt = ft_calloc(1, sizeof(t_rt));
 	infos = ft_split(element, ' ');
 	if (count_infos(infos) != 3)
-		return(print_error("invalid amount of sphere infos", infos, rt));
+		return(invalid("invalid amount of sphere infos", "be 3", infos, rt));
 	if(!get_sp_values(infos[1], rt, 'm'))
-		return(print_error("invalid sphere coordinates", infos, rt));
+		return(invalid("invalid sphere coordinates", COORDINATES, infos, rt));
 	if(!get_sp_values(infos[2], rt, 'd'))
-		return(print_error("invalid sphere diameter", infos, rt));
+		return(invalid("invalid sphere diameter", POSITIVE, infos, rt));
 	if(!get_sp_values(infos[3], rt, 'c'))
-		return(print_error("invalid sphere color", infos, rt));
+		return(invalid("invalid sphere color", COLOR, infos, rt));
 	get_sphere(rt, w);
 	free_split(infos);
 	free_rt(rt);

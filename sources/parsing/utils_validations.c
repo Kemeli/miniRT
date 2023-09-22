@@ -36,7 +36,7 @@ char	check_text_format(char **elements)
 		while(elements[i][j])
 		{
 			if (elements[i][j] == '\t')
-				return (error_msg("invalid text format (tab)"));
+				return (error_msg("text format (tab)", "spaces"));
 			j++;
 		}
 		i++;
@@ -58,17 +58,17 @@ char	check_mandatory_elements(char **elements)
 		if (elements[i][0] == 'A' && !acl[0])
 			acl[0] = 1;
 		else if (elements[i][0] == 'A' && acl[0])
-			return (error_msg("repeated ambient light"));
+			return (error_msg("repeated ambient light", "contain only one"));
 		else if (elements[i][0] == 'C' && !acl[1])
 			acl[1] = 1;
 		else if (elements[i][0] == 'C' && acl[1])
-			return (error_msg("repeated camera"));
+			return (error_msg("repeated camera", "contain only one"));
 		else if (elements[i][0] == 'L' && !acl[2])
 			acl[2] = 1;
 		else if (elements[i][0] == 'L' && acl[2])
-			return (error_msg("repeated light"));
+			return (error_msg("repeated light", "contain only one"));
 	}
 	if (!acl[0] || !acl[1] || !acl[2])
-		return (error_msg("missing mandatory element (A, C or L)"));
+		return (error_msg("missing mandatory element", "contain A, C and L"));
 	return (1);
 }
