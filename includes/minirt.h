@@ -17,12 +17,14 @@
 #define HEIGHT 100
 #define WIDTH 200
 
-#define POSITIVE "be a positive number"
-#define COLOR "contain 3 values, range 0 a 255 [0,255,180]"
-#define COORDINATES "contain 3 values, range -1000 a 1000 [0.0,1.0,0.5]" //precisaria validar isso
-#define ORIENTATION "contain 3 values, range -1 a 1 [0.0,1.0,0.5]" //talvez mudar o nome "orientation"
-#define FOV "be a positive between 0 and 180"
+#define POSITIVE "be between 0 an 1000"
+#define COLOR "contain 3 values between 0 and 255 [0,255,180]"
+#define COORDINATES "contain 3 values between -1000 and 1000 [6,0,-20]" //precisaria validar isso
+#define ORIENTATION "contain 3 values between -1 and 1 [0.0,1.0,0.5]" //talvez mudar o nome "orientation"
+#define FOV "be a value between 0 and 180"
 #define BRIGHTNESS "be a value between 0.0 and 1.0"
+
+#define MAX_RANGE 1000
 
 typedef double*		t_tuple;
 typedef double**	t_matrix;

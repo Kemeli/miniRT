@@ -30,5 +30,9 @@ t_tuple	validate_coordinates(char *str)
 
 	if (!validate_tuple(str, n))
 		return (NULL);
+	if (n[0] < -MAX_RANGE || n[0] > MAX_RANGE
+		|| n[1] < -MAX_RANGE || n[1] > MAX_RANGE
+		|| n[2] < -MAX_RANGE || n[2] > MAX_RANGE)
+		return (NULL);
 	return (point(n[0], n[1], n[2]));
 }

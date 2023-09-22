@@ -2,13 +2,13 @@
 
 double	 verify_and_get_double(char *str) //refatorar
 {
-	double	positive;
+	double	range;
 
 	if(str && is_double(str))
 	{
-		positive = ft_atof(str);
-		if (positive > 0)
-			return(positive);
+		range = ft_atof(str);
+		if (range > 0 && range < MAX_RANGE)
+			return(range);
 	}
 	return (0);
 }
@@ -36,7 +36,7 @@ char	check_text_format(char **elements)
 		while(elements[i][j])
 		{
 			if (elements[i][j] == '\t')
-				return (error_msg("text format (tab)", "spaces"));
+				return (error_msg("text format (tab)", "be spaces"));
 			j++;
 		}
 		i++;

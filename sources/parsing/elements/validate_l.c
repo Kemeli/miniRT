@@ -26,7 +26,7 @@ char	validate_l(char *element, t_point_light **light)
 	rt = ft_calloc(1, sizeof(t_rt));
 	infos = ft_split(element, ' ');
 	if (count_infos(infos) != 3)
-		return(invalid("invalid amount of light infos", "3", infos, rt));
+		return(invalid("invalid amount of light infos", "be 3", infos, rt));
 	if(!validate_l_element(infos[1], 'l', rt))
 		return(invalid("invalid light position", COORDINATES, infos, rt));
 	if(!validate_l_element(infos[2], 'b', rt))

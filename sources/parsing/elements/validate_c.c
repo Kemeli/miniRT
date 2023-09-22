@@ -67,7 +67,7 @@ char	validate_c(char *element, t_camera **cam)
 	rt = ft_calloc(1, sizeof(t_rt));
 	infos = ft_split(element, ' ');
 	if (count_infos(infos) != 3)
-		return(invalid("invalid amount of camera infos", "be 2", infos, rt));
+		return(invalid("invalid amount of camera infos", "be 3", infos, rt));
 	if(!validate_c_element(infos[1], 'c', rt))
 		return(invalid("invalid camera coordinates", COORDINATES, infos, rt));
 	if(!validate_c_element(infos[2], 'n', rt))

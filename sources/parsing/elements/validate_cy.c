@@ -95,7 +95,7 @@ char	validate_cy(char *element, t_world *w)
 	rt = ft_calloc(1, sizeof(t_rt));
 	infos = ft_split(element, ' ');
 	if (count_infos(infos) != 5)
-		return(invalid("amount of cylinder infos","5", infos, rt));
+		return(invalid("invalid amount of cylinder infos","be 5", infos, rt));
 	if(!get_cy_values(infos[1], rt, 'm'))
 		return(invalid("cylinder coordinates", COORDINATES, infos, rt));
 	if(!get_cy_values(infos[2], rt, 'n'))

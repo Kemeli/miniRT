@@ -21,7 +21,7 @@ double	get_ratio(char *str)
 	ratio = is_btwen_range(str, "0", "1"); //colocar essa função pra retornar -1
 	if (ratio == -1)
 	{
-		error_msg("invalid ambient ratio", "be between 0 and 1");
+		error_msg("invalid ambient ratio", BRIGHTNESS);
 		return (-1);
 	}
 	return (ratio);
