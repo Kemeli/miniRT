@@ -34,10 +34,12 @@ void	set_mlx_hooks(t_data *data)
 
 }
 
-void	start_mlx(t_data *data)
+char	start_mlx(t_data *data)
 {
 	data->img = ft_calloc(1, sizeof(t_image));
 	data->mlx_ptr = mlx_init();
+	if (!data->mlx_ptr)
+		return (0);
 	data->img->mlx_img = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
 	data->img->addr = mlx_get_data_addr(
 		data->img->mlx_img,
@@ -45,5 +47,5 @@ void	start_mlx(t_data *data)
 		&data->img->line_len,
 		&data->img->endian
 	);
-	data->win_ptr = mlx_new_window(data->mlx_ptr, WIDTH, HEIGHT, "miniRT");
+	return (1);
 }

@@ -14,8 +14,8 @@
 # define TRUE 1
 # define FALSE 0
 
-#define HEIGHT 100
-#define WIDTH 200
+#define HEIGHT 700
+#define WIDTH 1000
 
 #define POSITIVE "be between 0 an 1000"
 #define COLOR "contain 3 values between 0 and 255 [0,255,180]"
@@ -291,7 +291,7 @@ t_matrix		get_rotation_matrix(t_tuple orientation);
 int				count_infos(char **infos);
 t_matrix		get_rotation_matrix(t_tuple orientation);
 t_matrix		cofactor_matrix(t_matrix m, int size);
-void			start_mlx(t_data *data);
+char			start_mlx(t_data *data);
 void			set_mlx_hooks(t_data *data);
 int				repeat_image(t_data *data);
 int				handle_keypress(int keysym, t_data *data);

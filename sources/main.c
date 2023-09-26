@@ -30,14 +30,14 @@ int	main(int argc, char **argv)
 	extension_validation(argv[1]);
 	data = ft_calloc(1, sizeof(t_data));
 	data->w = create_world();
-	if (!validate_scene(argv[1], data))
+	if (!validate_scene(argv[1], data) || !start_mlx(data))
 	{
 		free_scene(data);
 		free(data);
 		return (0);
 	}
-	start_mlx(data);
 	make_scene(data);
+	data->win_ptr = mlx_new_window(data->mlx_ptr, WIDTH, HEIGHT, "miniRT");
 	free_scene(data);
 	set_mlx_hooks(data);
 	mlx_loop(data->mlx_ptr);

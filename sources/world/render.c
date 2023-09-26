@@ -22,8 +22,8 @@ static void	normalize_to_color(t_tuple to_color)
 
 void	render(t_data *data)
 {
-	int	x;
-	int	y;
+	int		x;
+	int		y;
 	t_ray	*r;
 	t_tuple	to_color;
 
