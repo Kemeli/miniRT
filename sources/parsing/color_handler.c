@@ -41,5 +41,7 @@ t_tuple	validate_color(char *str)
 		i++;
 	}
 	free_split(rgb);
+	if (pos != 3)
+		return (NULL);
 	return (color(num[0] / 255.0, num[1] / 255.0, num[2] / 255.0));
 }

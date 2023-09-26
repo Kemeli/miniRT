@@ -14,6 +14,12 @@ static char	validate_l_element(char *str, char type, t_rt *rt)
 		if (rt->brightness == -1)
 			return(0);
 	}
+	else if (type == 'c')
+	{
+		rt->color = validate_color(str);
+		if (!rt->color)
+			return(0);
+	}
 	return(1);
 }
 
@@ -31,6 +37,8 @@ char	validate_l(char *element, t_point_light **light)
 		return(invalid("invalid light position", COORDINATES, infos, rt));
 	if(!validate_l_element(infos[2], 'b', rt))
 		return(invalid("invalid light brightness", BRIGHTNESS, infos, rt));
+	if (!validate_l_element(infos[3], 'c', rt))
+		return(invalid("invalid light color", COLOR, infos, rt));
 	c = color(1, 1, 1);
 	*light = point_light(
 		point(rt->coordinates[0], rt->coordinates[1], rt->coordinates[2]),
