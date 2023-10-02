@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tuples.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kdaiane- < kdaiane-@student.42sp.org.br    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/26 20:27:57 by kdaiane-          #+#    #+#             */
+/*   Updated: 2023/09/26 20:27:58 by kdaiane-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minirt.h>
 
-t_tuple	tuple(float x, float y, float z, float w)
+t_tuple	tuple(double x, double y, double z, double w)
 {
 	t_tuple	tuple;
 
-	tuple = ft_calloc(4, sizeof(float *));
+	tuple = ft_calloc(4, sizeof(double *));
 	if (!tuple)
 		return (NULL);
 	tuple[0] = x;
@@ -14,7 +26,7 @@ t_tuple	tuple(float x, float y, float z, float w)
 	return (tuple);
 }
 
-t_tuple	vector(float x, float y, float z)
+t_tuple	vector(double x, double y, double z)
 {
 	t_tuple	vector;
 
@@ -22,7 +34,7 @@ t_tuple	vector(float x, float y, float z)
 	return (vector);
 }
 
-t_tuple	point(float x, float y, float z)
+t_tuple	point(double x, double y, double z)
 {
 	t_tuple	point;
 
@@ -37,7 +49,7 @@ char	compare_tuples(t_tuple a, t_tuple b)
 	i = 0;
 	while (i < 4)
 	{
-		if (!compare_floats(a[i], b[i]))
+		if (!compare_doubles(a[i], b[i]))
 			return (0);
 		i++;
 	}

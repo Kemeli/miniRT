@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sphere.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kdaiane- < kdaiane-@student.42sp.org.br    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/26 20:24:12 by kdaiane-          #+#    #+#             */
+/*   Updated: 2023/09/26 20:24:13 by kdaiane-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minirt.h>
 
-t_sphere	*create_sphere(void) //passar um valor unuico cade vez que a esfera é criada
+t_sphere	*create_sphere(void)
 {
 	t_sphere	*sphere;
 

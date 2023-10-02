@@ -1,25 +1,49 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   inverse.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kdaiane- < kdaiane-@student.42sp.org.br    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/26 20:23:12 by kdaiane-          #+#    #+#             */
+/*   Updated: 2023/09/26 20:23:13 by kdaiane-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minirt.h>
 
-float	**inverse(t_matrix original_matrix)
+t_matrix	get_inverse(t_matrix inverse, int size, double determinant)
 {
-	t_matrix	inversed_matrix;
-	int			size;
-	int			i;
-	int			j;
+	int		i;
+	int		j;
 
-	size = get_size(original_matrix);
-	inversed_matrix = matrix(size);
 	i = 0;
 	while (i < size)
 	{
 		j = 0;
 		while (j < size)
 		{
-			inversed_matrix[j][i] = cofactor(original_matrix, i, j)
-				/ determinant(original_matrix);
+			inverse[i][j] /= determinant;
 			j++;
 		}
 		i++;
 	}
-	return (inversed_matrix);
+	return (inverse);
+}
+
+t_matrix	inverse(t_matrix matrix)
+{
+	t_matrix	cofactor;
+	t_matrix	inverse;
+	double		determinant;
+	int			size;
+
+	size = get_size(matrix);
+	determinant = get_determinant(matrix);
+	if (compare_doubles(determinant, 0))
+		return (identity_matrix(size));
+	cofactor = cofactor_matrix(matrix, size);
+	inverse = transpose_matrix(cofactor);
+	free_matrix(cofactor);
+	return (get_inverse(inverse, size, determinant));
 }

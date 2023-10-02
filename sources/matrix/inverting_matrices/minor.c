@@ -1,12 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minor.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kdaiane- < kdaiane-@student.42sp.org.br    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/26 20:23:17 by kdaiane-          #+#    #+#             */
+/*   Updated: 2023/09/26 20:23:18 by kdaiane-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minirt.h>
 
-float	minor(t_matrix matrix, int i, int j)
+double	minor(t_matrix matrix, int i, int j)
 {
 	t_matrix	m;
-	float		result;
+	double		result;
 
 	m = submatrix(matrix, i, j);
-	result = determinant(m);
+	result = get_determinant(m);
 	free_matrix(m);
 	return (result);
 }

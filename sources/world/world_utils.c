@@ -1,18 +1,41 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   world_utils.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kdaiane- < kdaiane-@student.42sp.org.br    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/26 20:28:55 by kdaiane-          #+#    #+#             */
+/*   Updated: 2023/09/26 20:28:56 by kdaiane-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minirt.h>
 
-static void	free_content(void *node)
+void	free_objects_list(t_object *obj)
 {
-	free_object(((t_node *)node)->object);
-	free((t_node *)node);
+	t_object	*next;
+
+	while (obj)
+	{
+		next = obj->next;
+		free_object(obj);
+		obj = next;
+	}
 }
 
 void	free_world(t_world *world)
 {
-	ft_lstclear(&(world->head), free_content);
-	free(world->light->intensity);
-	free(world->light->position);
-	free(world->light);
-	free(world->head);
+	if (world->head)
+		free_objects_list(world->head);
+	if (world->light)
+	{
+		free(world->light->intensity);
+		free(world->light->position);
+		free(world->light);
+	}
+	if (world->ambient)
+		free(world->ambient);
 	free(world);
 	world = NULL;
 }
