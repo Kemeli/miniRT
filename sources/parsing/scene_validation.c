@@ -1,13 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   scene_validation.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kdaiane- < kdaiane-@student.42sp.org.br    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/26 20:25:20 by kdaiane-          #+#    #+#             */
+/*   Updated: 2023/09/26 20:25:20 by kdaiane-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minirt.h>
 
 static char	is_object(char *element, t_world *w)
 {
 	if (element[0] == 's' && element[1] == 'p' && element[2] == ' ')
-		return(validate_sp(element, w));
+		return (validate_sp(element, w));
 	else if (element[0] == 'p' && element[1] == 'l' && element[2] == ' ')
-		return(validate_pl(element, w));
+		return (validate_pl(element, w));
 	else if (element[0] == 'c' && element[1] == 'y' && element[2] == ' ')
-		return(validate_cy(element, w));
+		return (validate_cy(element, w));
 	return (error_msg("invalid element", "contain only A, C, L, sp, pl, cy"));
 }
 
@@ -38,7 +50,7 @@ static char	**get_elements(char *scene_name)
 	elements = ft_split(scene, '\n');
 	free(scene);
 	if (!elements)
-		return (error_msg_scene("empty scene"));//se é null não tem nada pra dar free
+		return (error_msg_scene("empty scene"));
 	if (!check_mandatory_elements(elements) || !check_text_format(elements))
 	{
 		free_split(elements);
@@ -58,12 +70,12 @@ char	validate_scene(char *scene_name, t_data *data)
 		return (0);
 	ret = 0;
 	i = -1;
-	while(elements[++i])
+	while (elements[++i])
 	{
 		ret = validate_identifier(elements[i], data);
 		if (!ret)
-			break;
+			break ;
 	}
 	free_split(elements);
-	return(ret);
+	return (ret);
 }

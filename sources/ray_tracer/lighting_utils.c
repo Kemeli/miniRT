@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lighting_utils.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kdaiane- < kdaiane-@student.42sp.org.br    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/26 20:26:13 by kdaiane-          #+#    #+#             */
+/*   Updated: 2023/09/26 20:26:13 by kdaiane-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minirt.h>
 
-t_tuple	ligth_vector(t_lighting *l)
+t_tuple	light_vector(t_lighting *l)
 {
 	t_tuple	sub;
 	t_tuple	light_v;
@@ -9,16 +21,4 @@ t_tuple	ligth_vector(t_lighting *l)
 	light_v = normalize(sub);
 	free(sub);
 	return (light_v);
-}
-
-t_tuple	multiply_color(t_tuple color, t_tuple amb)
-{
-	t_tuple	response;
-
-	response = ft_calloc(4, sizeof(double));
-	response[0] = color[0] * amb[0];
-	response[1] = color[1] * amb[1];
-	response[2] = color[2] * amb[2];
-	response[3] = 0;
-	return (response);
 }

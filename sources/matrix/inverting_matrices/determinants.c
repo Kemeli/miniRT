@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   determinants.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kdaiane- < kdaiane-@student.42sp.org.br    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/26 20:23:07 by kdaiane-          #+#    #+#             */
+/*   Updated: 2023/09/26 20:23:08 by kdaiane-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
-double	determinant_2X2_matrix(t_matrix matrix)
+double	determinant_2x2_matrix(t_matrix matrix)
 {
 	double	result;
 	double	first_diagonal;
@@ -21,7 +33,7 @@ double	get_determinant(t_matrix matrix)
 	size = get_size(matrix);
 	if (size == 2)
 	{
-		determ = determinant_2X2_matrix(matrix);
+		determ = determinant_2x2_matrix(matrix);
 		return (determ);
 	}
 	j = 0;

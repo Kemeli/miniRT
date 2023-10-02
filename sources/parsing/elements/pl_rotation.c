@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pl_rotation.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kdaiane- < kdaiane-@student.42sp.org.br    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/26 20:24:18 by kdaiane-          #+#    #+#             */
+/*   Updated: 2023/09/26 20:24:19 by kdaiane-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minirt.h>
 
 static t_matrix	get_x_y_rotation(t_tuple orientation)
@@ -7,7 +19,7 @@ static t_matrix	get_x_y_rotation(t_tuple orientation)
 	t_matrix	rotate;
 
 	rotate_x = rotation_x(M_PI / 2);
-	rotate_y = rotation_y(atan(orientation[0]/ orientation[2]));
+	rotate_y = rotation_y(atan(orientation[0] / orientation[2]));
 	rotate = multiply_matrix(rotate_y, rotate_x);
 	free_matrix(rotate_x);
 	free_matrix(rotate_y);
@@ -28,25 +40,26 @@ static t_matrix	get_z_x_rotation(t_tuple orientation)
 	return (rotate);
 }
 
-t_matrix get_rotation_matrix(t_tuple orientation)
+t_matrix	get_rotation_matrix(t_tuple orientation)
 {
-	if (compare_doubles(orientation[0], 0) && compare_doubles(orientation[2], 0))
+	if (compare_doubles(orientation[0], 0)
+		&& compare_doubles(orientation[2], 0))
 	{
 		if (compare_doubles(orientation[1], 1))
-			return identity_matrix(4);
+			return (identity_matrix(4));
 		else if (compare_doubles(orientation[1], -1))
-			return rotation_x(M_PI);
+			return (rotation_x(M_PI));
 	}
 	else if (compare_doubles(orientation[1], 0))
 	{
 		if (compare_doubles(orientation[0], 1))
-			return rotation_z(-M_PI / 2);
+			return (rotation_z(-M_PI / 2));
 		else if (compare_doubles(orientation[0], -1))
-			return rotation_z(M_PI / 2);
+			return (rotation_z(M_PI / 2));
 		else if (compare_doubles(orientation[2], 1))
-			return rotation_x(M_PI / 2);
+			return (rotation_x(M_PI / 2));
 		else if (compare_doubles(orientation[2], -1))
-			return rotation_x(-M_PI / 2);
+			return (rotation_x(-M_PI / 2));
 	}
 	if (compare_doubles(orientation[1], 0))
 		return (get_x_y_rotation(orientation));

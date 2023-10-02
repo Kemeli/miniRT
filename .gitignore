@@ -1,8 +1,0 @@
-test.out
-a.out
-.vscode
-*.o
-*/**/.o
-miniRT
-lib/libft/libft.a
-/scenes

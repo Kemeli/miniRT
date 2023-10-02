@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   errors_validation.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kdaiane- < kdaiane-@student.42sp.org.br    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/26 20:25:00 by kdaiane-          #+#    #+#             */
+/*   Updated: 2023/09/26 20:25:01 by kdaiane-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minirt.h>
 
 char	error_msg(char *error_message, char *expected)
@@ -35,5 +47,5 @@ char	invalid(char *message, char *expected, char **infos, t_rt *rt)
 {
 	free_rt(rt);
 	free_split(infos);
-	return(error_msg(message, expected));
+	return (error_msg(message, expected));
 }

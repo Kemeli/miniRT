@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ray_for_pixel.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kdaiane- < kdaiane-@student.42sp.org.br    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/26 20:28:33 by kdaiane-          #+#    #+#             */
+/*   Updated: 2023/09/27 16:13:18 by kdaiane-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minirt.h>
 
-t_tuple static	get_pixel(t_camera *c, double px, double py, t_matrix inv)
+static t_tuple	get_pixel(t_camera *c, double px, double py, t_matrix inv)
 {
 	double		offset_xy[2];
 	double		world_xy[2];

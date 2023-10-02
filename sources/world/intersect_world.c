@@ -1,20 +1,23 @@
-#include <minirt.h>
-#include <time.h>
-#include <minirt.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   intersect_world.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kdaiane- < kdaiane-@student.42sp.org.br    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/26 20:28:24 by kdaiane-          #+#    #+#             */
+/*   Updated: 2023/09/29 14:56:17 by kdaiane-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-typedef struct s_aux
-{
-	t_node	*temp;
-	t_node	*ptr;
-	t_node	*prev;
-}	t_aux;
+#include <minirt.h>
 
 static int	ft_is_sorted(t_node **list)
 {
 	int		flag;
 	t_node	*temp;
 
-	if(!(*list) || !(*list)->next)
+	if (!(*list) || !(*list)->next)
 		return (0);
 	flag = 0;
 	temp = *list;
@@ -29,7 +32,7 @@ static int	ft_is_sorted(t_node **list)
 	return (flag);
 }
 
-void	curr_t_bigger_than_next_t(t_aux *aux, t_node **head)
+void	curr_t_bigger_than_next_t(t_sort_aux *aux, t_node **head)
 {
 	aux->ptr = aux->temp->next;
 	aux->temp->next = aux->ptr->next;
@@ -43,7 +46,7 @@ void	curr_t_bigger_than_next_t(t_aux *aux, t_node **head)
 
 static void	bubble_sort(t_node **head)
 {
-	t_aux	aux;
+	t_sort_aux	aux;
 
 	while (ft_is_sorted(head))
 	{

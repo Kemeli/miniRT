@@ -1,22 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lighting.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kdaiane- < kdaiane-@student.42sp.org.br    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/26 20:26:18 by kdaiane-          #+#    #+#             */
+/*   Updated: 2023/09/26 20:26:18 by kdaiane-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minirt.h>
 
-typedef struct s_aux
-{
-	t_tuple	effective_c;
-	t_tuple	light_v;
-	t_tuple	ambient;
-	t_tuple	diffuse;
-	t_tuple	specular;
-	t_tuple	sum;
-	double	light_dot_normal;
-	double	f_reflect_dot_eye;
-}	t_aux;
-
-static void	free_aux(t_aux *aux)
+static void	free_aux(t_lighting_aux *aux)
 {
 	free(aux->effective_c);
 	free(aux->light_v);
-	if(aux && aux->diffuse)
+	if (aux && aux->diffuse)
 		free(aux->diffuse);
 	free(aux->specular);
 	free(aux->sum);
@@ -54,7 +54,7 @@ static t_tuple	calculate_specular(t_lighting *l, double ref_dot_eye)
 	return (specular);
 }
 
-static void	get_difuse_and_specular(t_aux *aux, t_lighting *l)
+static void	get_difuse_and_specular(t_lighting_aux *aux, t_lighting *l)
 {
 	if (aux->light_dot_normal < 0)
 	{
@@ -72,18 +72,18 @@ static void	get_difuse_and_specular(t_aux *aux, t_lighting *l)
 
 t_tuple	lighting(t_lighting *l)
 {
-	t_aux	aux;
-	t_tuple	response;
-	t_tuple	ambient;
+	t_lighting_aux	aux;
+	t_tuple			response;
+	t_tuple			ambient;
 
 	aux.effective_c = multiply_colors(l->material->color, l->light->intensity);
-	ambient = multiply_color(aux.effective_c, l->material->ambient);
+	ambient = multiply_colors(aux.effective_c, l->material->ambient);
 	if (l->in_shadow)
 	{
 		free(aux.effective_c);
 		return (ambient);
 	}
-	aux.light_v = ligth_vector(l);
+	aux.light_v = light_vector(l);
 	aux.light_dot_normal = dot(aux.light_v, l->normal);
 	get_difuse_and_specular(&aux, l);
 	aux.sum = tuple_addition(ambient, aux.diffuse);

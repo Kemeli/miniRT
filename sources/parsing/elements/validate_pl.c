@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   validate_pl.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kdaiane- < kdaiane-@student.42sp.org.br    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/26 20:24:37 by kdaiane-          #+#    #+#             */
+/*   Updated: 2023/09/26 20:24:38 by kdaiane-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minirt.h>
 
 void	set_plane_transform(t_object *obj, t_rt *rt)
@@ -23,9 +35,9 @@ void	get_plane(t_rt *rt, t_world *w)
 
 	obj = create_object('p');
 	obj->material->color = color(
-		rt->color[0],
-		rt->color[1],
-		rt->color[2]);
+			rt->color[0],
+			rt->color[1],
+			rt->color[2]);
 	obj->material->specular = 0.2;
 	set_plane_transform(obj, rt);
 	add_object(w, obj);
@@ -37,19 +49,19 @@ static char	get_pl_values(char *info, char type, t_rt *rt)
 	{
 		rt->coordinates = validate_coordinates(info);
 		if (!rt->coordinates)
-			return(0);
+			return (0);
 	}
 	else if (type == 'n')
 	{
 		rt->orientation = validate_orientation(info);
 		if (!rt->orientation)
-			return(0);
+			return (0);
 	}
 	else if (type == 'c')
 	{
 		rt->color = validate_color(info);
-		if(!rt->color)
-			return(0);
+		if (!rt->color)
+			return (0);
 	}
 	return (1);
 }
@@ -62,13 +74,13 @@ char	validate_pl(char *element, t_world *w)
 	rt = ft_calloc(1, sizeof(t_rt));
 	infos = ft_split(element, ' ');
 	if (count_infos(infos) != 3)
-		return(invalid("invalid amount of plane infos", "be 3", infos, rt));
-	if(!get_pl_values(infos[1], 'p', rt))
-		return(invalid("invalid plane coordinates", COORDINATES, infos, rt));
-	if(!get_pl_values(infos[2], 'n', rt))
-		return(invalid("invalid plane orientation", ORIENTATION, infos, rt));
-	if(!get_pl_values(infos[3], 'c', rt))
-		return(invalid("invalid plane color", COLOR, infos, rt));
+		return (invalid("invalid amount of plane infos", "be 3", infos, rt));
+	if (!get_pl_values(infos[1], 'p', rt))
+		return (invalid("invalid plane coordinates", COORDINATES, infos, rt));
+	if (!get_pl_values(infos[2], 'n', rt))
+		return (invalid("invalid plane orientation", ORIENTATION, infos, rt));
+	if (!get_pl_values(infos[3], 'c', rt))
+		return (invalid("invalid plane color", COLOR, infos, rt));
 	get_plane(rt, w);
 	free_split(infos);
 	free_rt(rt);

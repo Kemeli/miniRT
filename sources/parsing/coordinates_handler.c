@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   coordinates_handler.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kdaiane- < kdaiane-@student.42sp.org.br    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/26 20:24:54 by kdaiane-          #+#    #+#             */
+/*   Updated: 2023/09/30 02:19:53 by kdaiane-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minirt.h>
 
-double *validate_tuple(char *str, double *n)
+double	*validate_tuple(char *str, double *n)
 {
 	int		i;
 	int		pos;
@@ -11,7 +23,7 @@ double *validate_tuple(char *str, double *n)
 	num = ft_split(str, ',');
 	while (num && num[i])
 	{
-		if(is_double(num[i]))
+		if (is_double(num[i]))
 			n[pos++] = ft_atof(num[i]);
 		else
 		{
@@ -19,6 +31,11 @@ double *validate_tuple(char *str, double *n)
 			return (NULL);
 		}
 		i++;
+	}
+	if (pos != 3)
+	{
+		free_split(num);
+		return (NULL);
 	}
 	free_split(num);
 	return (n);

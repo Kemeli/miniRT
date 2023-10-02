@@ -1,14 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_validations.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kdaiane- < kdaiane-@student.42sp.org.br    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/26 20:25:24 by kdaiane-          #+#    #+#             */
+/*   Updated: 2023/09/26 20:25:25 by kdaiane-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minirt.h>
 
-double	 verify_and_get_double(char *str) //refatorar
+double	verify_and_get_double(char *str)
 {
 	double	range;
 
-	if(str && is_double(str))
+	if (str && is_double(str))
 	{
 		range = ft_atof(str);
 		if (range > 0 && range < MAX_RANGE)
-			return(range);
+			return (range);
 	}
 	return (0);
 }
@@ -30,10 +42,10 @@ char	check_text_format(char **elements)
 
 	i = 0;
 	j = 0;
-	while(elements[i])
+	while (elements[i])
 	{
 		j = 0;
-		while(elements[i][j])
+		while (elements[i][j])
 		{
 			if (elements[i][j] == '\t')
 				return (error_msg("text format (tab)", "be spaces"));

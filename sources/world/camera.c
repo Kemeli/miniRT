@@ -1,12 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   camera.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kdaiane- < kdaiane-@student.42sp.org.br    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/26 20:28:02 by kdaiane-          #+#    #+#             */
+/*   Updated: 2023/09/26 20:28:03 by kdaiane-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minirt.h>
 
 void	free_camera(t_camera *camera)
 {
-	if(camera->transform)
+	if (camera->transform)
 		free_matrix(camera->transform);
-	if(camera->inverse)
+	if (camera->inverse)
 		free_matrix(camera->inverse);
-	if(camera->origin)
+	if (camera->origin)
 		free(camera->origin);
 	free(camera);
 }

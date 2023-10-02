@@ -1,17 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_atof.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kdaiane- < kdaiane-@student.42sp.org.br    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/26 20:29:00 by kdaiane-          #+#    #+#             */
+/*   Updated: 2023/09/29 15:16:56 by kdaiane-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minirt.h>
-
-struct s_aux
-{
-	int		sign;
-	int		has_frac;
-	int		frac_pow;
-};
-
-static void	start_aux(struct s_aux *aux)
-{
-	aux->has_frac = 0;
-	aux->frac_pow = 1;
-}
 
 static int	has_sign(char **str)
 {
@@ -28,29 +27,25 @@ static int	has_sign(char **str)
 
 double	ft_atof(const char *str)
 {
-	double			result;
-	struct s_aux	aux;
+	double	result;
+	int		sign;
+	int		frac_pow;
 
 	result = 0.0;
-	start_aux(&aux);
-	aux.sign = has_sign((char **)&str);
+	frac_pow = 1;
+	sign = has_sign((char **)&str);
 	while (ft_isdigit(*str))
 	{
 		result = result * 10.0 + (*str - '0');
 		str++;
 	}
 	if (*str == '.')
-	{
-		aux.has_frac = 1;
 		str++;
-	}
 	while (ft_isdigit(*str))
 	{
 		result = result * 10.0 + (*str - '0');
-		aux.frac_pow *= 10;
+		frac_pow *= 10;
 		str++;
 	}
-	result = aux.sign * result / aux.frac_pow;
-	return (result);
+	return (sign * result / frac_pow);
 }
-

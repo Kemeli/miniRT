@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kdaiane- < kdaiane-@student.42sp.org.br    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/26 20:29:08 by kdaiane-          #+#    #+#             */
+/*   Updated: 2023/09/26 20:29:08 by kdaiane-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minirt.h>
 
 void	input_validation(int argc)
@@ -13,6 +25,7 @@ void	input_validation(int argc)
 void	extension_validation(char *scene_name)
 {
 	char	*extension;
+
 	extension = ft_strrchr(scene_name, '.');
 	if (!extension || ft_memcmp(extension, ".rt", 3))
 	{
@@ -42,4 +55,3 @@ int	main(int argc, char **argv)
 	set_mlx_hooks(data);
 	mlx_loop(data->mlx_ptr);
 }
-//testar arquivo invalido e arquivo vazio

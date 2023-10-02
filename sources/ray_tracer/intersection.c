@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   intersection.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kdaiane- < kdaiane-@student.42sp.org.br    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/26 20:26:04 by kdaiane-          #+#    #+#             */
+/*   Updated: 2023/09/26 20:26:04 by kdaiane-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minirt.h>
 
 t_node	*new_intersection(double t, t_object *object)
@@ -36,7 +48,7 @@ t_intersect	*intersect(t_object *object, t_ray *ray)
 	else if (object->shape == 'p')
 		intersect = intersect_plane(object, saved_ray);
 	else if (object->shape == 'c')
-		intersect = intersect_cylinder(object, saved_ray); //falta verificar aqui
+		intersect = intersect_cylinder(object, saved_ray);
 	free_ray(saved_ray);
 	return (intersect);
 }

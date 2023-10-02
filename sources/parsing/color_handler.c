@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   color_handler.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kdaiane- < kdaiane-@student.42sp.org.br    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/26 20:24:48 by kdaiane-          #+#    #+#             */
+/*   Updated: 2023/09/26 20:24:49 by kdaiane-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minirt.h>
 
 static void	*clear_and_return(char **str)
@@ -32,11 +44,11 @@ t_tuple	validate_color(char *str)
 	rgb = ft_split(str, ',');
 	while (rgb[i])
 	{
-		if(!is_num(rgb[i]))
-			return(clear_and_return(rgb));
+		if (!is_num(rgb[i]))
+			return (clear_and_return(rgb));
 		num[pos] = ft_atoi(rgb[i]);
 		if (num[pos] < 0 || num[pos] > 255)
-			return(clear_and_return(rgb));
+			return (clear_and_return(rgb));
 		pos++;
 		i++;
 	}
