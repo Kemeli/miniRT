@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   translation.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kdaiane- < kdaiane-@student.42sp.org.br    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/26 20:27:11 by kdaiane-          #+#    #+#             */
+/*   Updated: 2023/09/26 20:27:12 by kdaiane-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minirt.h>
 
-float	**translation(float x, float y, float z)
+double	**translation(double x, double y, double z)
 {
-	float	**translation_matrix;
+	double	**translation_matrix;
 
 	translation_matrix = identity_matrix(4);
 	translation_matrix[0][3] = x;

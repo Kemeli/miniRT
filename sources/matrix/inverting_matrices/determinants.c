@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   determinants.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kdaiane- < kdaiane-@student.42sp.org.br    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/26 20:23:07 by kdaiane-          #+#    #+#             */
+/*   Updated: 2023/09/26 20:23:08 by kdaiane-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
-float	determinant_2X2_matrix(t_matrix matrix)
+double	determinant_2x2_matrix(t_matrix matrix)
 {
-	float	result;
-	float	first_diagonal;
-	float	second_diagonal;
+	double	result;
+	double	first_diagonal;
+	double	second_diagonal;
 
 	first_diagonal = matrix[0][0] * matrix[1][1];
 	second_diagonal = matrix[0][1] * matrix[1][0];
@@ -12,16 +24,16 @@ float	determinant_2X2_matrix(t_matrix matrix)
 	return (result);
 }
 
-float	determinant(t_matrix matrix)
+double	get_determinant(t_matrix matrix)
 {
-	float	size;
-	float	determ;
+	double	size;
+	double	determ;
 	int		j;
 
 	size = get_size(matrix);
 	if (size == 2)
 	{
-		determ = determinant_2X2_matrix(matrix);
+		determ = determinant_2x2_matrix(matrix);
 		return (determ);
 	}
 	j = 0;

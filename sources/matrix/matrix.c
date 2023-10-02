@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   matrix.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kdaiane- < kdaiane-@student.42sp.org.br    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/26 20:23:48 by kdaiane-          #+#    #+#             */
+/*   Updated: 2023/09/26 20:23:49 by kdaiane-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minirt.h>
 
 t_matrix	matrix(unsigned int n)
@@ -8,17 +20,17 @@ t_matrix	matrix(unsigned int n)
 	if (n == 0)
 		return (NULL);
 	i = 0;
-	m = ft_calloc(n + 1, sizeof(float *));
+	m = ft_calloc(n + 1, sizeof(double *));
 	while (i < n)
 	{
-		m[i] = ft_calloc(n + 1, sizeof(float));
+		m[i] = ft_calloc(n + 1, sizeof(double));
 		i++;
 	}
 	m[i] = NULL;
 	return (m);
 }
 
-float	**identity_matrix(unsigned int n)
+double	**identity_matrix(unsigned int n)
 {
 	t_matrix		m;
 	unsigned int	i;
@@ -31,9 +43,10 @@ float	**identity_matrix(unsigned int n)
 		j = 0;
 		while (j < n)
 		{
-			m[i][j] = 0;
 			if (i == j)
 				m[i][j] = 1;
+			else
+				m[i][j] = 0;
 			j++;
 		}
 		i++;
@@ -48,8 +61,8 @@ void	free_matrix(t_matrix m)
 	i = 0;
 	while (m[i])
 	{
-		free(m[i]);
+		ft_free_ptr((void *) &m[i]);
 		i++;
 	}
-	free(m);
+	ft_free_ptr((void *) &m);
 }

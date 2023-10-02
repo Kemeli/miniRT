@@ -1,33 +1,32 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lighting.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kdaiane- < kdaiane-@student.42sp.org.br    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/26 20:26:18 by kdaiane-          #+#    #+#             */
+/*   Updated: 2023/09/26 20:26:18 by kdaiane-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minirt.h>
 
-typedef struct s_aux
+static void	free_aux(t_lighting_aux *aux)
 {
-	t_tuple	effective_c;
-	t_tuple	light_v;
-	t_tuple	ambient;
-	t_tuple	diffuse;
-	t_tuple	specular;
-	t_tuple	sum;
-	float	light_dot_normal;
-	float	f_reflect_dot_eye;
-}	t_aux;
-
-static t_tuple	ligth_vector(t_lighting *l)
-{
-	t_tuple	sub;
-	t_tuple	light_v;
-
-	sub = subtract(l->light->position, l->position);
-	light_v = normalize(sub);
-	free(sub);
-	return (light_v);
+	free(aux->effective_c);
+	free(aux->light_v);
+	if (aux && aux->diffuse)
+		free(aux->diffuse);
+	free(aux->specular);
+	free(aux->sum);
 }
 
-static float	reflect_dot_eye(t_lighting *l, t_tuple light_v)
+static double	reflect_dot_eye(t_lighting *l, t_tuple light_v)
 {
 	t_tuple	neg;
 	t_tuple	reflect_v;
-	float	reflect_dot_eye;
+	double	reflect_dot_eye;
 
 	neg = negative(light_v);
 	reflect_v = reflect(neg, l->normal);
@@ -37,10 +36,10 @@ static float	reflect_dot_eye(t_lighting *l, t_tuple light_v)
 	return (reflect_dot_eye);
 }
 
-static t_tuple	calculate_specular(t_lighting *l, float ref_dot_eye)
+static t_tuple	calculate_specular(t_lighting *l, double ref_dot_eye)
 {
 	t_tuple	specular;
-	float	factor;
+	double	factor;
 
 	if (ref_dot_eye <= 0)
 		specular = color(0, 0, 0);
@@ -55,33 +54,8 @@ static t_tuple	calculate_specular(t_lighting *l, float ref_dot_eye)
 	return (specular);
 }
 
-static void	free_aux(t_aux *aux)
+static void	get_difuse_and_specular(t_lighting_aux *aux, t_lighting *l)
 {
-	free(aux->effective_c);
-	free(aux->light_v);
-	free(aux->ambient);
-	free(aux->diffuse);
-	free(aux->specular);
-	free(aux->sum);
-	free(aux);
-}
-
-t_tuple	lighting(t_lighting *l)
-{
-	t_aux	*aux;
-	t_tuple	response;
-	t_tuple	ambient;
-
-	aux = ft_calloc(1, sizeof(t_aux));
-	aux->effective_c = multiply_colors(l->material->color, l->light->intensity);
-	ambient = multiply_tuple_by_scalar(aux->effective_c, l->material->ambient);
-	if (l->in_shadow)
-	{
-		free_aux(aux);
-		return(ambient);
-	}
-	aux->light_v = ligth_vector(l);
-	aux->light_dot_normal = dot(aux->light_v, l->normal);
 	if (aux->light_dot_normal < 0)
 	{
 		aux->diffuse = color(0, 0, 0);
@@ -94,9 +68,27 @@ t_tuple	lighting(t_lighting *l)
 		aux->f_reflect_dot_eye = reflect_dot_eye(l, aux->light_v);
 		aux->specular = calculate_specular(l, aux->f_reflect_dot_eye);
 	}
-	aux->sum = tuple_addition(ambient, aux->diffuse);
-	response = tuple_addition(aux->sum, aux->specular);
-	free_aux(aux);
+}
+
+t_tuple	lighting(t_lighting *l)
+{
+	t_lighting_aux	aux;
+	t_tuple			response;
+	t_tuple			ambient;
+
+	aux.effective_c = multiply_colors(l->material->color, l->light->intensity);
+	ambient = multiply_colors(aux.effective_c, l->material->ambient);
+	if (l->in_shadow)
+	{
+		free(aux.effective_c);
+		return (ambient);
+	}
+	aux.light_v = light_vector(l);
+	aux.light_dot_normal = dot(aux.light_v, l->normal);
+	get_difuse_and_specular(&aux, l);
+	aux.sum = tuple_addition(ambient, aux.diffuse);
+	response = tuple_addition(aux.sum, aux.specular);
+	free_aux(&aux);
 	free(ambient);
 	return (response);
 }

@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ray.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kdaiane- < kdaiane-@student.42sp.org.br    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/26 20:26:31 by kdaiane-          #+#    #+#             */
+/*   Updated: 2023/09/26 20:26:32 by kdaiane-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minirt.h>
 
 void	free_ray(t_ray *ray)
 {
 	free(ray->origin);
 	free(ray->direction);
-	if(ray)
+	if (ray)
 		free(ray);
 }
 
@@ -16,15 +28,4 @@ t_ray	*create_ray(t_tuple origin, t_tuple direction)
 	ray->origin = origin;
 	ray->direction = direction;
 	return (ray);
-}
-
-t_tuple	get_point_position(t_ray *ray, float t)
-{
-	t_tuple	position;
-	t_tuple	multiplication_result;
-
-	multiplication_result = multiply_tuple_by_scalar(ray->direction, t);
-	position = tuple_addition(ray->origin, multiplication_result);
-	free(multiplication_result);
-	return (position);
 }

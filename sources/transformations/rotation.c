@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rotation.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kdaiane- < kdaiane-@student.42sp.org.br    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/26 20:26:54 by kdaiane-          #+#    #+#             */
+/*   Updated: 2023/09/26 20:26:55 by kdaiane-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minirt.h>
 
-float	**rotation_x(float radian)
+double	**rotation_x(double radian)
 {
-	float	**rotation_matrix;
+	double	**rotation_matrix;
 
 	rotation_matrix = identity_matrix(4);
 	rotation_matrix[1][1] = cos(radian);
@@ -12,9 +24,9 @@ float	**rotation_x(float radian)
 	return (rotation_matrix);
 }
 
-float	**rotation_y(float radian)
+double	**rotation_y(double radian)
 {
-	float	**rotation_matrix;
+	double	**rotation_matrix;
 
 	rotation_matrix = identity_matrix(4);
 	rotation_matrix[0][0] = cos(radian);
@@ -24,9 +36,9 @@ float	**rotation_y(float radian)
 	return (rotation_matrix);
 }
 
-float	**rotation_z(float radian)
+double	**rotation_z(double radian)
 {
-	float	**rotation_matrix;
+	double	**rotation_matrix;
 
 	rotation_matrix = identity_matrix(4);
 	rotation_matrix[0][0] = cos(radian);

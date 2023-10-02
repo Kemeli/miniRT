@@ -6,7 +6,7 @@
 /*   By: kdaiane- < kdaiane-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 20:02:02 by kdaiane-          #+#    #+#             */
-/*   Updated: 2023/02/23 01:31:28 by kdaiane-         ###   ########.fr       */
+/*   Updated: 2023/09/29 16:10:42 by kdaiane-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,21 +90,20 @@ char	**ft_split(char const *s, char c)
 
 	str2 = (char *)s;
 	word_n = ft_count_words(str2, c);
-	arr = malloc((word_n + 1) * (sizeof (char *)));
-	if (arr == NULL)
-		return (NULL);
-	i = 0;
-	while (i < word_n)
+	arr = ft_calloc((word_n + 1), (sizeof (char *)));
+	i = -1;
+	while (++i < word_n)
 	{
 		len = get_word_len(str2, c);
 		arr[i] = ft_get_word(str2, len, c);
 		if (arr[i] == NULL)
 			return (free_mem(arr, i));
-		i++;
 		while (*str2 == c)
 			str2++;
 		str2 = str2 + len + 1;
 	}
 	arr[i] = NULL;
+	if (arr[0] == NULL)
+		return (free_mem(arr, i));
 	return (arr);
 }
