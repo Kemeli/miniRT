@@ -1,4 +1,4 @@
-NAME			= miniRT
+NAME			= miniRT 
 CC				= clang
 FLAGS			= -Wall -Werror -Wextra
 INCLUDES		= -I ./includes/ -I ./lib/minilibx/ -I ./lib/libft/includes
