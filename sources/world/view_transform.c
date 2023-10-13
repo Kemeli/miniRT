@@ -1,15 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   view_transform.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kdaiane- < kdaiane-@student.42sp.org.br    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/26 20:28:44 by kdaiane-          #+#    #+#             */
+/*   Updated: 2023/09/29 16:12:37 by kdaiane-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minirt.h>
 
-typedef struct s_aux{
-	t_tuple		sub;
-	t_tuple		forward;
-	t_tuple		normal_up;
-	t_tuple		left;
-	t_tuple		true_up;
-	t_tuple		neg;
-}				t_aux;
-
-static void	free_view_transform(t_aux *aux, t_matrix orient, t_matrix transl)
+static void	free_mem(t_transform_aux *aux, t_matrix orient, t_matrix transl)
 {
 	free(aux->normal_up);
 	free(aux->left);
@@ -42,12 +45,12 @@ static t_matrix	get_orientation(t_tuple left, t_tuple true_up, t_tuple forward)
 
 t_matrix	view_transform(t_tuple from, t_tuple to, t_tuple up)
 {
-	t_matrix	orientation;
-	t_matrix	transl;
-	t_matrix	transform;
-	t_aux		*aux;
+	t_matrix			orientation;
+	t_matrix			transl;
+	t_matrix			transform;
+	t_transform_aux		*aux;
 
-	aux = ft_calloc(1, sizeof(t_aux));
+	aux = ft_calloc(1, sizeof(t_transform_aux));
 	aux->normal_up = normalize(up);
 	aux->left = cross(to, aux->normal_up);
 	aux->true_up = cross(aux->left, to);
@@ -55,6 +58,6 @@ t_matrix	view_transform(t_tuple from, t_tuple to, t_tuple up)
 	aux->neg = negative(from);
 	transl = translation(aux->neg[0], aux->neg[1], aux->neg[2]);
 	transform = multiply_matrix(orientation, transl);
-	free_view_transform(aux, orientation, transl);
+	free_mem(aux, orientation, transl);
 	return (transform);
 }

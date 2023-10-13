@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   create_world.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kdaiane- < kdaiane-@student.42sp.org.br    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/26 20:28:11 by kdaiane-          #+#    #+#             */
+/*   Updated: 2023/09/26 20:28:12 by kdaiane-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minirt.h>
 
 void	append_object(t_object **head, t_object **new)
@@ -32,4 +44,3 @@ t_world	*create_world(void)
 	world->light = NULL;
 	return (world);
 }
-

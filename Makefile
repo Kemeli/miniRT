@@ -1,143 +1,136 @@
-NAME			= miniRT
-CC				= clang
-FLAGS			= -Wall -Werror -Wextra
-INCLUDES		= -I ./includes/ -I ./lib/minilibx/ -I ./lib/libft/includes
-LIBS			= -L ./lib/minilibx/ -lmlx -lm -lXext -lX11 -lz \
-					-L ./lib/libft -lft
+NAME	= miniRT
 
-SRC				= tuples.c
-SRC				+= subtract.c
-SRC				+= negative.c
-SRC				+= multiply_divide.c
-SRC				+= addition.c
-SRC				+= magnitude.c
-SRC				+= normalization.c
-SRC				+= dot.c
-SRC				+= cross.c
-SRC				+= color.c
-SRC				+= multiply_colors.c
-SRC				+= matrix.c
-SRC				+= comparing_matrix.c
-SRC				+= multiply_matrix.c
-SRC				+= multiply_matrix_tuple.c
-SRC				+= transposing_matrix.c
-SRC				+= determinants.c
-SRC				+= spotting_submatrices.c
-SRC				+= minor.c
-SRC				+= cofactor.c
-SRC				+= inverse.c
-SRC				+= utils.c
-SRC				+= translation.c
-SRC				+= scaling.c
-SRC				+= rotation.c
-SRC				+= shearing.c
-SRC				+= ray.c
-SRC				+= intersect_sphere.c
-SRC				+= sphere.c
-SRC				+= intersection.c
-SRC				+= hit.c
-SRC				+= transform_ray.c
-SRC				+= set_transform.c
-SRC				+= normal_at.c
-SRC				+= reflect_vector.c
-SRC				+= lighting.c
-SRC				+= lighting_utils.c
-SRC				+= create_world.c
-SRC				+= world_utils.c
-SRC				+= intersect_world.c
-SRC				+= prepare_computations.c
-SRC				+= free_object.c
-SRC				+= shade_hit.c
-SRC				+= color_at.c
-SRC				+= view_transform.c
-SRC				+= camera.c
-SRC				+= ray_for_pixel.c
-SRC				+= render.c
-SRC				+= shadow.c
-SRC				+= object.c
-SRC				+= plane.c
-SRC				+= cylinder.c
-SRC				+= intersect_plane.c
-SRC				+= intersect_cylinder.c
-SRC				+= is_btwen_range.c
-SRC				+= ft_atof.c
-SRC				+= color_handler.c
-SRC				+= coordinates_handler.c
-SRC				+= validate_orientation.c
-SRC				+= validate_angle.c
-SRC				+= validate_c.c
-SRC				+= validate_a.c
-SRC				+= validate_l.c
-SRC				+= utils_validations.c
-SRC				+= scene_validation.c
-SRC				+= errors_validation.c
-SRC				+= is_double.c
-SRC				+= validate_sp.c
-SRC				+= validate_pl.c
-SRC				+= pl_rotation.c
-SRC				+= validate_cy.c
-SRC				+= free_rt.c
-SRC				+= handle_mlx.c
-SRC				+= scene.c
-SRC				+= material.c
-SRC				+= light.c
-SRC				+= get_scene.c
+CC		= cc
+CFLAGS	= -Wall -Werror -Wextra
 
-OBJ_DIR			= ./obj
-OBJ				= $(SRC:.c=.o)
-OBJS			= $(addprefix $(OBJ_DIR)/, $(OBJ))
+INCLUDES	= -I ./includes/ \
+			  -I ./lib/minilibx/ \
+			  -I ./lib/libft/includes
 
-APP := $(OBJS) $(OBJ_DIR)/main.o
+LIBS		= -L ./lib/libft -lft \
+			  -lmlx -lm -lXext -lX11 -lz
 
-VPATH			= ./sources ./sources/tuples ./sources/tuples/operations
-VPATH			+= ./sources/tuples/colors
-VPATH			+= ./sources/matrix ./sources/matrix/operations
-VPATH			+= ./sources/matrix/inverting_matrices
-VPATH			+= ./sources/transformations
-VPATH			+= ./sources/ray_tracer
-VPATH			+= ./sources/world
-VPATH			+= ./sources/objects
-VPATH			+= ./sources/shadow
-VPATH			+= ./sources/parsing
-VPATH			+= ./sources/parsing/elements
-VPATH			+= ./lib/libft
+LIBFT = ./lib/libft/libft.a
 
-.DEFAULT_GOAL	= all
+SRC	=	sources/matrix/matrix.c \
+		sources/objects/cylinder.c \
+		sources/objects/free_object.c \
+		sources/objects/object.c \
+		sources/objects/plane.c \
+		sources/objects/sphere.c \
+		sources/parsing/color_handler.c \
+		sources/parsing/coordinates_handler.c \
+		sources/parsing/errors_validation.c \
+		sources/parsing/free_rt.c \
+		sources/parsing/get_scene.c \
+		sources/parsing/is_btwen_range.c \
+		sources/parsing/is_double.c \
+		sources/parsing/scene_validation.c \
+		sources/parsing/utils_validations.c \
+		sources/parsing/validate_angle.c \
+		sources/parsing/validate_orientation.c \
+		sources/ray_tracer/hit.c \
+		sources/ray_tracer/intersect_cylinder.c \
+		sources/ray_tracer/intersection.c \
+		sources/ray_tracer/intersect_plane.c \
+		sources/ray_tracer/intersect_sphere.c \
+		sources/ray_tracer/light.c \
+		sources/ray_tracer/lighting.c \
+		sources/ray_tracer/lighting_utils.c \
+		sources/ray_tracer/material.c \
+		sources/ray_tracer/normal_at.c \
+		sources/ray_tracer/ray.c \
+		sources/ray_tracer/reflect_vector.c \
+		sources/ray_tracer/set_transform.c \
+		sources/ray_tracer/transform_ray.c \
+		sources/shadow/shadow.c \
+		sources/transformations/rotation.c \
+		sources/transformations/scaling.c \
+		sources/transformations/translation.c \
+		sources/tuples/tuples.c \
+		sources/world/camera.c \
+		sources/world/color_at.c \
+		sources/world/create_world.c \
+		sources/world/intersect_world.c \
+		sources/world/prepare_computations.c \
+		sources/world/ray_for_pixel.c \
+		sources/world/render.c \
+		sources/world/shade_hit.c \
+		sources/world/view_transform.c \
+		sources/world/world_utils.c \
+		sources/matrix/inverting_matrices/cofactor.c \
+		sources/matrix/inverting_matrices/determinants.c \
+		sources/matrix/inverting_matrices/inverse.c \
+		sources/matrix/inverting_matrices/minor.c \
+		sources/matrix/inverting_matrices/spotting_submatrices.c \
+		sources/matrix/operations/comparing_matrix.c \
+		sources/matrix/operations/multiply_matrix.c \
+		sources/matrix/operations/multiply_matrix_tuple.c \
+		sources/matrix/operations/transposing_matrix.c \
+		sources/parsing/elements/pl_rotation.c \
+		sources/parsing/elements/validate_a.c \
+		sources/parsing/elements/validate_c.c \
+		sources/parsing/elements/validate_cy.c \
+		sources/parsing/elements/validate_l.c \
+		sources/parsing/elements/validate_pl.c \
+		sources/parsing/elements/validate_sp.c \
+		sources/tuples/colors/color.c \
+		sources/tuples/colors/multiply_colors.c \
+		sources/tuples/operations/addition.c \
+		sources/tuples/operations/cross.c \
+		sources/tuples/operations/dot.c \
+		sources/tuples/operations/magnitude.c \
+		sources/tuples/operations/multiply_divide.c \
+		sources/tuples/operations/negative.c \
+		sources/tuples/operations/normalization.c \
+		sources/tuples/operations/subtract.c \
+		sources/ft_atof.c \
+		sources/handle_mlx.c \
+		sources/main.c \
+		sources/scene.c \
+		sources/utils.c
 
-$(OBJ_DIR)/%.o: %.c
-			$(CC) $(FLAGS) -g3 $(INCLUDES) $< -c -o $@
+OBJ_DIR = obj
 
-obj_dir:
-		@mkdir -p $(OBJ_DIR)
+OBJS	= $(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 
-all: obj_dir $(NAME)
+# BASICS #######################################################################
 
-$(NAME): libs $(OBJS) $(APP)
-	$(CC) $(APP) $(FLAGS) $(LIBS) -o $(NAME)
+all: $(NAME)
 
-libs:
-	make all -sC ./lib/libft/
-	make all -sC ./lib/minilibx/
+$(NAME): $(LIBFT) $(OBJS)
+	@$(CC) $(OBJS) $(CFLAGS) $(INCLUDES) $(LIBS) -o $(NAME)
+	@echo building $(NAME) binary
 
-clean_libs:
-	make fclean -sC ./lib/libft/
-	make clean -sC ./lib/minilibx/
+clean:
+	@echo removing $(NAME) objects
+	@rm -rf $(OBJ_DIR)
 
-clean: clean_libs
-	rm -rf $(APP)
-	rm -rf $(OBJS)
-	rm -rf $(OBJ_DIR)
-	rm -rf test.out
-
-tests: libs obj_dir $(OBJS)
-	@$(CC) $(INCLUDES) -I ./tests/ $(OBJS) ./tests/main.c $(LIBS) -g3 -o test.out
-	@valgrind -q --leak-check=full ./test.out
-
-test: clean tests
+	@echo cleaning libft intermediate files
+	@make -sC ./lib/libft/ clean
 
 fclean: clean
-	rm -rf $(NAME)
+	@echo removing $(NAME) binary
+	@rm -f $(NAME)
+
+	@echo cleaning libft library file
+	@make -sC ./lib/libft/ fclean
 
 re: fclean all
 
-.PHONY: all clean fclean re obj_dir $(NAME) libs clean_libs test tests
+# LIBS #########################################################################
+
+$(LIBFT):
+	@echo building libft
+	@make -sC ./lib/libft/
+
+# AUXILIARIES ##################################################################
+
+$(OBJ_DIR)/%.o: %.c
+	@echo compiling $<
+	@mkdir -p $(dir $@)
+	@$(CC) $(CFLAGS) $(INCLUDES) $< -c -o $@
+
+################################################################################
+
+.PHONY: all clean fclean re

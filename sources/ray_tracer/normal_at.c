@@ -1,8 +1,31 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   normal_at.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kdaiane- < kdaiane-@student.42sp.org.br    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/26 20:26:27 by kdaiane-          #+#    #+#             */
+/*   Updated: 2023/09/26 20:26:28 by kdaiane-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minirt.h>
 
-static t_tuple local_normal_at_cy(t_object *object, t_tuple local_point);
+static t_tuple	local_normal_at_cy(t_object *object, t_tuple local_point)
+{
+	double	distance;
 
-t_tuple local_normal_at(t_object *object, t_tuple local_point)
+	distance = pow(local_point[0], 2) + pow(local_point[2], 2);
+	if (distance < 1 && local_point[1] >= object->cylinder->maximum - EPSILON)
+		return (vector(0, 1, 0));
+	else if (distance < 1
+		&& local_point[1] <= object->cylinder->minimum + EPSILON)
+		return (vector(0, -1, 0));
+	return (vector(local_point[0], 0, local_point[2]));
+}
+
+t_tuple	local_normal_at(t_object *object, t_tuple local_point)
 {
 	t_tuple	obj_normal;
 
@@ -14,19 +37,6 @@ t_tuple local_normal_at(t_object *object, t_tuple local_point)
 	if (object->shape == 'c')
 		obj_normal = local_normal_at_cy(object, local_point);
 	return (obj_normal);
-}
-
-static t_tuple local_normal_at_cy(t_object *object, t_tuple local_point)
-{
-	double	distance;
-
-	distance = pow(local_point[0], 2) + pow(local_point[2], 2);
-	if (distance < 1 && local_point[1] >= object->cylinder->maximum - EPSILON)
-		return (vector(0, 1, 0));
-	else if (distance < 1
-		&& local_point[1] <= object->cylinder->minimum + EPSILON)
-		return (vector(0, -1, 0));
-	return (vector(local_point[0], 0, local_point[2]));
 }
 
 t_tuple	normal_at(t_object *object, t_tuple world_point)

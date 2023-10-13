@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   validate_orientation.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kdaiane- < kdaiane-@student.42sp.org.br    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/26 20:25:32 by kdaiane-          #+#    #+#             */
+/*   Updated: 2023/09/26 20:25:33 by kdaiane-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minirt.h>
 
 static char	validate_range(double *n)
@@ -17,7 +29,7 @@ static char	validate_range(double *n)
 t_tuple	validate_orientation(char *str)
 {
 	double	n[3];
-	double *normal;
+	double	*normal;
 	t_tuple	ret;
 
 	normal = validate_tuple(str, n);

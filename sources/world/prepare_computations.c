@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   prepare_computations.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kdaiane- < kdaiane-@student.42sp.org.br    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/26 20:28:28 by kdaiane-          #+#    #+#             */
+/*   Updated: 2023/09/28 01:38:41 by kdaiane-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minirt.h>
 
 t_tuple	get_point_position(t_ray *ray, double t)
@@ -28,7 +40,7 @@ t_comps	*prepare_computations(t_node *hit, t_ray *ray)
 	dot_p = dot(comps->normal, comps->eye);
 	if (dot_p < 0)
 	{
-		comps->inside = True;
+		comps->inside = TRUE;
 		temp = comps->normal;
 		comps->normal = negative(temp);
 		free(temp);
